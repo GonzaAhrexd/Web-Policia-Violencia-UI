@@ -164,13 +164,13 @@ useEffect(() => {
       </div>
 
       <div className='flex flex-col md:flex-row my-2'>
-        <SelectCargaDenuncias isRequired={false} valor={datos.juzgado_interviniente} campo="Organismo judicial interviniente" nombre="juzgado_interviniente" opciones={juzgadoIntervinente} register={register} setValue={setValue} type="text" error={errors.juzgado_interviniente} />
+        <SelectRegisterSingle isRequired={false} valor={datos.juzgado_interviniente} campo="Organismo judicial interviniente" nombre="juzgado_interviniente" opciones={juzgadoIntervinente} setValue={setValue}  error={errors.juzgado_interviniente} />
         <InputRegister require={false} valor={datos.juzgado_interviniente_numero} campo="Número del organismo judicial" nombre="juzgado_interviniente_numero" register={register} setValue={setValue} type="text" error={errors.juzgado_interviniente_numero} />
         <InputRegister notMid={true} campo="Dependencia Derivada" nombre="dependencia_derivada" register={register} setValue={setValue} type="text" error={errors.dependencia_derivada} valor={datos.dependencia_derivada} />
       </div>
       <div className='flex flex-col md:flex-row my-2' >
-        <SelectCargaDenuncias isRequired={false} valor={datos.violencia} campo="Violencia" nombre="violencia" opciones={opcionesViolencia} register={register} setValue={setValue} type="text" error={errors.violencia} />
-        <SelectCargaDenuncias isRequired={false} valor={datos.modalidades} setTitulo={setTitulo} info={tiposModalidades} campo="Modalidades" nombre="modalidades" opciones={opcionesModalidades} register={register} setValue={setValue} type="text" error={errors.modalidades} handleOpenModal={handleOpenModal} />
+        <SelectRegisterSingle isRequired={false} valor={datos.violencia} campo="Violencia" nombre="violencia" opciones={opcionesViolencia} setValue={setValue} error={errors.violencia} />
+        <SelectRegisterSingle isRequired={false} valor={datos.modalidades} modal={true} setTitulo={setTitulo} info={tiposModalidades} campo="Modalidades" nombre="modalidades" opciones={opcionesModalidades} setValue={setValue} error={errors.modalidades} handleOpenModal={handleOpenModal} />
       </div>
       <>
         <span className='ml-4 font-medium  flex flex-row my-2'> Tipo de Violencia

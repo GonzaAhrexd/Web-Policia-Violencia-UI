@@ -99,9 +99,8 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
   } = useStore();
 
   useEffect(() => {
-    console.log(datosVictima)
-
-  })
+    console.log(errors)
+  }, [])
 
   return (
     <div>
@@ -111,6 +110,7 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
         method='post'
         onSubmit={
           handleSubmit(async (values) => {
+                 console.log(values)
 
             Swal.fire({
               title: '¿Estás seguro?',
@@ -123,7 +123,7 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
               cancelButtonText: 'Cancelar'
             }).then(async (result) => {
               if (result.isConfirmed) {
-
+           
                 // Verifica si se cambió el select de estado civil y ocupación, si es así, conserva los valores, sino, los reemplaza por los que ya estaban
                 values.estado_civil_victima ? values.estado_civil_victima = values.estado_civil_victima : values.estado_civil_victima = datosVictima.estado_civil
                 values.ocupacion_victima ? values.ocupacion_victima = values.ocupacion_victima : values.ocupacion_victima = datosVictima.ocupacion
@@ -181,7 +181,7 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
           <h1 className='text-2xl my-5'>Víctima</h1>
           <MagnifyingGlassIcon className='bg-sky-950 hover:bg-sky-700 flex items-center text-white justify-center cursor-pointer font-bold py-2 mx-5 rounded w-10 h-10' onClick={() => setOpenModalVictima(true)} />
         </div>
-        <div className='flex justify-center'>
+          <div className='flex justify-center'>
           <VerificarDenunciante watch={watch} datos={victimaCargar ? victimaCargar : datosVictima} register={register} setValue={setValue} errors={errors} />
         </div>
         <div className='flex items-center'>

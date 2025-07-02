@@ -150,7 +150,7 @@ function CargarDenuncia({ fecha, modoActuacion, setTitulo, handleOpenModal, regi
       </div>
       <div className='flex flex-col md:flex-row my-2' >
         <SelectRegisterSingle campo="Violencia" nombre="violencia" opciones={opcionesViolencia} setValue={setValue} error={errors.violencia} />
-        <SelectCargaDenuncias setTitulo={setTitulo} info={tiposModalidades} campo="Modalidades" nombre="modalidades" opciones={opcionesModalidades} register={register} setValue={setValue} type="text" error={errors.modalidades} handleOpenModal={handleOpenModal} />
+        <SelectRegisterSingle modal={true} setTitulo={setTitulo} info={tiposModalidades} campo="Modalidades" nombre="modalidades" opciones={opcionesModalidades} setValue={setValue} error={errors.modalidades} handleOpenModal={handleOpenModal} />
 
       </div>
       <>
