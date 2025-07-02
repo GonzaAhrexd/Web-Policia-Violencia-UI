@@ -5,7 +5,7 @@ import axios from '../axios'
 // Agregar un campo
 export const agregarCampo = async (campo: any) => {
     try {
-        const response = await axios.post('/campos/agregar-campo', campo)
+        const response = await axios.post('/campos/', campo)
         return response.data
     } catch (error) {
         console.log(error)
@@ -15,7 +15,7 @@ export const agregarCampo = async (campo: any) => {
 // Listar todos los campos
 export const obtenerCampo = async (tipo: string) => {
     try {
-        const response = await axios.get(`/campos/obtener-campo/${tipo}`)
+        const response = await axios.get(`/campos/${tipo}`)
         return response.data
     } catch (error) {
         console.log(error)
@@ -25,7 +25,7 @@ export const obtenerCampo = async (tipo: string) => {
 // Editar un campo
 export const editarCampo = async (campo: any) => {
     try {
-        const response = await axios.put(`/campos/editar-campo/${campo._id}`, campo)
+        const response = await axios.put(`/campos/${campo._id}`, campo)
         return response.data
     } catch (error) {
         console.log(error)
@@ -35,7 +35,7 @@ export const editarCampo = async (campo: any) => {
 // Eliminar un campo
 export const eliminarCampo = async (id: string) => {
     try {
-        const response = await axios.delete(`/campos/eliminar-campo/${id}`)
+        const response = await axios.delete(`/campos/${id}`)
         return response.data
     } catch (error) {
         console.log(error)
