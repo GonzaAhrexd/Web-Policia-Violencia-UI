@@ -34,7 +34,7 @@ export default function CardProfile({ title, usuario }: Props): JSX.Element {
                 <div className="bg-neutral-500 h-20 w-20 rounded-full flex items-center justify-center mx-auto">
                     <img
                         className="h-16 w-16 rounded-full"
-                        src={usuario.imagen != "sin_definir" ? `${APIURL}/users/${usuario.id}/image` : '/user.png'}
+                        src={usuario.imagen != "sin_definir" ? `${APIURL}/usuario/${usuario.id}/image` : '/user.png'}
                         alt="Foto de perfil"
                     />
                 </div>

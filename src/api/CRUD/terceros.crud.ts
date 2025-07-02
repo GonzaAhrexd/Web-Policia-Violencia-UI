@@ -1,20 +1,30 @@
 import axios from '../axios'
 
 // TERCERO
-// Obtener tercero
+// GET: Obtener tercero
 export const getTercero = async (id: string) => {
     try {
-        const response = await axios.get(`/terceros/tercero/${id}`)
+        const response = await axios.get(`/terceros/${id}`)
         return response.data
     } catch (error) {
         console.log(error)
     }
 }
 
-// Crear tercero
+// GET: Buscar tercero
+export const buscarTercero = async (values: any) => {
+    try {
+        const response = await axios.get(`/terceros/${values.id_tercero ? values.id_tercero : "no_ingresado"}/${values.nombre_tercero ? values.nombre_tercero : "no_ingresado"}/${values.apellido_tercero ? values.apellido_tercero : "no_ingresado"}/${values.dni_tercero ? values.dni_tercero : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+// POST: Crear tercero
 export const crearTercero = async (tercero: any) => {
     try {
-        const response = await axios.post(`/terceros/crear-tercero/`, tercero)
+        const response = await axios.post(`/terceros/`, tercero)
         const id = response.data.id
         return id
     } catch (error) {
@@ -22,32 +32,13 @@ export const crearTercero = async (tercero: any) => {
     }
 }
 
-// Editar tercero
+// PUT: Editar tercero
 export const editarTercero = async (tercero: any) => {
     try {
-        const response = await axios.put(`/terceros/editar-tercero/${tercero.tercero_id}`, tercero)
+        const response = await axios.put(`/terceros/${tercero.tercero_id}`, tercero)
         return response.data
     } catch (error) {
         console.log(error)
     }
 }
 
-// Eliminar tercero
-export const eliminarTercero = async (id: string) => {
-    try {
-        const response = await axios.delete(`/terceros/eliminar-tercero/${id}`)
-        return response.data
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-// Buscar tercero
-export const buscarTercero = async (values: any) => {
-    try {
-        const response = await axios.get(`/terceros/buscar-tercero/${values.id_tercero ? values.id_tercero : "no_ingresado"}/${values.nombre_tercero ? values.nombre_tercero : "no_ingresado"}/${values.apellido_tercero ? values.apellido_tercero : "no_ingresado"}/${values.dni_tercero ? values.dni_tercero : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}`)
-        return response.data
-    } catch (error) {
-        console.log(error)
-    }
-}

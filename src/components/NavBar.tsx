@@ -127,7 +127,7 @@ function NavBar({ user }: NavBarProps) {
           <div className="relative">
             <img
               onClick={() => toggleDropdown('profile')}
-              src={user.imagen !== "sin_definir" ? `${APIURL}/users/${user.id}/image` : "/user.png"}
+              src={user.imagen !== "sin_definir" ? `${APIURL}/usuario/${user.id}/image` : "/user.png"}
               alt="Avatar"
               className="w-10 h-10 rounded-full border-2 border-white cursor-pointer"
             />

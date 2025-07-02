@@ -2,7 +2,7 @@ import axios from '../axios'
 
 export const crearRadiograma = async (radiograma: any) => {
     try {
-        const response = await axios.post(`/radiograma/crear-radiograma`, radiograma)
+        const response = await axios.post(`/radiograma/`, radiograma)
         return response.data
     } catch (error) {
         console.log(error)
@@ -11,7 +11,7 @@ export const crearRadiograma = async (radiograma: any) => {
 
 export const getRadiogramaById = async (id: string) => {
     try {
-        const response = await axios.get(`/radiograma/buscar-radiograma/${id}`)
+        const response = await axios.get(`/radiograma/${id}`)
         return response.data
     } catch (error) {
         console.log(error)
@@ -20,7 +20,7 @@ export const getRadiogramaById = async (id: string) => {
 
 export const editRadiograma = async (id: string, radiograma: any) => {
     try {
-        const response = await axios.put(`/radiograma/editar-radiograma/${id}`, radiograma)
+        const response = await axios.put(`/radiograma/${id}`, radiograma)
         return response.data
     } catch (error) {
         console.log(error)
@@ -38,7 +38,7 @@ export const ampliarRadiograma = async (id_radiograma_original: string, id_radio
 
 export const deleteRadiograma = async (id: string) => {
     try {
-        const response = await axios.delete(`/radiograma/eliminar-radiograma/${id}`)
+        const response = await axios.delete(`/radiograma/${id}`)
         return response.data
     } catch (error) {
         console.log(error)

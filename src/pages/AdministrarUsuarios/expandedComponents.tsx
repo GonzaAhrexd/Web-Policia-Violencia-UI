@@ -71,7 +71,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
 
     return <div className="flex flex-col p-1 sm:p-10 max-w-lg sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-full scale-up-ver-top">
         <div className='flex flex-col items-center justify-around'>
-            <img className="h-32 w-32 rounded-full object-cover" src={user.imagen != "sin_definir" ? `${APIURL}/users/${data?._id}/image` : "/user.png"} alt="" />
+            <img className="h-32 w-32 rounded-full object-cover" src={user.imagen != "sin_definir" ? `${APIURL}/usuario/${data?._id}/image` : "/user.png"} alt="" />
             <h1 className='text-5xl my-5 font-sans'> Usuario {data.nombre_de_usuario} </h1>
         </div>
         <h1 className='text-3xl my-5 font-sans'>Datos del usuario</h1>

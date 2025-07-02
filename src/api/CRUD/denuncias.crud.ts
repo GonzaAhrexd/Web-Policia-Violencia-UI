@@ -2,7 +2,7 @@ import axios from '../axios'
 
 
 // DENUNCIAS
-// Crear denuncias
+// POST: Crear denuncias
 export const crearDenuncia = (denuncia: any) => {
     const formData = new FormData();
     // Pasa todos los datos de la denuncia a un FormData
@@ -11,7 +11,7 @@ export const crearDenuncia = (denuncia: any) => {
     });
     
     try {
-        axios.post(`/denuncias/crear-denuncia/`, formData, {
+        axios.post(`/denuncias/`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -21,7 +21,7 @@ export const crearDenuncia = (denuncia: any) => {
     }
 }
 
-// Listar denuncias del usuario actual
+// GET: Listar denuncias del usuario actual
 export const misDenuncias = async (values: any) => {
     try {
         const response = await axios.get(`/denuncias/mis-denuncias/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}/${values.is_expediente_completo ? values.is_expediente_completo : "no_ingresado"}`)
@@ -31,20 +31,20 @@ export const misDenuncias = async (values: any) => {
     }
 }
 
-// Listar denuncias del usuario actual
+// GET: Listar denuncias del usuario actual
 export const buscarDenuncias = async (values: any, manual: boolean) => {
     try {
-        const response = await axios.get(`/denuncias/buscar-denuncias/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}/${values.id_denuncia ? values.id_denuncia : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}/${values.is_expediente_completo ? values.is_expediente_completo : "no_ingresado"}/${values.division ? values.division : "no_ingresado"}/${values.municipio ? values.municipio : "no_ingresado"}/${values.comisaria ? values.comisaria : "no_ingresado"}/${values.relacion_victima_victimario ? encodeURIComponent(values.relacion_victima_victimario) : "no_ingresado" }/${values.aprehension ? values.aprehension : "no_ingresado" }/${manual}`)
+        const response = await axios.get(`/denuncias/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}/${values.id_denuncia ? values.id_denuncia : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}/${values.is_expediente_completo ? values.is_expediente_completo : "no_ingresado"}/${values.division ? values.division : "no_ingresado"}/${values.municipio ? values.municipio : "no_ingresado"}/${values.comisaria ? values.comisaria : "no_ingresado"}/${values.relacion_victima_victimario ? encodeURIComponent(values.relacion_victima_victimario) : "no_ingresado" }/${values.aprehension ? values.aprehension : "no_ingresado" }/${manual}`)
         return response.data
     } catch (error) {
         console.log(error)
     }
 }
 
-// Listar las denuncias para generar un excel
+// GET: Listar las denuncias para generar un excel
 export const buscarDenunciasPlus = async (values: any ) => {
     try {
-        const response = await axios.get(`/denuncias/generar-excel-denuncias/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}/${values.id_denuncia ? values.id_denuncia : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}/${values.is_expediente_completo ? values.is_expediente_completo : "no_ingresado"}/${values.division ? values.division : "no_ingresado"}/${values.municipio ? values.municipio : "no_ingresado"}/${values.comisaria ? values.comisaria : "no_ingresado"}/${values.relacion_victima_victimario ? encodeURIComponent(values.relacion_victima_victimario) : "no_ingresado" }/${values.aprehension ? values.aprehension : "no_ingresado" }`)
+        const response = await axios.get(`/denuncias/excel/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}/${values.id_denuncia ? values.id_denuncia : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}/${values.is_expediente_completo ? values.is_expediente_completo : "no_ingresado"}/${values.division ? values.division : "no_ingresado"}/${values.municipio ? values.municipio : "no_ingresado"}/${values.comisaria ? values.comisaria : "no_ingresado"}/${values.relacion_victima_victimario ? encodeURIComponent(values.relacion_victima_victimario) : "no_ingresado" }/${values.aprehension ? values.aprehension : "no_ingresado" }`)
         return response.data
     } catch (error) {
         console.log(error)
@@ -53,36 +53,49 @@ export const buscarDenunciasPlus = async (values: any ) => {
 
 
 
-// Buscar denuncias por id
+// GET: Buscar denuncias por id
 export const buscarDenunciasPorId = async (id: string) => {
     try {
-        const response = await axios.get(`/denuncias/buscar-denuncias-id/${id}`)
+        const response = await axios.get(`/denuncias/${id}`)
         return response.data
     } catch (error) {
         console.log(error)
     }
 }
 
-// Editar denuncias
+
+// GET: Cantidad de denuncias
+export const cantidadDenuncias = async (values: any) => {
+    try {
+        const response = await axios.get(`/denuncias/cantidad/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+// GET: Estadística anual de denuncias
+export const getDenunciasEstadisticaAnual = async () => {
+    try {
+        const response = await axios.get(`/denuncias/estadistica-anual`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+// PUT: Editar denuncias
 export const editarDenuncia = async (denuncia: any) => {
     try {
-        const response = await axios.put(`/denuncias/editar-denuncias/${denuncia.denuncia_id}`, denuncia)
+        const response = await axios.put(`/denuncias/${denuncia.denuncia_id}`, denuncia)
         return response.data
     } catch (error) {
         console.log(error)
     }
 }
 
-// Eliminar denuncias
-export const eliminarDenuncia = async (id: string) => {
-    try {
-        const response = await axios.delete(`/denuncias/eliminar-denuncias/${id}`)
-        return response.data
-    } catch (error) {
-        console.log(error)
-    }
-}
-
+// PUT: Editar imagen de denuncia
 export const editarImagenDenuncia = async (imagenDenuncia : any) => {
     const formData = new FormData();
     // Pasa todos los datos de la denuncia a un FormData
@@ -90,7 +103,7 @@ export const editarImagenDenuncia = async (imagenDenuncia : any) => {
         formData.append(key, imagenDenuncia[key]);
     });
     try {
-        axios.put(`/denuncias/editar-imagen-denuncia/`, formData, {
+        axios.put(`/denuncias/imagen/`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -100,19 +113,11 @@ export const editarImagenDenuncia = async (imagenDenuncia : any) => {
     }
 }
 
-// Cantidad de denuncias
-export const cantidadDenuncias = async (values: any) => {
-    try {
-        const response = await axios.get(`/denuncias/cantidad-denuncias/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}`)
-        return response.data
-    } catch (error) {
-        console.log(error)
-    }
-}
 
-export const getDenunciasEstadisticaAnual = async () => {
+// DELETE: Eliminar denuncias
+export const eliminarDenuncia = async (id: string) => {
     try {
-        const response = await axios.get(`/denuncias/denuncias-estadistica-anual`)
+        const response = await axios.delete(`/denuncias/${id}`)
         return response.data
     } catch (error) {
         console.log(error)

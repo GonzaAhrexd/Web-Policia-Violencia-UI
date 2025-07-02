@@ -58,7 +58,7 @@ function Index() {
         // Intenta cargar la imagen del usuario
         try {
           // Ruta de la imagen
-          const imagePath = `${APIURL}/users/${user.id}/image`
+          const imagePath = `${APIURL}/usuario/${user.id}/image`
           // Establece la imagen del usuario
           setUserImage(imagePath);
         } catch (error) {
