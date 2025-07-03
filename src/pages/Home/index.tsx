@@ -19,9 +19,9 @@ import CardMostrarSeccionAdmin from '../../components/Cards/CardMostrarSeccionAd
 import CardDenunciasTotales from '../../components/Cards/CardDenunciasTotales';
 import Footer from '../../components/Footer/Footer';
 import LoadingScreen from '../../components/LoadingScreen';
+import CardDenunciasGrafico from '../../components/Cards/CardDenunciasGrafico';
 // Iconos
 import { ExclamationTriangleIcon, UserIcon, MagnifyingGlassIcon, ListBulletIcon, PencilSquareIcon, ClipboardDocumentCheckIcon, ChartPieIcon, UserPlusIcon, PresentationChartBarIcon, ArrowUpTrayIcon } from '@heroicons/react/24/outline'
-import CardDenunciasGrafico from '../../components/Cards/CardDenunciasGrafico';
 
 function Home() {
   // Obtiene los datos del usuario y verifica si está autenticado desde el contexto
@@ -91,6 +91,7 @@ function Home() {
               {isAgente && seccionesAgente.map((seccion, index) => (
                 <CardActions key={index} mostrar={seccion.mostrar} url={seccion.url} SVGIcon={seccion.svg} />
               ))}
+              
               {isCarga && seccionesCarga.map((seccion, index) => (
                 <CardActions key={index} mostrar={seccion.mostrar} url={seccion.url} SVGIcon={seccion.svg} />
               ))}
@@ -103,10 +104,9 @@ function Home() {
               {(isAdmin && showAdminSection) && seccionesAdmin.map((seccion, index) => (
                 <CardActions key={index} mostrar={seccion.mostrar} url={seccion.url} SVGIcon={seccion.svg} />
               ))}
+
             </div>
           </div>
-
-
           <div>
             <h2 className='text-3xl my-5 '>Resumen</h2>
             <div className='grid gap-1 grid-cols-1 sm:grid-cols-1 sm:gap-5 md:grid-cols-3 xl:grid-cols-5 w-full p-2'>

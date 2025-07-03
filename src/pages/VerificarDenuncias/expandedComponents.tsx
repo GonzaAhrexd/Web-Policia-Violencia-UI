@@ -17,7 +17,7 @@ import Swal from 'sweetalert2' // Librería para mostrar popups
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid'
 // Componentes
 import SimpleTableCheckorX from '../../components/ShowData/SimpleTableCheckorX';
-import EditSectionSinVerificar from '../../components/EditMode/EditSectionSinVerificar';
+import EditSectionSinVerificar from '../../components/Busqueda/BuscarDenunciasSinVerificar/EditSectionSinVerificar';
 import ShowTextArea from '../../components/ShowData/ShowTextArea';
 
 // Props

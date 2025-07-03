@@ -1,14 +1,14 @@
 
-import EditVictimaExposicion from './EditVictimaExposicion'
+import EditVictimaExposicion from '../../EditMode/EditVictimaExposicion'
 type EditExposicionProps = {
     datos: any,
     setEditMode: any,
 }
 import { useForm } from 'react-hook-form'   
-import InputTextArea from '../InputComponents/InputTextArea'
+import InputTextArea from '../../InputComponents/InputTextArea'
 import Swal from 'sweetalert2'
 
-import { editarExposicion } from '../../api/CRUD/exposicion.crud'
+import { editarExposicion } from '../../../api/CRUD/exposicion.crud'
 
 
 function EditExposicion({datos, setEditMode }: EditExposicionProps) {
@@ -56,11 +56,6 @@ function EditExposicion({datos, setEditMode }: EditExposicionProps) {
               <div className='flex justify-center'>
               <InputTextArea variante={"edit"} valor={datos.observaciones} campo="" nombre="observaciones" setValue={setValue} register={register} type="text" />
               </div>
-              {/* <h1 className='text-2xl my-5'>Preguntas</h1>
-              <div className='flex justify-center'>
-                <CargarPreguntas watch={watch} tipoDenuncia={tipoDenuncia} register={register} setValue={setValue} errors={errors} />
-              </div>
-              <CargarInstructorYSecretario register={register} setValue={setValue} errors={errors} /> */}
               <div className="flex justify-center my-3">
                 <div className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10 flex flex-col items-center justify-center cursor-pointer' onClick={() => setEditMode(false)}>Cancelar</div>
                 <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' type="submit">Enviar</button>

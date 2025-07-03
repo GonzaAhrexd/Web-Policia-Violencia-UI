@@ -1,17 +1,23 @@
-import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
-import InputRegister from "../InputComponents/InputRegister";
-import InputDate from "../InputComponents/InputDate";
-import InputCheckboxAcumulador from "../InputComponents/InputCheckboxAcumulador";
-import { editPreventivo, ampliarPreventivo } from "../../api/CRUD/preventivo.crud";
+// Hooks
 import { useEffect, useState } from "react";
-import { useAuth } from "../../context/auth";
-import { useCampos } from "../../context/campos";
-import InputTextArea from "../InputComponents/InputTextArea";
-import CargarInstructorYSecretario from "../Cargar/CargarAgente/CargarInstructor";
+import { useForm } from "react-hook-form";
+// Componentes
+import InputRegister from "../../InputComponents/InputRegister";
+import InputDate from "../../InputComponents/InputDate";
+import InputCheckboxAcumulador from "../../InputComponents/InputCheckboxAcumulador";
+import InputTextArea from "../../InputComponents/InputTextArea";
+import CargarInstructorYSecretario from "../../Cargar/CargarAgente/CargarInstructor";
+import PDF from "../../Cargar/CargarPreventivo/PDF";
+// Librerías React
+import Swal from "sweetalert2";
 import { pdf } from "@react-pdf/renderer";
-import PDF from "../Cargar/CargarPreventivo/PDF";
-
+// Backend
+import { editPreventivo, ampliarPreventivo } from "../../../api/CRUD/preventivo.crud";
+// Contexto
+import { useAuth } from "../../../context/auth";
+import { useCampos } from "../../../context/campos";
+import direccionDivisiones from "../../../GlobalConst/direccionDivisiones";
+// Tipos de datos para el componente
 type EditPrevencionProps = {
     data: any
     modoExpandir: boolean
@@ -27,18 +33,6 @@ function EditPrevencion({ data, modoExpandir }: EditPrevencionProps) {
     const [supervisionValor, setSupervisionValor] = useState('')
     const { unidades } = useCampos()
     const [stringSeparado, setStringSeparado] = useState([])
-
-
-    const direccionDivisiones: any[] = [
-        { division: "Metropolitana", direccion: "Avenida Alvear Nº 126", telefono: "362461832" },
-        { division: "La Leonesa", direccion: "Santiago del Estero y Entre Ríos", telefono: "3624644562" },
-        { division: "Lapachito", direccion: "25 de Mayo S/N", telefono: "3624605783" },
-        { division: "Roque Saenz Peña", direccion: "Calle 7e/12 y 14", telefono: "3644431835" },
-        { division: "Villa Ángela", direccion: "Echeverría N° 35", telefono: "3735 431438" },
-        { division: "General San Martín", direccion: "Esq. Maipú y Urquiza", telefono: "3725422202" },
-        { division: "Charata", direccion: "9 de Julio N° 575", telefono: "3624222322" },
-        { division: "Juan José Castelli", direccion: "Av. Perón N° 470", telefono: "3624702665" }
-    ]
 
     useEffect(() => {
         const unidadesSeparadas = user.unidad.split(",")

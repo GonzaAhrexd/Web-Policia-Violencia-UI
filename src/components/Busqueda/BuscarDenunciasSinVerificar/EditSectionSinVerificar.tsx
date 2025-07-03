@@ -10,24 +10,25 @@ ________________________________________________________________________________
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 // APIs y BackEnd
-import { agregarVictimario } from '../../api/CRUD/victimario.crud'
-import { agregarVictima } from '../../api/CRUD/victimas.crud'
-import { aprobarDenuncia } from '../../api/CRUD/denunciasSinVerificar.crud'
-import { crearDenuncia } from '../../api/CRUD/denuncias.crud'
+import { agregarVictimario } from '../../../api/CRUD/victimario.crud'
+import { agregarVictima } from '../../../api/CRUD/victimas.crud'
+import { aprobarDenuncia } from '../../../api/CRUD/denunciasSinVerificar.crud'
+import { crearDenuncia } from '../../../api/CRUD/denuncias.crud'
 // Componentes
-import VerificarDenunciante from '../VerificarDenuncias/VerificarDenunciante'
-import CargarVictimario from '../Cargar/CargarVictimario'
-import CargarDenuncia from '../Cargar/CargarDenuncia'
-import EditVictimario from './EditVictimario'
+// import VerificarDenunciante from '../VerificarDenuncias/VerificarDenunciante'
+import EditVictima from '../../EditMode/EditVictima'
+import CargarVictimario from '../../Cargar/CargarVictimario'
+import CargarDenuncia from '../../Cargar/CargarDenuncia'
+import EditVictimario from '../../EditMode/EditVictimario'
 import Swal from 'sweetalert2'
-import { useAuth } from '../../context/auth';
-import InputCheckbox from '../InputComponents/InputCheckbox'
-import InputTextArea from '../InputComponents/InputTextArea'
+import { useAuth } from '../../../context/auth';
+import InputCheckbox from '../../InputComponents/InputCheckbox'
+import InputTextArea from '../../InputComponents/InputTextArea'
 // Iconos
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { XMarkIcon, CheckIcon } from '@heroicons/react/24/solid'
 // Dependencias
-import { useStore } from '../../pages/CargarDenuncias/store'
+import { useStore } from '../../../pages/CargarDenuncias/store'
 // Props
 interface EditSectionProps {
   datos: any
@@ -181,8 +182,8 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
           <h1 className='text-2xl my-5'>Víctima</h1>
           <MagnifyingGlassIcon className='bg-sky-950 hover:bg-sky-700 flex items-center text-white justify-center cursor-pointer font-bold py-2 mx-5 rounded w-10 h-10' onClick={() => setOpenModalVictima(true)} />
         </div>
-          <div className='flex justify-center'>
-          <VerificarDenunciante watch={watch} datos={victimaCargar ? victimaCargar : datosVictima} register={register} setValue={setValue} errors={errors} />
+          <div className='flex justify-center '>
+          <EditVictima md verificar={true} watch={watch} datos={victimaCargar ? victimaCargar : datosVictima} register={register} setValue={setValue} errors={errors} />
         </div>
         <div className='flex items-center'>
           <h1 className='text-2xl my-5'>Victimario</h1>

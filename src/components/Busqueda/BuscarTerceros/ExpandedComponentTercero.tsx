@@ -19,13 +19,13 @@ import { PencilSquareIcon, PrinterIcon } from '@heroicons/react/24/solid'
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import { UserIcon } from '@heroicons/react/24/outline'
 // Componentes
-import SimpleTableCheckorX from '../../../components/ShowData/SimpleTableCheckorX';
+import SimpleTableCheckorX from '../../ShowData/SimpleTableCheckorX';
 import { columnsDenuncia } from '../BuscarDenuncias/columnsDataTableDenuncias'
 import { customStyles } from '../../../GlobalConst/customStyles'
-import EditTercero from '../../../components/EditMode/EditTercero';
+import EditTercero from './EditTercero';
 // Importa expandedComponents con otro nombre
 import { editarTercero } from '../../../api/CRUD/terceros.crud';
-import expandedDenuncia from '../BuscarDenuncias/expandedComponents'
+import expandedDenuncia from '../BuscarDenuncias/ExpandedComponentDenuncias'
 import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outline'
 
 import { useAuth } from '../../../context/auth';

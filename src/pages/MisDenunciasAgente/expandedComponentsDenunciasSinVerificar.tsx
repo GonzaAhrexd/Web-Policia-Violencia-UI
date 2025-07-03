@@ -22,7 +22,7 @@ import ShowTextArea from '../../components/ShowData/ShowTextArea'; // Componente
 import CargarAmpliacion from '../../components/Cargar/CargarAmpliacion/CargarAmpliacion'; // Componente para crear ampliaciones
 import CargarPreventivo from '../../components/Cargar/CargarPreventivo/CargarPreventivo'; // Componente para crear preventivos
 import CargarRadiograma from '../../components/Cargar/CargarRadiograma/CargarRadiograma'; // Componente para crear radiogramas
-import ExpandedComponent from '../../components/Busqueda/BuscarPreventivo/expandedComponent'; // Componente para mostrar detalles de preventivos
+import ExpandedComponent from '../../components/Busqueda/BuscarPreventivo/ExpandedComponentPreventivo'; // Componente para mostrar detalles de preventivos
 import PDF from '../CargarDenuncias/PDF'; // Componente para generar PDF de denuncias
 import PDFAmpliacion from '../../components/Cargar/CargarAmpliacion/PDF'; // Componente para generar PDF de ampliaciones
 import ExpandedComponentRadiograma from '../../components/Busqueda/BuscarRadiograma/expandedComponent';

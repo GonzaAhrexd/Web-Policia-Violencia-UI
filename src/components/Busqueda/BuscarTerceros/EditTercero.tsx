@@ -5,12 +5,12 @@
     Este componente es utilizado en editSection.
 */
 //Componentes
-import InputRegister from '../InputComponents/InputRegister'
-import SelectRegisterSingle from '../Select/SelectRegisterSingle';
-import InputNumber from '../InputComponents/InputNumber';
+import InputRegister from '../../InputComponents/InputRegister'
+import SelectRegisterSingle from '../../Select/SelectRegisterSingle';
+import InputNumber from '../../InputComponents/InputNumber';
 // Campos
 
-import { useCampos } from '../../context/campos'
+import { useCampos } from '../../../context/campos'
 
 interface CargarVictimaProps {
     datos: any;

@@ -6,8 +6,8 @@ import Swal from "sweetalert2";
 import { TrashIcon } from '@heroicons/react/24/solid'
 import { PrinterIcon } from "@heroicons/react/24/outline";
 // Componentes
-import SimpleTableCheckorX from '../../../components/ShowData/SimpleTableCheckorX';
-import EditPrevencion from "../../EditMode/EditPrevencion";
+import SimpleTableCheckorX from '../../ShowData/SimpleTableCheckorX';
+import EditPrevencion from "./EditPrevencion";
 // Context
 import { useAuth } from "../../../context/auth"
 // BackEnd
@@ -16,9 +16,11 @@ import { pdf } from "@react-pdf/renderer";
 import PDF from "../../Cargar/CargarPreventivo/PDF";
 import ShowTextArea from "../../ShowData/ShowTextArea";
 import { getPreventivo } from "../../../api/CRUD/preventivo.crud";
+
 type expandedComponentProps = {
     data: any
 }
+
 // Expanded component PREVENTIVO
 function expandedComponent({ data }: expandedComponentProps) {
 
@@ -96,11 +98,6 @@ function expandedComponent({ data }: expandedComponentProps) {
         )
     }
 
-    // else if (editGlobal) {
-    //     return (
-    //         <EditPrevencion modoExpandir={false} data={dataPreventivo} />
-    //     )
-    // }
     else {
         return (
 

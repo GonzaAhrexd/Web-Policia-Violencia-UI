@@ -19,7 +19,7 @@ import { PencilSquareIcon, UserIcon } from '@heroicons/react/24/outline'
 // Componentes
 import SimpleTableCheckorX from '../../../components/ShowData/SimpleTableCheckorX';
 import ShowTextArea from '../../../components/ShowData/ShowTextArea';
-import EditExposicion from '../../EditMode/EditExposicion';
+import EditExposicion from './EditExposicion';
 
 import { useAuth } from '../../../context/auth';
 

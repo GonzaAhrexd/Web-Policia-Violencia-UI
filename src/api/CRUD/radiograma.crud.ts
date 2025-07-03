@@ -1,5 +1,6 @@
 import axios from '../axios'
 
+// POST: Crear radiograma
 export const crearRadiograma = async (radiograma: any) => {
     try {
         const response = await axios.post(`/radiograma/`, radiograma)
@@ -9,6 +10,7 @@ export const crearRadiograma = async (radiograma: any) => {
     }
 }
 
+// GET: Buscar radiogramas
 export const getRadiogramaById = async (id: string) => {
     try {
         const response = await axios.get(`/radiograma/${id}`)
@@ -17,6 +19,8 @@ export const getRadiogramaById = async (id: string) => {
         console.log(error)
     }
 }
+
+// PUT: Editar radiograma
 
 export const editRadiograma = async (id: string, radiograma: any) => {
     try {
@@ -27,6 +31,7 @@ export const editRadiograma = async (id: string, radiograma: any) => {
     }
 }
 
+// PUT: Ampliar radiograma
 export const ampliarRadiograma = async (id_radiograma_original: string, id_radiograma_ampliado: string) => {
     try {
         const response = await axios.put(`/radiograma/ampliar-radiograma/${id_radiograma_original}/${id_radiograma_ampliado}`)
@@ -36,6 +41,7 @@ export const ampliarRadiograma = async (id_radiograma_original: string, id_radio
     }
 }
 
+// DELETE: Eliminar radiograma
 export const deleteRadiograma = async (id: string) => {
     try {
         const response = await axios.delete(`/radiograma/${id}`)

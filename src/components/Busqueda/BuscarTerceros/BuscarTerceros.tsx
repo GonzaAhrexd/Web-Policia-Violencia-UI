@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import DataTable from 'react-data-table-component';
 // Dependencias de esta carpeta
 import { columnTercero } from './columnDataTableTerceros'
-import expandedComponents from './expandedComponents'
+import expandedComponents from './ExpandedComponentTercero'
 import { customStyles } from '../../../GlobalConst/customStyles'
 // Iconos
 import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outline'

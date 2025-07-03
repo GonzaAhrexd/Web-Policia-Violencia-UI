@@ -17,18 +17,17 @@ import { getVictimario } from '../../../api/CRUD/victimario.crud';
 // Librerías react
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet' // Librería para mostrar mapas
 import Swal from 'sweetalert2' // Librería para mostrar popups
+import { pdf } from '@react-pdf/renderer';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-
-// IMPORTAR LAS IMÁGENES EXPLÍCITAMENTE
+// FIX PARA VITE + LEAFLET
+// @ts-ignore
+delete L.Icon.Default.prototype._getIconUrl;
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
-// FIX PARA VITE + LEAFLET
-// @ts-ignore
-delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x,
@@ -36,34 +35,27 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
-// import { Icon } from 'leaflet'
 // Iconos
 import { PencilSquareIcon, TrashIcon, MapPinIcon, PrinterIcon } from '@heroicons/react/24/solid'
 import { UsersIcon, UserIcon, ClipboardDocumentCheckIcon, ExclamationTriangleIcon, QueueListIcon, MapPinIcon as MapPinIconOutLine, ListBulletIcon, QuestionMarkCircleIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
+
 // Componentes
-import SimpleTableCheckorX from '../../../components/ShowData/SimpleTableCheckorX';
-import EditSection from '../../../components/EditMode/EditSection';
-import ShowTextArea from '../../../components/ShowData/ShowTextArea';
+import SimpleTableCheckorX from '../../ShowData/SimpleTableCheckorX';
+import EditSection from './EditSection';
+import ShowTextArea from '../../ShowData/ShowTextArea';
+import PDF from './PDF';
+
 // Estados globales
 import { useAuth } from '../../../context/auth';
 
-
-import { pdf } from '@react-pdf/renderer';
-import PDF from './PDF';
-
-interface expandedComponentsProps {
+type expandedComponentsProps = {
     data: any
 }
 
 
 // Expanded component DENUNCIA
-function expandedComponents({ data }: expandedComponentsProps) {
+function ExpandedComponentDenuncias({ data }: expandedComponentsProps) {
     const APIURL = import.meta.env.VITE_BASE_URL
-
-    // const markerIcon = new Icon({
-    //     iconUrl: '/pin-de-ubicacion.png',
-    //     iconSize: [30, 30],
-    // });
 
     const fileInputRef = useRef(null)
     const { handleSubmit } = useForm();
@@ -326,7 +318,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
             if (result.isConfirmed) {
                 try {
                     // Llamada a la API
-                    eliminarDenuncia(data._id)
+                    await eliminarDenuncia(data._id)
                     // Mensaje de éxito
                     Swal.fire({
                         title: 'Borrado',
@@ -405,8 +397,6 @@ function expandedComponents({ data }: expandedComponentsProps) {
                 </div>
                 <SimpleTableCheckorX campo="Tipo de Violencia" datos={tiposDeViolencia} icono={<ListBulletIcon className='h-6 w-6' />} />
                 <SimpleTableCheckorX campo="Medida solicitada por la víctima" datos={medidas} icono={<QuestionMarkCircleIcon className='h-6 w-6' />} />
-
-
                 <SimpleTableCheckorX campo="Medida dispuesta por la autoridad judicial" datos={medidaDispuestaPorLaAutoridadJudicial} icono={<img src="./Judge.svg" alt="Icono" className='h-6 w-6' />} />
                 <div className='flex flex-col'>
                     {data.denunciado_por_tercero &&
@@ -506,4 +496,4 @@ function expandedComponents({ data }: expandedComponentsProps) {
 
 }
 
-export default expandedComponents
+export default ExpandedComponentDenuncias

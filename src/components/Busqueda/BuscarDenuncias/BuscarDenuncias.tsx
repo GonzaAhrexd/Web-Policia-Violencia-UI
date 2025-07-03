@@ -12,7 +12,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form'
 import DataTable from 'react-data-table-component';
 import { columnsDenuncia } from './columnsDataTableDenuncias'
-import expandedComponents from './expandedComponents'
+import ExpandedComponentDenuncias from './ExpandedComponentDenuncias'
 import { customStyles } from '../../../GlobalConst/customStyles'
 import { useAuth } from '../../../context/auth';
 
@@ -106,7 +106,7 @@ function BuscarDenuncias() {
                         data={denunciasAMostrar}
                         pagination
                         expandableRows
-                        expandableRowsComponent={expandedComponents}
+                        expandableRowsComponent={ExpandedComponentDenuncias}
                         customStyles={customStyles}
                         responsive={true}
                         striped={true}

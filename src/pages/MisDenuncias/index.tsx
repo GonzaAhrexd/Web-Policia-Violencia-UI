@@ -24,7 +24,7 @@ import LoadingScreen from '../../components/LoadingScreen';
 import Footer from '../../components/Footer/Footer';
 // DataTable
 import { columnsDenuncia } from './columnsDataTable'
-import expandedComponents from '../../components/Busqueda/BuscarDenuncias/expandedComponents' // Busca de otro lado para mantener consistencia
+import ExpandedComponentDenuncias from '../../components/Busqueda/BuscarDenuncias/ExpandedComponentDenuncias' // Busca de otro lado para mantener consistencia
 import { customStyles } from '../../GlobalConst/customStyles'
 // Página alternativa para el rol agente
 import MisDenunciasAgente from '../MisDenunciasAgente'
@@ -109,7 +109,7 @@ function MisDenuncias() {
                                 data={denunciasAMostrar} // Datos de la tabla
                                 pagination // Paginación
                                 expandableRows // Filas expandibles
-                                expandableRowsComponent={expandedComponents}  // Componente de filas expandibles
+                                expandableRowsComponent={ExpandedComponentDenuncias}  // Componente de filas expandibles
                                 customStyles={customStyles} // Estilos personalizados
                                 responsive={true} // Diseño responsivo
                                 striped={true} // Filas alternadas

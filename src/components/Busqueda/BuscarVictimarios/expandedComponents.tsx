@@ -25,7 +25,7 @@ import { customStyles } from '../../../GlobalConst/customStyles'
 import EditVictimario from '../../../components/EditMode/EditVictimario';
 // Importa expandedComponents con otro nombre
 import { editarVictimario } from '../../../api/CRUD/victimario.crud';
-import expandedDenuncia from '../BuscarDenuncias/expandedComponents'
+import expandedDenuncia from '../BuscarDenuncias/ExpandedComponentDenuncias'
 import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outline'
 
 import { useAuth } from '../../../context/auth';

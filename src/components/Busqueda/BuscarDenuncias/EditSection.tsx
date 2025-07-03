@@ -10,19 +10,19 @@ ________________________________________________________________________________
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 // APIs y BackEnd
-import {  editarTercero, crearTercero } from '../../api/CRUD/terceros.crud'
-import { editarVictimario } from '../../api/CRUD/victimario.crud'
-import { editarVictima } from '../../api/CRUD/victimas.crud'
-import { editarDenuncia } from '../../api/CRUD/denuncias.crud'
+import {  editarTercero, crearTercero } from '../../../api/CRUD/terceros.crud'
+import { editarVictimario } from '../../../api/CRUD/victimario.crud'
+import { editarVictima } from '../../../api/CRUD/victimas.crud'
+import { editarDenuncia } from '../../../api/CRUD/denuncias.crud'
 // Componentes
-import EditVictima from './EditVictima'
-import EditVictimario from './EditVictimario'
-import EditHecho from './EditHecho'
-import InputTextArea from '../InputComponents/InputTextArea'
-import InputCheckbox from '../InputComponents/InputCheckbox'
+import EditVictima from '../../EditMode/EditVictima'
+import EditVictimario from '../../EditMode/EditVictimario'
+import EditHecho from '../../EditMode/EditHecho'
+import InputTextArea from '../../InputComponents/InputTextArea'
+import InputCheckbox from '../../InputComponents/InputCheckbox'
 import Swal from 'sweetalert2'
 import { XMarkIcon, CheckIcon } from '@heroicons/react/24/solid'
-import { useStore } from '../../pages/MisDenuncias/store'
+import { useStore } from '../../../pages/MisDenuncias/store'
 
 // Props
 interface EditSectionProps {
@@ -114,7 +114,7 @@ function EditSection({  datosTerceros, datosGeograficos, datosVictima, datosVict
                         })
                     })}>
 
-                <EditVictima watch={watch} editarConDenuncia cantidad_hijos_con_agresor={datosHecho.hijos_victima_con_victimario} hijos_con_agresor={datosHecho.hijos_victima_con_victimario} convivencia={datosHecho.convivencia} dependencia_economica={datosHecho.dependencia_economica} vinculo_con_agresor={datosHecho.relacion_victima_victimario} datos={datosVictima} register={register} setValue={setValue} errors={errors} />
+                <EditVictima watch={watch} cantidad_hijos_con_agresor={datosHecho.hijos_victima_con_victimario} hijos_con_agresor={datosHecho.hijos_victima_con_victimario} convivencia={datosHecho.convivencia} dependencia_economica={datosHecho.dependencia_economica} vinculo_con_agresor={datosHecho.relacion_victima_victimario} datos={datosVictima} register={register} setValue={setValue} errors={errors} />
                 <EditVictimario datos={datosVictimario} register={register} setValue={setValue} errors={errors} />
                 <EditHecho setIsSolicitudAprehension={setIsSolicitudAprehension} datosTerceros={datosTerceros} datosGeograficos={datosGeograficos} datos={datosHecho} handleOpenModal={handleOpenModal} setTitulo={setTitle} register={register} setValue={setValue} errors={errors} />
                 
