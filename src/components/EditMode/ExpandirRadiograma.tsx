@@ -9,7 +9,7 @@ import InputTextArea from '../InputComponents/InputTextArea';
 import SelectRegisterSingle from '../Select/SelectRegisterSingle';
 import { jerarquiaCampos } from '../../GlobalConst/jerarquiaCampos';
 import { pdf } from '@react-pdf/renderer';
-import PDFRadiograma from '../Cargar/CargarRadiograma/PDFRadiograma';
+import PDFRadiograma from '../ReactPDF/PDFRadiograma';
 
 type CargarRadiogramaProps = {
   // Define the props for the CargarRadiograma component here

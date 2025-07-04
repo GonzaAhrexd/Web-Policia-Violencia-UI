@@ -23,8 +23,8 @@ import CargarAmpliacion from '../../components/Cargar/CargarAmpliacion/CargarAmp
 import CargarPreventivo from '../../components/Cargar/CargarPreventivo/CargarPreventivo'; // Componente para crear preventivos
 import CargarRadiograma from '../../components/Cargar/CargarRadiograma/CargarRadiograma'; // Componente para crear radiogramas
 import ExpandedComponent from '../../components/Busqueda/BuscarPreventivo/ExpandedComponentPreventivo'; // Componente para mostrar detalles de preventivos
-import PDF from '../CargarDenuncias/PDF'; // Componente para generar PDF de denuncias
-import PDFAmpliacion from '../../components/Cargar/CargarAmpliacion/PDF'; // Componente para generar PDF de ampliaciones
+import PDF from '../../components/ReactPDF/PDFDenuncias'; // Componente para generar PDF de denuncias
+import PDFAmpliacion from '../../components/ReactPDF/PDFAmpliacion'; // Componente para generar PDF de ampliaciones
 import ExpandedComponentRadiograma from '../../components/Busqueda/BuscarRadiograma/expandedComponent';
 // Funciones de API
 import { getPreventivo } from '../../api/CRUD/preventivo.crud'; // Función para obtener datos de un preventivo

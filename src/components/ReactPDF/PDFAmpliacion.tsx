@@ -1,14 +1,17 @@
-import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
+import { Document, Page, Text, View, Image } from '@react-pdf/renderer';
 import { useState } from 'react';
-import direccionDivisiones from '../../../GlobalConst/direccionDivisiones';
-interface PDFProps {
+import direccionDivisiones from '../../GlobalConst/direccionDivisiones';
+import Footer from './Footer';
+import styles from '../../GlobalConst/PDFStyles';
+
+type PDFProps = {
     isBusqueda: boolean;   
     datos: any;
     user: any;
     genero: string;
 }
 
-function PDF({isBusqueda, genero, datos, user }: PDFProps) {
+function PDFAmpliacion({isBusqueda, genero, datos, user }: PDFProps) {
 
     const userDivisionZona = user.unidad.split(",")
 
@@ -30,130 +33,7 @@ function PDF({isBusqueda, genero, datos, user }: PDFProps) {
  
     // Según userDivisionZona[0], quiero obtener de direccionDivisiones
     const direccionDivision: division[] = direccionDivisiones.filter((division) => division.division === userDivisionZona[0])
-    const styles = StyleSheet.create({
-        page: {
-            padding: 30,
-        },
-        section: {
-            margin: 10,
-            padding: 10,
-            fontSize: 12,
-        },
-        header: {
-            fontSize: 14,
-            textAlign: 'center',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            alignContent: 'center',
-            marginBottom: 10,
-            display: 'flex',
-            flexDirection: 'row',
-            paddingLeft: 30,
-            paddingRight: 30,
-        },
-        subheader: {
-            fontSize: 14,
-            fontWeight: 'bold',
-            textAlign: 'center',
-            marginBottom: 10,
-        },
-        text: {
-            marginBottom: 10,
-            fontSize: 12,
-            // textAlign: 'left',
-        },
-        signature: {
-            marginTop: 40,
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-        },
-        signatureSection: {
-            width: '30%',
-            textAlign: 'center',
-        },
-        sectionCenter: {
-            margin: 5,
-            padding: 5,
-            flexGrow: 1,
-            flexDirection: 'column',
-            alignItems: 'center',
-            fontSize: 11
-        },
-        images: {
-            width: "1.17cm",
-            height: "1.70cm"
-        },
-        textBold: {
-            fontWeight: 'bold',
-            fontSize: 16
-        },
-        sectionRight: {
-            margin: 5,
-            padding: 5,
-            flexGrow: 1,
-            flexDirection: 'column',
-            alignItems: 'flex-end',
-            fontSize: 12,
-            fontWeight: 'bold',
-        },
-        longText: {
-            fontSize: 10,
-            textAlign: 'justify',
-            lineHeight: 1.5, // Aumenta el espacio entre líneas
-        },
-        boldText: {
-            fontFamily: 'Times-Bold',
-            fontSize: 12,
-            fontWeight: 'bold',
-            textDecoration: 'underline',
-        },
-        sectionSignatureEnd: {
-            display: 'flex',
-            fontSize: 12,
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            marginTop: 20,
-        },
-        sectionSignatureEndContainer: {
-            display: 'flex',
-            fontSize: 11,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginTop: 10,
-        },
-        sectionSignatureEndText: {
-            display: 'flex',
-            fontSize: 11,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 10,
-            marginRight: 10
-        },
-        sectionSignatureEndSecretario: {
-            display: 'flex',
-            fontSize: 11,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 80,
-            marginLeft: 30
-        },
-        signaturesNameAndJerarquia: {
-            fontSize: 11,
-        },
-        signaturesEndEnd: {
-            fontFamily: 'Times-Bold',
-            fontSize: 11,
-            fontWeight: 'bold',
-            textDecoration: 'underline',
-        },
-        footer: {
-            marginTop: 5,
-        },
 
-    });
 
     const Header = () => {
 
@@ -179,30 +59,6 @@ function PDF({isBusqueda, genero, datos, user }: PDFProps) {
         )
     }
 
-    const Footer = () => {
-        return (
-            <View minPresenceAhead={150} wrap={false}>
-                <Text>_____________________________________________________</Text>
-                <View style={styles.sectionSignatureEnd}>
-                    <Text>Firma</Text>
-                    <Text>Aclaración</Text>
-                    <Text>DNI</Text>
-                </View>
-                <View style={styles.sectionSignatureEndContainer}>
-                    <View style={styles.sectionSignatureEndSecretario}>
-                        <Text style={styles.signaturesNameAndJerarquia}>{datos.nombre_completo_secretario ? datos.nombre_completo_secretario : datos.secretario.nombre_completo_secretario}</Text>
-                        <Text style={styles.signaturesNameAndJerarquia}>{datos.jerarquia_secretario ? datos.jerarquia_secretario : datos.secretario.jerarquia_secretario} {datos.plaza_secretario}</Text>
-                        <Text style={styles.boldText}>-SECRETARIO-</Text>
-                    </View>
-                    <View style={styles.sectionSignatureEndText}>
-                        <Text style={styles.signaturesNameAndJerarquia}>{datos.nombre_completo_instructor ? datos.nombre_completo_instructor : datos.instructor.nombre_completo_instructor}</Text>
-                        <Text style={styles.signaturesNameAndJerarquia}>{datos.jerarquia_instructor ? datos.jerarquia_instructor : datos.instructor.jerarquia_instructor} {datos.plaza_instructor}</Text>
-                        <Text style={styles.boldText}>-INSTRUCTOR-</Text>
-                    </View>
-                </View>
-            </View>
-        );
-    };
 
     // Create Document Component
         return (
@@ -239,10 +95,10 @@ function PDF({isBusqueda, genero, datos, user }: PDFProps) {
                         </Text>
 
                     </View>
-                    <Footer />
+                    <Footer firmas datos={datos}/>
                 </Page>
             </Document>
         )
     
 }
-export default PDF;
+export default PDFAmpliacion;

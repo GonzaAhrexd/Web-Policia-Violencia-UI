@@ -9,7 +9,7 @@ import InputDate from '../../InputComponents/InputDate';
 import InputRegister from '../../InputComponents/InputRegister';
 import InputTextArea from '../../InputComponents/InputTextArea';
 import SelectRegisterSingle from '../../Select/SelectRegisterSingle';
-import PDFRadiograma from './PDFRadiograma';
+import PDFRadiograma from '../../ReactPDF/PDFRadiograma';
 // API
 import { crearRadiograma } from '../../../api/CRUD/radiograma.crud';
 import { getPreventivo } from '../../../api/CRUD/preventivo.crud';

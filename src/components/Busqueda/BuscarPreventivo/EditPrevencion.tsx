@@ -7,7 +7,7 @@ import InputDate from "../../InputComponents/InputDate";
 import InputCheckboxAcumulador from "../../InputComponents/InputCheckboxAcumulador";
 import InputTextArea from "../../InputComponents/InputTextArea";
 import CargarInstructorYSecretario from "../../Cargar/CargarAgente/CargarInstructor";
-import PDF from "../../Cargar/CargarPreventivo/PDF";
+import PDF from "../../ReactPDF/PDFPreventivo";
 // Librerías React
 import Swal from "sweetalert2";
 import { pdf } from "@react-pdf/renderer";

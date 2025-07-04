@@ -18,7 +18,7 @@ import InputExpediente from "../../InputComponents/InputExpediente"
 import InputDate from "../../InputComponents/InputDate"
 import InputRegister from "../../InputComponents/InputRegister"
 import InputTextArea from "../../InputComponents/InputTextArea"
-import PDF from "./PDF"
+import PDF from "../../ReactPDF/PDFAmpliacion"
 // API
 import { crearDenunciaSinVerificar, agregarAmpliacionDenuncia } from "../../../api/CRUD/denunciasSinVerificar.crud"
 type CargarAmpliacionProps = {

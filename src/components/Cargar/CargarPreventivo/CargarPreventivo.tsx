@@ -22,7 +22,7 @@ import InputDate from '../../../components/InputComponents/InputDate'; // Compon
 import InputTextArea from '../../InputComponents/InputTextArea'; // Componente para áreas de texto
 import InputCheckboxAcumulador from '../../InputComponents/InputCheckboxAcumulador'; // Componente para checkboxes acumuladores
 import CargarInstructorYSecretario from '../../Cargar/CargarAgente/CargarInstructor'; // Componente para cargar datos de instructor y secretario
-import PDF from './PDF'; // Componente para generar el PDF del preventivo
+import PDF from '../../ReactPDF/PDFPreventivo'; // Componente para generar el PDF del preventivo
 
 // Funciones de API
 import { crearPreventivo, getPreventivo } from '../../../api/CRUD/preventivo.crud'; // Función para crear un preventivo

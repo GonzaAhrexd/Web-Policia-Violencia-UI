@@ -9,7 +9,7 @@ import { PrinterIcon } from "@heroicons/react/24/outline";
 // Componentes
 import SimpleTableCheckorX from '../../../components/ShowData/SimpleTableCheckorX';
 import EditRadiograma from "../../EditMode/ExpandirRadiograma";
-import PDFRadiograma from "../../Cargar/CargarRadiograma/PDFRadiograma";
+import PDFRadiograma from "../../ReactPDF/PDFRadiograma";
 import ShowTextArea from "../../ShowData/ShowTextArea";
 // Context
 import { useAuth } from "../../../context/auth"

@@ -13,7 +13,7 @@ import { useAuth } from "../../../context/auth"
 // BackEnd
 import { deletePreventivo } from "../../../api/CRUD/preventivo.crud";
 import { pdf } from "@react-pdf/renderer";
-import PDF from "../../Cargar/CargarPreventivo/PDF";
+import PDF from "../../ReactPDF/PDFPreventivo";
 import ShowTextArea from "../../ShowData/ShowTextArea";
 import { getPreventivo } from "../../../api/CRUD/preventivo.crud";
 
