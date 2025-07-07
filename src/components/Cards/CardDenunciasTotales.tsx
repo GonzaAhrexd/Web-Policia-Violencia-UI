@@ -1,7 +1,7 @@
 // Hooks
 import { useEffect, useState } from 'react';
 // Backend
-import { cantidadDenuncias, getDenunciasEstadisticaPeriodos } from '../../api/CRUD/denuncias.crud';
+import { getDenunciasEstadisticaPeriodos } from '../../api/CRUD/denuncias.crud';
 // Dependencias
 import { NavLink } from 'react-router-dom';
 // Iconos
