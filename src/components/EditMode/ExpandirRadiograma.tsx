@@ -25,7 +25,6 @@ function EditRadiograma({preventivoAmpliado, data, modoExpandir }: CargarRadiogr
 
   const handlePrint = async () => {
     const values = getValues();
-    console.log(preventivoAmpliado)
     const nuevosValores = {
       ...data,
       ...values,
@@ -34,7 +33,6 @@ function EditRadiograma({preventivoAmpliado, data, modoExpandir }: CargarRadiogr
       fecha_anterior: data.fecha,
     };
 
-    console.log(nuevosValores)
     if (modoExpandir) {
       const blob = await pdf(
         <PDFRadiograma datos={nuevosValores} user={user} ampliacion={true} />
@@ -76,8 +74,6 @@ function EditRadiograma({preventivoAmpliado, data, modoExpandir }: CargarRadiogr
                 fecha_anterior: data.fecha,
                 tipo_radiograma: "Ampliación de radiograma",
               }
-
-              console.log(valoresParaEnviar)
 
               const radiogramaNuevo = await crearRadiograma(valoresParaEnviar);
               await ampliarRadiograma(data._id, radiogramaNuevo._id);

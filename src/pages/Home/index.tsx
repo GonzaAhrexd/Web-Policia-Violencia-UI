@@ -6,7 +6,7 @@
 */
 
 // Hooks
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 // Componentes
@@ -20,6 +20,7 @@ import CardDenunciasTotales from '../../components/Cards/CardDenunciasTotales';
 import Footer from '../../components/Footer/Footer';
 import LoadingScreen from '../../components/LoadingScreen';
 import CardDenunciasGrafico from '../../components/Cards/CardDenunciasGrafico';
+import WarningMessage from '../../components/Warnings/WarningMessage';
 // Iconos
 import { ExclamationTriangleIcon, UserIcon, MagnifyingGlassIcon, ListBulletIcon, PencilSquareIcon, ClipboardDocumentCheckIcon, ChartPieIcon, UserPlusIcon, PresentationChartBarIcon, ArrowUpTrayIcon } from '@heroicons/react/24/outline'
 
@@ -28,7 +29,20 @@ function Home() {
   const { user, isAuthenticated, isLoading } = useAuth();
   // Estados
   const [showAdminSection, setShowAdminSection] = useState<boolean>(false);
+  const [isInscripciones, setIsInscripciones] = useState<boolean>(false);
 
+  useEffect(() => {
+    // Si la fecha está entre el 07/07/2025 y el 20/07/2025 pon en true isInscripciones
+    const fechaActual: Date = new Date();
+    const fechaInicio: Date = new Date('2025-07-07');
+    const fechaFin: Date = new Date('2025-07-21');
+
+    if (fechaActual >= fechaInicio && fechaActual <= fechaFin) {
+      setIsInscripciones(true);
+    } else {
+      setIsInscripciones(false);
+    }
+  },[]);
   // Validación de cargando y si está logeado
   if (isLoading) return <LoadingScreen />
 
@@ -71,10 +85,16 @@ function Home() {
   }
 
 
+
   return (
     <>
       <NavBar user={user} />
       <div className='h-screen flex flex-grow flex-col'>
+        {isInscripciones && (
+          <WarningMessage
+            mensaje="Debido al inicio del período de inscripciones para la Escuela de Policía, la aplicación podría experimentar lentitud por la alta demanda en el servidor."
+          />
+        )}
         <div className='p-10'>
           <h1 className='text-4xl sm:text-7xl'>¡{saludosDependiendoLaHora()}, {user?.nombre}!</h1>
           {user?.rol === 'sin_definir' && (

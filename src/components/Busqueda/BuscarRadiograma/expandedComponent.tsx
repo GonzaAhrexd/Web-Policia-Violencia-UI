@@ -62,7 +62,6 @@ function expandedComponentRadiograma({ data }: expandedComponentProps) {
 
 
     const handleVerRadiograma = async () => {
-        console.log(dataRadiograma.ampliacion_ID)
         const radiogramaAmpliado = await getRadiogramaById(dataRadiograma.ampliacion_ID);
         if (radiogramaAmpliado) {
             setDataRadiograma(radiogramaAmpliado);

@@ -73,15 +73,14 @@ function EditSection({  datosTerceros, datosGeograficos, datosVictima, datosVict
                         }).then(async (result) => {
 
                             if (result.isConfirmed) {
-
                                 // Llamamos a editar victima del backend
-                                editarVictima(values)
+                                await editarVictima(values)
                                 // Llamamos a editar victimario del backend
-                                editarVictimario(values)
+                                await editarVictimario(values)
                                 // Editar tercero
                                 if (values.denunciado_por_tercero) {
                                     if (datosTerceros.denunciado_por_tercero) {
-                                        editarTercero(values)
+                                        await editarTercero(values)
                                     } else {
                                         const idTercero = await crearTercero(values)
                                         values.tercero_ID = idTercero
@@ -96,7 +95,7 @@ function EditSection({  datosTerceros, datosGeograficos, datosVictima, datosVict
                                     values.isExpedienteCompleto = false
                                 }
                                 // Llamamos a editar denuncia del backend
-                                editarDenuncia(values)
+                                await editarDenuncia(values)
                                 // Utilizamos Swal para mostrar un mensaje de éxito
                                 Swal.fire({
                                     icon: 'success',
@@ -107,7 +106,7 @@ function EditSection({  datosTerceros, datosGeograficos, datosVictima, datosVict
                                 }).then((result) => {
                                     // Si se confirma el mensaje, recargamos la página
                                     if (result.isConfirmed) {
-                                        window.location.reload();
+                                        // window.location.reload();
                                     }
                                 })
                             }

@@ -111,8 +111,6 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
         method='post'
         onSubmit={
           handleSubmit(async (values) => {
-                 console.log(values)
-
             Swal.fire({
               title: '¿Estás seguro?',
               text: "Podrás editarlo más adelante.",

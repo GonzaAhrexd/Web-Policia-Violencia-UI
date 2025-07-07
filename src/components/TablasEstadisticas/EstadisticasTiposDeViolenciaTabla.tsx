@@ -1,5 +1,3 @@
-import { useEffect } from "react"
-
 type EstadisticasTiposDeViolenciaProps = {
   tipos_de_violencia: { [tipo: string]: number }
   format: (tipo: string) => string
@@ -8,11 +6,6 @@ type EstadisticasTiposDeViolenciaProps = {
 
 
 function EstadisticasTiposDeViolencia({ texto, tipos_de_violencia, format }: EstadisticasTiposDeViolenciaProps) {
-
-  useEffect(() => {
-    console.log(tipos_de_violencia)
-  })
-  
 
 
   return (

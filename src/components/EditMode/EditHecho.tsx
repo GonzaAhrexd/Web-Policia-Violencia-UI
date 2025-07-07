@@ -66,6 +66,16 @@ function EditHecho({ setIsSolicitudAprehension, datosTerceros, datosGeograficos,
   const [direccion, setDireccion] = useState('')
   const [modificarDatosGeograficos, setModificarDatosGeograficos] = useState(false)
   const [barrio, setBarrio] = useState('')
+  // Estados para las medidas solicitadas
+  const [isProhibicionAcercamientoSolicitada, setIsProhibicionAcercamientoSolicitada] = useState(datos.medida.prohibicion_de_acercamiento)
+  const [isBotonAntipanicoSolicitada, setIsBotonAntipanicoSolicitada] = useState(datos.medida.boton_antipanico)
+  const [isRestitucionMenorSolicitada, setIsRestitucionMenorSolicitada] = useState(datos.medida.restitucion_de_menor)
+  const [isExclusionHogarSolicitada, setIsExclusionHogarSolicitada] = useState(datos.medida.exclusion_de_hogar)
+  const [isAlimentoProvisorioSolicitada, setIsAlimentoProvisorioSolicitada] = useState(datos.medida.alimento_provisorio)
+  const [isDerechoComunicacionSolicitada, setIsDerechoComunicacionSolicitada] = useState(datos.medida.derecho_de_comunicacion)
+  const [isRestitucionBienesSolicitada, setIsRestitucionBienesSolicitada] = useState(datos.medida.restitucion_de_bienes)
+  const [isNingunaSolicitada, setIsNingunaSolicitada] = useState(datos.medida.ninguna_solicitada)
+  // Estados para las medidas dispuestas
   const [isNinguna, setIsNinguna] = useState(datos.medida_dispuesta.ninguna)
   const [isProhibicion, setIsProhibicion] = useState(datos.medida_dispuesta.prohibicion_de_acercamiento)
   const [isBoton, setIsBoton] = useState(datos.medida_dispuesta.boton_antipanico)
@@ -206,12 +216,14 @@ useEffect(() => {
         <span className='ml-4 font-medium'> Medida Solicitada por la víctima</span>
       </div>
       <div className={`grid grid-cols-1 md:grid-cols-3 my-2 rounded-md`}>
-        <InputCheckbox state={datos.medida.prohibicion_de_acercamiento} campo="Prohibición de Acercamiento" nombre="prohibicion_de_acercamiento" register={register} setValue={setValue}  id="prohibicion" />
-        <InputCheckbox state={datos.medida.boton_antipanico} campo="Botón Antipánico" nombre="boton_antipanico" register={register} setValue={setValue}  id="botonAntipanico" />
-        <InputCheckbox state={datos.medida.restitucion_de_menor} campo="Restitución de Menor" nombre="restitucion_de_menor" register={register} setValue={setValue}  id="restitucion" />
-        <InputCheckbox state={datos.medida.exclusion_de_hogar} campo="Exclusión Hogar" nombre="exclusion_de_hogar" register={register} setValue={setValue}  id="exclusion" />
-        <InputCheckbox state={datos.medida.alimento_provisorio} campo="Alimento Provisorio" nombre="alimento_provisorio" register={register} setValue={setValue}  id="alimentoProvisorio" />
-        <InputCheckbox state={datos.medida.derecho_de_comunicacion} campo="Derecho Comunicación" nombre="derecho_de_comunicacion" register={register} setValue={setValue}  id="derechoComunicacion" />
+        <InputCheckbox setHook={setIsProhibicionAcercamientoSolicitada} disabled={isNingunaSolicitada} state={isProhibicionAcercamientoSolicitada} campo="Prohibición de Acercamiento" nombre="prohibicion_de_acercamiento" register={register} setValue={setValue}  id="prohibicion" />
+        <InputCheckbox setHook={setIsBotonAntipanicoSolicitada} disabled={isNingunaSolicitada} state={isBotonAntipanicoSolicitada} campo="Botón Antipánico" nombre="boton_antipanico" register={register} setValue={setValue}  id="botonAntipanico" />
+        <InputCheckbox setHook={setIsRestitucionMenorSolicitada} disabled={isNingunaSolicitada} state={isRestitucionMenorSolicitada} campo="Restitución de Menor" nombre="restitucion_de_menor" register={register} setValue={setValue}  id="restitucion" />
+        <InputCheckbox setHook={setIsExclusionHogarSolicitada} disabled={isNingunaSolicitada} state={isExclusionHogarSolicitada} campo="Exclusión Hogar" nombre="exclusion_de_hogar" register={register} setValue={setValue}  id="exclusion" />
+        <InputCheckbox setHook={setIsAlimentoProvisorioSolicitada} disabled={isNingunaSolicitada} state={isAlimentoProvisorioSolicitada} campo="Alimento Provisorio" nombre="alimento_provisorio" register={register} setValue={setValue}  id="alimentoProvisorio" />
+        <InputCheckbox setHook={setIsDerechoComunicacionSolicitada} disabled={isNingunaSolicitada} state={isDerechoComunicacionSolicitada} campo="Derecho Comunicación" nombre="derecho_de_comunicacion" register={register} setValue={setValue}  id="derechoComunicacion" />
+        <InputCheckbox setHook={setIsRestitucionBienesSolicitada} disabled={isNingunaSolicitada} state={isRestitucionBienesSolicitada} campo="Restitución de Bienes" nombre="restitucion_de_bienes" register={register} setValue={setValue}  id="restitucion_bienes" />
+        <InputCheckbox setHook={setIsNingunaSolicitada} disabled={isProhibicionAcercamientoSolicitada || isBotonAntipanicoSolicitada || isRestitucionMenorSolicitada || isExclusionHogarSolicitada || isAlimentoProvisorioSolicitada || isDerechoComunicacionSolicitada || isRestitucionBienesSolicitada} state={isNingunaSolicitada} campo="Ninguna" nombre="ninguna_solicitada" register={register} setValue={setValue}  id="ninguna_solicitada" />
         <div />
       </div>
       <div className='flex flex-col my-2'>

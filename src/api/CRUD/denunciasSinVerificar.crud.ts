@@ -4,7 +4,6 @@ import axios from '../axios'
 export const crearDenunciaSinVerificar = async (denuncia: any) => {
     try {
         const response:any = await axios.post(`/denuncias-sin-verificar/`, denuncia)
-        console.log(response.data)
         return response.data 
     } catch (error) {
         console.log(error)

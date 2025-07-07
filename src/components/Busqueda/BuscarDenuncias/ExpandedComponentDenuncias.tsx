@@ -259,18 +259,20 @@ function ExpandedComponentDenuncias({ data }: expandedComponentsProps) {
         { nombre: "Vínculo con la víctima", valor: data?.vinculo_con_la_victima_tercero ? data.vinculo_con_la_victima_tercero : "No especificado" }
     ]
 
-    // Medidas
+    // Medidas solicitadas
     const medidas = [
         { nombre: "Prohibición de acercamiento", valor: data.medida.prohibicion_de_acercamiento },
         { nombre: "Restitución de menor", valor: data.medida.restitucion_de_menor },
         { nombre: "Exclusión de Hogar", valor: data.medida.exclusion_de_hogar },
         { nombre: "Alimento Provisorio", valor: data.medida.alimento_provisorio },
         { nombre: "Derecho de Comunicación", valor: data.medida.derecho_de_comunicacion },
-        { nombre: "Botón antipánico", valor: data.medida.boton_antipanico }
+        { nombre: "Botón antipánico", valor: data.medida.boton_antipanico },
+        { nombre: "Restitución de bienes", valor: data.medida.restitucion_de_bienes ? data.medida.restitucion_de_bienes[0] : false },
+        { nombre: "Ninguna solicitada", valor: data.medida.ninguna_solicitada ? data.medida.ninguna_solicitada : false }
     ]
 
 
-    // Medidas
+    // Medidas dispuestas por la autoridad judicial
     const medidaDispuestaPorLaAutoridadJudicial = [
         { nombre: "Prohibición de acercamiento", valor: data.medida_dispuesta.prohibicion_de_acercamiento },
         { nombre: "Exclusión de Hogar", valor: data.medida_dispuesta.exclusion_de_hogar },

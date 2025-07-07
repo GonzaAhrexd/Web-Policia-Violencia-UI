@@ -60,10 +60,10 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
     const [PreventivoData, setPreventivoData] = useState(null); // Almacena los datos del preventivo
     const [radiogramaData, setRadiogramaData] = useState(null); // Almacena los datos del radiograma
     const [listaAmpliaciones, setListaAmpliaciones] = useState([]); // Almacena la lista de ampliaciones
-    
+
     const { user } = useAuth(); // Obtiene el usuario autenticado desde el contexto
     const [tienePreventivoPrevio, setTienePreventivoPrevio] = useState(false); // Controla si hay un preventivo previo
-   
+
     // Datos para mostrar en tablas
     // Información general de la denuncia
     const datosDenuncia = [
@@ -79,6 +79,7 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
         { nombre: 'Apellido de la víctima', valor: data.apellido_victima },
         { nombre: 'Edad víctima', valor: data.edad_victima },
         { nombre: 'DNI víctima', valor: data.DNI_victima },
+        { nombre: "Género víctima", valor: data?.genero_victima ? data.genero_victima : "No especificado" },
         { nombre: 'Estado civil víctima', valor: data.estado_civil_victima },
         { nombre: 'Ocupación víctima', valor: data.ocupacion_victima },
         { nombre: 'Nacionalidad de la víctima', valor: data.nacionalidad_victima },
@@ -130,9 +131,6 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
     // Genera y abre un PDF de la denuncia o ampliación en una nueva pestaña
     const handleImprimir = async () => {
 
-        if(data.modo_actuacion === 'Ampliación de denuncia') {
-            console.log(data)
-        }
 
         const blob = await pdf(
             data.modo_actuacion === 'Ampliación de denuncia' ? (
@@ -288,20 +286,20 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
                             Ver preventivo
                         </button>
                         {/* Botón para crear un radiograma */}
-                        {data.radiograma_ID ? ( 
-                        <button
-                            className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10"
-                            onClick={() => handleVerRadiograma()}
-                        >
-                            Ver radiograma
-                        </button>   
-                        ) : (   
+                        {data.radiograma_ID ? (
                             <button
-                            className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10"
-                            onClick={() => setCrearRadiograma(true)}
-                        >
-                            Crear radiograma
-                        </button>
+                                className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10"
+                                onClick={() => handleVerRadiograma()}
+                            >
+                                Ver radiograma
+                            </button>
+                        ) : (
+                            <button
+                                className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10"
+                                onClick={() => setCrearRadiograma(true)}
+                            >
+                                Crear radiograma
+                            </button>
                         )}
                     </>
                 ) :

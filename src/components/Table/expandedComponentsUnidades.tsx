@@ -46,7 +46,6 @@ function expandedComponentsUnidades({ data }: expandedComponentsUnidadesProps) {
 
                         <form className='w-full flex flex-col items-center justify-center'
                             onSubmit={handleSubmit((values) => {
-                                console.log(values)
                                 Swal.fire({
                                     title: '¿Estás seguro de editar la unidad?',
                                     icon: 'warning',

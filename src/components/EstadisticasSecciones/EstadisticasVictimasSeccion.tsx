@@ -26,7 +26,6 @@ function EstadisticasVictimasSeccion({ denunciasAMostrar }: EstadisticasVictimas
             const victimasSet = new Set();
             const arrayIds: string[] = [];
             // Usamos un bucle for...of para iterar sobre las denuncias
-            console.log(denunciasAMostrar)
 
             for (const denuncia of denunciasAMostrar) {
                     arrayIds.push(denuncia.victima_ID);

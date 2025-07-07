@@ -14,7 +14,7 @@ import { eliminarExposicion } from '../../../api/CRUD/exposicion.crud';
 import Swal from 'sweetalert2' // Librería para mostrar popups
 // Iconos
 import { TrashIcon } from '@heroicons/react/24/solid'
-import { PencilSquareIcon, UserIcon } from '@heroicons/react/24/outline'
+import { PencilSquareIcon, UserIcon, PrinterIcon } from '@heroicons/react/24/outline'
 
 // Componentes
 import SimpleTableCheckorX from '../../../components/ShowData/SimpleTableCheckorX';
@@ -22,6 +22,8 @@ import ShowTextArea from '../../../components/ShowData/ShowTextArea';
 import EditExposicion from './EditExposicion';
 
 import { useAuth } from '../../../context/auth';
+import PDF from '../../ReactPDF/PDFDenuncias'
+import { pdf } from '@react-pdf/renderer';
 
 type expandedComponentsProps = {
     data: any
@@ -58,6 +60,18 @@ function expandedComponents({ data }: expandedComponentsProps) {
         { nombre: "Nombre del instructor", valor: data.instructor.nombre_completo_instructor },
         { nombre: "Jerarquía instructor", valor: data.instructor.jerarquia_instructor },
     ]
+    // Imprimir
+
+    const handlePrint =  async () => {
+    
+
+        const blob = await pdf(<PDF isBusqueda={true} genero={data.genero} tipoDenuncia={"Exposición"} datos={data} user={user} />).toBlob();
+        // Crea una URL de objeto a partir del blob
+        const url = URL.createObjectURL(blob);
+        // Abre la URL en una nueva pestaña
+        window.open(url);
+    }
+
     // Controlar cuando se da a eliminar
     const handleDelete = async (data: any) => {
         // Popup de confirmación
@@ -117,7 +131,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
                 {data.preguntas.desea_agregar_quitar_o_enmendar &&
                     <>
                         <div className='flex items-center'>
-                            <h2 className='text-3xl my-5 font-sans	'>Agrega</h2>
+                            <h2 className='text-3xl my-5 font-sans'>Agrega</h2>
                         </div>
                         <div className="flex flex-row">
                             <ShowTextArea campo="Observaciones" dato={data.agrega} />
@@ -137,6 +151,9 @@ function expandedComponents({ data }: expandedComponentsProps) {
                     <SimpleTableCheckorX campo="" datos={instructorDatosMostrar} icono={<UserIcon className='h-6 w-6' />} />
                 </div>
                 <div className='my-5 flex flex-col md:flex-row md:items-center md:justify-center w-full '>
+                    <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => handlePrint()}>
+                        <PrinterIcon className="w-7" />
+                    </div>
                     {(user.rol === 'admin' || user.rol === 'carga') &&
                         <>
                             <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => setEditGlobal(!editGlobal)}>

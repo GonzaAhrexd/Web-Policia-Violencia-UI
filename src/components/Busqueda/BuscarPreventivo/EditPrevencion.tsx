@@ -129,8 +129,6 @@ function EditPrevencion({ data, modoExpandir }: EditPrevencionProps) {
             autoridades: stringAcumulador
         };
         let blob;
-        // console.log(data.numero_nota)
-        console.log(values.numero_nota)
         if (modoExpandir || data.tipo_preventivo == "Ampliación de preventivo") {
             // Preguntar y continuar luego
             blob = await pdf(<PDF datos={nuevosValores} user={user} ampliacion />).toBlob();

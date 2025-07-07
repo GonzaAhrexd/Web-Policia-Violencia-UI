@@ -9,12 +9,6 @@ type PDFProps = {
   ampliacion?: boolean;
 };
 
-type division = {
-    division: string;
-    direccion: string;
-    telefono: string;
-  };
-
 
 function PDF({ datos, user, ampliacion }: PDFProps) {
   const userDivisionZona = user.unidad.split(",");

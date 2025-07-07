@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     },
     // Preventivo
     indentedBoldStrokeText: {
-        textIndent: 250, // Sangría solo en la primera línea
+        textIndent: 200, // Sangría solo en la primera línea
         fontSize: 12,
         textAlign: 'justify',
         fontWeight: 'bold',
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     },
     // Radiograma
     indentedText: {
-        textIndent: 250,
+        textIndent: 200,
         fontSize: 12,
         textAlign: 'justify',
         lineHeight: 1.5,

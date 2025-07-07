@@ -54,15 +54,26 @@ function CargarDenuncia({ fecha, modoActuacion, setTitulo, handleOpenModal, regi
   const [direccion, setDireccion] = useState('')
   const [barrio, setBarrio] = useState('')
 
-  const [isNinguna, setIsNinguna] = useState(false)
+// Solicitada
+  const [isProhibicionSolicitada, setIsProhibicionSolicitada] = useState(false)
+  const [isBotonSolicitado, setIsBotonSolicitado] = useState(false)
+  const [isRestitucionMenorSolicitada, setIsRestitucionMenorSolicitada] = useState(false)
+  const [isExclusionSolicitada, setIsExclusionSolicitada] = useState(false)
+  const [isAlimentoSolicitado, setIsAlimentoSolicitado] = useState(false)
+  const [isDerechoComunicacionSolicitado, setIsDerechoComunicacionSolicitado] = useState(false)
+  const [isRestitucionDeBienesSolicitada, setIsRestitucionDeBienesSolicitada] = useState(false)
+  const [isNingunaSolicitada, setIsNingunaSolicitada] = useState(false)
+
+  // Dispuesta
   const [isProhibicion, setIsProhibicion] = useState(false)
   const [isBoton, setIsBoton] = useState(false)
   const [isExclusion, setIsExclusion] = useState(false)
   const [isSolicitud, setIsSolicitud] = useState(false)
   const [isExpedientes, setIsExpedientes] = useState(false)
   const [isLibertad, setIsLibertad] = useState(false)
-  const [isCeseDeHostigamiento, setIsCeseDeHostigamiento] = useState(false)
   const [isNotificacionExpediente, setIsNotificacionExpediente] = useState(false)
+  const [isCeseDeHostigamiento, setIsCeseDeHostigamiento] = useState(false)
+  const [isNinguna, setIsNinguna] = useState(false)
 
   const { juzgadoIntervinente, vinculo, tiposDeArmas: opcionesTiposDeArma, unidades: unidadCampos } = useCampos()
 
@@ -181,12 +192,14 @@ function CargarDenuncia({ fecha, modoActuacion, setTitulo, handleOpenModal, regi
         <span className='ml-4 font-medium'> Medida Solicitada por la víctima</span>
       </div>
       <div className={`grid grid-cols-1 md:grid-cols-3 my-2 md:border-0 bg-white rounded-md`}>
-        <InputCheckbox campo="Prohibición de Acercamiento" nombre="prohibicion_de_acercamiento" register={register} setValue={setValue} id="prohibicion" />
-        <InputCheckbox campo="Botón Antipánico" nombre="boton_antipanico" register={register} setValue={setValue} id="botonAntipanico" />
-        <InputCheckbox campo="Restitución de Menor" nombre="restitucion_de_menor" register={register} setValue={setValue} id="restitucion" />
-        <InputCheckbox campo="Exclusión Hogar" nombre="exclusion_de_hogar" register={register} setValue={setValue} id="exclusion" />
-        <InputCheckbox campo="Alimento Provisorio" nombre="alimento_provisorio" register={register} setValue={setValue} id="alimentoProvisorio" />
-        <InputCheckbox campo="Derecho Comunicación" nombre="derecho_de_comunicacion" register={register} setValue={setValue} id="derechoComunicacion" />
+        <InputCheckbox setHook={setIsProhibicionSolicitada} disabled={isNingunaSolicitada} campo="Prohibición de Acercamiento" nombre="prohibicion_de_acercamiento" register={register} setValue={setValue} id="prohibicion" />
+        <InputCheckbox setHook={setIsBotonSolicitado} disabled={isNingunaSolicitada} campo="Botón Antipánico" nombre="boton_antipanico" register={register} setValue={setValue} id="botonAntipanico" />
+        <InputCheckbox setHook={setIsRestitucionMenorSolicitada} disabled={isNingunaSolicitada} campo="Restitución de Menor" nombre="restitucion_de_menor" register={register} setValue={setValue} id="restitucion" />
+        <InputCheckbox setHook={setIsExclusionSolicitada} disabled={isNingunaSolicitada} campo="Exclusión Hogar" nombre="exclusion_de_hogar" register={register} setValue={setValue} id="exclusion" />
+        <InputCheckbox setHook={setIsAlimentoSolicitado} disabled={isNingunaSolicitada} campo="Alimento Provisorio" nombre="alimento_provisorio" register={register} setValue={setValue} id="alimentoProvisorio" />
+        <InputCheckbox setHook={setIsDerechoComunicacionSolicitado} disabled={isNingunaSolicitada} campo="Derecho Comunicación" nombre="derecho_de_comunicacion" register={register} setValue={setValue} id="derechoComunicacion" />
+        <InputCheckbox setHook={setIsRestitucionDeBienesSolicitada} disabled={isNingunaSolicitada} campo="Restitución de Bienes" nombre="restitucion_de_bienes" register={register} setValue={setValue} id="restitucionBienes" />
+        <InputCheckbox setHook={setIsNingunaSolicitada} disabled={isProhibicionSolicitada || isBotonSolicitado || isRestitucionMenorSolicitada || isExclusionSolicitada || isAlimentoSolicitado || isDerechoComunicacionSolicitado || isRestitucionDeBienesSolicitada} campo="Ninguna" nombre="ninguna_solicitada" register={register} setValue={setValue} id="ninguna_solicitada" />
         <div />
       </div>
       <div className='flex flex-col my-2'>

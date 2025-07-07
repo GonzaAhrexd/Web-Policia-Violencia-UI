@@ -79,7 +79,6 @@ function ModalAddUser({ setOpenModal }: ModalAddUserProps) {
                   try {
                     // Agregar usuario
                     const usuarioResponse = await altaUsuario(values);
-                    console.log(values)
                     if(usuarioResponse.mensaje == "No se encontró el usuario"){
                       Swal.fire({
                         title: 'DNI no encontrado',

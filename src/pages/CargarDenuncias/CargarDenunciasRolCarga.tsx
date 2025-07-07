@@ -145,7 +145,7 @@ function CargarDenunciasRolCarga({ setTitulo, user, handleOpenModal }: CargarDen
                   }).then((result) => {
                     if (result.isConfirmed) {
                       // Si se confirma, recargar la página
-                      window.location.reload();
+                      // window.location.reload();
                     }
                   });
                 } catch (error) {

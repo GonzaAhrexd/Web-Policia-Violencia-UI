@@ -61,7 +61,6 @@ function BuscarDenuncias() {
             <form className="w-full flex flex-col items-center"
                 onSubmit={
                     handleSubmit(async (values) => {
-                        console.log(values)
                         // Separa la unidad en division, municipio y comisaria siempre que tenga una , para separar, sino no
                         if (values.unidad && user.rol != "agente") {
                             values.unidad = values.unidad.split(',')

@@ -56,7 +56,6 @@ function index() {
                 <form className="w-full flex flex-col items-center"
                     onSubmit={
                         handleSubmit(async (values) => {
-                            console.log(values)
                             const usuarios = await listarActividadesRecientes(values)
                             setListaDeActividad(usuarios)
                         }
