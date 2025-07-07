@@ -84,6 +84,16 @@ export const getDenunciasEstadisticaAnual = async () => {
     }
 }
 
+// GET: Estadística diaria, semanal, mensual y anual
+export const getDenunciasEstadisticaPeriodos = async () => {
+    try {
+        const response = await axios.get(`/denuncias/estadistica-periodos/`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 // PUT: Editar denuncias
 export const editarDenuncia = async (denuncia: any) => {
