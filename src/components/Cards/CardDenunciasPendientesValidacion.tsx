@@ -1,44 +1,85 @@
 /*
-    Componente utilizado en el index de la página
-    Muestra de forma rápida las denuncias que están pendientes de validación
-*/
+ * Componente utilizado en la página principal para mostrar rápidamente
+ * la cantidad de denuncias que están pendientes de validación.
+ */
 
-import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+
 // APIs del BackEnd
 import { mostrarDenunciasSinVerificar } from '../../api/CRUD/denunciasSinVerificar.crud';
 
-function CardDenunciasPendientesValidacion() {
-  const [cantidadDenunciasPendientes, setCantidadDenunciasPendientes] = useState(0);
+export default function CardDenunciasPendientesValidacion(): JSX.Element {
+  const [cantidadDenunciasPendientes, setCantidadDenunciasPendientes] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [hasAnimated, setHasAnimated] = useState(false); // Estado para controlar la animación
+
   useEffect(() => {
     const cargarDenuncias = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
+        // Asumimos que mostrarDenunciasSinVerificar devuelve un array o un objeto con una propiedad 'length'
         const response = await mostrarDenunciasSinVerificar();
-        // @ts-ignore
-        setCantidadDenunciasPendientes(response.length);
-      } catch (error) {
-        console.error('Hubo un error al cargar las denuncias: ', error);
+        setCantidadDenunciasPendientes(response.length || 0); // Asegurarse de que sea un número
+      } catch (err) {
+        console.error('Hubo un error al cargar las denuncias pendientes: ', err);
+        setError("No se pudieron cargar las denuncias.");
+      } finally {
+        setIsLoading(false);
       }
     };
-  
+
     cargarDenuncias();
-  }, []); 
+
+    // Inicia la animación después de un breve retraso
+    const timer = setTimeout(() => {
+      setHasAnimated(true);
+    }, 100);
+
+    // Limpia el temporizador si el componente se desmonta
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Determina el texto a mostrar (singular/plural)
+  const denunciasTexto = cantidadDenunciasPendientes === 1 ? "Denuncia" : "Denuncias";
+  const pendienteTexto = cantidadDenunciasPendientes === 1 ? "pendiente" : "pendientes";
+
+  // Determina si la cantidad tiene 3 o más dígitos
+  const esTresDigitosOMas = cantidadDenunciasPendientes.toString().length >= 3;
+
+  // Clases dinámicas para el contenedor principal de la tarjeta
+  const cardLayoutClass = esTresDigitosOMas
+    ? "flex flex-col items-center justify-center" // Siempre apilado si es de 3 o más dígitos
+    : "flex flex-col md:flex-row items-center justify-center"; // Comportamiento responsivo normal
 
   return (
-
     <NavLink
-    className="flex items-center hover:bg-neutral-900 cursor-pointer rounded-lg text-center shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] bg-neutral-700 transform transition-transform duration-300 ease-in-out hover:scale-105" to="/verificar-denuncias">
-      <div className='flex p-6'>
-        <div className='text-white text-9xl'>
-          {cantidadDenunciasPendientes}
+      className={`rounded-lg text-center shadow-lg bg-neutral-700
+                  transform transition-all duration-200 ease-out hover:scale-105
+                  ${cardLayoutClass} p-6
+                  ${hasAnimated ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`} // Animación de entrada
+      to="/verificar-denuncias"
+    >
+      {isLoading ? (
+        <div className="text-neutral-300 text-xl animate-pulse">Cargando...</div>
+      ) : error ? (
+        <div className="text-red-400 text-center text-sm px-2">
+          {error}
         </div>
-        <div className='flex text-white text-2xl justify-center items-center'>
-          Denuncia{cantidadDenunciasPendientes > 1 ? "s" : ""} pendiente{cantidadDenunciasPendientes > 1 ? "s" : ""} de validación
-        </div>
-        </div>
-      </NavLink>
-   
-  )
+      ) : (
+        <>
+          <div className={`text-white font-bold
+                          ${esTresDigitosOMas ? 'text-6xl mb-3' : 'text-7xl md:text-8xl lg:text-9xl mb-4 md:mb-0 md:mr-6'}`}>
+            {cantidadDenunciasPendientes}
+          </div>
+          <div className={`text-white font-medium max-w-xs leading-tight
+                          ${esTresDigitosOMas ? 'text-xl' : 'text-xl md:text-2xl lg:text-3xl'}`}>
+            {denunciasTexto} {pendienteTexto} de validación
+          </div>
+        </>
+      )}
+    </NavLink>
+  );
 }
-
-export default CardDenunciasPendientesValidacion

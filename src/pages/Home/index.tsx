@@ -104,7 +104,7 @@ function Home() {
           )}
           <div>
             <h2 className='text-3xl my-5'>Accesos directos</h2>
-            <div className='grid gap-1 grid-cols-1 sm:gap-5 md:grid-cols-4 lg:grid-cols-5 w-full '>
+            <div className='grid gap-1 grid-cols-1 sm:gap-5 md:grid-cols-3 lg:grid-cols-5 w-full '>
               <CardActions mostrar={"Mi perfil"} url={"/mi-perfil"} SVGIcon={UserIcon} />
               <CardActions mostrar={"Sugerencia o error"} url={"/reportar-errores"} SVGIcon={ExclamationTriangleIcon} />
 
@@ -130,7 +130,7 @@ function Home() {
           <div>
             <h2 className='text-3xl my-5 '>Resumen</h2>
             <div className='grid gap-1 grid-cols-1 sm:grid-cols-1 sm:gap-5 md:grid-cols-3 xl:grid-cols-5 w-full p-2'>
-              <CardProfile title="Mi cuenta" description="Mis datos" usuario={user} />
+              <CardProfile title="Mi cuenta" user={user} />
               {(user?.rol === 'admin' || user?.rol === 'carga') && (
                 <>
                   <CardDenunciasRecientes title="Denuncias recientes" />

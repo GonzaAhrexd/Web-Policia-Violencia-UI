@@ -52,21 +52,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         }
     }
     //Login
-    const signIn = async (user: any) => {
-        try {
-            // Se realiza la petición de login
-            const res = await loginRequest(user)
-            // Se establece al usuario en el estado
-            setUser(res.data);
-            // Guarda el token en las cookies
-            PRODUCCION === "true" && Cookies.set('token', res.data.token );            
-            // Se establece la autenticación en true
-            setIsAuthenticated(true);
-        } catch (error: any) {
-            console.log(error)
-            setErrors(error.response.data.message);
-        }
+  const signIn = async (user: any) => {
+    try {
+        const res = await loginRequest(user);
+
+        // Guardar primero el token (esto es síncrono, pero lo importante es el orden)
+        // Cookies.set('token', res.data.token);
+
+        // Luego setear el usuario
+        setUser(res.data);
+
+        // Finalmente, marcar como autenticado
+        setIsAuthenticated(true);
+    } catch (error: any) {
+        console.log(error);
+        setErrors(error.response?.data?.message || "Error en login");
     }
+};
     // Logout de usuarios
     const logOut = async () => {
         try {
@@ -74,7 +76,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             await logoutRequest();
             // Se establece la autenticación en false
             setIsAuthenticated(false);
-            PRODUCCION === "true" && Cookies.set('token', "" );
+            //    PRODUCCION === "true" && PRODUCCION === "true" && Cookies.set('token', "" );
             // Se establece al usuario en null
             setUser(null);
         } catch (error) {

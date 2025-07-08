@@ -6,7 +6,6 @@ function Footer() {
         </figure>
       <div className="w-full md:w-2/10 flex flex-col justify-center items-center m-4 sm:m-0 text-sm 3xl:text-xl">
         <p>División de Capacitación y Estadísticas</p>
-        <p>© 2024 - {`${(new Date().getFullYear())}`}  Todos los derechos reservados</p>
         <p>
         <a href="https://policiasistemas.chaco.gob.ar/violencia.capyesta/Manual_de_Uso_Violencia_de_Genero.pdf" download="Manual de uso.pdf">
         Manual de Uso

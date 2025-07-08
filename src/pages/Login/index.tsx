@@ -3,53 +3,109 @@
   Descripción: Este componente es el encargado de mostrar el formulario de inicio de sesión.
 */
 // Hooks
-import { useForm } from 'react-hook-form'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-// import { NavLink } from 'react-router-dom'
+import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react'; // Importar useState
+import { useNavigate } from 'react-router-dom';
 // Contexto
-import { useAuth } from '../../context/auth'
+import { useAuth } from '../../context/auth';
 // Componentes
-import InputLogin from '../../components/InputComponents/InputLogin'
+import InputLogin from '../../components/InputComponents/InputLogin';
+
 function Login() {
-  // Importamos las funciones necesarias de useForm
-  const { register, handleSubmit, formState: {
-    errors
-  } } = useForm()
-  // Importamos la función navigate de react-router-dom
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
-  const { signIn, errorsAuth, user, isAuthenticated} = useAuth()
-  // useEffect para redirigir al usuario si ya está autenticado
+  const { signIn, errorsAuth, user, isAuthenticated } = useAuth();
+
+  // Nuevo estado para controlar la animación
+  const [showForm, setShowForm] = useState(false);
+
   useEffect(() => {
-    if(isAuthenticated){
-      navigate('/')
+    if (isAuthenticated) {
+      navigate('/');
+      window.location.reload();
     }
-  }, [user, isAuthenticated])
+  }, [user, isAuthenticated, navigate]);
+
+  // useEffect para la animación de entrada
+  useEffect(() => {
+    // Al montar el componente, establece showForm a true después de un pequeño retardo
+    // Esto permite que el navegador primero aplique el estado inicial (opacity-0, translate-y-4)
+    // y luego anime la transición.
+    const timer = setTimeout(() => {
+      setShowForm(true);
+    }, 100); // Pequeño retardo para asegurar que el DOM se renderice primero
+
+    return () => clearTimeout(timer); // Limpia el timer si el componente se desmonta
+  }, []); // Se ejecuta solo una vez al montar
+
   return (
-    <div className='gradient h-screen flex flex-col items-center align-middle justify-center'>
-      <div className='flex flex-row align-middle justify-center bg-white h-screen w-screen sm:h-full sm:w-full sm:rounded-md sm:mt-0 md:h-full md:w-full md:rounded-md md:mt-0 lg:h-9/10 lg:w-6/10 lg:rounded-md lg:mt-0 xl:h-9/10 xl:w-5/10 xl:rounded-md xl:mt-0 2xl:h-5/6 2xl:w-2/5 2xl:rounded-md 2xl:mt-0'>
-        <div className='w-screen flex flex-col items-center align-middle justify-center'>
-          {errorsAuth && <div className='rounded-md bg-red-500 p-2 text-white'>{errorsAuth}</div>}
-          <h1 className='open-sans text-3xl font-semibold'>¡Bienvenido!</h1>
-         <figure className='flex flex-col'>
-            <img className='w-28 sm:w-20' src="Escudo_Policia_Chaco_Transparente.png" alt="" />
+    <div className='gradient min-h-screen flex items-center justify-center md:p-4'>
+      {/*
+        Clases de animación:
+        - transition-all duration-500 ease-out: Define la duración y curva de la animación.
+        - transform translate-y-4: Estado inicial (desplazado hacia abajo).
+        - opacity-0: Estado inicial (invisible).
+        - ${showForm ? 'translate-y-0 opacity-100' : ''}: Clases condicionales para el estado final.
+      */}
+      <div className={`flex flex-col items-center justify-center bg-white shadow-2xl p-8
+                        h-screen w-screen rounded-none
+                        md:h-full md:w-full md:rounded-lg md:max-w-xl
+                        lg:h-9/10 lg:w-6/10 lg:rounded-lg
+                        xl:h-9/10 xl:w-5/10 xl:rounded-lg
+                        2xl:h-5/6 2xl:w-2/5 2xl:rounded-lg
+                        transition-all duration-500 ease-out transform ${showForm ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+
+        <div className='w-full flex flex-col items-center justify-center'>
+          {errorsAuth && (
+            <div className='rounded-md bg-red-600 p-3 text-white text-center mb-4 text-sm font-medium'>
+              {errorsAuth}
+            </div>
+          )}
+          <h1 className='open-sans text-4xl font-extrabold text-gray-800 mb-2'>¡Bienvenido!</h1>
+          <figure className='flex flex-col items-center mb-4'>
+            <img className='w-32 sm:w-28 drop-shadow-md' src="Escudo_Policia_Chaco_Transparente.png" alt="Escudo Policía del Chaco" />
           </figure>
-          <h1 className='open-sans text-xl'>Dpto. Violencia Familiar y de Género</h1>
-          <form className='flex flex-col items-center align-middle justify-center w-4/5 sm:w-3/5' action=""  onSubmit={handleSubmit(async(values) => {
-            signIn(values)
-            })}>
-           <InputLogin campo={"nombre_de_usuario"} placeholder={"Nombre de usuario"} register={register} type="text" error={errors.nombre_de_usuario}></InputLogin>
-            <InputLogin campo={"pass"} placeholder={"Contraseña"} register={register} type="password" error={errors.pass}></InputLogin>
-             {/* <span>¿Has olvidado la contraseña? </span> <a href='/recover' className='text-sky-900'>Recuperar</a> */}
-            <button className='bg-sky-900 hover:bg-sky-700 text-white w-full h-10 rounded-md my-2'>Iniciar Sesión</button>
-           
-            <span className='text-sm'>¿No tienes cuenta u olvidaste tu contraseña?<a href="https://policiadigital.chaco.gob.ar/" className='text-sky-900'>Ingresa aquí</a></span>           
-           { /* <span className='text-sm'> ¿No tienes cuenta? <NavLink to='/register' className='text-sky-900'>Regístrate</NavLink> </span> */}
-          </form> 
+          <h2 className='open-sans text-xl sm:text-2xl text-gray-700 text-center mb-6'>Dpto. Violencia Familiar y de Género</h2>
+
+          <form
+            className='flex flex-col items-center w-full max-w-sm'
+            onSubmit={handleSubmit(async (values) => {
+              await signIn(values);
+            })}
+          >
+            <InputLogin
+              campo={"nombre_de_usuario"}
+              placeholder={"Nombre de usuario"}
+              register={register}
+              type="text"
+              error={errors.nombre_de_usuario}
+            />
+            <InputLogin
+              campo={"pass"}
+              placeholder={"Contraseña"}
+              register={register}
+              type="password"
+              error={errors.pass}
+            />
+
+            <button
+              type="submit"
+              className='bg-sky-800 hover:bg-sky-700 text-white text-xl font-semibold w-full h-12 rounded-lg my-4 transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg'
+            >
+              Iniciar Sesión
+            </button>
+
+            <span className='text-sm text-gray-600 text-center mt-2'>
+              ¿No tienes cuenta u olvidaste tu contraseña?{' '}
+              <a href="https://policiadigital.chaco.gob.ar/" className='text-sky-800 hover:text-sky-600 font-medium transition-colors duration-200'>
+                Ingresa aquí
+              </a>
+            </span>
+          </form>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
