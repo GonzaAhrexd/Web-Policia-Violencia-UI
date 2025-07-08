@@ -2,7 +2,6 @@ import { createContext, ReactNode, useState, useContext, useEffect } from 'react
 import { logoutRequest, loginRequest, verifyToken, editUser } from '../api/auth'
 import Cookies from 'js-cookie'
 
-const PRODUCCION = import.meta.env.VITE_PRODUCCION
 
 type AuthContextType = {
     signUp: (user: any) => Promise<void>; 

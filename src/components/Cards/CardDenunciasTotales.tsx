@@ -127,7 +127,7 @@ function CardDenunciasTotales(): JSX.Element {
 
             {/* Enlace de Búsqueda */}
             <NavLink
-                to="/busqueda"
+                to="/búsqueda"
                 className='mt-auto w-full flex items-center justify-center p-3 bg-neutral-600 hover:bg-neutral-500 rounded-lg transition-colors duration-200 text-neutral-200 font-medium'
             >
                 <MagnifyingGlassIcon className='h-6 w-6 mr-3' />

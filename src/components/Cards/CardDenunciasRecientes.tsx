@@ -91,7 +91,7 @@ export default function CardDenunciasRecientes({ title }: CardDenunciasRecientes
                         </div>
                     ) : lastFiveDenuncias.length === 0 ? (
                         <div className='w-full text-neutral-300 bg-neutral-600 border border-neutral-500 rounded-lg p-2'>
-                            No tienes denuncias recientes. ¡Todo en orden!
+                            No tienes denuncias recientes.
                         </div>
                     ) : (
                         lastFiveDenuncias.map((denuncia) => (

@@ -98,7 +98,7 @@ function NavBar({ user }: NavBarProps) {
           </svg>
         </button>
         <NavLink to='/' className='flex items-center space-x-2'>
-          <img className='h-12 w-12' src='/Escudo_Policia_Chaco_Transparente.png' alt='Escudo Policía del Chaco' />
+          <img className='h-12 w-12' src='./Escudo_Policia_Chaco_Transparente.png' alt='Escudo Policía del Chaco' />
           {/* <span className='hidden text-lg font-semibold md:block'>Sistema de Denuncias</span> */}
         </NavLink>
       </div>
