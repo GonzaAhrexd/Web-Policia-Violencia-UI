@@ -7,7 +7,6 @@ import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
 // Componentes
-import SelectRegisterUser from '../Select/SelectRegisterUser'
 import InputNumber from '../InputComponents/InputNumber'
 import SelectRegisterSingle from '../Select/SelectRegisterSingle'
 import InputRadio from '../InputComponents/InputRadio'
@@ -130,7 +129,11 @@ function ModalAddUser({ setOpenModal }: ModalAddUserProps) {
            {division ? 
             <SelectRegister notMunicipio notComisaria campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} type="text" error={errors.unidad} />
             :
-          <SelectRegisterUser campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} type="text" error={errors.unidad} />
+            <>
+          <h1>Acá</h1>
+                     <SelectRegister  campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} type="text" error={errors.unidad} />
+
+            </>
           }
 
             <button type='submit' className='bg-sky-900 hover:bg-sky-700 text-white w-4/10 h-10 rounded-md my-2'>Agregar</button>

@@ -45,7 +45,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
     // Datos de la víctima
     // Mostrar datos del victimario
     const victimarioDatosMostrar = [
-        { nombre: "ID", valor: data._id},
+        { nombre: "ID", valor: data._id },
         { nombre: "Nombre", valor: data.nombre ? data.nombre : "No especificado" },
         { nombre: "Apellido", valor: data.apellido ? data.apellido : "No especificado" },
         { nombre: "Domicilio del victimario", valor: data.direccion ? data.direccion : "No especificado" },
@@ -59,6 +59,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
     const detallesVictimario = [
         { nombre: "Abuso de Alcohol", valor: data.abuso_de_alcohol },
         { nombre: "Antecedentes toxicológicos", valor: data.antecedentes_toxicologicos },
+        { nombre: "Antecedentes psicológicos", valor: data.antecedentes_psicologicos },
         { nombre: "Antecedentes Penales", valor: data.antecedentes_penales },
         { nombre: "Antecedentes Contravencionales", valor: data.antecedentes_contravencionales },
         { nombre: "Entrenamiento en combate", valor: data.entrenamiento_en_combate },
@@ -98,14 +99,14 @@ function expandedComponents({ data }: expandedComponentsProps) {
         {!editGlobal &&
             <>
                 <div className='flex items-center'>
-                <h1 className='text-3xl my-5 font-sans mr-4'>Datos del victimario</h1>
+                    <h1 className='text-3xl my-5 font-sans mr-4'>Datos del victimario</h1>
                 </div>
                 <div className='flex flex-col'>
-                    <SimpleTableCheckorX campo="Datos" datos={victimarioDatosMostrar} icono={<UserIcon className='h-6 w-6'/>}/>
-                    <SimpleTableCheckorX campo="Detalles" datos={detallesVictimario} icono={<QueueListIcon className='h-6 w-6' />}/>
+                    <SimpleTableCheckorX campo="Datos" datos={victimarioDatosMostrar} icono={<UserIcon className='h-6 w-6' />} />
+                    <SimpleTableCheckorX campo="Detalles" datos={detallesVictimario} icono={<QueueListIcon className='h-6 w-6' />} />
                 </div>
                 <div className='flex items-center'>
-                <h1 className='text-3xl my-5 font-sans mr-4'>Denuncias</h1>
+                    <h1 className='text-3xl my-5 font-sans mr-4'>Denuncias</h1>
                 </div>
                 <div className='flex flex-col'>
                     <DataTable
@@ -125,11 +126,11 @@ function expandedComponents({ data }: expandedComponentsProps) {
                     />
                 </div>
                 <div className='my-5 flex flex-col md:flex-row md:items-center md:justify-center w-full '>
-                <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10  md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => setModoImprimir(!modoImprimir)}>
+                    <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10  md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => setModoImprimir(!modoImprimir)}>
                         <PrinterIcon className="w-7" />
                     </div>
                     {(user.rol == "carga" || user.rol == "admin") &&
-                       <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => setEditGlobal(!editGlobal)}>
+                        <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => setEditGlobal(!editGlobal)}>
                             <PencilSquareIcon className="w-7" />
                         </div>
                     }
@@ -148,21 +149,36 @@ function expandedComponents({ data }: expandedComponentsProps) {
                     onSubmit={
                         handleSubmit(async (values) => {
                             // Llamamos a editar victima del backend
-                            editarVictimario(values)
-                            // Llamamos a editar victimario del backend
-                            // Utilizamos Swal para mostrar un mensaje de éxito
+
                             Swal.fire({
-                                icon: 'success',
-                                title: '¡Denuncia editada con éxito!',
-                                showConfirmButton: true,
-                                confirmButtonText: 'Aceptar',
+                                title: '¿Estás seguro de que deseas editar este victimario?',
+                                icon: 'warning',
+                                showCancelButton: true,
                                 confirmButtonColor: '#0C4A6E',
-                            }).then((result) => {
-                                // Si se confirma el mensaje, recargamos la página
+                                cancelButtonColor: '#FF554C',
+                                confirmButtonText: 'Sí, editar',
+                                cancelButtonText: 'Cancelar'
+                            }).then(async (result) => {
                                 if (result.isConfirmed) {
-                                    window.location.reload();
-                                }
+                                    // Si se confirma, continuamos con la edición
+                                    await editarVictimario(values)
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: '¡Denuncia editada con éxito!',
+                                        showConfirmButton: true,
+                                        confirmButtonText: 'Aceptar',
+                                        confirmButtonColor: '#0C4A6E',
+                                    }).then((result) => {
+                                        // Si se confirma el mensaje, recargamos la página
+                                        if (result.isConfirmed) {
+                                            window.location.reload();
+                                        }
+                                    })
+                                } 
                             })
+
+
+
                         })}>
                     <EditVictimario datos={data} register={register} setValue={setValue} errors={errors} />
                     <div className='my-5 flex flex-col md:flex-row sm:items-center md:justify-center w-full '>
