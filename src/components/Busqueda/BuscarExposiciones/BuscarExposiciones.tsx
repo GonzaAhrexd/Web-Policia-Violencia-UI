@@ -41,7 +41,7 @@ function BuscarExposiciones() {
         collapsed: <ArrowDownCircleIcon className='h-6 w-6' />,
         expanded: <ArrowUpCircleIcon className='h-6 w-6' />
     }
-    
+
     return (
         <>
             <form className="w-full flex flex-col items-center"
@@ -57,7 +57,7 @@ function BuscarExposiciones() {
                     }
                     )}>
                 <InputDateRange register={register} setValue={setValue} isRequired={isDateRangeRequired} />
-                <InputRegister busqueda campo="ID" nombre="id_exposicion" register={register} type="text" error={errors.id_denuncia} require={false}/>
+                <InputRegister busqueda campo="ID" nombre="id_exposicion" register={register} type="text" error={errors.id_denuncia} require={false} />
                 <InputRegister busqueda campo="Nombre víctima" nombre="nombre_victima" register={register} type="text" error={errors.numero_de_expediente} require={false}></InputRegister>
                 <InputRegister busqueda campo="Apellido víctima" nombre="apellido_victima" register={register} type="text" error={errors.numero_de_expediente} require={false}></InputRegister>
                 <InputRegister busqueda campo="DNI víctima" nombre="dni_victima" register={register} type="text" error={errors.numero_de_expediente} require={false}></InputRegister>
@@ -75,7 +75,7 @@ function BuscarExposiciones() {
                     responsive={true}
                     striped={true}
                     highlightOnHover={true}
-                    noDataComponent="No hay denuncias para mostrar"
+                    noDataComponent="No hay exposiciones para mostrar"
                     defaultSortFieldId={"Fecha"}
                     expandableIcon={expandableIcon}
                 />

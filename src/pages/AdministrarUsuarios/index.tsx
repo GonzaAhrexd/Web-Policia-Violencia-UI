@@ -27,7 +27,7 @@ import { customStyles } from '../../GlobalConst/customStyles'
 function index() {
     const { user, isAuthenticated, isLoading } = useAuth();
     // Formulario
-     
+
     const [modalShow, setModalShow] = useState(false)
 
     const { isLoading: loadingCampos } = useCampos()
@@ -54,7 +54,7 @@ function index() {
         expanded: <ArrowUpCircleIcon className='h-6 w-6' />
     }
 
-    if (isLoading && loadingCampos) return <LoadingScreen/>
+    if (isLoading && loadingCampos) return <LoadingScreen />
     // Si no esta autenticado, redirige a login
     if ((!isLoading) && (!isAuthenticated)) return <Navigate to="/login" replace />
     // Si el usuario no tiene rol, redirige a login
@@ -63,14 +63,14 @@ function index() {
     return (
         <div className='h-full flex flex-grow flex-col'>
             <NavBar user={user} />
-            { modalShow && 
-                 <ModalAddUser setOpenModal={setModalShow}/>
-            
+            {modalShow &&
+                <ModalAddUser setOpenModal={setModalShow} />
+
             }
             <div className='min-h-screen flex flex-grow flex-col'>
                 <div className='p-2 sm:p-10'>
                     <div className='flex flex-row items-center'>
-                    <h1 className='text-3xl my-5'>Administrar usuarios</h1> <PlusCircleIcon className='h-6 w-6 ml-2 cursor-pointer' onClick={() => handleAddUser()}/>
+                        <h1 className='text-3xl my-5'>Administrar usuarios</h1> <PlusCircleIcon className='h-6 w-6 ml-2 cursor-pointer' onClick={() => handleAddUser()} />
                     </div>
                     <form className="w-full flex flex-col items-center"
                         onSubmit={
@@ -100,7 +100,7 @@ function index() {
                                 responsive={true}
                                 striped={true}
                                 highlightOnHover={true}
-                                noDataComponent="No hay denuncias para mostrar"
+                                noDataComponent="No hay usuarios para mostrar"
                                 defaultSortFieldId={"Fecha"}
                                 defaultSortAsc={false}
                                 expandableIcon={expandableIcon}

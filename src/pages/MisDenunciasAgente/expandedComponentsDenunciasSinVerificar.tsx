@@ -187,7 +187,7 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
                     responsive // Diseño adaptable
                     striped // Filas alternadas
                     highlightOnHover // Resalta filas al pasar el mouse
-                    noDataComponent="No hay denuncias para mostrar" // Mensaje si no hay datos
+                    noDataComponent="No hay ampliaciones para mostrar" // Mensaje si no hay datos
                     defaultSortFieldId="fecha" // Ordena por fecha por defecto
                     defaultSortAsc={false} // Orden descendente
                     expandableIcon={expandableIcon} // Iconos de expandir/colapsar

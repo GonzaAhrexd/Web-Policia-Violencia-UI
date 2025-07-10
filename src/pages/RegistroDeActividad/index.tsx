@@ -39,6 +39,10 @@ function index() {
         { nombre: "Exposiciones", value: "Exposición" },
         { nombre: "Inicio de sesión", value: "Inicios" },
         { nombre: "Registro de usuarios", value: "Registros" },
+        { nombre: "Denuncia Sin verificar", value: "Denuncia Sin Verificar" },
+        { nombre: "Preventivos", value: "Preventivo" },
+        { nombre: "Radiogramas", value: "Radiograma" },
+
     ]
 
 
@@ -56,8 +60,8 @@ function index() {
                 <form className="w-full flex flex-col items-center"
                     onSubmit={
                         handleSubmit(async (values) => {
-                            const usuarios = await listarActividadesRecientes(values)
-                            setListaDeActividad(usuarios)
+                            const usuarios = await listarActividadesRecientes(values);
+                            setListaDeActividad(usuarios);
                         }
                         )}>
                     <InputDateRange register={register} setValue={setValue} isRequired={true} />
@@ -76,9 +80,9 @@ function index() {
                             responsive={true}
                             striped={true}
                             highlightOnHover={true}
-                            noDataComponent="No hay denuncias para mostrar"
-                            // defaultSortFieldId={"Fecha"}
-                            // defaultSortAsc={false}
+                            noDataComponent="No hay actividad para mostrar"
+                        // defaultSortFieldId={"Fecha"}
+                        // defaultSortAsc={false}
                         />
                     </div>
                 }

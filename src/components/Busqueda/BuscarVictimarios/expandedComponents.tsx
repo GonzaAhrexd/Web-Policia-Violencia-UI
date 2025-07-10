@@ -29,7 +29,7 @@ import expandedDenuncia from '../BuscarDenuncias/ExpandedComponentDenuncias'
 import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outline'
 
 import { useAuth } from '../../../context/auth';
-import ModoImprimir from './ModoImprimir';
+import ModoImprimir from '../ModoImprimir/ModoImprimir'
 
 interface expandedComponentsProps {
     data: any
@@ -139,7 +139,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
         }
         {modoImprimir &&
             <div>
-                <ModoImprimir modoImprimir={modoImprimir} setModoImprimir={setModoImprimir} denunciasAMostrar={denunciasAMostrar} user={user} data={data} />
+                <ModoImprimir tipoPersona='victimario' modoImprimir={modoImprimir} setModoImprimir={setModoImprimir} denunciasAMostrar={denunciasAMostrar} user={user} data={data} />
             </div>
         }
 

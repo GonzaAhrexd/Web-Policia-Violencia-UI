@@ -71,37 +71,40 @@ function CardDenunciasTotales(): JSX.Element {
                          ${hasAnimated ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}> {/* Animación de entrada */}
 
             {/* Selector de Período */}
-            <div className="flex space-x-3 mb-4 w-full justify-center">
+            <div className="flex mb-4 w-full justify-center">
                 <button
                     onClick={() => handlePeriodoChange('hoy')}
-                    className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200
-                                 ${periodo === 'hoy' ? 'bg-gray-500 text-white shadow-md' : 'bg-neutral-600 text-neutral-300 hover:bg-neutral-500'}`}
+                    className={`flex-grow px-2 py-2 text-sm font-medium rounded-full transition-colors duration-200
+            ${periodo === 'hoy' ? 'bg-gray-500 text-white shadow-md' : 'bg-neutral-600 text-neutral-300 hover:bg-neutral-500'}
+            text-center mx-1 sm:mx-2`}
                 >
                     Hoy
                 </button>
                 <button
                     onClick={() => handlePeriodoChange('semana')}
-                    className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200
-                                 ${periodo === 'semana' ? 'bg-gray-500 text-white shadow-md' : 'bg-neutral-600 text-neutral-300 hover:bg-neutral-500'}`}
+                    className={`flex-grow px-2 py-2 text-sm font-medium rounded-full transition-colors duration-200
+            ${periodo === 'semana' ? 'bg-gray-500 text-white shadow-md' : 'bg-neutral-600 text-neutral-300 hover:bg-neutral-500'}
+            text-center mx-1 sm:mx-2`}
                 >
                     7 días
                 </button>
                 <button
                     onClick={() => handlePeriodoChange('mes')}
-                    className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200
-                                 ${periodo === 'mes' ? 'bg-gray-500 text-white shadow-md' : 'bg-neutral-600 text-neutral-300 hover:bg-neutral-500'}`}
+                    className={`flex-grow px-2 py-2 text-sm font-medium rounded-full transition-colors duration-200
+            ${periodo === 'mes' ? 'bg-gray-500 text-white shadow-md' : 'bg-neutral-600 text-neutral-300 hover:bg-neutral-500'}
+            text-center mx-1 sm:mx-2`}
                 >
                     30 días
                 </button>
                 <button
                     onClick={() => handlePeriodoChange('anio')}
-                    className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200
-                                 ${periodo === 'anio' ? 'bg-gray-500 text-white shadow-md' : 'bg-neutral-600 text-neutral-300 hover:bg-neutral-500'}`}
+                    className={`flex-grow px-2 py-2 text-sm font-medium rounded-full transition-colors duration-200
+            ${periodo === 'anio' ? 'bg-gray-500 text-white shadow-md' : 'bg-neutral-600 text-neutral-300 hover:bg-neutral-500'}
+            text-center mx-1 sm:mx-2`}
                 >
                     Año
                 </button>
             </div>
-
             {/* Contenedor principal para el valor y mensaje, con flex-grow para ocupar el espacio restante */}
             <div className="flex flex-col items-center justify-center flex-grow w-full">
                 {isLoading ? (

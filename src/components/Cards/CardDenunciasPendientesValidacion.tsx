@@ -49,16 +49,12 @@ export default function CardDenunciasPendientesValidacion(): JSX.Element {
   // Determina si la cantidad tiene 3 o más dígitos
   const esTresDigitosOMas = cantidadDenunciasPendientes.toString().length >= 3;
 
-  // Clases dinámicas para el contenedor principal de la tarjeta
-  const cardLayoutClass = esTresDigitosOMas
-    ? "flex flex-col items-center justify-center" // Siempre apilado si es de 3 o más dígitos
-    : "flex flex-col md:flex-row items-center justify-center"; // Comportamiento responsivo normal
 
   return (
     <NavLink
       className={`rounded-lg text-center shadow-lg bg-neutral-700
                   transform transition-all duration-200 ease-out hover:scale-105
-                  ${cardLayoutClass} p-6
+                  flex flex-col 3xl:flex-row items-center justify-center p-6
                   ${hasAnimated ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`} // Animación de entrada
       to="/verificar-denuncias"
     >

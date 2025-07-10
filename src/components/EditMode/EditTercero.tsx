@@ -1,16 +1,12 @@
-/*
- Uso del componente:
-    EditVictima recibe los datos de las victimas para ser mostrados y editados en el formulario
-    de la sección de victima.
-    Este componente es utilizado en editSection.
-*/
+/* [Uso del componente]
+    EditVictima recibe los datos de las victimas para ser mostrados y editados en el formulario de la sección de victima.
+    Este componente es utilizado en editSection. */
 //Componentes
-import InputRegister from '../../InputComponents/InputRegister'
-import SelectRegisterSingle from '../../Select/SelectRegisterSingle';
-import InputNumber from '../../InputComponents/InputNumber';
+import InputRegister from '../InputComponents/InputRegister'
+import SelectRegisterSingle from '../Select/SelectRegisterSingle';
+import InputNumber from '../InputComponents/InputNumber';
 // Campos
-
-import { useCampos } from '../../../context/campos'
+import { useCampos } from '../../context/campos'
 
 interface CargarVictimaProps {
     datos: any;

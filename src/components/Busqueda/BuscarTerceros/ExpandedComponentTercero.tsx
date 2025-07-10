@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 // APIs del BackEnd
 import { buscarDenunciasPorId } from '../../../api/CRUD/denuncias.crud';
+import { editarTercero } from '../../../api/CRUD/terceros.crud';
 // Librerías react
 import DataTable from 'react-data-table-component';
 import Swal from 'sweetalert2' // Librería para mostrar popups
@@ -18,18 +19,18 @@ import Swal from 'sweetalert2' // Librería para mostrar popups
 import { PencilSquareIcon, PrinterIcon } from '@heroicons/react/24/solid'
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import { UserIcon } from '@heroicons/react/24/outline'
+import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outline'
 // Componentes
 import SimpleTableCheckorX from '../../ShowData/SimpleTableCheckorX';
 import { columnsDenuncia } from '../BuscarDenuncias/columnsDataTableDenuncias'
-import { customStyles } from '../../../GlobalConst/customStyles'
-import EditTercero from './EditTercero';
+import EditTercero from '../../EditMode/EditTercero';
+import ModoImprimir from '../ModoImprimir/ModoImprimir';
 // Importa expandedComponents con otro nombre
-import { editarTercero } from '../../../api/CRUD/terceros.crud';
 import expandedDenuncia from '../BuscarDenuncias/ExpandedComponentDenuncias'
-import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outline'
-
+// Contexto
 import { useAuth } from '../../../context/auth';
-import ModoImprimir from './ModoImprimir';
+// Estilos
+import { customStyles } from '../../../GlobalConst/customStyles'
 
 interface expandedComponentsProps {
     data: any
@@ -120,7 +121,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
         }
         {modoImprimir &&
             <div>
-                <ModoImprimir modoImprimir={modoImprimir} setModoImprimir={setModoImprimir} denunciasAMostrar={denunciasAMostrar} user={user} data={data} />
+                <ModoImprimir tipoPersona='tercero' modoImprimir={modoImprimir} setModoImprimir={setModoImprimir} denunciasAMostrar={denunciasAMostrar} user={user} data={data} />
             </div>
         }
 

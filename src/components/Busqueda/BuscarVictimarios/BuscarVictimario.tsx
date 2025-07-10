@@ -70,7 +70,7 @@ function BuscarVictimario() {
                     responsive={true}
                     striped={true}
                     highlightOnHover={true}
-                    noDataComponent="No hay denuncias para mostrar"
+                    noDataComponent="No hay victimarios para mostrar"
                     defaultSortFieldId={"Fecha"}
                     defaultSortAsc={false}
                     expandableIcon={expandableIcon}

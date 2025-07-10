@@ -30,7 +30,7 @@ function TablaUnidades() {
         responsive={true}
         striped={true}
         highlightOnHover={true}
-        noDataComponent="No hay denuncias para mostrar"
+        noDataComponent="No hay unidades para mostrar"
         defaultSortFieldId={"Fecha"}
         defaultSortAsc={false}
         expandableIcon={expandableIcon}

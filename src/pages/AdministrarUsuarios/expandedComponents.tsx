@@ -149,7 +149,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
                         responsive={true}
                         striped={true}
                         highlightOnHover={true}
-                        noDataComponent="No hay denuncias para mostrar"
+                        noDataComponent="No hay actividad reciente para mostrar"
                         defaultSortFieldId={"fecha"}
                         defaultSortAsc={false}
                     />

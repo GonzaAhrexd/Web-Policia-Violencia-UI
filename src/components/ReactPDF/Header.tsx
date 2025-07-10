@@ -15,7 +15,7 @@ type division = {
 };
 
 
-const Header = ({ datos, userDivisionZona }: PDFProps) => {
+const  Header = ({ datos, userDivisionZona }: PDFProps) => {
 
     const [isDivision] = useState(!(userDivisionZona.length > 1));
 
