@@ -31,6 +31,7 @@ import { useCampos } from '../../../context/campos'; // Hook para obtener datos 
 
 // Componentes y contexto
 import autoridadesOpciones from '../../../GlobalConst/autoridadesCampos';
+import SelectRegisterSingle from '../../Select/SelectRegisterSingle';
 
 // Tipos
 // Define las propiedades del componente
@@ -60,6 +61,7 @@ function CargarPreventivo({ data, setCrearPreventivo }: CargarPreventivoProps) {
     const [telefonoValor, setTelefonoValor] = useState(''); // Teléfono de la unidad
     const [supervisionValor, setSupervisionValor] = useState(''); // Supervisión de la unidad
     const [stringAcumulador, setStringAcumulador] = useState(''); // Acumula las autoridades seleccionadas
+    const [printMode, setPrintMode] = useState(false); // Controla el modo de impresión
 
     // Efecto para cargar dirección, teléfono y supervisión según la unidad del usuario
     useEffect(() => {
@@ -129,9 +131,9 @@ function CargarPreventivo({ data, setCrearPreventivo }: CargarPreventivoProps) {
         // Genera el PDF según el tipo de denuncia
         const blob = await pdf(
             data.modo_actuacion === 'Ampliación de denuncia' ? (
-                <PDF datos={nuevosValores} user={user} ampliacion={true} />
+                <PDF datos={{...nuevosValores, tipoHoja: values.tipoHoja}} user={user} ampliacion={true} />
             ) : (
-                <PDF datos={nuevosValores} user={user} />
+                <PDF datos={{...nuevosValores, tipoHoja: values.tipoHoja}} user={user} />
             )
         ).toBlob();
 
@@ -151,7 +153,7 @@ function CargarPreventivo({ data, setCrearPreventivo }: CargarPreventivoProps) {
                             const denunciaBase = await mostrarDenunciasSinVerificarID(data.ampliado_de); // Obtiene la denuncia base
                             const preventivoBase = await getPreventivo(denunciaBase.preventivo_ID); // Obtiene el preventivo base
 
-                            
+
                             setNumeroDeExpedienteDenuncia(preventivoBase.numero_expediente); // Establece el número de expediente de la denuncia
                             setNumeroNotaAnterior(preventivoBase.numero_nota); // Establece el número de nota anterior
                             setObjetoAnterior(preventivoBase.objeto); // Establece el objeto anterior
@@ -219,16 +221,38 @@ function CargarPreventivo({ data, setCrearPreventivo }: CargarPreventivoProps) {
                 <div className='flex flex-col'>
                     <CargarInstructorYSecretario register={register} setValue={setValue} errors={errors} />
                 </div>
-                <div className='flex flex-row items-center justify-center'>
-                    <div onClick={() => handlePrint()} className='flex flex-col items-center justify-center cursor-pointer mr-2 bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10'>
-                        Imprimir
+
+
+                {!printMode && (
+                    <div className="flex justify-center my-3">
+                        <div className='flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(true)}>Imprimir</div>
+                        <button
+                            className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10'
+                        >
+                            Crear preventivo
+                        </button>
                     </div>
-                    <button
-                        className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10'
-                    >
-                        Crear preventivo
-                    </button>
-                </div>
+                )}
+                {printMode && (
+                    <div className="flex flex-col items-center justify-center my-3">
+                        <h1 className='text-2xl my-5'>Elegir tipo de hoja</h1>
+                        <SelectRegisterSingle campo="Tipo de Hoja" nombre="tipoHoja" setValue={setValue} error={errors.tipoHoja} opciones={
+                            [
+                                { nombre: "A4", value: "A4" },
+                                { nombre: "Legal", value: "LEGAL" }
+                            ]
+                        } />
+                        <div className='mb-1 flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => {
+                            handlePrint()
+                        }}>
+                            Imprimir
+                        </div>
+                        <div className='flex flex-col items-center bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(false)}>
+                            Cancelar
+                        </div>
+                    </div>
+
+                )}
 
             </form>
         </>

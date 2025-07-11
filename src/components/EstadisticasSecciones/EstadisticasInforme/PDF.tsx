@@ -1,5 +1,5 @@
 import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
-
+import styles from '../../../GlobalConst/PDFStyles'
 interface PDFProps {
     datos: any;
     fecha: any;
@@ -7,126 +7,7 @@ interface PDFProps {
 
 function PDF({ datos, fecha }: PDFProps) {
 
-    const styles = StyleSheet.create({
-        page: {
-            padding: 30,
-        },
-        section: {
-            margin: 10,
-            padding: 10,
-            fontSize: 12,
-        },
-        header: {
-            fontSize: 14,
-            textAlign: 'center',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            alignContent: 'center',
-            marginBottom: 20,
-            display: 'flex',
-            flexDirection: 'row',
-            paddingLeft: 30,
-            paddingRight: 30,
-        },
-        subheader: {
-            fontSize: 14,
-            fontWeight: 'bold',
-            textAlign: 'center',
-            marginBottom: 10,
-        },
-        text: {
-            marginBottom: 10,
-            fontSize: 12,
-            textAlign: 'justify',
-        },
-        signature: {
-            marginTop: 40,
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-        },
-        signatureSection: {
-            width: '30%',
-            textAlign: 'center',
-        },
-        sectionCenter: {
-            margin: 5,
-            padding: 5,
-            flexGrow: 1,
-            flexDirection: 'column',
-            alignItems: 'center',
-            fontSize: 11
-        },
-        images: {
-            width: "1.17cm",
-            height: "1.70cm"
-        },
-        textBold: {
-            fontWeight: 'bold',
-            fontSize: 16
-        },
-        sectionRight: {
-            margin: 5,
-            padding: 5,
-            flexGrow: 1,
-            flexDirection: 'column',
-            alignItems: 'flex-end',
-            fontSize: 12,
-            fontWeight: 'bold',
-        },
-        longText: {
-            fontWeight: 'bold',
-            fontSize: 10,
-            textAlign: 'justify',
-
-        },
-        boldText: {
-            fontFamily: 'Times-Bold',
-            fontSize: 12,
-            fontWeight: 'bold',
-            textDecoration: 'underline',
-        },
-        sectionSignatureEnd: {
-            display: 'flex',
-            fontSize: 12,
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            marginTop: 20,
-        },
-        sectionSignatureEndContainer: {
-            display: 'flex',
-            fontSize: 12,
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            marginTop: 20,
-        },
-        sectionSignatureEndText: {
-            display: 'flex',
-            fontSize: 12,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 20,
-        },
-        signaturesNameAndJerarquia: {
-            fontFamily: 'Times-Bold',
-            fontSize: 14,
-            fontWeight: 'bold',
-        },
-        signaturesEndEnd: {
-            fontFamily: 'Times-Bold',
-            fontSize: 12,
-            fontWeight: 'bold',
-            textDecoration: 'underline',
-        },
-        datos: {
-            marginBottom: 10,
-            fontSize: 12,
-            textAlign: 'justify',
-        },
-
-    });
-
+ 
 
     const formatFecha = (date: Date) => {
         // Convertir la fecha a una cadena ISO sin modificar la zona horaria

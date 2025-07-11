@@ -19,6 +19,7 @@ import InputRegister from '../../components/InputComponents/InputRegister';
 import { useCampos } from '../../context/campos';
 import direccionDivisiones from '../../GlobalConst/direccionDivisiones';
 import { useStore } from './store';
+import SelectRegisterSingle from '../../components/Select/SelectRegisterSingle';
 type CargarDenunciasRolCargaProps = {
   user: any;
 }
@@ -34,7 +35,7 @@ function CargarDenunciasRolAgente({ user }: CargarDenunciasRolCargaProps) {
   const [comisariaPertenece, setComisariaPertenece] = useState('')
   const [direccionValor, setDireccionValor] = useState('')
   const [telefonoValor, setTelefonoValor] = useState('')
-
+  const [printMode, setPrintMode] = useState(false);
 
   const { genero } = useStore((state) => ({
     genero: state.genero,
@@ -118,9 +119,9 @@ function CargarDenunciasRolAgente({ user }: CargarDenunciasRolCargaProps) {
       setComisariaPertenece(comisariaEncontrada?.prefijo + '-')
       setDireccionValor(comisariaEncontrada?.direccion)
       setTelefonoValor(comisariaEncontrada?.telefono)
-      
+
     }
-    
+
 
   }, [user, unidades])
 
@@ -130,7 +131,7 @@ function CargarDenunciasRolAgente({ user }: CargarDenunciasRolCargaProps) {
       <div>
         <form onSubmit={
           handleSubmit(async (values) => {
-            
+
             Swal.fire({
               title: '¿Estás seguro?',
               text: "Una vez enviado, debe ser verificado.",
@@ -148,13 +149,13 @@ function CargarDenunciasRolAgente({ user }: CargarDenunciasRolCargaProps) {
                 const horaActual = new Date().getHours().toString().padStart(2, '0') + ":" + new Date().getMinutes().toString().padStart(2, '0')
                 values.fecha = fecha
                 values.hora = horaActual
-                
+
                 values.numero_de_expediente = values.PrefijoExpediente + values.numero_de_expediente + values.Expediente + values.SufijoExpediente
-                
+
                 if (values.modo_actuacion == "Exposición") {
                   values.division = user.unidad
                   await crearExposicion(values)
-                }else {
+                } else {
                   if (values.modo_actuacion == "Denuncia") {
                     values.modo_actuacion = values.modo_actuacion_2
                   }
@@ -207,10 +208,32 @@ function CargarDenunciasRolAgente({ user }: CargarDenunciasRolCargaProps) {
                 <CargarPreguntas genero={tipoDenuncia != "Exposición" ? genero : undefined} watch={watch} tipoDenuncia={tipoDenuncia} register={register} setValue={setValue} errors={errors} />
               </div>
               <CargarInstructorYSecretario register={register} setValue={setValue} errors={errors} />
-              <div className="flex justify-center my-3">
-                <div className='flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => handleImprimir()}>Imprimir</div>
-                <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' type="submit">Enviar</button>
-              </div>
+              {!printMode && (
+                <div className="flex justify-center my-3">
+                  <div className='flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(true)}>Imprimir</div>
+                  <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' type="submit">Enviar</button>
+                </div>
+              )}
+              {printMode && (
+                <div className="flex flex-col items-center justify-center my-3">
+                  <h1 className='text-2xl my-5'>Elegir tipo de hoja</h1>
+                    <SelectRegisterSingle campo="Tipo de Hoja" nombre="tipoHoja" setValue={setValue} error={errors.tipoHoja} opciones={
+                      [
+                        { nombre: "A4", value: "A4" },
+                        { nombre: "Legal", value: "LEGAL" }
+                      ]
+                    } />
+                  <div className='mb-1 flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => {
+                    handleImprimir()
+                  }}>
+                    Imprimir
+                </div>
+                  <div className='flex flex-col items-center bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(false)}>
+                    Cancelar
+                  </div>
+                </div>
+
+              )}
             </>
           )}
 

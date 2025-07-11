@@ -24,6 +24,8 @@ import EditExposicion from './EditExposicion';
 import { useAuth } from '../../../context/auth';
 import PDF from '../../ReactPDF/PDFDenuncias'
 import { pdf } from '@react-pdf/renderer';
+import { useForm } from 'react-hook-form';
+import SelectRegisterSingle from '../../Select/SelectRegisterSingle';
 
 type expandedComponentsProps = {
     data: any
@@ -33,10 +35,14 @@ function expandedComponents({ data }: expandedComponentsProps) {
 
     // Estado de editar global
     const [editGlobal, setEditGlobal] = useState(false)
+    const [printMode, setPrintMode] = useState(false)
     // Datos del hecho
-
     const { user } = useAuth()
+   const { setValue, watch, formState: { errors } } = useForm({
+    
+        });
 
+        
     const victimaDatosMostrar = [
         { nombre: "Nombre de la víctima", valor: data.nombre_victima },
         { nombre: "Apellido de la víctima", valor: data.apellido_victima },
@@ -63,9 +69,9 @@ function expandedComponents({ data }: expandedComponentsProps) {
     // Imprimir
 
     const handlePrint =  async () => {
-    
+        const tipoHoja = watch("tipoHoja");
 
-        const blob = await pdf(<PDF isBusqueda={true} genero={data.genero} tipoDenuncia={"Exposición"} datos={data} user={user} />).toBlob();
+        const blob = await pdf(<PDF isBusqueda={true} genero={data.genero} tipoDenuncia={"Exposición"} datos={{...data, tipoHoja: tipoHoja}} user={user} />).toBlob();
         // Crea una URL de objeto a partir del blob
         const url = URL.createObjectURL(blob);
         // Abre la URL en una nueva pestaña
@@ -150,21 +156,45 @@ function expandedComponents({ data }: expandedComponentsProps) {
                 <div className='flex flex-row'>
                     <SimpleTableCheckorX campo="" datos={instructorDatosMostrar} icono={<UserIcon className='h-6 w-6' />} />
                 </div>
-                <div className='my-5 flex flex-col md:flex-row md:items-center md:justify-center w-full '>
-                    <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => handlePrint()}>
-                        <PrinterIcon className="w-7" />
-                    </div>
-                    {(user.rol === 'admin' || user.rol === 'carga') &&
-                        <>
-                            <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => setEditGlobal(!editGlobal)}>
+             
+                 {!printMode && (
+                    <div className="flex justify-center my-3">
+                        <div className="bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0" onClick={() => setPrintMode(true)}>
+                            <PrinterIcon className="w-7" />
+                        </div>
+                        {((user.rol === "admin") || (user.rol === "carga")) &&
+                            <>
+                               <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => setEditGlobal(!editGlobal)}>
                                 <PencilSquareIcon className="w-7" />
                             </div>
                             <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => handleDelete(data)}>
                                 <TrashIcon className="w-7" />
                             </div>
-                        </>
-                    }
-                </div>
+                            </>
+                        }                
+                        </div>
+                )}
+                {printMode && (
+                    <div className="flex flex-col items-center justify-center my-3">
+                        <h1 className='text-2xl my-5'>Elegir tipo de hoja</h1>
+                        <SelectRegisterSingle campo="Tipo de Hoja" nombre="tipoHoja" setValue={setValue} error={errors.tipoHoja} opciones={
+                            [
+                                { nombre: "A4", value: "A4" },
+                                { nombre: "Legal", value: "LEGAL" }
+                            ]
+                        } />
+                        <div className='mb-1 flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => {
+                            handlePrint()
+                        }}>
+                            Imprimir
+                        </div>
+
+                        <div className='flex flex-col items-center bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(false)}>
+                            Cancelar
+                        </div>
+                    </div>
+
+                )}
             </>
             :
             <>

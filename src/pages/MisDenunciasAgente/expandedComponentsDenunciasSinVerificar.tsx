@@ -33,6 +33,8 @@ import { columns } from './columnsDataTable'; // Configuración de columnas para
 import { customStyles } from '../../GlobalConst/customStyles'; // Estilos personalizados para DataTable
 import { mostrarDenunciasSinVerificarID } from '../../api/CRUD/denunciasSinVerificar.crud';
 import { getRadiogramaById } from '../../api/CRUD/radiograma.crud'; // Función para obtener datos de un radiograma
+import SelectRegisterSingle from '../../components/Select/SelectRegisterSingle';
+import { useForm } from 'react-hook-form';
 // Tipos
 // Define el tipo de las propiedades del componente
 type ExpandedComponentsProps = {
@@ -60,9 +62,15 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
     const [PreventivoData, setPreventivoData] = useState(null); // Almacena los datos del preventivo
     const [radiogramaData, setRadiogramaData] = useState(null); // Almacena los datos del radiograma
     const [listaAmpliaciones, setListaAmpliaciones] = useState([]); // Almacena la lista de ampliaciones
-
     const { user } = useAuth(); // Obtiene el usuario autenticado desde el contexto
     const [tienePreventivoPrevio, setTienePreventivoPrevio] = useState(false); // Controla si hay un preventivo previo
+    const [printMode, setPrintMode] = useState(false); // Controla el modo de impresión
+
+ // Formulario
+  const {  watch, setValue, formState: {
+    errors
+  } } = useForm()
+
 
     // Datos para mostrar en tablas
     // Información general de la denuncia
@@ -130,13 +138,12 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
     // Funciones
     // Genera y abre un PDF de la denuncia o ampliación en una nueva pestaña
     const handleImprimir = async () => {
-
-
+        const tipoDeHoja = watch('tipoHoja') || 'A4'; // Obtiene el tipo de hoja seleccionado o A4 por defecto 
         const blob = await pdf(
             data.modo_actuacion === 'Ampliación de denuncia' ? (
-                <PDFAmpliacion isBusqueda genero={data.genero_victima} user={user} datos={data} />
+                <PDFAmpliacion isBusqueda genero={data.genero_victima} user={user} datos={{...data, tipoHoja: tipoDeHoja}} />
             ) : (
-                <PDF isBusqueda={true} genero={data.genero_victima} tipoDenuncia={data.modo_actuacion} datos={data} user={user} />
+                <PDF isBusqueda={true} genero={data.genero_victima} tipoDenuncia={data.modo_actuacion} datos={{...data, tipoHoja: tipoDeHoja}} user={user} />
             )
         ).toBlob();
         window.open(URL.createObjectURL(blob));
@@ -351,15 +358,37 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
             <h2 className="text-3xl my-5 font-sans">Instructor</h2>
             <SimpleTableCheckorX datos={instructorDatosMostrar} />
 
+                
+
             {/* Botón para generar y abrir el PDF */}
-            <div className="flex justify-center mt-5">
-                <button
-                    className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10"
-                    onClick={handleImprimir}
-                >
+               {!printMode && (
+                <div className="flex justify-center my-3">
+                  <div className='flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(true)}>Imprimir</div>
+                  <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' type="submit">Enviar</button>
+                </div>
+              )}
+              {printMode && (
+                <div className="flex flex-col items-center justify-center my-3">
+                  <h1 className='text-2xl my-5'>Elegir tipo de hoja</h1>
+                    <SelectRegisterSingle campo="Tipo de Hoja" nombre="tipoHoja" setValue={setValue} error={errors.tipoHoja} opciones={
+                      [
+                        { nombre: "A4", value: "A4" },
+                        { nombre: "Legal", value: "LEGAL" }
+                      ]
+                    } />
+                  <div className='mb-1 flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => {
+                    handleImprimir()
+                  }}>
                     Imprimir
-                </button>
-            </div>
+                </div>
+                  <div className='flex flex-col cursor-pointer  items-center bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(false)}>
+                    Cancelar
+                  </div>
+                </div>
+
+              )}
+               
+          
         </div>
     );
 }

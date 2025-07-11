@@ -127,7 +127,7 @@ function PDFDenuncias({ genero, tipoDenuncia, datos, user, isBusqueda }: PDFProp
 
     return (
         <Document>
-            <Page style={styles.page}>
+            <Page size={datos.tipoHoja} style={styles.page}>
                 <Header datos={datos} userDivisionZona={userDivisionZona} />
                 <View style={styles.section}>
                     <View style={styles.sectionRight}>
@@ -135,7 +135,11 @@ function PDFDenuncias({ genero, tipoDenuncia, datos, user, isBusqueda }: PDFProp
                         </Text>
                     </View>
                     <Text style={styles.subheader}>{isExposicion ? "- EXPOSICIÓN -" : "- DENUNCIA -"}</Text>
-                    <Text style={styles.text}>{datos.nombre_victima} {datos.apellido_victima} S/ {isExposicion ? "EXPOSICIÓN" : "DENUNCIA"}:--------------------------------------------------------/</Text>
+                    <View style={styles.textAndLineContainer}>
+                        <Text style={styles.text}>{datos.nombre_victima} {datos.apellido_victima} S/ {isExposicion ? "EXPOSICIÓN" : "DENUNCIA"}:</Text>
+                        <View style={styles.lineFiller} />
+                        <Text style={styles.finalSlash}>/</Text>
+                    </View>
                     {isExposicion ? <RenderExposicion /> : <RenderDenuncia />}
                 </View>
                 <Footer firmas datos={datos} />

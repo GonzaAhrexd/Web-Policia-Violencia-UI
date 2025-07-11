@@ -29,6 +29,22 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 5,
     },
+    // Contenedor para el texto y la línea
+    textAndLineContainer: {
+        flexDirection: 'row', // Muy importante: los elementos se alinearán horizontalmente
+        alignItems: 'center', // Alinea el texto y la línea en la parte inferior si sus alturas varían
+        width: '100%', // Asegúrate de que el contenedor ocupe todo el ancho disponible
+    },
+    lineFiller: {
+        flexGrow: 1, // Esto hace que el View se expanda para llenar el espacio restante
+        height: 1, // El grosor de la línea
+        borderBottom: '2px dashed black',
+        marginLeft: 5, // Un pequeño espacio entre el texto y el inicio de la línea
+    },
+    finalSlash: {
+        fontSize: 12, // Asegúrate de que el tamaño de la barra coincida con el texto
+        fontFamily: 'Helvetica',
+    },
     subheader: {
         fontSize: 14,
         fontWeight: 'bold',
@@ -208,6 +224,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10,
         marginRight: 10,
+    },
+    datos: {
+        marginBottom: 10,
+        fontSize: 12,
+        textAlign: 'justify',
     },
 })
 

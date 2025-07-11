@@ -16,7 +16,8 @@ import { pdf } from "@react-pdf/renderer";
 import PDF from "../../ReactPDF/PDFPreventivo";
 import ShowTextArea from "../../ShowData/ShowTextArea";
 import { getPreventivo } from "../../../api/CRUD/preventivo.crud";
-
+import SelectRegisterSingle from "../../Select/SelectRegisterSingle";
+import { useForm } from "react-hook-form";
 type expandedComponentProps = {
     data: any
 }
@@ -26,16 +27,22 @@ function expandedComponent({ data }: expandedComponentProps) {
 
     const [ampliarPreventivo, setAmpliarPreventivo] = useState(false)
     const [dataPreventivo, setDataPreventivo] = useState(data);
+    const [printMode, setPrintMode] = useState(false);
     const { user } = useAuth();
 
     const handleVerAmpliación = async () => {
-        const ampliacionPreventivo = await  getPreventivo(dataPreventivo.preventivo_ampliado_ID);
+        const ampliacionPreventivo = await getPreventivo(dataPreventivo.preventivo_ampliado_ID);
         setDataPreventivo(ampliacionPreventivo);
-
-
     }
+
+    
+        const { setValue, watch, formState: { errors } } = useForm({
+    
+        });
+
     const handlePrint = async () => {
-        const blob = await pdf(<PDF datos={dataPreventivo} user={user} ampliacion={dataPreventivo.tipo_preventivo === "Ampliación de preventivo"} />).toBlob();
+        const tipoHoja = watch("tipoHoja");
+        const blob = await pdf(<PDF datos={{...dataPreventivo, tipoHoja: tipoHoja}} user={user} ampliacion={dataPreventivo.tipo_preventivo === "Ampliación de preventivo"} />).toBlob();
         // Crea una URL de objeto a partir del blob
         const url = URL.createObjectURL(blob);
         // Abre la URL en una nueva pestaña
@@ -102,7 +109,7 @@ function expandedComponent({ data }: expandedComponentProps) {
         return (
 
             <div>
-                {(dataPreventivo.preventivo_ampliado_ID)  ?
+                {(dataPreventivo.preventivo_ampliado_ID) ?
                     <button
                         className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full "
                         onClick={() => handleVerAmpliación()}
@@ -113,11 +120,11 @@ function expandedComponent({ data }: expandedComponentProps) {
                     : (
                         (dataPreventivo.tipo_preventivo !== "Ampliación de preventivo") && (
                             <button
-                            className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full "
-                            onClick={() => setAmpliarPreventivo(true)}
+                                className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full "
+                                onClick={() => setAmpliarPreventivo(true)}
                             >
-                            Ampliar preventivo
-                        </button>
+                                Ampliar preventivo
+                            </button>
                         )
                     )
 
@@ -161,21 +168,43 @@ function expandedComponent({ data }: expandedComponentProps) {
                     <SimpleTableCheckorX campo="" datos={instructorDatosMostrar} />
                 </div>
 
-                <div className='flex flex-col md:flex-row items-center justify-center m-2 md:m-0'>
-                    <div className="bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0" onClick={() => handlePrint()}>
-                        <PrinterIcon className="w-7" />
+               
+
+                {!printMode && (
+                    <div className="flex justify-center my-3">
+                        <div className="bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0" onClick={() => setPrintMode(true)}>
+                            <PrinterIcon className="w-7" />
+                        </div>
+                        {((user.rol === "admin") || (user.rol === "carga")) &&
+                            <>
+                                <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => handleDelete(dataPreventivo)}>
+                                    <TrashIcon className="w-7" />
+                                </div>
+                            </>
+                        }                
+                        </div>
+                )}
+                {printMode && (
+                    <div className="flex flex-col items-center justify-center my-3">
+                        <h1 className='text-2xl my-5'>Elegir tipo de hoja</h1>
+                        <SelectRegisterSingle campo="Tipo de Hoja" nombre="tipoHoja" setValue={setValue} error={errors.tipoHoja} opciones={
+                            [
+                                { nombre: "A4", value: "A4" },
+                                { nombre: "Legal", value: "LEGAL" }
+                            ]
+                        } />
+                        <div className='mb-1 flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => {
+                            handlePrint()
+                        }}>
+                            Imprimir
+                        </div>
+
+                        <div className='flex flex-col items-center bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(false)}>
+                            Cancelar
+                        </div>
                     </div>
-                    {((user.rol === "admin") || (user.rol === "carga")) &&
-                        <>
-                            {/* <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => setEditGlobal(!editGlobal)}>
-                                <PencilSquareIcon className="w-7" />
-                            </div> */}
-                            <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => handleDelete(dataPreventivo)}>
-                                <TrashIcon className="w-7" />
-                            </div>
-                        </>
-                    }
-                </div>
+
+                )}
 
 
             </div>

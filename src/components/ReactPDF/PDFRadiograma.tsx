@@ -91,7 +91,7 @@ function PDF({ datos, user, ampliacion }: PDFProps) {
 
     return (
         <Document>
-            <Page style={styles.page}>
+            <Page size={datos.tipoHoja || "A4"} style={styles.page}>
                 <Header />
                 <View style={styles.section}>
                     <View style={styles.sectionRight}>

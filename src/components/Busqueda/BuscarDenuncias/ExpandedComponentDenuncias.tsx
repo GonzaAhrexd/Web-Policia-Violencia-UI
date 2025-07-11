@@ -113,8 +113,6 @@ function ExpandedComponentDenuncias({ data }: expandedComponentsProps) {
          lat = parseFloat(latLng[0]);
          lon = parseFloat(latLng[1]);
 
-         console.log(latLng)
-
         }else{
 
         const latLng: Array<string> = data.GIS.split("-").slice(1)
@@ -140,6 +138,7 @@ function ExpandedComponentDenuncias({ data }: expandedComponentsProps) {
         victimaObtener(data.victima_ID); // Asegúrate de tener un 'id' válido aquí
         victimarioObtener(data.victimario_ID)
         if (data.denunciado_por_tercero) {
+            console.log(data.tercero_ID)
             terceroObtener(data.tercero_ID)
         }
 

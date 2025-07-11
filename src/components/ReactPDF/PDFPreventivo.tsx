@@ -48,7 +48,7 @@ function PDF({ datos, user, ampliacion }: PDFProps) {
 
   return (
     <Document>
-      <Page style={styles.page}>
+      <Page size={datos.tipoHoja} style={styles.page}>
         <Header datos={datos} userDivisionZona={userDivisionZona}/>
         <View style={styles.section}>
           <View style={styles.sectionRight}>

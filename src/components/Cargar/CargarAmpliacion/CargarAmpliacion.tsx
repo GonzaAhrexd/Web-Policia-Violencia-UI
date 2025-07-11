@@ -21,6 +21,7 @@ import InputTextArea from "../../InputComponents/InputTextArea"
 import PDF from "../../ReactPDF/PDFAmpliacion"
 // API
 import { crearDenunciaSinVerificar, agregarAmpliacionDenuncia } from "../../../api/CRUD/denunciasSinVerificar.crud"
+import SelectRegisterSingle from "../../Select/SelectRegisterSingle"
 type CargarAmpliacionProps = {
   data: any;
   setAmpliarDenuncia: any;
@@ -33,7 +34,7 @@ function CargarAmpliacion({ data, setAmpliarDenuncia }: CargarAmpliacionProps) {
   const [comisariaPertenece, setComisariaPertenece] = useState('')
   const [direccionValor, setDireccionValor] = useState('')
   const [telefonoValor, setTelefonoValor] = useState('')
-
+  const [printMode, setPrintMode] = useState(false) // Controla el modo de impresión
   const { user } = useAuth()
 
 
@@ -158,11 +159,11 @@ function CargarAmpliacion({ data, setAmpliarDenuncia }: CargarAmpliacionProps) {
 
             await agregarAmpliacionDenuncia(data._id, denunciaAmpliada._id)
             Swal.fire({
-                  title: `Enviado`,
-                  icon: 'success',
-                  confirmButtonText: 'Ok',            
-                  allowOutsideClick: false
-                })
+              title: `Enviado`,
+              icon: 'success',
+              confirmButtonText: 'Ok',
+              allowOutsideClick: false
+            })
             // setAmpliarDenuncia(false)
           } else if (result.isDenied) {
             Swal.fire('No se envió la ampliación', '', 'info')
@@ -197,16 +198,34 @@ function CargarAmpliacion({ data, setAmpliarDenuncia }: CargarAmpliacionProps) {
           <CargarPreguntas watch={watch} genero={genero} tipoDenuncia={tipoDenuncia} register={register} setValue={setValue} errors={errors} />
         </div>
         <CargarInstructorYSecretario register={register} setValue={setValue} errors={errors} />
-        <div className='flex flex-row items-center justify-center'>
-          <div onClick={() => handlePrint()} className='flex flex-col items-center justify-center cursor-pointer mr-2 bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10'>
-            Imprimir
+
+        {!printMode && (
+          <div className="flex justify-center my-3">
+            <div className='flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(true)}>Imprimir</div>
+            <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' type="submit">Enviar</button>
           </div>
-          <button
-            className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10'
-          >
-            Enviar denuncia
-          </button>
-        </div>
+        )}
+        {printMode && (
+          <div className="flex flex-col items-center justify-center my-3">
+            <h1 className='text-2xl my-5'>Elegir tipo de hoja</h1>
+            <SelectRegisterSingle campo="Tipo de Hoja" nombre="tipoHoja" setValue={setValue} error={errors.tipoHoja} opciones={
+              [
+                { nombre: "A4", value: "A4" },
+                { nombre: "Legal", value: "LEGAL" }
+              ]
+            } />
+            <div className='mb-1 flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => {
+              handlePrint()
+            }}>
+              Imprimir
+            </div>
+            <div className='flex flex-col items-center bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(false)}>
+              Cancelar
+            </div>
+          </div>
+
+        )}
+
       </form>
     </div>
   )

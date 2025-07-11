@@ -17,6 +17,8 @@ import { useAuth } from "../../../context/auth"
 import { pdf } from "@react-pdf/renderer";
 import { getPreventivo } from "../../../api/CRUD/preventivo.crud";
 import { getRadiogramaById, deleteRadiograma } from "../../../api/CRUD/radiograma.crud";
+import SelectRegisterSingle from "../../Select/SelectRegisterSingle";
+import { useForm } from "react-hook-form";
 
 type expandedComponentProps = {
     data: any
@@ -28,10 +30,14 @@ function expandedComponentRadiograma({ data }: expandedComponentProps) {
     const [ampliarRadiograma, setAmpliarRadiograma] = useState(false)
     const [dataRadiograma, setDataRadiograma] = useState(data);
     const { user } = useAuth();
-
+    const [printMode, setPrintMode] = useState(false);
     const [preventivoAmpliado, setPreventivoAmpliado] = useState(null);
     const [loading, setLoading] = useState(true);
 
+      const { setValue, watch, formState: { errors } } = useForm({
+    
+        });
+        
     useEffect(() => {
         const fetchPreventivo = async () => {
             try {
@@ -52,7 +58,8 @@ function expandedComponentRadiograma({ data }: expandedComponentProps) {
 
 
     const handlePrint = async () => {
-        const blob = await pdf(<PDFRadiograma datos={dataRadiograma} user={user}  ampliacion={dataRadiograma.tipo_radiograma == "Ampliación de radiograma"}/>).toBlob();
+        const tipoHoja = watch("tipoHoja");
+        const blob = await pdf(<PDFRadiograma datos={{...dataRadiograma, tipoHoja: tipoHoja}} user={user}  ampliacion={dataRadiograma.tipo_radiograma == "Ampliación de radiograma"}/>).toBlob();
 
         // Crea una URL de objeto a partir del blob
         const url = URL.createObjectURL(blob);
@@ -132,11 +139,7 @@ function expandedComponentRadiograma({ data }: expandedComponentProps) {
         )
     }
 
-    // else if (editGlobal) {
-    //     return (
-    //         <EditRadiograma data={dataRadiograma} />
-    //     )
-    // }
+ 
     else {
         return (
 
@@ -193,18 +196,43 @@ function expandedComponentRadiograma({ data }: expandedComponentProps) {
                     <SimpleTableCheckorX campo="" datos={instructorDatosMostrar} />
                 </div>
 
-                <div className='flex flex-col md:flex-row items-center justify-center m-2 md:m-0'>
-                    <div className="bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0" onClick={() => handlePrint()}>
-                        <PrinterIcon className="w-7" />
+               {!printMode && (
+                    <div className="flex justify-center my-3">
+                        <div className="bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0" onClick={() => setPrintMode(true)}>
+                            <PrinterIcon className="w-7" />
+                        </div>
+                        {((user.rol === "admin") || (user.rol === "carga")) &&
+                            <>
+                                <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => handleDelete(dataRadiograma)}>
+                                    <TrashIcon className="w-7" />
+                                </div>
+                            </>
+                        }                
+                        </div>
+                )}
+                {printMode && (
+                    <div className="flex flex-col items-center justify-center my-3">
+                        <h1 className='text-2xl my-5'>Elegir tipo de hoja</h1>
+                        <SelectRegisterSingle campo="Tipo de Hoja" nombre="tipoHoja" setValue={setValue} error={errors.tipoHoja} opciones={
+                            [
+                                { nombre: "A4", value: "A4" },
+                                { nombre: "Legal", value: "LEGAL" }
+                            ]
+                        } />
+                        <div className='mb-1 flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => {
+                            handlePrint()
+                        }}>
+                            Imprimir
+                        </div>
+
+                        <div className='flex flex-col items-center bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(false)}>
+                            Cancelar
+                        </div>
                     </div>
-                    {((user.rol === "admin") || (user.rol === "carga")) &&
-                        <>
-                            <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => handleDelete(dataRadiograma)}>
-                                <TrashIcon className="w-7" />
-                            </div>
-                        </>
-                    }
-                </div>
+
+                )}
+
+
 
 
             </div>

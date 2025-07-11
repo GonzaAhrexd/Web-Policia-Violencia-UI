@@ -10,6 +10,7 @@ import SelectRegisterSingle from '../Select/SelectRegisterSingle';
 import { jerarquiaCampos } from '../../GlobalConst/jerarquiaCampos';
 import { pdf } from '@react-pdf/renderer';
 import PDFRadiograma from '../ReactPDF/PDFRadiograma';
+import { useState } from 'react';
 
 type CargarRadiogramaProps = {
   // Define the props for the CargarRadiograma component here
@@ -21,7 +22,7 @@ type CargarRadiogramaProps = {
 function EditRadiograma({preventivoAmpliado, data, modoExpandir }: CargarRadiogramaProps) {
   const { register, handleSubmit, setValue, getValues, formState: { errors } } = useForm(); // Hook para manejar el formulario
   const { user } = useAuth(); // Obtiene el usuario autenticado
-
+  const [printMode, setPrintMode] = useState(false); // Estado para controlar el modo de impresión
 
   const handlePrint = async () => {
     const values = getValues();
@@ -35,7 +36,7 @@ function EditRadiograma({preventivoAmpliado, data, modoExpandir }: CargarRadiogr
 
     if (modoExpandir) {
       const blob = await pdf(
-        <PDFRadiograma datos={nuevosValores} user={user} ampliacion={true} />
+        <PDFRadiograma datos={{...nuevosValores, tipoHoja: values.tipoHoja}} user={user} ampliacion={true} />
       ).toBlob();
 
       window.open(URL.createObjectURL(blob));
@@ -106,13 +107,36 @@ function EditRadiograma({preventivoAmpliado, data, modoExpandir }: CargarRadiogr
           </div>
         </div>
         <div className='flex flex-row items-center justify-center'>
-          <div onClick={() => handlePrint()} className='flex flex-col items-center justify-center cursor-pointer mr-2 bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10'>
-            Imprimir
-          </div>
-          <button
+          
+         
+              {!printMode && (
+                <div className="flex justify-center my-3">
+                  <div className='flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(true)}>Imprimir</div>
+ <button
             className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10'>
             Ampliar radiograma
-          </button>
+          </button>                </div>
+              )}
+              {printMode && (
+                <div className="flex flex-col items-center justify-center my-3">
+                  <h1 className='text-2xl my-5'>Elegir tipo de hoja</h1>
+                    <SelectRegisterSingle campo="Tipo de Hoja" nombre="tipoHoja" setValue={setValue} error={errors.tipoHoja} opciones={
+                      [
+                        { nombre: "A4", value: "A4" },
+                        { nombre: "Legal", value: "LEGAL" }
+                      ]
+                    } />
+                  <div className='mb-1 flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => {
+                    handlePrint()
+                  }}>
+                    Imprimir
+                </div>
+                  <div className='flex flex-col items-center bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(false)}>
+                    Cancelar
+                  </div>
+                </div>
+
+              )}
         </div>
       </form>
 

@@ -67,7 +67,7 @@ function modoImprimir({ tipoPersona, modoImprimir, setModoImprimir, denunciasAMo
 
     return (
         <>
-            <h1 className='text-3xl my-5 font-sans	'>Imprimir antecedentes</h1>
+            <h1 className='text-3xl my-5 font-sans'>Imprimir antecedentes</h1>
             <form onSubmit={
                 handleSubmit(async (values) => {
                     
