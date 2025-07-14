@@ -15,7 +15,6 @@ import Swal from 'sweetalert2'
 
 // APIs
 import { altaUsuario } from '../../api/auth'
-// import InputRegister from '../InputComponents/InputRegister'
 // Campos
 
 import { jerarquiaCampos } from '../../GlobalConst/jerarquiaCampos'
@@ -78,7 +77,7 @@ function ModalAddUser({ setOpenModal }: ModalAddUserProps) {
                   try {
                     // Agregar usuario
                     const usuarioResponse = await altaUsuario(values);
-                    if(usuarioResponse.mensaje == "No se encontró el usuario"){
+                    if (usuarioResponse.mensaje == "No se encontró el usuario") {
                       Swal.fire({
                         title: 'DNI no encontrado',
                         text: 'Comprueba si está escrito correctamente.',
@@ -86,7 +85,7 @@ function ModalAddUser({ setOpenModal }: ModalAddUserProps) {
                         confirmButtonColor: '#0C4A6E',
                         confirmButtonText: 'Aceptar'
                       })
-                    }else if(usuarioResponse.mensaje == "Ya está dado de alta"){
+                    } else if (usuarioResponse.mensaje == "Ya está dado de alta") {
                       Swal.fire({
                         title: 'Usuario ya dado de alta',
                         text: 'El usuario ingresado ya está dado de alta.',
@@ -94,14 +93,14 @@ function ModalAddUser({ setOpenModal }: ModalAddUserProps) {
                         confirmButtonColor: '#0C4A6E',
                         confirmButtonText: 'Aceptar'
                       })
-                    }else if(usuarioResponse.mensaje == "Usuario creado con éxito"){
-                    Swal.fire({
-                      title: 'Usuario agregado',
-                      icon: 'success',
-                      confirmButtonColor: '#0C4A6E',
-                      confirmButtonText: 'Aceptar'
-                    });
-                  }
+                    } else if (usuarioResponse.mensaje == "Usuario creado con éxito") {
+                      Swal.fire({
+                        title: 'Usuario agregado',
+                        icon: 'success',
+                        confirmButtonColor: '#0C4A6E',
+                        confirmButtonText: 'Aceptar'
+                      });
+                    }
                   } catch (error) {
                     Swal.fire({
                       title: 'Error',
@@ -117,24 +116,22 @@ function ModalAddUser({ setOpenModal }: ModalAddUserProps) {
           }>
             <h1 className='text-4xl'>Alta de nuevo usuario</h1>
             <div className='w-9/10 md:w-5/10'>
-            <p>Desde este apartado, se puede dar de alta a un usuario con cuenta en Policía Digital. Si el usuario no tiene cuenta, deberá solicitarla <a className='text-sky-800' href="https://policiadigital.chaco.gob.ar/" >aquí</a> </p>
+              <p>Desde este apartado, se puede dar de alta a un usuario con cuenta en Policía Digital. Si el usuario no tiene cuenta, deberá solicitarla <a className='text-sky-800' href="https://policiadigital.chaco.gob.ar/" >aquí</a> </p>
             </div>
-            <InputNumber busqueda campo="DNI" nombre="dni" register={register} maxLenght={8} type="text" error={errors.dni} />
+            <InputNumber customSize="flex flex-col w-full xl:w-1/2" campo="DNI" nombre="dni" register={register} maxLenght={8} error={errors.dni} />
             <SelectRegisterSingle campo="Rol" nombre="rol" setValue={setValue} error={errors.rol} opciones={rolesCampos} />
             <SelectRegisterSingle campo="Jerarquía" nombre="jerarquia" opciones={jerarquiaCampos} setValue={setValue} error={errors.jerarquia} />
             <SelectRegisterSingle campo="Zona" nombre="zona" opciones={zonaCampos} setValue={setValue} error={errors.zona} />
             <span>¿División Violencia Familiar y de Género?</span>
             <InputRadio watch={watch} defaultValue={1} handleChange={setDivision} campo="violencia_familiar" nombre="violencia_familiar" register={register} type="radio" opciones={opcionesRadio} />
-           
-           {division ? 
-            <SelectRegister notMunicipio notComisaria campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} type="text" error={errors.unidad} />
-            :
-            <>
-          <h1>Acá</h1>
-                     <SelectRegister  campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} type="text" error={errors.unidad} />
 
-            </>
-          }
+            {division ?
+              <SelectRegister notMunicipio notComisaria campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} />
+              :
+              <>
+                <SelectRegister campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} />
+              </>
+            }
 
             <button type='submit' className='bg-sky-900 hover:bg-sky-700 text-white w-4/10 h-10 rounded-md my-2'>Agregar</button>
 

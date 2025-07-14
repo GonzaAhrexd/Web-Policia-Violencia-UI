@@ -132,7 +132,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
                     <h2 className='text-3xl my-5 font-sans mr-4'>Exposición</h2>
                 </div>
                 <div className="flex flex-row">
-                    <ShowTextArea campo="Observaciones" dato={data.observaciones} />
+                    <ShowTextArea  dato={data.observaciones} />
                 </div>
                 {data.preguntas.desea_agregar_quitar_o_enmendar &&
                     <>
@@ -140,7 +140,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
                             <h2 className='text-3xl my-5 font-sans'>Agrega</h2>
                         </div>
                         <div className="flex flex-row">
-                            <ShowTextArea campo="Observaciones" dato={data.agrega} />
+                            <ShowTextArea  dato={data.agrega} />
                         </div>
                     </>
                 }

@@ -5,30 +5,27 @@
 // Hooks
 import { useState } from 'react';
 
-interface Opcion {
+type Opcion = {
     value?: string;
     nombre?: string;
     subdivisiones?: Opcion[];
 }
 
-interface Props {
+type Props = {
     campo: string;
     opciones: Opcion[];
     register: any
     setValue: any
-    type: string
     nombre: string
     error: any
     isRequired?: any
     valor?: any
-    mid?: boolean
-    setTipoDenuncia?: any
     selectDivisiones?: boolean;
 }
 
 
 
-function SelectDivisionMunicipios({selectDivisiones, campo, opciones, nombre, setValue, isRequired, valor }: Props) {
+function SelectDivisionMunicipios({selectDivisiones, nombre, campo, opciones, setValue, isRequired, valor }: Props) {
 
     // Estados
     const [requiredInput,] = useState(isRequired != null ? isRequired : true)

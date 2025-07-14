@@ -150,17 +150,17 @@ useEffect(() => {
 
   return (
     <div className='w-full'>
-      <InputRegister campo="" nombre="denuncia_id" register={register} setValue={setValue} type="hidden" error={errors._id} valor={datos._id} />
-      <InputRegister campo="" nombre="tercero_ID" register={register} setValue={setValue} type="hidden" error={errors.tercero_ID} valor={datos.tercero_ID ? datos.tercero_ID : "No hay tercero"} />
+      <InputRegister campo="" nombre="denuncia_id" register={register} setValue={setValue}  error={errors._id} valor={datos._id} />
+      <InputRegister campo="" nombre="tercero_ID" register={register} setValue={setValue}  error={errors.tercero_ID} valor={datos.tercero_ID ? datos.tercero_ID : "No hay tercero"} />
       <h1 className='text-2xl my-5'>Hecho</h1>
       <div className='flex flex-col xl:flex-row'>
-        <InputDate valor={new Date(datos.fecha).toISOString().slice(0, 10)} campo="Fecha" nombre="fecha" register={register} type="text" error={errors.fecha} />
+        <InputDate valor={new Date(datos.fecha).toISOString().slice(0, 10)} campo="Fecha" nombre="fecha" register={register}  error={errors.fecha} />
         <SelectRegisterSingle isRequired={false} valor={datos.modo_actuacion} campo="Actuación" nombre="modo_actuacion" opciones={tipoDenunciaV2} setValue={setValue} error={errors.modo_actuacion} />
       </div>
 
       <div className='flex flex-col my-2'>
         {modificarDatosGeograficos ?
-          <SelectCargaDenuncias selectDivisiones consultarCoordenadas={consultarCoordenadas} direccion={direccion} barrio={barrio} setBarrio={setBarrio} setDireccion={setDireccion} coordenadas={coordenadas} setCoordenadas={setCoordenadas} errors={errors} setMunicipio={setMunicipio} campo="Unidad de carga" setComisariaPertenece={setComisariaPertenece} nombre="unidad_de_carga" opciones={unidadCampos} register={register} setValue={setValue} type="text" error={errors.unidad} state={isDivision} />
+          <SelectCargaDenuncias selectDivisiones consultarCoordenadas={consultarCoordenadas} direccion={direccion} barrio={barrio} setBarrio={setBarrio} setDireccion={setDireccion} coordenadas={coordenadas} setCoordenadas={setCoordenadas} errors={errors} setMunicipio={setMunicipio} campo="Unidad de carga" setComisariaPertenece={setComisariaPertenece} nombre="unidad_de_carga" opciones={unidadCampos} register={register} setValue={setValue} error={errors.unidad} state={isDivision} />
           :
           <SimpleTableCheckorX campo="Datos geográficos" datos={datosGeograficos} />
         }
@@ -170,13 +170,13 @@ useEffect(() => {
           </div>
         </div>
         <InputCheckbox campo="División Violencia Familiar y de Género" nombre="isDivision" register={register} setValue={setValue}  setHook={setIsDivision} state={isDivision} id="division" />
-        <EditExpediente expediente={expedienteDividido} campo="Número de Expediente" comisariaPertenece={comisariaPertenece} nombre="numero_de_expediente" register={register} setValue={setValue} type="text" error={errors.expediente} />
+        <EditExpediente expediente={expedienteDividido} campo="Número de Expediente" comisariaPertenece={comisariaPertenece} nombre="numero_de_expediente" register={register} setValue={setValue} error={errors.expediente} />
       </div>
 
       <div className='flex flex-col md:flex-row my-2'>
         <SelectRegisterSingle isRequired={false} valor={datos.juzgado_interviniente} campo="Organismo judicial interviniente" nombre="juzgado_interviniente" opciones={juzgadoIntervinente} setValue={setValue}  error={errors.juzgado_interviniente} />
-        <InputRegister require={false} valor={datos.juzgado_interviniente_numero} campo="Número del organismo judicial" nombre="juzgado_interviniente_numero" register={register} setValue={setValue} type="text" error={errors.juzgado_interviniente_numero} />
-        <InputRegister notMid={true} campo="Dependencia Derivada" nombre="dependencia_derivada" register={register} setValue={setValue} type="text" error={errors.dependencia_derivada} valor={datos.dependencia_derivada} />
+        <InputRegister require={false} valor={datos.juzgado_interviniente_numero} campo="Número del organismo judicial" nombre="juzgado_interviniente_numero" register={register} setValue={setValue} error={errors.juzgado_interviniente_numero} />
+        <InputRegister customSize='flex flex-col w-full md:w-full' campo="Dependencia Derivada" nombre="dependencia_derivada" register={register} setValue={setValue} error={errors.dependencia_derivada} valor={datos.dependencia_derivada} />
       </div>
       <div className='flex flex-col md:flex-row my-2' >
         <SelectRegisterSingle isRequired={false} valor={datos.violencia} campo="Violencia" nombre="violencia" opciones={opcionesViolencia} setValue={setValue} error={errors.violencia} />
@@ -206,7 +206,7 @@ useEffect(() => {
           <InputCheckbox campo="Empleo de Armas" nombre="empleo_de_armas" register={register} setValue={setValue}  error={errors.hijos} setHook={setIsArmas} state={isArmas} id="empleo_de_armas" />
           {isArmas &&
             <>
-              <SelectCargaDenuncias isRequired={false} valor={datos.arma_empleada} campo="Arma empleada" nombre="tipo_de_arma" opciones={opcionesTiposDeArma} register={register} setValue={setValue} type="text" error={errors.modalidad} />
+              <SelectCargaDenuncias isRequired={false} valor={datos.arma_empleada} campo="Arma empleada" nombre="tipo_de_arma" opciones={opcionesTiposDeArma} register={register} setValue={setValue} error={errors.modalidad} />
             </>
           }
         </div>
@@ -249,9 +249,9 @@ useEffect(() => {
         {isDenunciadoPorTercero &&
           <>
             <div className='flex flex-col md:flex-row'>
-              <InputRegister valor={datosTerceros[0].valor} campo="Nombre" nombre="nombre_tercero" register={register} setValue={setValue} type="text" error={errors.nombre} />
-              <InputRegister valor={datosTerceros[1].valor} campo="Apellido" nombre="apellido_tercero" register={register} setValue={setValue} type="text" error={errors.apellido} />
-              <InputRegister valor={datosTerceros[2].valor} campo="DNI" nombre="dni_tercero" register={register} setValue={setValue} type="text" error={errors.DNI} />
+              <InputRegister valor={datosTerceros[0].valor} campo="Nombre" nombre="nombre_tercero" register={register} setValue={setValue}  error={errors.nombre} />
+              <InputRegister valor={datosTerceros[1].valor} campo="Apellido" nombre="apellido_tercero" register={register} setValue={setValue}  error={errors.apellido} />
+              <InputRegister valor={datosTerceros[2].valor} campo="DNI" nombre="dni_tercero" register={register} setValue={setValue}  error={errors.DNI} />
             </div>
             <div className='flex flex-col'>
               <SelectRegisterSingle isRequired={false} valor={datosTerceros[3].valor} campo="Vínculo con la víctima" nombre="vinculo_con_la_victima" opciones={vinculo} setValue={setValue} error={errors.vinculo_con_agresor} />

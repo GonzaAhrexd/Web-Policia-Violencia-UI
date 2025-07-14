@@ -79,15 +79,16 @@ function CardEditDataUser({ user, setIsEditing }: InputRegisterProps) {
                 })}>
                 {/* ID oculta para luego pasarlo al submit */}
                 <div className='flex flex-col md:flex-row'>
-                    <InputRegister disabled campo="Nombre" nombre="nombre" register={register} setValue={setValue} type="text" error={errors.nombre} valor={user.nombre} />
-                    <InputRegister disabled campo="Apellido" nombre="apellido" register={register} setValue={setValue} type="text" error={errors.apellido} valor={user.apellido} />
+                    <InputRegister disabled campo="Nombre" nombre="nombre" register={register} setValue={setValue}  error={errors.nombre} valor={user.nombre} />
+                    <InputRegister disabled campo="Apellido" nombre="apellido" register={register} setValue={setValue}  error={errors.apellido} valor={user.apellido} />
                 </div>
                 <div className='flex flex-col md:flex-row'>
-                    <InputNumber  require={false} campo="Teléfono" nombre="telefono" placeholder={user.telefono} register={register} setValue={setValue} type="text" error={errors.telefono} valor={user.telefono} maxLenght={14} />
-                    <InputRegister disabled campo="Nombre de usuario" nombre="nombre_de_usuario" register={register} setValue={setValue} type="text" error={errors.nombre_de_usuario} valor={user.username} />
+                    <InputNumber  require={false} campo="Teléfono" nombre="telefono" placeholder={user.telefono} register={register} setValue={setValue} error={errors.telefono} valor={user.telefono} maxLenght={14} />
+                    <InputRegister disabled campo="Nombre de usuario" nombre="nombre_de_usuario" register={register} setValue={setValue}  error={errors.nombre_de_usuario} valor={user.username} />
                 </div>
                 <div className='flex flex-col md:flex-row'>
                     <SelectRegisterSingle mid isRequired={false} valor={user.jerarquia} campo="Jerarquía" nombre="jerarquia" opciones={jerarquiaCampos} setValue={setValue} error={errors.jerarquia} />
+                    
                     <SelectRegisterSingle mid isRequired={false} valor={user.zona} campo="Zona" nombre="zona" opciones={zonaCampos}  setValue={setValue}  error={errors.zona} />
                 </div>
 
@@ -97,9 +98,9 @@ function CardEditDataUser({ user, setIsEditing }: InputRegisterProps) {
             <InputRadio watch={watch} defaultValue={isDivision ? 0 : 1} handleChange={setIsDivision} campo="violencia_familiar" nombre="violencia_familiar" register={register} type="radio" opciones={opcionesRadio} />
            
             {isDivision ?
-                <SelectRegister notMunicipio notComisaria isRequired={false} valor={user.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} type="text" error={errors.unidad} />
+                <SelectRegister notMunicipio notComisaria isRequired={false} valor={user.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue}  />
                 :
-                <SelectRegister  isRequired={false} valor={user.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} type="text" error={errors.unidad} />
+                <SelectRegister  isRequired={false} valor={user.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue}  />
             }
             </>
         }

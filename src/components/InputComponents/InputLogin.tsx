@@ -10,63 +10,7 @@ type InputLoginProps = {
     placeholder?: string;
 };
 
-function 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-InputLogin({ campo, register, type, error, placeholder }: InputLoginProps) {
+function InputLogin({ campo, register, type, error, placeholder }: InputLoginProps) {
     // Si no se recibe un placeholder, se asigna un string vacío
      placeholder ? placeholder : '';
 

@@ -10,7 +10,6 @@ interface InputDateProps {
     campo: string;
     nombre: string;
     register: any;
-    type?: string;
     placeholder?: string;
     error: any;
     require?: boolean;

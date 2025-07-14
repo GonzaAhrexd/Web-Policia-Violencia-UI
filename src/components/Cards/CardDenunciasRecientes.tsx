@@ -94,9 +94,9 @@ export default function CardDenunciasRecientes({ title }: CardDenunciasRecientes
                             No tienes denuncias recientes.
                         </div>
                     ) : (
-                        lastFiveDenuncias.map((denuncia) => (
+                        lastFiveDenuncias.map((denuncia, index) => (
                             <div
-                                key={denuncia.id}
+                                key={index}
                                 className='w-full text-neutral-800 bg-neutral-300 border border-neutral-400 rounded-lg mb-2 p-3 flex items-center justify-center shadow-sm'
                             >
                                 <span className="font-medium text-center truncate">{denuncia.numero_de_expediente}</span>

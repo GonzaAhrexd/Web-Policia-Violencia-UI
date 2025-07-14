@@ -76,14 +76,15 @@ function BuscarDenuncias() {
                     }
                     )}>
                 <InputDateRange register={register} setValue={setValue} isRequired={isDateRangeRequired} />
-                <InputRegister busqueda={true} campo="ID" nombre="id_denuncia" register={register} type="text" error={errors.id_denuncia} require={false} />
-                <InputRegister campo="Número de expediente" nombre="numero_de_expediente" register={register} type="text" error={errors.numero_de_expediente} require={false}></InputRegister>
+                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="ID" nombre="id_denuncia" register={register} error={errors.id_denuncia} require={false} />
+                <InputRegister customSize='flex flex-col w-full xl:w-1/2' campo="Número de expediente" nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false}/>
                 <div className='flex flex-col xl:flex-row w-full items-center justify-center'>
                     <SelectRegisterSingle isRequired={false} campo="Relación entre víctima y victimario" nombre="relacion_victima_victimario" opciones={vinculoCampos} setValue={setValue} error={errors.relacion_victima_victimario} />
                 </div>
                 {user.rol != "agente" &&
                     <div className='flex flex-col xl:flex-row w-full items-center justify-center'>
-                        <SelectDivisionMunicipios selectDivisiones isRequired={false} campo="División, Municipio y Comisaría" nombre="division" opciones={unidadCampos} register={register} setValue={setValue} type="text" error={errors.division} />
+                        <SelectDivisionMunicipios selectDivisiones isRequired={false} campo="División, Municipio y Comisaría" nombre="division" opciones={unidadCampos} register={register} setValue={setValue} error={errors.division} />
+                       
                     </div>
                 }
                 <div>

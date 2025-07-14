@@ -92,7 +92,7 @@ function modoImprimir({ tipoPersona, modoImprimir, setModoImprimir, denunciasAMo
                 })}>
 
                 <div>
-                    <InputRegister busqueda={true} notMid={true} campo="Firma atentamente" nombre="atte" register={register} type="text" error={errors.atte} />
+                    <InputRegister customSize="flex flex-col w-full md:w-full" campo="Firma atentamente" nombre="atte" register={register} error={errors.atte} />
                     {!isListarTodo &&
                         <SelectRegisterSingle mid={true} campo="Listar denuncias de" nombre="denuncias_de" setValue={setValue} error={errors} opciones={opcionesPersonas} />
                     }

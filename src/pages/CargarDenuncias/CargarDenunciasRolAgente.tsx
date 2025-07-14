@@ -186,12 +186,12 @@ function CargarDenunciasRolAgente({ user }: CargarDenunciasRolCargaProps) {
             <>
               <h1 className='text-2xl my-5'>Expediente</h1>
               <div className='flex justify-center'>
-                <InputExpediente cargaAgente={true} campo="Número de Expediente" comisariaPertenece={comisariaPertenece} nombre="numero_de_expediente" register={register} setValue={setValue} type="text" error={errors.expediente} />
+                <InputExpediente cargaAgente={true} campo="Número de Expediente" comisariaPertenece={comisariaPertenece} nombre="numero_de_expediente" register={register} setValue={setValue} error={errors.expediente} />
               </div>
               <div className='flex flex-col md:flex-row w-full justify-center'>
                 <div className='flex flex-col md:flex-row w-full lg:w-8/10 xl:w-6/10'>
-                  <InputRegister valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} type="text" />
-                  <InputRegister valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} type="text" />
+                  <InputRegister valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion}/>
+                  <InputRegister valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono}/>
                 </div>
               </div>
               <h1 className='text-2xl my-5'>{tipoDenuncia != "Exposición" ? "Denunciante" : "Expositor"}</h1>

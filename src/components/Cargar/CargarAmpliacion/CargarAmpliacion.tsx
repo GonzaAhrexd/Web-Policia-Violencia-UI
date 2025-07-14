@@ -174,13 +174,13 @@ function CargarAmpliacion({ data, setAmpliarDenuncia }: CargarAmpliacionProps) {
       >
         <h1 className='text-2xl my-5'>Expediente</h1>
         <div className='flex justify-center'>
-          <InputExpediente cargaAgente={true} campo="Número de Expediente" comisariaPertenece={comisariaPertenece} nombre="numero_de_expediente" register={register} setValue={setValue} type="text" error={errors.expediente} />
+          <InputExpediente cargaAgente={true} campo="Número de Expediente" comisariaPertenece={comisariaPertenece} nombre="numero_de_expediente" register={register} setValue={setValue} error={errors.expediente} />
         </div>
         <div className='flex flex-row w-full justify-center'>
           <div className='flex flex-row w-full lg:w-8/10 xl:w-6/10'>
-            <InputDate campo="Fecha" nombre="fecha" register={register} error={errors.fecha} type="date" />
-            <InputRegister valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} type="text" />
-            <InputRegister valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} type="text" />
+            <InputDate campo="Fecha" nombre="fecha" register={register} error={errors.fecha} />
+            <InputRegister valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
+            <InputRegister valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
           </div>
         </div>
         <h2 className="text-2xl my-5 font-sans">Víctima</h2>
@@ -190,7 +190,7 @@ function CargarAmpliacion({ data, setAmpliarDenuncia }: CargarAmpliacionProps) {
         <h1 className='text-2xl my-5'>Denuncia</h1>
         <div className="flex flex-col w-full items-center justify-center">
           <div className='flex flex-col items-center w-2/3 justify-center '>
-            <InputTextArea variante={"edit"} valor={data.observaciones} campo="" nombre="observaciones" setValue={setValue} register={register} type="text" />
+            <InputTextArea variante={"edit"} valor={data.observaciones} campo="" nombre="observaciones" setValue={setValue} register={register}/>
           </div>
         </div>
         <h1 className='text-2xl my-5'>Preguntas</h1>

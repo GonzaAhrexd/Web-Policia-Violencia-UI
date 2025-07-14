@@ -235,20 +235,20 @@ function EditPrevencion({ data, modoExpandir }: EditPrevencionProps) {
                     })
                 }>
                 <div className='flex flex-col items-center justify-center'>
-                    <InputRegister notMidMD campo="Supervisión" nombre="supervision" register={register} type="text" error={errors.supervision} require placeholder="Supervisión" setValue={setValue} valor={supervisionValor} />
-                    <InputDate campo="Fecha" nombre="fecha_preventivo" register={register} error={errors.fecha} type="date" valor={new Date(data.fecha).toISOString().slice(0, 10)} />
+                    <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Supervisión" nombre="supervision" register={register} error={errors.supervision} require placeholder="Supervisión" setValue={setValue} valor={supervisionValor} />
+                    <InputDate campo="Fecha" nombre="fecha_preventivo" register={register} error={errors.fecha} valor={new Date(data.fecha).toISOString().slice(0, 10)} />
                     <div className='flex flex-row w-full  xl:w-5/10'>
-                        <InputRegister valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} type="text" />
-                        <InputRegister valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} type="text" />
+                        <InputRegister valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
+                        <InputRegister valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
                     </div>
 
-                    <InputRegister notMidMD campo="Número de nota" nombre="numero_nota" register={register} type="text" error={errors.numero_nota} require placeholder="Número de nota" valor={`N°-CSPJ/${new Date().getFullYear()}`} setValue={setValue} />
-                    <InputRegister valor={data.objeto} notMidMD campo="Objeto" nombre="objeto" register={register} type="text" error={errors.objeto} require placeholder="Objeto" setValue={setValue} />
-                    <InputRegister valor={data.consultado} notMidMD campo="Consultado a" nombre="consulta" register={register} type="text" error={errors.consulta} require placeholder="Consultado a" setValue={setValue} />
+                    <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Número de nota" nombre="numero_nota" register={register} error={errors.numero_nota} require placeholder="Número de nota" valor={`N°-CSPJ/${new Date().getFullYear()}`} setValue={setValue} />
+                    <InputRegister valor={data.objeto} customSize="flex flex-col md:w-full xl:w-1/2" campo="Objeto" nombre="objeto" register={register} error={errors.objeto} require placeholder="Objeto" setValue={setValue} />
+                    <InputRegister valor={data.consultado} customSize="flex flex-col md:w-full xl:w-1/2" campo="Consultado a" nombre="consulta" register={register} error={errors.consulta} require placeholder="Consultado a" setValue={setValue} />
                     {modoExpandir && 
-                    <InputTextArea valor={data.observaciones} campo="Observaciones" nombre="observaciones" register={register} type="text" required placeholder="Observaciones" setValue={setValue} /> 
+                    <InputTextArea valor={data.observaciones} campo="Observaciones" nombre="observaciones" register={register}  required placeholder="Observaciones" setValue={setValue} /> 
                     }
-                    <InputTextArea valor={data.resolucion} campo="Resolución" nombre="resolucion" register={register} type="text" required placeholder="Descripción" setValue={setValue} />
+                    <InputTextArea valor={data.resolucion} campo="Resolución" nombre="resolucion" register={register} required placeholder="Descripción" setValue={setValue} />
                 </div>
                 <h1 className='text-2xl'>Autoridades</h1>
                 <div className='flex flex-col items-center justify-center'>

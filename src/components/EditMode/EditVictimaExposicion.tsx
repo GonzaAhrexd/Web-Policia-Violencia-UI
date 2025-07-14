@@ -29,13 +29,13 @@ function EditVictimaExposicion({ datos, register, setValue, errors }: EditVictim
   return (
     <div className='w-full lg:w-6/10'>
       <div className='flex flex-col md:flex-row my-2'>
-        <InputRegister campo="Nombre" nombre="nombre_victima" valor={datos.nombre_victima} register={register} setValue={setValue} type="text" error={errors.nombre_victima} />
-        <InputRegister campo="Apellido" nombre="apellido_victima" valor={datos.apellido_victima} register={register} setValue={setValue} type="text" error={errors.apellido_victima} />
+        <InputRegister campo="Nombre" nombre="nombre_victima" valor={datos.nombre_victima} register={register} setValue={setValue} error={errors.nombre_victima} />
+        <InputRegister campo="Apellido" nombre="apellido_victima" valor={datos.apellido_victima} register={register} setValue={setValue} error={errors.apellido_victima} />
       </div>
 
       <div className='flex flex-col md:flex-row my-2'>
-        <InputRegister campo="Nacionalidad" nombre="nacionalidad_victima" valor={datos.nacionalidad_victima} register={register} setValue={setValue} type="text" error={errors.nacionalidad_victima} />
-        <InputNumber campo="Edad" nombre="edad_victima" valor={datos.edad_victima} register={register} setValue={setValue} type="text" error={errors.edad_victima} maxLenght={2} />
+        <InputRegister campo="Nacionalidad" nombre="nacionalidad_victima" valor={datos.nacionalidad_victima} register={register} setValue={setValue} error={errors.nacionalidad_victima} />
+        <InputNumber campo="Edad" nombre="edad_victima" valor={datos.edad_victima} register={register} setValue={setValue}  error={errors.edad_victima} maxLenght={2} />
       </div>
 
       <div className='flex flex-col xl:flex-row my-2'>
@@ -44,9 +44,9 @@ function EditVictimaExposicion({ datos, register, setValue, errors }: EditVictim
       </div>
 
       <div className='flex flex-col md:flex-row my-2'>
-        <InputNumber campo="Teléfono celular" nombre="telefono_victima" valor={datos.telefono_victima} register={register} setValue={setValue} type="text" maxLenght={10} error={errors.nacionalidad_victima} />
-        <InputNumber campo="DNI" nombre="dni_victima" valor={datos.DNI_victima} register={register} setValue={setValue} type="text" error={errors.dni_victima} maxLenght={8} />
-        <InputRegister campo="Domicilio" nombre="direccion_victima" valor={datos.direccion_victima} register={register} setValue={setValue} type="text" error={errors.nacionalidad_victima} />
+        <InputNumber campo="Teléfono celular" nombre="telefono_victima" valor={datos.telefono_victima} register={register} setValue={setValue}  maxLenght={10} error={errors.nacionalidad_victima} />
+        <InputNumber campo="DNI" nombre="dni_victima" valor={datos.DNI_victima} register={register} setValue={setValue}  error={errors.dni_victima} maxLenght={8} />
+        <InputRegister campo="Domicilio" nombre="direccion_victima" valor={datos.direccion_victima} register={register} setValue={setValue} error={errors.nacionalidad_victima} />
       </div>
 
       <div className='flex flex-col my-2'>

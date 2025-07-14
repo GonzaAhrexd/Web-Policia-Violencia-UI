@@ -65,7 +65,7 @@ function MisDenunciasAgente() {
                         handleBusqueda(values)
                     })}>
                 <InputDateRange register={register} setValue={setValue} isRequired={false} />
-                <InputRegister campo="Número de expediente" nombre="numero_de_expediente" register={register} type="text" error={errors.numero_de_expediente} require={false}></InputRegister>
+                <InputRegister campo="Número de expediente" nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false} customSize='flex flex-col w-full xl:w-1/2'/>
                 <InputCheckbox campo="Falta rellenar el expediente" nombre="is_expediente_completo" register={register} error={errors.is_expediente_completo} id="is_expediente_completo" setValue={setValue}></InputCheckbox>
                 <button className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-3/10"> Buscar</button>
             </form>

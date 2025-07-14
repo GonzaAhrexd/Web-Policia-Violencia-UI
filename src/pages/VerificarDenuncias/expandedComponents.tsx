@@ -105,14 +105,14 @@ function expandedComponents({ data }: expandedComponentsProps) {
             <SimpleTableCheckorX campo="" datos={denuncianteDatos} />
         </div>
         <h1 className='text-3xl my-5 font-sans	'>Datos del hecho</h1>
-        <ShowTextArea campo="Hecho" dato={data.observaciones} />
+        <ShowTextArea dato={data.observaciones} />
         <div className='flex flex-col'>
             <SimpleTableCheckorX campo="" datos={preguntas} />
         </div>
         {data.preguntas.desea_agregar_quitar_o_enmendar &&
             <>
                 <h1 className='text-3xl my-5 font-sans	'>Adjunto</h1>
-                <ShowTextArea campo="Hecho" dato={data.agrega} />
+                <ShowTextArea dato={data.agrega} />
             </>
         }
         {editGlobal &&

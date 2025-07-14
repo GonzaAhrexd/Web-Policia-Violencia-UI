@@ -11,7 +11,7 @@ import DataTable from 'react-data-table-component';
 
 // Componentes
 import NavBar from '../../components/NavBar'
-import SelectRegister from '../../components/Select/SelectRegisterSingle';
+import SelectRegisterSingle from '../../components/Select/SelectRegisterSingle';
 import InputDateRange from '../../components/InputComponents/InputDateRange';
 import InputRegister from '../../components/InputComponents/InputRegister';
 import LoadingScreen from '../../components/LoadingScreen';
@@ -65,8 +65,8 @@ function index() {
                         }
                         )}>
                     <InputDateRange register={register} setValue={setValue} isRequired={true} />
-                    <SelectRegister isRequired={false} campo={"Sección"} nombre={"seccion"} opciones={listaDeSecciones} setValue={setValue} error={errors.seccion} />
-                    <InputRegister busqueda register={register} require={false} campo={"Usuario"} nombre={"usuario"} type="text" error={errors.usuario} />
+                    <SelectRegisterSingle isRequired={false} campo={"Sección"} nombre={"seccion"} opciones={listaDeSecciones} setValue={setValue} error={errors.seccion} />
+                    <InputRegister customSize="flex flex-col w-full xl:w-1/2" register={register} require={false} campo={"Usuario"} nombre={"usuario"} error={errors.usuario} />
                     <button className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10"> Buscar</button>
                 </form>
                 {listaDeActividad?.length > 0 &&
@@ -80,9 +80,7 @@ function index() {
                             responsive={true}
                             striped={true}
                             highlightOnHover={true}
-                            noDataComponent="No hay actividad para mostrar"
-                        // defaultSortFieldId={"Fecha"}
-                        // defaultSortAsc={false}
+                            noDataComponent="No hay actividad para mostrar"  
                         />
                     </div>
                 }

@@ -77,17 +77,17 @@ function EditVictima({ datos, register, setValue, errors, watch, verificar = fal
   return (
     <div key={!verificar ? datos._id : undefined} className={`w-full ${ md ? 'lg:w-6/10' : ''}`}>
       {!verificar && !existente && <h1 className='text-2xl my-5'>Víctima</h1>}
-      {!verificar && <InputRegister campo='' nombre='victima_id' register={register} setValue={setValue} type='hidden' error={errors.nombre_victima} valor={datos._id} />}
+      {!verificar && <InputRegister campo='' nombre='victima_id' register={register} setValue={setValue} hidden error={errors.nombre_victima} valor={datos._id} />}
 
       <div className='flex flex-col md:flex-row my-2'>
-        <InputRegister campo='Nombre' nombre='nombre_victima' register={register} setValue={setValue} type='text' error={errors.nombre_victima} valor={datos.nombre} require={verificar ? true : false} />
-        <InputRegister campo='Apellido' nombre='apellido_victima' register={register} setValue={setValue} type='text' error={errors.apellido_victima} valor={datos.apellido} require={verificar ? true : false} />
+        <InputRegister campo='Nombre' nombre='nombre_victima' register={register} setValue={setValue}  error={errors.nombre_victima} valor={datos.nombre} require={verificar ? true : false} />
+        <InputRegister campo='Apellido' nombre='apellido_victima' register={register} setValue={setValue}  error={errors.apellido_victima} valor={datos.apellido} require={verificar ? true : false} />
         <SelectRegisterSingle campo='Género' nombre='genero_victima' opciones={generos} setValue={setValue} error={errors.genero_victima} valor={datos.genero} isRequired={false} />
       </div>
       <div className='flex flex-col md:flex-row my-2'>
-        <InputNumber require={verificar ? true : false} campo='Edad' nombre='edad_victima' register={register} setValue={setValue} type='text' error={errors.edad_victima} valor={verificar ? datos.edad : (datos.edad != null ? datos.edad : '')} maxLenght={2} />
-        <InputNumber require={verificar ? true : false} campo='DNI' nombre='dni_victima' register={register} setValue={setValue} type='text' error={errors.dni_victima} valor={verificar ? datos.DNI : (datos.DNI != 'S/N' ? datos.DNI : '')} maxLenght={8} />
-        <InputRegister require={verificar ? true : false} campo='Domicilio' nombre='direccion_victima' register={register} setValue={setValue} type='text' error={errors.direccion_victima} valor={verificar ? datos.direccion : (datos.direccion != '' ? datos.direccion : ' ')} />
+        <InputNumber require={verificar ? true : false} campo='Edad' nombre='edad_victima' register={register} setValue={setValue}  error={errors.edad_victima} valor={verificar ? datos.edad : (datos.edad != null ? datos.edad : '')} maxLenght={2} />
+        <InputNumber require={verificar ? true : false} campo='DNI' nombre='dni_victima' register={register} setValue={setValue}  error={errors.dni_victima} valor={verificar ? datos.DNI : (datos.DNI != 'S/N' ? datos.DNI : '')} maxLenght={8} />
+        <InputRegister require={verificar ? true : false} campo='Domicilio' nombre='direccion_victima' register={register} setValue={setValue} error={errors.direccion_victima} valor={verificar ? datos.direccion : (datos.direccion != '' ? datos.direccion : ' ')} />
       </div>
       <div className='flex flex-col xl:flex-row my-2'>
         <SelectRegisterSingle valor={datos.estado_civil} campo='Estado Civil' nombre='estado_civil_victima' opciones={estadoCivil} setValue={setValue} error={errors.estado_civil_victima} isRequired={false} />
@@ -168,7 +168,6 @@ function EditVictima({ datos, register, setValue, errors, watch, verificar = fal
                 nombre='cantidad_hijos_con_agresor'
                 register={register}
                 setValue={setValue}
-                type='text'
                 error={errors.cantidad_hijos_con_agresor}
                 maxLenght={2}
                 valor={verificar ? (datos.hijos?.hijos_con_el_agresor || '') : (cantidad_hijos_con_agresor || '')}

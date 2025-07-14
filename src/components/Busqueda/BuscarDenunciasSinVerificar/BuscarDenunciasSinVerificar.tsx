@@ -81,14 +81,14 @@ const BuscarDenunciasSinVerificar = () => {
                 />
 
                 {/* Input para buscar por ID de denuncia */}
-                <InputRegister busqueda campo="ID" nombre="id_denuncia" register={register} type="text" error={errors.id_denuncia} require={false}/>
+                <InputRegister campo="ID" nombre="id_denuncia" register={register} error={errors.id_denuncia} require={false} customSize="flex flex-col w-full xl:w-1/2"/>
                 {/* Input para buscar por número de expediente */}
-                <InputRegister campo="Número de expediente"nombre="numero_de_expediente" register={register} type="text" error={errors.numero_de_expediente} require={false}/>
+                <InputRegister campo="Número de expediente"nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false} customSize='flex flex-col w-full xl:w-1/2'/>
 
                 {/* Selector de división, municipio y comisaría, solo visible para no agentes */}
                 {user.rol !== 'agente' && (
                     <div className="flex flex-col xl:flex-row w-full items-center justify-center">
-                        <SelectDivisionMunicipios isRequired={false} campo="División, Municipio y Comisaría" nombre="division" opciones={unidadCampos} register={register} setValue={setValue} type="text" error={errors.division}
+                        <SelectDivisionMunicipios isRequired={false} campo="División, Municipio y Comisaría" nombre="division" opciones={unidadCampos} register={register} setValue={setValue} error={errors.division}
                         />
                     </div>
                 )}

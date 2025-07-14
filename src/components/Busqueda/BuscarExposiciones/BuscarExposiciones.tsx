@@ -57,10 +57,10 @@ function BuscarExposiciones() {
                     }
                     )}>
                 <InputDateRange register={register} setValue={setValue} isRequired={isDateRangeRequired} />
-                <InputRegister busqueda campo="ID" nombre="id_exposicion" register={register} type="text" error={errors.id_denuncia} require={false} />
-                <InputRegister busqueda campo="Nombre víctima" nombre="nombre_victima" register={register} type="text" error={errors.numero_de_expediente} require={false}></InputRegister>
-                <InputRegister busqueda campo="Apellido víctima" nombre="apellido_victima" register={register} type="text" error={errors.numero_de_expediente} require={false}></InputRegister>
-                <InputRegister busqueda campo="DNI víctima" nombre="dni_victima" register={register} type="text" error={errors.numero_de_expediente} require={false}></InputRegister>
+                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="ID" nombre="id_exposicion" register={register} error={errors.id_denuncia} require={false} />
+                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Nombre víctima" nombre="nombre_victima" register={register} error={errors.numero_de_expediente} require={false}></InputRegister>
+                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Apellido víctima" nombre="apellido_victima" register={register} error={errors.numero_de_expediente} require={false}></InputRegister>
+                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="DNI víctima" nombre="dni_victima" register={register} error={errors.numero_de_expediente} require={false}></InputRegister>
                 <button className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10"> Buscar</button>
             </form>
             <div className="flex flex-col w-full">

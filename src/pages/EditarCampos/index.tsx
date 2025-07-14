@@ -22,7 +22,6 @@ function EditarCampos() {
     const [showTiposDeLugar, setShowTiposDeLugar] = useState<boolean>(false);
     const [showUnidades, setShowUnidades] = useState<boolean>(false);
 
-    // @ts-ignore
     const { juzgadoIntervinente, ocupaciones, vinculo, tiposDeArmas, tiposDeLugar, isLoading: isCamposLoading } = useContext(CamposContext) ;
 
 

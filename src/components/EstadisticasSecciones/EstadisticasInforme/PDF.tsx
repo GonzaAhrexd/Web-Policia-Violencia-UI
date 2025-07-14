@@ -1,4 +1,4 @@
-import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
+import { Document, Page, Text, View, Image } from '@react-pdf/renderer';
 import styles from '../../../GlobalConst/PDFStyles'
 interface PDFProps {
     datos: any;
@@ -38,24 +38,19 @@ function PDF({ datos, fecha }: PDFProps) {
                     <Image src="Escudo_Policia_Chaco_Transparente.png" style={styles.images} />
                 </View>
                 <View style={styles.section}>
-                    <Text>Comunicar Novedad</Text>
+                    <Text style={styles.textBold}>Comunicar Novedad</Text>
                     <Text>Conforme lo solicitado, cumplo en informar, registros desde fecha {(formatFecha(fecha.desde))} hasta {formatFecha(fecha.hasta)} de denuncias de Violencia Familiar y de Género recepcionada en las distintas dependencias policiales de la Provincia del Chaco, detallando por Direcciones de Zonas, que a continuación se detalla: </Text>
                 </View>
                 <View>
-                    {Object.entries(datos).map(([unidad, stats]) => (
+                    {Object.entries(datos).map(([unidad, stats]: any) => (
                         <View key={unidad}>
                             <Text>{unidad}</Text>
-                            {/* @ts-ignore */}
                             <Text style={styles.datos}>Total: {stats.total}</Text>
-                            {/* @ts-ignore */}
                             <Text style={styles.datos}>Total división: {stats.totalDivision}</Text>
-                            {/* @ts-ignore */}
                             <Text style={styles.datos}>Aprehensiones: {stats.aprehensiones}</Text>
-                            {/* @ts-ignore */}
                             <Text style={styles.datos}>Solicitudes de Aprehensión: {stats.solicitudesAprehension}</Text>
                         </View>
                     ))}
-
                 </View>
             </Page>
         </Document>

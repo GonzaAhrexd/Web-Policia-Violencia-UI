@@ -178,20 +178,20 @@ function CargarRadiograma({ data, setCrearRadiograma }: CargarRadiogramaProps) {
         })}
       >
         <div className='flex flex-col md:items-center justify-start md:justify-center'>
-          <InputRegister notMidMD campo="Supervisión" nombre="supervision" register={register} type="text" error={errors.supervision} require placeholder="Supervisión" setValue={setValue} valor={supervisionValor} />
-          <InputDate campo="Fecha" nombre="fecha_preventivo" register={register} error={errors.fecha} type="date" />
-          <InputRegister notMidMD valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} type="text" />
-          <InputRegister notMidMD valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} type="text" />
-          <InputTextArea campo="Solicita" nombre="solicita" register={register} type="text" required placeholder="Solicita" setValue={setValue} />
+          <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Supervisión" nombre="supervision" register={register} error={errors.supervision} require placeholder="Supervisión" setValue={setValue} valor={supervisionValor} />
+          <InputDate campo="Fecha" nombre="fecha_preventivo" register={register} error={errors.fecha} />
+          <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
+          <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
+          <InputTextArea campo="Solicita" nombre="solicita" register={register} required placeholder="Solicita" setValue={setValue} />
         </div>
         <h1 className='text-2xl'>Destinatario</h1>
         <div className='flex flex-col md:items-center justify-center'>
-          <InputRegister notMidMD campo="Destinatario" nombre="destinatario" register={register} type="text" error={errors.supervision} require placeholder="Supervisión" setValue={setValue} />
+          <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Destinatario" nombre="destinatario" register={register} error={errors.supervision} require placeholder="Supervisión" setValue={setValue} />
         </div>
         <h1 className='text-2xl my-5'>Instructor</h1>
         <div className='flex flex-col justify-center items-center w-full '>
           <div className='flex flex-col lg:flex-row my-2 w-full lg:w-8/10 xl:w-6/10'>
-            <InputRegister notMidMD campo="Nombre y apellido" nombre="nombre_completo_instructor" register={register} setValue={setValue} type="text" error={errors.nombre_completo_instructor} />
+            <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Nombre y apellido" nombre="nombre_completo_instructor" register={register} setValue={setValue} error={errors.nombre_completo_instructor} />
             <SelectRegisterSingle campo='Jerarquía' nombre="jerarquia_instructor" opciones={jerarquiaCampos} setValue={setValue} error={errors.jerarquia_instructor} />
           </div>
         </div>

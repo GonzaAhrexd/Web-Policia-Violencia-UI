@@ -10,7 +10,7 @@ import { zonaCampos } from '../../GlobalConst/zonaCampos';
 import InputRegister from '../InputComponents/InputRegister'
 import SelectRegister from '../Select/SelectRegister'
 import InputNumber from '../InputComponents/InputNumber'
-
+import SelectRegisterSingle from '../Select/SelectRegisterSingle'
 // Backend
 import { editUser } from '../../api/CRUD/usuarios.crud'
 import { useCampos } from '../../context/campos'
@@ -27,14 +27,14 @@ function CardEditDatadatos({ datos, setIsEditing }: InputRegisterProps) {
     const divisionZona = datos.unidad.split(",")
     const [isDivision, setDivision] = useState(!(divisionZona.length > 1));
 
-    
-  const opcionesRadio = [
-    { value: "si", nombre: "Sí" },
-    { value: "no", nombre: "No" },
-  ]
-  
 
-    const {watch, register, handleSubmit, setValue, formState: { errors } } = useForm();
+    const opcionesRadio = [
+        { value: "si", nombre: "Sí" },
+        { value: "no", nombre: "No" },
+    ]
+
+
+    const { watch, register, handleSubmit, setValue, formState: { errors } } = useForm();
     const [mensajeError, setMensajeError] = useState('')
 
     const { unidades: unidadCampos } = useCampos();
@@ -72,30 +72,30 @@ function CardEditDatadatos({ datos, setIsEditing }: InputRegisterProps) {
                     }
                 })}>
                 <div className='flex flex-col md:flex-row'>
-                    <InputRegister disabled campo="Nombre" nombre="nombre" register={register} setValue={setValue} type="text" error={errors.nombre} valor={datos.nombre} />
-                    <InputRegister disabled campo="Apellido" nombre="apellido" register={register} setValue={setValue} type="text" error={errors.apellido} valor={datos.apellido} />
+                    <InputRegister disabled campo="Nombre" nombre="nombre" register={register} setValue={setValue} error={errors.nombre} valor={datos.nombre} />
+                    <InputRegister disabled campo="Apellido" nombre="apellido" register={register} setValue={setValue} error={errors.apellido} valor={datos.apellido} />
                 </div>
                 <div className='flex flex-col md:flex-row'>
-                    <InputNumber require={false} campo="Teléfono" nombre="telefono" placeholder={datos.telefono} register={register} setValue={setValue} type="text" error={errors.telefono} valor={datos.telefono} maxLenght={14} />
+                    <InputNumber require={false} campo="Teléfono" nombre="telefono" placeholder={datos.telefono} register={register} setValue={setValue} error={errors.telefono} valor={datos.telefono} maxLenght={14} />
                 </div>
 
                 <div className='flex flex-col md:flex-row'>
-                    <InputRegister require={false} campo="N° de Credencial" nombre="credencial" register={register} setValue={setValue} type="text" error={errors.credencial} valor={datos.credencial} />
-                    <InputRegister require={false} campo="N° de Plaza" nombre="plaza" register={register} setValue={setValue} type="text" error={errors.plaza} valor={datos.plaza} />
+                    <InputRegister require={false} campo="N° de Credencial" nombre="credencial" register={register} setValue={setValue} error={errors.credencial} valor={datos.credencial} />
+                    <InputRegister require={false} campo="N° de Plaza" nombre="plaza" register={register} setValue={setValue} error={errors.plaza} valor={datos.plaza} />
                 </div>
                 <div className='flex flex-col md:flex-row'>
-                    <SelectRegister mid isRequired={false} valor={datos.jerarquia} campo="Jerarquía" nombre="jerarquia" opciones={jerarquiaCampos} register={register} setValue={setValue} type="text" error={errors.jerarquia} />
-                    <SelectRegister mid isRequired={false} valor={datos.zona} campo="Zona" nombre="zona" opciones={zonaCampos} register={register} setValue={setValue} type="text" error={errors.zona} />
+                    <SelectRegisterSingle valor={datos.jerarquia} campo="Jerarquía" nombre="jerarquia" opciones={jerarquiaCampos} setValue={setValue} error={errors.jerarquia} isRequired={false} />
+                    <SelectRegisterSingle valor={datos.zona} campo="Zona" nombre="zona" opciones={zonaCampos} setValue={setValue} error={errors.zona} isRequired={false} />
                 </div>
                 <div>
                     <span>¿División Violencia Familiar y de Género?</span>
-            <InputRadio watch={watch} defaultValue={isDivision ? 0 : 1} handleChange={setDivision} campo="violencia_familiar" nombre="violencia_familiar" register={register} type="radio" opciones={opcionesRadio} />
-           
+                    <InputRadio watch={watch} defaultValue={isDivision ? 0 : 1} handleChange={setDivision} campo="violencia_familiar" nombre="violencia_familiar" register={register} type="radio" opciones={opcionesRadio} />
+
                 </div>
                 {isDivision ?
-                    <SelectRegister notComisaria notMunicipio isRequired={false} valor={datos.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} type="text" error={errors.unidad} />
+                    <SelectRegister notComisaria notMunicipio isRequired={false} valor={datos.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} />
                     :
-                    <SelectRegister isRequired={false} valor={datos.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} type="text" error={errors.unidad} />
+                    <SelectRegister isRequired={false} valor={datos.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} />
                 }
                 <span className='text-red-400 pl-3'> {mensajeError} </span>
 

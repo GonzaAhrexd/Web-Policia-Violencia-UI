@@ -59,13 +59,13 @@ function CargarVictimario({watch, register, setValue, errors }: CargarVictimario
   return (
     <div className='w-full lg:w-6/10'> 
       <div className='flex flex-col md:flex-row my-2'>
-        <InputRegister campo="Nombre" nombre="nombre_victimario" register={register} setValue={setValue} type="text" error={errors.nombre_victimario} />
-        <InputRegister campo="Apellido" nombre="apellido_victimario" register={register} setValue={setValue} type="text" error={errors.apellido_victimario} />
+        <InputRegister campo="Nombre" nombre="nombre_victimario" register={register} setValue={setValue} error={errors.nombre_victimario} />
+        <InputRegister campo="Apellido" nombre="apellido_victimario" register={register} setValue={setValue} error={errors.apellido_victimario} />
       </div>
       <div className='flex flex-col md:flex-row my-2'>
-        <InputNumber campo="Edad" nombre="edad_victimario" register={register} require={false} setValue={setValue} type="text" error={errors.edad_victimario} maxLenght={2} />
-        <InputNumber campo="DNI" nombre="dni_victimario" require={false} register={register} setValue={setValue} type="text" error={errors.dni_victimario} maxLenght={8} />
-        <InputRegister campo="Domicilio" nombre="direccion_victimario" require={false} register={register} setValue={setValue} type="text" error={errors.direccion_victimario} />
+        <InputNumber campo="Edad" nombre="edad_victimario" register={register} require={false} setValue={setValue}  error={errors.edad_victimario} maxLenght={2} />
+        <InputNumber campo="DNI" nombre="dni_victimario" require={false} register={register} setValue={setValue}  error={errors.dni_victimario} maxLenght={8} />
+        <InputRegister campo="Domicilio" nombre="direccion_victimario" require={false} register={register} setValue={setValue} error={errors.direccion_victimario} />
       </div>
       <div className='flex flex-col xl:flex-row my-2'>
         <SelectRegisterSingle campo="Estado Civil" nombre="estado_civil_victimario" opciones={estadoCivil}  setValue={setValue} error={errors.estado_civil_victimario} />

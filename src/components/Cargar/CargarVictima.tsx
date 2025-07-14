@@ -61,15 +61,15 @@ function CargarVictima({watch, register, setValue, errors }: CargarVictimaProps)
   return (
     <div className='w-full lg:w-6/10'>
       <div className='flex flex-col md:flex-row my-2'>
-        <InputRegister campo="Nombre" nombre="nombre_victima" register={register} setValue={setValue} type="text" error={errors.nombre_victima} />
-        <InputRegister campo="Apellido" nombre="apellido_victima" register={register} setValue={setValue} type="text" error={errors.apellido_victima} />
+        <InputRegister campo="Nombre" nombre="nombre_victima" register={register} setValue={setValue}  error={errors.nombre_victima} />
+        <InputRegister campo="Apellido" nombre="apellido_victima" register={register} setValue={setValue}  error={errors.apellido_victima} />
         <SelectRegisterSingle campo="Género" nombre="genero_victima" opciones={generos} setValue={setValue} error={errors.genero_victima} />
       </div>
 
       <div className='flex flex-col md:flex-row my-2'>
-        <InputNumber campo="Edad" nombre="edad_victima" require={false} register={register} setValue={setValue} type="text" error={errors.edad_victima} maxLenght={2} />
-        <InputNumber campo="DNI" nombre="dni_victima" require={false} register={register} setValue={setValue} type="text" error={errors.dni_victima} maxLenght={8} />
-        <InputRegister campo="Domicilio" nombre="direccion_victima" require={false} register={register} setValue={setValue} type="text" error={errors.direccion_victima} />
+        <InputNumber campo="Edad" nombre="edad_victima" require={false} register={register} setValue={setValue} error={errors.edad_victima} maxLenght={2} />
+        <InputNumber campo="DNI" nombre="dni_victima" require={false} register={register} setValue={setValue} error={errors.dni_victima} maxLenght={8} />
+        <InputRegister campo="Domicilio" nombre="direccion_victima" require={false} register={register} setValue={setValue}  error={errors.direccion_victima} />
       </div>
       <div className='flex flex-col xl:flex-row my-2'>
         <SelectRegisterSingle campo="Estado Civil" nombre="estado_civil_victima" opciones={estadoCivil} setValue={setValue} error={errors.estado_civil_victima} />
@@ -115,7 +115,7 @@ function CargarVictima({watch, register, setValue, errors }: CargarVictimaProps)
             <InputCheckbox campo="Hijos con el agresor" nombre="hijos_con_agresor" register={register} setValue={setValue}  error={errors.hijos_con_agresor} setHook={setIsHijosConAgresor} state={isHijosConAgresor} id="hijosConElAgresor" />
           </div>
           {isHijosConAgresor &&
-            <InputNumber campo="Cantidad" nombre="cantidad_hijos_con_agresor" register={register} setValue={setValue} type="text" error={errors.cantidad_hijos_con_agresor} maxLenght={2} />
+            <InputNumber campo="Cantidad" nombre="cantidad_hijos_con_agresor" register={register} setValue={setValue} error={errors.cantidad_hijos_con_agresor} maxLenght={2} />
           }
         </div>
       }

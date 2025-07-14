@@ -92,8 +92,8 @@ function expandedComponentsUnidades({ data, municipio, comisaria, tipo }: expand
                     }
                     )}
                 >
-                    <InputRegister busqueda campo="Nombre" nombre="nombre_cuadricula" register={register} type="text" error={errors.nombre_cuadricula} valor={data.nombre} setValue={setValue} />
-                    <InputRegister busqueda campo="Valor" nombre="valor_cuadricula" register={register} type="text" error={errors.nombre_valor} valor={data.value} setValue={setValue} />
+                    <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Nombre" nombre="nombre_cuadricula" register={register} error={errors.nombre_cuadricula} valor={data.nombre} setValue={setValue} />
+                    <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Valor" nombre="valor_cuadricula" register={register} error={errors.nombre_valor} valor={data.value} setValue={setValue} />
                     <div className='flex flex-row items-center justify-center w-1/2'>
                     <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-4/10 md:w-3/10 mr-2'>
                         Editar cuadrícula

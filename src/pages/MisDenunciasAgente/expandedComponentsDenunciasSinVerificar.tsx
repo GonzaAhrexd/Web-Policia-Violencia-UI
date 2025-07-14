@@ -341,13 +341,13 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
 
             {/* Sección de observaciones */}
             <h2 className="text-3xl my-5 font-sans">Observaciones</h2>
-            <ShowTextArea campo="Observaciones" dato={data.observaciones} />
+            <ShowTextArea  dato={data.observaciones} />
 
             {/* Sección de exposición, si aplica */}
             {data.preguntas.desea_agregar_quitar_o_enmendar && (
                 <>
                     <h2 className="text-3xl my-5 font-sans">Exposición</h2>
-                    <ShowTextArea campo="Exposición" dato={data.agrega} />
+                    <ShowTextArea  dato={data.agrega} />
                 </>
             )}
 

@@ -8,7 +8,6 @@ import { crearDenuncia } from '../../api/CRUD/denuncias.crud';
 import { agregarVictimario } from '../../api/CRUD/victimario.crud';
 // Librerías React
 import Swal from 'sweetalert2';
-
 // Componentes
 import CargarVictima from '../../components/Cargar/CargarVictima';
 import CargarVictimario from '../../components/Cargar/CargarVictimario';

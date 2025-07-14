@@ -198,17 +198,17 @@ function CargarPreventivo({ data, setCrearPreventivo }: CargarPreventivoProps) {
                     })}
             >
                 <div className='flex flex-col items-center justify-center'>
-                    <InputRegister campo="Supervisión" nombre="supervision" register={register} type="text" error={errors.supervision} require placeholder="Supervisión" setValue={setValue} valor={supervisionValor} />
-                    <InputDate campo="Fecha" nombre="fecha_preventivo" register={register} error={errors.fecha} type="date" />
+                    <InputRegister campo="Supervisión" nombre="supervision" register={register} error={errors.supervision} require placeholder="Supervisión" setValue={setValue} valor={supervisionValor} />
+                    <InputDate campo="Fecha" nombre="fecha_preventivo" register={register} error={errors.fecha}/>
                     <div className='flex flex-row w-full  xl:w-5/10'>
-                        <InputRegister valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} type="text" />
-                        <InputRegister valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} type="text" />
+                        <InputRegister valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
+                        <InputRegister valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
                     </div>
 
-                    <InputRegister notMidMD campo="Número de nota" nombre="numero_nota" register={register} type="text" error={errors.numero_nota} require placeholder="Número de nota" valor={`N°-CSPJ/${new Date().getFullYear()}`} setValue={setValue} />
-                    <InputRegister notMidMD campo="Objeto" nombre="objeto" register={register} type="text" error={errors.objeto} require placeholder="Objeto" setValue={setValue} />
-                    <InputRegister notMidMD campo="Consultado a" nombre="consultado" register={register} type="text" error={errors.consultado} require placeholder="Consultado a" setValue={setValue} />
-                    <InputTextArea campo="Resolución" nombre="resolucion" register={register} type="text" required placeholder="Descripción" setValue={setValue} />
+                    <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Número de nota" nombre="numero_nota" register={register} error={errors.numero_nota} require placeholder="Número de nota" valor={`N°-CSPJ/${new Date().getFullYear()}`} setValue={setValue} />
+                    <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Objeto" nombre="objeto" register={register} error={errors.objeto} require placeholder="Objeto" setValue={setValue} />
+                    <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Consultado a" nombre="consultado" register={register} error={errors.consultado} require placeholder="Consultado a" setValue={setValue} />
+                    <InputTextArea campo="Resolución" nombre="resolucion" register={register} required placeholder="Descripción" setValue={setValue} />
                 </div>
                 <h1 className='text-2xl'>Autoridades</h1>
                 <div className='flex flex-col items-center justify-center'>

@@ -64,7 +64,7 @@ function CargarPreguntas({genero, watch, tipoDenuncia, register }: CargarVictima
        </div>
         {isAgregado &&
         <div className='flex flex-col my-2'>
-          <InputTextArea variante={"edit"} campo="Agrega" nombre="agrega" register={register} type="textarea"></InputTextArea>
+          <InputTextArea variante={"edit"} campo="Agrega" nombre="agrega" register={register}></InputTextArea>
           </div>
         }
       </div>
@@ -78,7 +78,7 @@ function CargarPreguntas({genero, watch, tipoDenuncia, register }: CargarVictima
        </div>
         {isAgregado &&
         <div className='flex flex-col my-2'>
-          <InputTextArea variante={"edit"} campo="Agrega" nombre="agrega" register={register} type="textarea"></InputTextArea>
+          <InputTextArea variante={"edit"} campo="Agrega" nombre="agrega" register={register} ></InputTextArea>
           </div>
         }
       </div>

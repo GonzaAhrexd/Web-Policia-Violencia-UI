@@ -19,7 +19,7 @@ type CargarRadiogramaProps = {
   modoExpandir?: boolean; // Indica si el modo es expandido
 }
 
-function EditRadiograma({preventivoAmpliado, data, modoExpandir }: CargarRadiogramaProps) {
+function EditRadiograma({ preventivoAmpliado, data, modoExpandir }: CargarRadiogramaProps) {
   const { register, handleSubmit, setValue, getValues, formState: { errors } } = useForm(); // Hook para manejar el formulario
   const { user } = useAuth(); // Obtiene el usuario autenticado
   const [printMode, setPrintMode] = useState(false); // Estado para controlar el modo de impresión
@@ -36,7 +36,7 @@ function EditRadiograma({preventivoAmpliado, data, modoExpandir }: CargarRadiogr
 
     if (modoExpandir) {
       const blob = await pdf(
-        <PDFRadiograma datos={{...nuevosValores, tipoHoja: values.tipoHoja}} user={user} ampliacion={true} />
+        <PDFRadiograma datos={{ ...nuevosValores, tipoHoja: values.tipoHoja }} user={user} ampliacion={true} />
       ).toBlob();
 
       window.open(URL.createObjectURL(blob));
@@ -78,7 +78,7 @@ function EditRadiograma({preventivoAmpliado, data, modoExpandir }: CargarRadiogr
 
               const radiogramaNuevo = await crearRadiograma(valoresParaEnviar);
               await ampliarRadiograma(data._id, radiogramaNuevo._id);
-              
+
               Swal.fire(
                 '¡Creado!',
                 'El radiograma ha sido creado.',
@@ -89,54 +89,54 @@ function EditRadiograma({preventivoAmpliado, data, modoExpandir }: CargarRadiogr
         })}
       >
         <div className='flex flex-col md:items-center justify-start md:justify-center'>
-          <InputRegister notMidMD campo="Supervisión" nombre="supervision" register={register} type="text" error={errors.supervision} require placeholder="Supervisión" setValue={setValue} valor={data?.supervision} />
-          <InputDate campo="Fecha" nombre="fecha" register={register} error={errors.fecha} type="date" valor={new Date(data.fecha).toISOString().slice(0, 10)} />
-          <InputRegister notMidMD valor={data.direccion} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} type="text" />
-          <InputRegister notMidMD valor={data.telefono} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} type="text" />
-          <InputTextArea valor={data.solicita} campo="Solicita" nombre="solicita" register={register} type="text" required placeholder="Solicita" setValue={setValue} />
+          <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Supervisión" nombre="supervision" register={register} error={errors.supervision} require placeholder="Supervisión" setValue={setValue} valor={data?.supervision} />
+          <InputDate campo="Fecha" nombre="fecha" register={register} error={errors.fecha} valor={new Date(data.fecha).toISOString().slice(0, 10)} />
+          <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" valor={data.direccion} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
+          <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" valor={data.telefono} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
+          <InputTextArea valor={data.solicita} campo="Solicita" nombre="solicita" register={register}  required placeholder="Solicita" setValue={setValue} />
         </div>
         <h1 className='text-2xl'>Destinatario</h1>
         <div className='flex flex-col md:items-center justify-center'>
-          <InputRegister valor={data.destinatario} notMidMD campo="Destinatario" nombre="destinatario" register={register} type="text" error={errors.supervision} require placeholder="Destinatario" setValue={setValue} />
+          <InputRegister valor={data.destinatario} customSize="flex flex-col md:w-full xl:w-1/2" campo="Destinatario" nombre="destinatario" register={register} error={errors.supervision} require placeholder="Destinatario" setValue={setValue} />
         </div>
         <h1 className='text-2xl my-5'>Instructor</h1>
         <div className='flex flex-col justify-center items-center w-full '>
           <div className='flex flex-col lg:flex-row my-2 w-full lg:w-8/10 xl:w-6/10'>
-            <InputRegister valor={data.instructor.nombre_completo_instructor} notMidMD campo="Nombre y apellido" nombre="nombre_completo_instructor" register={register} setValue={setValue} type="text" error={errors.nombre_completo_instructor} />
+            <InputRegister valor={data.instructor.nombre_completo_instructor} customSize="flex flex-col md:w-full xl:w-1/2" campo="Nombre y apellido" nombre="nombre_completo_instructor" register={register} setValue={setValue} error={errors.nombre_completo_instructor} />
             <SelectRegisterSingle valor={data.instructor.jerarquia_instructor} campo='Jerarquía' nombre="jerarquia_instructor" opciones={jerarquiaCampos} setValue={setValue} error={errors.jerarquia_instructor} />
           </div>
         </div>
         <div className='flex flex-row items-center justify-center'>
-          
-         
-              {!printMode && (
-                <div className="flex justify-center my-3">
-                  <div className='flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(true)}>Imprimir</div>
- <button
-            className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10'>
-            Ampliar radiograma
-          </button>                </div>
-              )}
-              {printMode && (
-                <div className="flex flex-col items-center justify-center my-3">
-                  <h1 className='text-2xl my-5'>Elegir tipo de hoja</h1>
-                    <SelectRegisterSingle campo="Tipo de Hoja" nombre="tipoHoja" setValue={setValue} error={errors.tipoHoja} opciones={
-                      [
-                        { nombre: "A4", value: "A4" },
-                        { nombre: "Legal", value: "LEGAL" }
-                      ]
-                    } />
-                  <div className='mb-1 flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => {
-                    handlePrint()
-                  }}>
-                    Imprimir
-                </div>
-                  <div className='flex flex-col items-center bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(false)}>
-                    Cancelar
-                  </div>
-                </div>
 
-              )}
+
+          {!printMode && (
+            <div className="flex justify-center my-3">
+              <div className='flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(true)}>Imprimir</div>
+              <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10'>
+                Ampliar radiograma
+              </button>
+            </div>
+          )}
+          {printMode && (
+            <div className="flex flex-col items-center justify-center my-3">
+              <h1 className='text-2xl my-5'>Elegir tipo de hoja</h1>
+              <SelectRegisterSingle campo="Tipo de Hoja" nombre="tipoHoja" setValue={setValue} error={errors.tipoHoja} opciones={
+                [
+                  { nombre: "A4", value: "A4" },
+                  { nombre: "Legal", value: "LEGAL" }
+                ]
+              } />
+              <div className='mb-1 flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => {
+                handlePrint()
+              }}>
+                Imprimir
+              </div>
+              <div className='flex flex-col items-center bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(false)}>
+                Cancelar
+              </div>
+            </div>
+
+          )}
         </div>
       </form>
 

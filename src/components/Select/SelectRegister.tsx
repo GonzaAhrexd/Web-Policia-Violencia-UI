@@ -17,9 +17,7 @@ interface Props {
     opciones: Opcion[];
     register: any
     setValue: any
-    type: string
     nombre: string
-    error: any
     isRequired?: any
     valor?: any
     mid?: boolean

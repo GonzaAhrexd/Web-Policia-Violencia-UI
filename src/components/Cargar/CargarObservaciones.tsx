@@ -37,7 +37,7 @@ function CargarObservaciones({ fileInputRef, rolAgenteHidden, register, setValue
       }
 
       <div className='flex flex-col items-center w-full'>
-        <InputTextArea campo="Observaciones" nombre="observaciones" register={register} type="text" required={observacionRequired} />
+        <InputTextArea campo="Observaciones" nombre="observaciones" register={register} required={observacionRequired} />
       </div>
     </div>
   )

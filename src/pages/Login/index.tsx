@@ -96,7 +96,7 @@ function Login() {
             </button>
 
             <span className='text-sm text-gray-600 text-center mt-2'>
-              ¿No tienes cuenta u olvidaste tu contraseña?{' '}
+              ¿No tenés cuenta u olvidaste tu contraseña?{' '}
               <a href="https://policiadigital.chaco.gob.ar/" className='text-sky-800 hover:text-sky-600 font-medium transition-colors duration-200'>
                 Ingresa aquí
               </a>
