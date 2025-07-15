@@ -8,7 +8,6 @@ import { jerarquiaCampos } from '../../GlobalConst/jerarquiaCampos';
 import { zonaCampos } from '../../GlobalConst/zonaCampos';
 // Componentes
 import InputRegister from '../InputComponents/InputRegister'
-import SelectRegister from '../Select/SelectRegister'
 import InputNumber from '../InputComponents/InputNumber'
 import SelectRegisterSingle from '../Select/SelectRegisterSingle'
 // Backend
@@ -93,9 +92,9 @@ function CardEditDatadatos({ datos, setIsEditing }: InputRegisterProps) {
 
                 </div>
                 {isDivision ?
-                    <SelectRegister notComisaria notMunicipio isRequired={false} valor={datos.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} />
+                    <SelectRegisterSingle notComisaria notMunicipio isRequired={false} valor={datos.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} setValue={setValue} />
                     :
-                    <SelectRegister isRequired={false} valor={datos.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} />
+                    <SelectRegisterSingle isRequired={false} valor={datos.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} setValue={setValue} />
                 }
                 <span className='text-red-400 pl-3'> {mensajeError} </span>
 

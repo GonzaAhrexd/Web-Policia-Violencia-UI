@@ -21,7 +21,6 @@ import { jerarquiaCampos } from '../../GlobalConst/jerarquiaCampos'
 import { zonaCampos } from '../../GlobalConst/zonaCampos'
 import { useCampos } from '../../context/campos'
 import { XCircleIcon } from '@heroicons/react/24/outline'
-import SelectRegister from '../Select/SelectRegister'
 function ModalAddUser({ setOpenModal }: ModalAddUserProps) {
   const { watch, register, handleSubmit, setValue, formState: { errors } } = useForm();
   useEffect(() => {
@@ -126,10 +125,10 @@ function ModalAddUser({ setOpenModal }: ModalAddUserProps) {
             <InputRadio watch={watch} defaultValue={1} handleChange={setDivision} campo="violencia_familiar" nombre="violencia_familiar" register={register} type="radio" opciones={opcionesRadio} />
 
             {division ?
-              <SelectRegister notMunicipio notComisaria campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} />
+              <SelectRegisterSingle notMunicipio notComisaria campo="Unidad" nombre="unidad" opciones={unidadCampos} setValue={setValue} />
               :
               <>
-                <SelectRegister campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue} />
+                <SelectRegisterSingle campo="Unidad" nombre="unidad" opciones={unidadCampos} setValue={setValue} />
               </>
             }
 

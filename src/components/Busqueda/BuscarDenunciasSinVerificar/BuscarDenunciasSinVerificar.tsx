@@ -10,7 +10,6 @@ import { useCampos } from '../../../context/campos';
 
 // Componentes
 import InputRegister from '../../InputComponents/InputRegister';
-import SelectDivisionMunicipios from '../../Select/SelectDivisionMunicipios';
 import InputDateRange from '../../InputComponents/InputDateRange';
 import InputCheckbox from '../../InputComponents/InputCheckbox';
 
@@ -18,6 +17,7 @@ import InputCheckbox from '../../InputComponents/InputCheckbox';
 import { columnsDataTableVerificar } from './columnsDataTableVerificar';
 import { customStyles } from '../../../GlobalConst/customStyles';
 import expandedComponentDenunciasSinVerificar from '../../../pages/MisDenunciasAgente/expandedComponentsDenunciasSinVerificar';
+import SelectRegisterSingle from '../../Select/SelectRegisterSingle';
 // Define los íconos para expandir/contraer filas en la DataTable
 const expandableIcon = {
     collapsed: <ArrowDownCircleIcon className='h-6 w-6' />,
@@ -88,7 +88,7 @@ const BuscarDenunciasSinVerificar = () => {
                 {/* Selector de división, municipio y comisaría, solo visible para no agentes */}
                 {user.rol !== 'agente' && (
                     <div className="flex flex-col xl:flex-row w-full items-center justify-center">
-                        <SelectDivisionMunicipios isRequired={false} campo="División, Municipio y Comisaría" nombre="division" opciones={unidadCampos} register={register} setValue={setValue} error={errors.division}
+                        <SelectRegisterSingle isRequired={false} campo="División, Municipio y Comisaría" nombre="division" opciones={unidadCampos} setValue={setValue} error={errors.division}
                         />
                     </div>
                 )}

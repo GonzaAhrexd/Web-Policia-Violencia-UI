@@ -95,7 +95,7 @@ function CargarDenuncia({ fecha, modoActuacion, setTitulo, handleOpenModal, regi
 
 
   const consultarCoordenadas = async () => {
-    let buscarDir = direccion + "," + barrio + "," + municipio;
+    let buscarDir = `${direccion},${barrio},${municipio}`;
 
     const fetchCoords = async (query: any) => {
       try {
@@ -139,6 +139,7 @@ function CargarDenuncia({ fecha, modoActuacion, setTitulo, handleOpenModal, regi
       });
     }
   };
+
   return (
     <div className='w-full lg:w-6/10'>
       <div className='flex flex-col xl:flex-row'>

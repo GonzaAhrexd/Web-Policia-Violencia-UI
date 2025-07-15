@@ -1,7 +1,6 @@
 // Hooks
-import { UseFormRegister, UseFormSetValue, FieldErrors } from 'react-hook-form';
+import { UseFormSetValue, FieldErrors } from 'react-hook-form';
 // Componentes
-import SelectRegister from '../../Select/SelectRegister'
 import SelectRegisterSingle from '../../Select/SelectRegisterSingle';
 // Usuario
 import { useAuth } from '../../../context/auth'
@@ -10,12 +9,11 @@ import { useAuth } from '../../../context/auth'
 interface TipoDenunciaProps {
   setTipoDenuncia: any;
   tipoDenuncia: string;
-  register: UseFormRegister<any>;
   setValue: UseFormSetValue<any>;
   errors: FieldErrors;
 }
 
-function CargarTipoDeDenuncia({ setTipoDenuncia, tipoDenuncia, register, setValue, errors }: TipoDenunciaProps) {
+function CargarTipoDeDenuncia({ setTipoDenuncia, tipoDenuncia, setValue, errors }: TipoDenunciaProps) {
 
   const { user } = useAuth()
   const userRol = user.rol
@@ -44,7 +42,7 @@ function CargarTipoDeDenuncia({ setTipoDenuncia, tipoDenuncia, register, setValu
     <div className='w-full lg:w-8/10 xl:w-6/10'>
 
       <div className='flex flex-col xl:flex-row my-2'>
-        <SelectRegister campo="Tipo de Actuación" nombre="modo_actuacion" setTipoDenuncia={setTipoDenuncia} opciones={tipoDeDenuncia} register={register} setValue={setValue} />
+        <SelectRegisterSingle campo="Tipo de Actuación" nombre="modo_actuacion" setState={setTipoDenuncia} opciones={tipoDeDenuncia}  setValue={setValue} />
         {tipoDenuncia === "Denuncia" &&
           <SelectRegisterSingle campo="Tipo de Denuncia" nombre="modo_actuacion_2" opciones={tipoDenunciaV2} setValue={setValue} error={errors.modo_actuacionV2} />
         }

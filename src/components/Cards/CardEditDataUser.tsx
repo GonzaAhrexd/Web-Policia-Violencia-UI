@@ -8,7 +8,6 @@ import { zonaCampos } from '../../GlobalConst/zonaCampos';
 
 // Componentes
 import InputRegister from '../InputComponents/InputRegister'
-import SelectRegister from '../Select/SelectRegister'
 import InputNumber from '../InputComponents/InputNumber'
 import SelectRegisterSingle from '../Select/SelectRegisterSingle'
 // Contexto
@@ -98,9 +97,9 @@ function CardEditDataUser({ user, setIsEditing }: InputRegisterProps) {
             <InputRadio watch={watch} defaultValue={isDivision ? 0 : 1} handleChange={setIsDivision} campo="violencia_familiar" nombre="violencia_familiar" register={register} type="radio" opciones={opcionesRadio} />
            
             {isDivision ?
-                <SelectRegister notMunicipio notComisaria isRequired={false} valor={user.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue}  />
+                <SelectRegisterSingle notMunicipio notComisaria isRequired={false} valor={user.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} setValue={setValue}  />
                 :
-                <SelectRegister  isRequired={false} valor={user.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} register={register} setValue={setValue}  />
+                <SelectRegisterSingle  isRequired={false} valor={user.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} setValue={setValue}  />
             }
             </>
         }

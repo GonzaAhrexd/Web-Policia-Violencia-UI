@@ -120,7 +120,7 @@ function EditVictimaExistente({datos, register, setValue, errors, watch, editarC
             <div className='flex flex-col md:flex-row my-2'>
                 <InputRegister campo="Nombre" nombre="nombre_victima" register={register} setValue={setValue} error={errors.nombre_victima} valor={datos.nombre} />
                 <InputRegister campo="Apellido" nombre="apellido_victima" register={register} setValue={setValue} error={errors.apellido_victima} valor={datos.apellido} />
-                <SelectRegisterSingle campo="Género" nombre="genero_victima" opciones={generos} setValue={setValue} error={errors.genero_victima} valor={datos.genero} />
+                <SelectRegisterSingle campo="Género" nombre="genero_victima" opciones={generos} setValue={setValue} error={errors.genero_victima} valor={datos.genero} isRequired={false}/>
 
             </div>
             <div className='flex flex-col md:flex-row my-2'>

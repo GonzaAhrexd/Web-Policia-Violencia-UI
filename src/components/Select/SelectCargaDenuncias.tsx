@@ -244,7 +244,7 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                 </div>
                 {selectedUnidad && opciones.find((unidad: Opcion) => unidad.value === selectedUnidad)?.subdivisiones && (
                     <div className='flex flex-col xl:h-full 2xl:h-full xl:w-full'>
-                        <span className='ml-4 font-medium '> Municipio  <span className='text-red-500'> </span> </span>
+                        <span className='ml-4 font-medium '> Municipio </span>
                         <select
                             className="border open-sans border-gray-300 rounded-md h-10 xl:h-8 2xl:h-10 my-2 xl:my-1 xl:m-2 m-4 w-95/10"
                             name="subunidad"
@@ -306,7 +306,6 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                     </>
                 }
                 {selectedSubunidad &&
-                    // @ts-ignore
                     opciones.find((unidad: Opcion) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad: Opcion) =>
                         subunidad.value === selectedSubunidad
                     )?.subdivisiones?.length > 0 && (
@@ -329,7 +328,6 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                             </select>
                         </div>
                     )}
-                {/* @ts-ignore */}
                 {selectedSubunidad && opciones.find((unidad: Opcion) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad: Opcion) =>
                     subunidad.value === selectedSubunidad)?.cuadriculas?.length > 0 && (
 
@@ -353,7 +351,6 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                             </select>
                         </div>
                     )}
-                {/* @ts-ignore */}
                 {selectedSubsubunidad && opciones.find((unidad: Opcion) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad: Opcion) => subunidad.value === selectedSubunidad)?.subdivisiones?.find((subsubunidad: Opcion) => subsubunidad.value === selectedSubsubunidad)?.cuadriculas?.length > 0 && (
                     <div className='flex flex-col xl:h-full 2xl:h-full xl:w-full'>
                         <span className='ml-4 font-medium '> Cuadricula </span>

@@ -76,7 +76,6 @@ function CargarDenunciasRolCarga({ setTitulo, user, handleOpenModal }: CargarDen
                 // Si se confirma la carga de la denuncia, comienza la carga al backend
                 if (result.isConfirmed) {
 
-                  // @ts-ignore
                   const file = fileInputRef?.current?.files[0];
                   // Se crean las variables para los ids de víctima, victimario y tercero
                   let idVictima = null;

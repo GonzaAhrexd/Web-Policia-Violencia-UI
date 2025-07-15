@@ -180,7 +180,7 @@ function CargarDenunciasRolAgente({ user }: CargarDenunciasRolCargaProps) {
         >
           <h1 className='text-2xl my-5'>Tipo de denuncia</h1>
           <div className='flex flex-col items-center justify-center'>
-            <CargarTipoDeDenuncia tipoDenuncia={tipoDenuncia} setTipoDenuncia={setTipoDenuncia} register={register} setValue={setValue} errors={errors} />
+            <CargarTipoDeDenuncia tipoDenuncia={tipoDenuncia} setTipoDenuncia={setTipoDenuncia} setValue={setValue} errors={errors} />
           </div>
           {(tipoDenuncia != "") && (
             <>

@@ -1,8 +1,10 @@
 // Componentes
 import InputRegister from '../../InputComponents/InputRegister';
 import InputCheckbox from '../../InputComponents/InputCheckbox';
-import SelectDivisionMunicipios from '../../Select/SelectDivisionMunicipios';
+// import SelectDivisionMunicipios from '../../Select/SelectDivisionMunicipios';
 import InputDateRange from '../../InputComponents/InputDateRange';
+import Excel from './Excel';
+import SelectRegisterSingle from '../../Select/SelectRegisterSingle';
 
 // Backend APIs
 import { buscarDenuncias } from '../../../api/CRUD/denuncias.crud';
@@ -22,8 +24,6 @@ import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outl
 // Campos
 // import { unidadCampos } from '../../../GlobalConst/unidadCampos';
 import { useCampos } from '../../../context/campos';
-import Excel from './Excel';
-import SelectRegisterSingle from '../../Select/SelectRegisterSingle';
 
 function BuscarDenuncias() {
     const [denunciasAMostrar, setDenunciasAMostrar] = useState([]);
@@ -83,8 +83,7 @@ function BuscarDenuncias() {
                 </div>
                 {user.rol != "agente" &&
                     <div className='flex flex-col xl:flex-row w-full items-center justify-center'>
-                        <SelectDivisionMunicipios selectDivisiones isRequired={false} campo="División, Municipio y Comisaría" nombre="division" opciones={unidadCampos} register={register} setValue={setValue} error={errors.division} />
-                       
+                        <SelectRegisterSingle selectDivisiones isRequired={false} campo="División, Municipio y Comisaría" nombre="division" opciones={unidadCampos} setValue={setValue} error={errors.division} />
                     </div>
                 }
                 <div>
