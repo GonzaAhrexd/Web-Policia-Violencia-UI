@@ -86,7 +86,7 @@ function EditHecho({ setIsSolicitudAprehension, datosTerceros, datosGeograficos,
   const [isCeseDeHostigamiento, setIsCeseDeHostigamiento] = useState(datos?.medida_dispuesta?.cese_de_hostigamiento? datos?.medida_dispuesta?.cese_de_hostigamiento : false)
   const [isNotificacionExpediente, setIsNotificacionExpediente] = useState(datos?.medida_dispuesta?.notificacion_expediente ? datos?.medida_dispuesta?.notificacion_expediente : false) 
   
-  const { juzgadoIntervinente, vinculo, tiposDeArmas: opcionesTiposDeArma, unidades: unidadCampos } = useCampos()
+  const { juzgadoIntervinente, vinculo, tiposDeArmas: opcionesTiposDeArma } = useCampos()
 useEffect(() => {
   console.log(datos)
   setIsSolicitudAprehension(isSolicitud)
@@ -160,7 +160,7 @@ useEffect(() => {
 
       <div className='flex flex-col my-2'>
         {modificarDatosGeograficos ?
-          <SelectCargaDenuncias selectDivisiones consultarCoordenadas={consultarCoordenadas} direccion={direccion} barrio={barrio} setBarrio={setBarrio} setDireccion={setDireccion} coordenadas={coordenadas} setCoordenadas={setCoordenadas} errors={errors} setMunicipio={setMunicipio} campo="Unidad de carga" setComisariaPertenece={setComisariaPertenece} nombre="unidad_de_carga" opciones={unidadCampos} register={register} setValue={setValue} error={errors.unidad} state={isDivision} />
+          <SelectCargaDenuncias selectDivisiones consultarCoordenadas={consultarCoordenadas} direccion={direccion} barrio={barrio} setBarrio={setBarrio} setDireccion={setDireccion} coordenadas={coordenadas} setCoordenadas={setCoordenadas} errors={errors} setMunicipio={setMunicipio} campo="Unidad de carga" setComisariaPertenece={setComisariaPertenece} nombre="unidad_de_carga"  register={register} setValue={setValue} error={errors.unidad} state={isDivision} />
           :
           <SimpleTableCheckorX campo="Datos geográficos" datos={datosGeograficos} />
         }
@@ -206,7 +206,7 @@ useEffect(() => {
           <InputCheckbox campo="Empleo de Armas" nombre="empleo_de_armas" register={register} setValue={setValue}  error={errors.hijos} setHook={setIsArmas} state={isArmas} id="empleo_de_armas" />
           {isArmas &&
             <>
-              <SelectCargaDenuncias isRequired={false} valor={datos.arma_empleada} campo="Arma empleada" nombre="tipo_de_arma" opciones={opcionesTiposDeArma} register={register} setValue={setValue} error={errors.modalidad} />
+              <SelectRegisterSingle isRequired={false} valor={datos.arma_empleada} campo="Arma empleada" nombre="tipo_de_arma" opciones={ opcionesTiposDeArma} setValue={setValue} error={errors.modalidad} />
             </>
           }
         </div>

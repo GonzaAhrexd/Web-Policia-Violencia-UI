@@ -27,8 +27,10 @@ import DataTable from 'react-data-table-component';
 import { customStyles } from '../../GlobalConst/customStyles';
 import { columns } from '../Perfil/columnsDataTable';
 
+// Tipos
+import User from '../../types/Usuarios';
 interface expandedComponentsProps {
-    data: any
+    data: User
 }
 function expandedComponents({ data }: expandedComponentsProps) {
 
@@ -87,7 +89,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
         </div>
 
         <h1 className='text-3xl my-5 font-sans'>Asignar rol</h1>
-        {user.id === data._id ? <h1 className='text-2xl my-5 font-sans'>No puedes cambiar tu propio rol</h1> :
+        {user._id === data._id ? <h1 className='text-2xl my-5 font-sans'>No puedes cambiar tu propio rol</h1> :
             <>
                 <form className='w-full flex flex-col justify-center items-center' action=""
                     onSubmit={handleSubmit(async (values) => {

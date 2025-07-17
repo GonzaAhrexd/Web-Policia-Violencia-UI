@@ -20,8 +20,12 @@ import { useCampos } from '../../context/campos';
 import direccionDivisiones from '../../GlobalConst/direccionDivisiones';
 import { useStore } from './store';
 import SelectRegisterSingle from '../../components/Select/SelectRegisterSingle';
+
+// Tipos
+import User from '../../types/Usuarios'
+
 type CargarDenunciasRolCargaProps = {
-  user: any;
+  user: User;
 }
 
 function CargarDenunciasRolAgente({ user }: CargarDenunciasRolCargaProps) {

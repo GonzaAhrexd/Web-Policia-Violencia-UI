@@ -24,6 +24,9 @@ import { columns } from './columnsDataTable'
 import expandedComponents from './expandedComponents'
 import { customStyles } from '../../GlobalConst/customStyles'
 
+// Tipos
+import User from '../../types/Usuarios'
+
 function index() {
     const { user, isAuthenticated, isLoading } = useAuth();
     // Formulario
@@ -35,7 +38,7 @@ function index() {
     const { register, handleSubmit, setValue, formState: {
         errors
     } } = useForm()
-    const [listaDeUsuarios, setListaDeUsuarios] = useState([])
+    const [listaDeUsuarios, setListaDeUsuarios] = useState<User[]>([])
 
     const opcionesRoles = [
         { value: "admin", nombre: "Admin" },

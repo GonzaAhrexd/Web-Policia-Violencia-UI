@@ -22,14 +22,30 @@ import { useAuth } from '../../../context/auth';
 import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outline'
 
 // Campos
-// import { unidadCampos } from '../../../GlobalConst/unidadCampos';
 import { useCampos } from '../../../context/campos';
+// Tipos
+import Denuncia from '../../../types/Denuncia';
+
+type Filtros = {
+    id_denuncia?: string;
+    numero_de_expediente?: string;
+    aprehension?: boolean;
+    is_expediente_completo?: boolean;
+    desde?: string;
+    hasta?: string;
+    relacion_victima_victimario?: string;
+    unidad: string ;
+    division?: string;
+    municipio?: string;
+    comisaria?: string;
+}
 
 function BuscarDenuncias() {
-    const [denunciasAMostrar, setDenunciasAMostrar] = useState([]);
+    const [denunciasAMostrar, setDenunciasAMostrar] = useState<Denuncia[]>([]);
     const { register, handleSubmit, setValue, watch, formState: {
         errors
     } } = useForm()
+
     const handleBusqueda = async (values: any) => {
         const fetchDenuncias = async () => {
             const result = await buscarDenuncias(values, true);
@@ -50,22 +66,22 @@ function BuscarDenuncias() {
         expanded: <ArrowUpCircleIcon className='h-6 w-6' />
     }
 
-    const [showExcel, setShowExcel] = useState(false);
+    const [showExcel, setShowExcel] = useState<Boolean>(false);
     const { unidades: unidadCampos, vinculo: vinculoCampos } = useCampos();
     const { user } = useAuth()
-    const userDivisionZona = user.unidad.split(",")
-    const [valuesGlobal, setValuesGlobal] = useState({})
+    const userDivisionZona: string[] = user.unidad.split(",")
+    const [valuesGlobal, setValuesGlobal] = useState<Filtros>(null)
 
     return (
-        <>
+        <>       
             <form className="w-full flex flex-col items-center"
                 onSubmit={
-                    handleSubmit(async (values) => {
+                    handleSubmit(async (values: Filtros) => {
                         // Separa la unidad en division, municipio y comisaria siempre que tenga una , para separar, sino no
                         if (values.unidad && user.rol != "agente") {
-                            values.unidad = values.unidad.split(',')
-                            values.municipio = values.unidad[1]
-                            values.comisaria = values.unidad[2]
+                            const unidadSeparada = values.unidad.split(',')
+                            values.municipio = unidadSeparada[1]
+                            values.comisaria = unidadSeparada[2]
                         } else if (user.rol == "agente") {
                             values.division = userDivisionZona[0]
                             values.municipio = userDivisionZona[1]
@@ -77,7 +93,7 @@ function BuscarDenuncias() {
                     )}>
                 <InputDateRange register={register} setValue={setValue} isRequired={isDateRangeRequired} />
                 <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="ID" nombre="id_denuncia" register={register} error={errors.id_denuncia} require={false} />
-                <InputRegister customSize='flex flex-col w-full xl:w-1/2' campo="Número de expediente" nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false}/>
+                <InputRegister customSize='flex flex-col w-full xl:w-1/2' campo="Número de expediente" nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false} />
                 <div className='flex flex-col xl:flex-row w-full items-center justify-center'>
                     <SelectRegisterSingle isRequired={false} campo="Relación entre víctima y victimario" nombre="relacion_victima_victimario" opciones={vinculoCampos} setValue={setValue} error={errors.relacion_victima_victimario} />
                 </div>

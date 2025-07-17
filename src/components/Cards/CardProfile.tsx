@@ -1,16 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react'; // Importar useState y useEffect
 
-type User = {
-    id: string;
-    nombre: string;
-    apellido: string;
-    imagen: string;
-    telefono: string;
-    jerarquia: string;
-    unidad: string;
-    createdAt: string; // O Date si ya se convierte antes de pasar al componente
-};
+import User from '../../types/Usuarios'
 
 type CardProfileProps = {
     title: string;
@@ -39,7 +30,7 @@ export default function CardProfile({ title, user }: CardProfileProps): JSX.Elem
     };
 
     const imageUrl = user.imagen !== "sin_definir"
-        ? `${APIURL}/usuario/${user.id}/image`
+        ? `${APIURL}/usuario/${user._id}/image`
         : '/user.png';
 
     return (

@@ -2,18 +2,10 @@
   Componente utilizado en /mi-perfil
   Muestra los datos del usuario y cuenta con el botón para poner en modo de edición
 */
-
-interface UserData {
-  jerarquia: string;
-  username: string;
-  telefono: string;
-  zona: string;
-  unidad: string;
-  rol: string;
-}
+import User from '../../types/Usuarios'
 
 interface CardDataUsuarioProps {
-  datosUsuario: UserData;
+  datosUsuario: User;
   setIsEditing: (isEditing: boolean) => void;
 }
 
@@ -27,7 +19,7 @@ function CardDataUsuario({ datosUsuario, setIsEditing }: CardDataUsuarioProps) {
           <strong className="text-gray-800">Jerarquía:</strong> {datosUsuario.jerarquia}
         </p>
         <p className="text-xl">
-          <strong className="text-gray-800">Nombre de usuario:</strong> {datosUsuario.username}
+          <strong className="text-gray-800">Nombre de usuario:</strong> {datosUsuario.nombre_de_usuario}
         </p>
         <p className="text-xl">
           <strong className="text-gray-800">Teléfono:</strong> {datosUsuario.telefono}

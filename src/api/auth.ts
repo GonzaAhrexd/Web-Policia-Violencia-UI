@@ -28,4 +28,4 @@ export const editUserImg = (userId: string, file: File) => {
   return axios.post(`/editar-imagen-usuario/${userId}`, formData);
 };
 // PUT: Función para editar un usuario
-export const editUser = (user: any) => axios.put(`/usuario/${user.id}`, user)
+export const editUser = (user: any) => axios.put(`/usuario/${user._id}`, user)

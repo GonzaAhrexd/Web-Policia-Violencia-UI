@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useState, useContext, useEffect } from 'react';
 import { logoutRequest, loginRequest, verifyToken, editUser } from '../api/auth'
+import User from '../types/Usuarios';
 import Cookies from 'js-cookie'
 
 
@@ -8,7 +9,7 @@ type AuthContextType = {
     signIn: (user: any) => Promise<void>;
     logOut: () => Promise<void>;
     editProfile: (user: any) => any;
-    user: any;
+    user: User;
     isAuthenticated: boolean;
     errorsAuth: any;
     isLoading: boolean;
@@ -35,8 +36,8 @@ export const useAuth = () => {
 // Se exporta AuthProvider para poder ser utilizado en el resto de la aplicación
 export const AuthProvider = ({ children }: AuthProviderProps) => {
     // Se definen los estados de usuario, autenticación, errores y carga
-    const [user, setUser] = useState(null)
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [user, setUser] = useState<User>(null)
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
     const [errorsAuth, setErrors] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     //Registro

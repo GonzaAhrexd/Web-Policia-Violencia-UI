@@ -15,20 +15,29 @@ import {
 } from '@heroicons/react/24/outline';
 
 // Tipos
+import User  from '../types/Usuarios';
+
 type NavBarProps = {
-  user: {
-    rol: string;
-    id: string;
-    imagen: string;
-    nombre: string;
-    apellido: string;
-  };
+  user: User; // Usuario autenticado
+};
+
+type NavBarItemsSecciones = {
+  title: string;
+  href: string;
+  icon: JSX.Element;
+}
+
+type NavBarItems = {
+  denunciasAgentes: NavBarItemsSecciones[];
+  denunciasCarga: NavBarItemsSecciones[];
+  admin: NavBarItemsSecciones[];
+  agenteSearch: NavBarItemsSecciones;
 };
 
 // Componente NavBar
 function NavBar({ user }: NavBarProps) {
   // Estados
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   // Referencias para cerrar los dropdowns al hacer clic fuera
@@ -42,7 +51,7 @@ function NavBar({ user }: NavBarProps) {
   const isAgente = user?.rol === 'agente' || isCarga;
 
   // Definición de ítems del menú con sus rutas e íconos
-  const navItems = {
+  const navItems: NavBarItems = {
     denunciasAgentes: [
       { title: 'Mis denuncias', href: '/mis-denuncias', icon: <ListBulletIcon className='h-5 w-5' /> },
       { title: 'Cargar denuncias', href: '/cargar-denuncias', icon: <PencilSquareIcon className='h-5 w-5' /> },
@@ -99,12 +108,10 @@ function NavBar({ user }: NavBarProps) {
         </button>
         <NavLink to='/' className='flex items-center space-x-2'>
           <img className='h-12 w-12' src='./Escudo_Policia_Chaco_Transparente.png' alt='Escudo Policía del Chaco' />
-          {/* <span className='hidden text-lg font-semibold md:block'>Sistema de Denuncias</span> */}
         </NavLink>
       </div>
 
       {/* Sección Central: Menú de navegación principal (Desktop) */}
-      {/* Este div usa flex-1 y justify-center para ocupar el espacio restante y centrar su contenido */}
       <div className='flex flex-1 items-center justify-center'>
         <div className='hidden sm:flex gap-6 border-x border-white px-4'>
           {isAgente && !isCarga && (
@@ -197,7 +204,7 @@ function NavBar({ user }: NavBarProps) {
       <div className='relative flex items-center' ref={el => dropdownRefs.current.profile = el}>
         <img
           onClick={() => toggleDropdown('profile')}
-          src={user.imagen !== 'sin_definir' ? `${API_URL}/usuario/${user.id}/image` : '/user.png'}
+          src={user.imagen !== 'sin_definir' ? `${API_URL}/usuario/${user._id}/image` : '/user.png'}
           alt='Avatar del usuario'
           className='h-10 w-10 cursor-pointer rounded-full border-2 border-white object-cover'
         />

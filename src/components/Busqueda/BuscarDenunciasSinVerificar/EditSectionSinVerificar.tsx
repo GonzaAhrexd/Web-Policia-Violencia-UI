@@ -143,7 +143,7 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
                 }
 
 
-                values.user_id = user.id
+                values.user_id = user._id
                 values.numero_de_expediente = values.PrefijoExpediente + values.numero_expediente + values.Expediente + values.SufijoExpediente
 
                 values.modo_actuacion = values.modo_actuacion ? values.modo_actuacion : datos.modo_actuacion

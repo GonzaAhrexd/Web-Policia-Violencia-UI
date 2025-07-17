@@ -1,13 +1,19 @@
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline"
-import Swal from "sweetalert2"
+// Hooks
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+// Iconos
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline"
+// Bibliotecas
+import Swal from "sweetalert2"
+// Componentes
 import InputRegister from "../InputComponents/InputRegister"
+// API
 import { agregarCampo, editarCampo, eliminarCampo } from "../../api/CRUD/campos.crud"
 
+import Campos from '../../types/Campos'
 
 type TablaCamposProps = {
-    campos: any;
+    campos: Campos[];
     tipo: any
 }
 
@@ -99,7 +105,7 @@ function TablaCampos({ campos, tipo }: TablaCamposProps) {
                             <div className="w-5/10 sm:w-3/10">Acciones</div>
                         </div>
                     </div>
-                    {campos?.map((campo: any, index: number) => (
+                    {campos?.map((campo: Campos, index: number) => (
                         <div key={index} className='table-row'>
                             <div className="flex items-center justify-between word-wrap md:h-10 m-1 ">
                                 <div className="w-4/10 ml-4 text-lg">{campo.nombre}</div>

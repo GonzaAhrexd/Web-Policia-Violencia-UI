@@ -1,17 +1,45 @@
-import { utils, writeFile } from 'xlsx';
+// Hooks
 import { useState } from 'react';
+// BackEnd
 import { buscarDenunciasPlus } from '../../../api/CRUD/denuncias.crud';
+// Librerías
+import { utils, writeFile } from 'xlsx';
+// Iconos
 import { TableCellsIcon } from '@heroicons/react/24/outline';
+// Tipos
+import Denuncia from '../../../types/Denuncia';
+import Victima from '../../../types/Victimas';
+import Victimario from '../../../types/Victimario';
+import Tercero from '../../../types/Tercero';
 
-// Interface for the component props
-type Denuncia = {
-  filtros: any;
+
+type Filtros = {
+    id_denuncia?: string;
+    numero_de_expediente?: string;
+    aprehension?: boolean;
+    is_expediente_completo?: boolean;
+    desde?: string;
+    hasta?: string;
+    relacion_victima_victimario?: string;
+    unidad?: string ;
+    division?: string;
+    municipio?: string;
+    comisaria?: string;
 }
 
-// TypeScript interface derived from columnConfig
+// Interface for the component props
+type ExcelProps = {
+  filtros: Filtros;
+}
+
+type DenunciaPlus = Denuncia & {
+  Victima: Victima;
+  Victimario: Victimario;
+  Tercero: Tercero;
+};
 
 // Component
-function Excel({ filtros }: Denuncia) {
+function Excel({ filtros }: ExcelProps) {
   const [isLoading, setIsLoading] = useState(false);
   const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
@@ -20,12 +48,14 @@ function Excel({ filtros }: Denuncia) {
     key: string;
     header: string;
     width: number;
-    getValue: (denuncia: any) => string | number | undefined;
+    getValue: (denuncia: DenunciaPlus) => string | number | undefined;
   }[] = [
       { key: 'id', header: 'ID', width: 26, getValue: (d) => d?._id },
+      // Fecha
       { key: 'fecha', header: 'Fecha', width: 10, getValue: (d) => `${new Date(d.fecha).getUTCDate().toString().padStart(2, '0')}/${(new Date(d.fecha).getUTCMonth() + 1).toString().padStart(2, '0')}/${new Date(d.fecha).getUTCFullYear()}`, },
       { key: 'mes', header: 'Mes', width: 6, getValue: (d) => meses[new Date(d?.fecha).getMonth()] },
       { key: 'año', header: 'Año', width: 6, getValue: (d) => new Date(d?.fecha).getFullYear().toString() },
+      // Datos geográficos
       { key: 'direccion', header: 'Dirección', width: 20, getValue: (d) => d?.direccion },
       { key: 'GIS', header: 'GIS', width: 24, getValue: (d) => d?.GIS },
       { key: 'barrio', header: 'Barrio', width: 12, getValue: (d) => d?.barrio },
@@ -35,37 +65,46 @@ function Excel({ filtros }: Denuncia) {
       { key: 'jurisdiccion', header: 'Jurisdicción policial', width: 28, getValue: (d) => d?.jurisdiccion_policial },
       { key: 'cuadricula', header: 'Cuadrícula', width: 14, getValue: (d) => d?.cuadricula },
       { key: 'isDivision', header: 'Cargado en la división', width: 22, getValue: (d) => (d?.isDivision ? 'Sí' : 'No') },
+      // Expediente
       { key: 'numero_de_expediente', header: 'Número de expediente', width: 22, getValue: (d) => d?.numero_de_expediente },
       { key: 'is_expediente_completo', header: 'Expediente completo', width: 18, getValue: (d) => (d?.is_expediente_completo ? 'Sí' : 'No') },
-      { key: 'modo_actuacion', header: 'Modo de actuación', width: 20, getValue: (d) => d?.modo_de_actuacion },
+      // Modo de actuación
+      { key: 'modo_actuacion', header: 'Modo de actuación', width: 20, getValue: (d) => d?.modo_actuacion },
       { key: 'juzgado_interviniente', header: 'Juzgado interviniente', width: 20, getValue: (d) => `${d?.juzgado_interviniente} ${d?.juzgado_interviniente_numero}`, },
       { key: 'dependencia_derivada', header: 'Dependencia derivada', width: 18, getValue: (d) => d?.dependencia_derivada },
       { key: 'violencia', header: 'Violencia', width: 20, getValue: (d) => d?.violencia },
       { key: 'modalidades', header: 'Modalidades', width: 26, getValue: (d) => d?.modalidades },
+      // Tipo de violencia
       { key: 'violencia_fisica', header: 'Violencia física', width: 13, getValue: (d) => (d?.tipo_de_violencia.Fisica ? 'Sí' : 'No') },
       { key: 'violencia_psicologica', header: 'Violencia psicológica', width: 18, getValue: (d) => (d?.tipo_de_violencia.Psicologica ? 'Sí' : 'No'), },
       { key: 'violencia_sexual', header: 'Violencia sexual', width: 14, getValue: (d) => (d?.tipo_de_violencia.Sexual ? 'Sí' : 'No') },
       { key: 'violencia_economica_y_patrimonial', header: 'Violencia económica y patrimonial', width: 30, getValue: (d) => (d?.tipo_de_violencia.Economica_y_patrimonial ? 'Sí' : 'No'), },
       { key: 'violencia_simbolica', header: 'Violencia simbólica', width: 17, getValue: (d) => (d?.tipo_de_violencia.Simbolica ? 'Sí' : 'No'), },
       { key: 'violencia_politica', header: 'Violencia política', width: 14, getValue: (d) => (d?.tipo_de_violencia.Politica ? 'Sí' : 'No'), },
+      // Empleo de arma
       { key: 'empleo_de_armas', header: 'Empleo de armas', width: 15, getValue: (d) => (d?.empleo_de_armas ? 'Sí' : 'No') },
       { key: 'arma_empleada', header: 'Arma empleada', width: 20, getValue: (d) => d?.arma_empleada },
+      // Medida solicitada
       { key: 'prohibicion_de_acercamiento', header: 'Prohibición de acercamiento', width: 26, getValue: (d) => (d?.medida.prohibicion_de_acercamiento ? 'Sí' : 'No'), },
       { key: 'restitucion_de_menor', header: 'Restitución de menor', width: 22, getValue: (d) => (d?.medida.restitucion_de_menor ? 'Sí' : 'No'), },
       { key: 'exclusion_hogar', header: 'Exclusión del hogar', width: 20, getValue: (d) => (d?.medida.exclusion_de_hogar ? 'Sí' : 'No') },
       { key: 'alimento_provisorio', header: 'Alimento provisorio', width: 18, getValue: (d) => (d?.medida.alimento_provisorio ? 'Sí' : 'No'), },
-      { key: 'derecho_comunicacion', header: 'Derecho a la comunicación', width: 24, getValue: (d) => (d?.medida.derecho_comunicacion ? 'Sí' : 'No'), },
+      { key: 'derecho_comunicacion', header: 'Derecho a la comunicación', width: 24, getValue: (d) => (d?.medida.derecho_de_comunicacion ? 'Sí' : 'No'), },
       { key: 'boton_antipanico', header: 'Botón antipánico', width: 16, getValue: (d) => (d?.medida.boton_antipanico ? 'Sí' : 'No') },
+      { key: 'restitucion_de_bienes', header: 'Restitución de bienes', width: 26, getValue: (d) => (d?.medida.restitucion_de_bienes ? 'Sí' : 'No') },
+      { key: 'ninguna_solicitada', header: 'Ninguna solicitada', width: 20, getValue: (d) => (d?.medida.ninguna_solicitada ? 'Sí' : 'No') },
+      // Medida dispuesta
       { key: 'prohibicion_de_acercamiento_dispuesta', header: 'Prohibición de acercamiento dispuesta', width: 34, getValue: (d) => (d?.medida_dispuesta.prohibicion_de_acercamiento ? 'Sí' : 'No'), },
       { key: 'boton_antipanico_dispuesto', header: 'Botón antipánico dispuesto', width: 26, getValue: (d) => (d?.medida_dispuesta.boton_antipanico ? 'Sí' : 'No'), },
       { key: 'exclusion_de_hogar_dispuesta', header: 'Exclusión del hogar dispuesta', width: 26, getValue: (d) => (d?.medida_dispuesta.exclusion_de_hogar ? 'Sí' : 'No'), },
       { key: 'en_libertad', header: 'En libertad dispuesto', width: 20, getValue: (d) => (d?.medida_dispuesta.en_libertad ? 'Sí' : 'No'), },
       { key: 'cese_de_hostigamiento', header: 'Cese de hostigamiento', width: 20, getValue: (d) => (d?.medida_dispuesta.cese_de_hostigamiento ? 'Sí' : 'No'), },
       { key: 'notificacion_expediente', header: 'Notificación de expediente', width: 26, getValue: (d) => (d?.medida_dispuesta.notificacion_expediente ? 'Sí' : 'No'), },
-      { key: 'solicitud_de_aprehension', header: 'Solicitud de Aprehensión', width: 26, getValue: (d) => (d?.solicitud_de_aprehension ? 'Sí' : 'No'), },
+      { key: 'solicitud_de_aprehension', header: 'Solicitud de Aprehensión', width: 26, getValue: (d) => (d?.medida_dispuesta.solicitud_de_aprehension ? 'Sí' : 'No'), },
+      { key: 'expedientes_con_cautelar', header: 'Expedientes c/cautelar', width: 26, getValue: (d) => (d?.medida_dispuesta.expedientes_con_cautelar ? 'Sí' : 'No'), },
+      { key: 'ninguna', header: 'Ninguna', width: 26, getValue: (d) => (d?.medida_dispuesta.ninguna ? 'Sí' : 'No') },
+      // Aprehensión
       { key: 'aprehension', header: 'Aprehensión', width: 16, getValue: (d) => (d?.aprehension ? 'Sí' : 'No'), },
-      { key: 'expedientes_con_cautelar', header: 'Expedientes c/cautelar', width: 26, getValue: (d) => (d?.expedientes_con_cautelar ? 'Sí' : 'No'), },
-      { key: 'ninguna', header: 'Ninguna', width: 26, getValue: (d) => (d?.ninguna ? 'Sí' : 'No') },
       { key: 'denunciado_por_terceros', header: 'Denunciado por terceros', width: 20, getValue: (d) => (d?.denunciado_por_tercero ? 'Sí' : 'No'), },
       { key: 'observaciones', header: 'Observaciones', width: 200, getValue: (d) => d?.observaciones },
       // VÍCTIMAS
@@ -78,10 +117,11 @@ function Excel({ filtros }: Denuncia) {
       { key: 'estado_civil_victima', header: 'Estado civil de la víctima', width: 24, getValue: (d) => d.Victima?.estado_civil },
       { key: 'ocupacion_victima', header: 'Ocupación de la víctima', width: 22, getValue: (d) => d.Victima?.ocupacion },
       { key: 'vinculo_con_agresor_victima', header: 'Vínculo con el agresor de la víctima', width: 32, getValue: (d) => d?.relacion_victima_victimario, },
+      // Condición de vulnerabilidad
       { key: 'condicion_de_vulnerabilidad_victima', header: 'Condición de vulnerabilidad de la víctima', width: 24, getValue: (d) => (d.Victima?.condicion_de_vulnerabilidad ? 'Sí' : 'No'), },
       { key: 'embarazo_victima', header: 'Embarazo', width: 16, getValue: (d) => (d.Victima?.condiciones_de_vulnerabilidad.embarazo ? 'Sí' : 'No') },
-      { key: 'periodo_post_parto_victima', header: 'Post parto', width: 24, getValue: (d) => (d.Victima?.condiciones_de_vulnerabilidad.post_parto ? 'Sí' : 'No') },
-      { key: 'periodo_de_lactancia_victima', header: 'Lactancia', width: 24, getValue: (d) => (d.Victima?.condiciones_de_vulnerabilidad.lactancia ? 'Sí' : 'No') },
+      { key: 'periodo_post_parto_victima', header: 'Post parto', width: 24, getValue: (d) => (d.Victima?.condiciones_de_vulnerabilidad.periodo_post_parto ? 'Sí' : 'No') },
+      { key: 'periodo_de_lactancia_victima', header: 'Lactancia', width: 24, getValue: (d) => (d.Victima?.condiciones_de_vulnerabilidad.periodo_de_lactancia ? 'Sí' : 'No') },
       { key: 'discapacidad_victima', header: 'Discapacidad', width: 24, getValue: (d) => (d.Victima?.condiciones_de_vulnerabilidad.discapacidad ? 'Sí' : 'No') },
       { key: 'enfermedad_cronica_victima', header: 'Enfermedad crónica', width: 24, getValue: (d) => (d.Victima?.condiciones_de_vulnerabilidad.enfermedad_cronica ? 'Sí' : 'No'), },
       { key: 'adulto_mayor_victima', header: 'Adulto mayor', width: 20, getValue: (d) => (d.Victima?.condiciones_de_vulnerabilidad.adulto_mayor ? 'Sí' : 'No'), },
@@ -90,6 +130,7 @@ function Excel({ filtros }: Denuncia) {
       { key: 'convivencia_victima', header: 'Convivencia', width: 22, getValue: (d) => (d?.convivencia ? 'Sí' : 'No') },
       { key: 'dependencia_economica', header: 'Dependencia económica', width: 20, getValue: (d) => (d?.dependencia_economica ? 'Sí' : 'No') },
       { key: 'cantidad_de_denuncias_realizadas_por_la_victima', header: 'Cantidad de denuncias previas', width: 24, getValue: (d) => d.Victima?.denuncias_realizadas?.length, },
+      // Hijos
       { key: 'tiene_hijos', header: 'Tiene hijos', width: 12, getValue: (d) => (d.Victima?.hijos.tiene_hijos ? 'Sí' : 'No') },
       { key: 'mayores_de_edad', header: 'Mayores de edad', width: 17, getValue: (d) => (d.Victima?.hijos.mayores_de_edad ? 'Sí' : 'No') },
       { key: 'menores_de_edad', header: 'Menores de edad', width: 20, getValue: (d) => (d.Victima?.hijos.menores_de_edad ? 'Sí' : 'No') },
@@ -144,7 +185,7 @@ function Excel({ filtros }: Denuncia) {
 
   const exportarDenuncias = async () => {
     setIsLoading(true);
-    const denuncias = await rellenarDenuncias();
+    const denuncias:DenunciaPlus[] = await rellenarDenuncias();
 
     // Create worksheet
     const hoja = utils.json_to_sheet(denuncias);
@@ -153,8 +194,7 @@ function Excel({ filtros }: Denuncia) {
     hoja['!cols'] = columnConfig.map(({ width }) => ({ wch: width }));
 
     // Set column headers
-    // @ts-ignore
-    columnConfig.forEach(({ key, header }, index) => {
+    columnConfig.forEach(({  header }, index) => {
       const cellRef = `${getExcelColumnName(index)}1`; // Usa la nueva función para obtener A, B, ..., AA, AB, etc.
       hoja[cellRef] = { v: header, t: 's' };
     });

@@ -23,6 +23,8 @@ import { useForm } from "react-hook-form";
 type expandedComponentProps = {
     data: any
 }
+
+
 // Expanded component RADIOGRAMA
 function expandedComponentRadiograma({ data }: expandedComponentProps) {
 

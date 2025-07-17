@@ -12,17 +12,9 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 // Campos
 import { useCampos } from '../../context/campos';
 
-type Opcion = {
-    value?: string;
-    nombre?: string;
-    subdivisiones?: Opcion[];
-    prefijo?: any;
-    cuadriculas?: Opcion[];
-}
 
 type Props = {
     campo: string;
-    opciones: Opcion[];
     register: any
     setValue: any
     nombre: string
@@ -47,7 +39,7 @@ type Props = {
 }
 
 
-function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenModal, consultarCoordenadas, direccion, setDireccion, barrio, setBarrio, coordenadas, setCoordenadas, errors, setMunicipio, campo, opciones, nombre, register, setValue, setComisariaPertenece, state, info, setTitulo }: Props) {
+function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenModal, consultarCoordenadas, direccion, setDireccion, barrio, setBarrio, coordenadas, setCoordenadas, errors, setMunicipio, campo, nombre, register, setValue, setComisariaPertenece, state, info, setTitulo }: Props) {
 
     // Estados para guardar las opciones seleccionadas
     const [requiredInput,] = useState(isRequired != null ? isRequired : true)
@@ -58,13 +50,13 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
     const [municipiosTodo, setMunicipiosTodo] = useState([]);
     const [showAllMunicipios, setShowAllMunicipios] = useState(false);
     
-    const { tiposDeLugar: opcionesTipoDeLugar } = useCampos()
+    const { tiposDeLugar: opcionesTipoDeLugar, unidades: opciones } = useCampos()
     
     const getAllMunicipios = () => {
         // Obtiene todos los municipios de las opciones
         const municipios: string[] = [];
-        opciones.forEach((unidad: Opcion) => {
-            unidad.subdivisiones?.forEach((subunidad: Opcion) => {
+        opciones.forEach((unidad) => {
+            unidad.subdivisiones?.forEach((subunidad) => {
                 if (subunidad.value) {
                     municipios.push(subunidad.value);
                 }
@@ -78,15 +70,15 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
         setShowAllMunicipios(!showAllMunicipios)
         setMunicipiosTodo(getAllMunicipios());
     }
-    const handleBuscarPrefijo = (comisaria: String) => {
+    const handleBuscarPrefijo = (comisaria: any) => {
         //Busca el prefijo de la comisaria entre las opciones, tiene que coincidir con el valor de la comisaria
         let prefijo = ''
         // Utiliza un map anidado para recorrer las opciones y buscar el prefijo de la comisaria
-        opciones.map((unidad: Opcion) => {
+        opciones.map((unidad) => {
             // Si la unidad no es la comisaria, busca en las subdivisiones
             if (unidad != comisaria) {
                 // Si la comisaria tiene subdivisiones, busca en ellas
-                unidad.subdivisiones?.map((subunidad: Opcion) => {
+                unidad.subdivisiones?.map((subunidad) => {
                     // Si la comisaria coincide con el valor de la comisaria, guarda el prefijo
                     if (subunidad.value == comisaria && subunidad.prefijo != undefined) {
                         // Guarda el prefijo de la comisaria
@@ -95,7 +87,7 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                     // Si la comisaria tiene subdivisiones, busca en ellas
                     if (subunidad.subdivisiones != undefined) {
                         // Si la comisaria coincide con el valor de la comisaria, guarda el prefijo
-                        subunidad.subdivisiones.map((subsubunidad: Opcion) => {
+                        subunidad.subdivisiones.map((subsubunidad) => {
                             // Si la comisaria coincide con el valor de la comisaria, guarda el prefijo
                             if (subsubunidad.value == comisaria && subsubunidad.prefijo != undefined) {
                                 // Guarda el prefijo de la comisaria
@@ -229,7 +221,7 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                         required={requiredInput}
                     >
                         <option value="">{valor ? valor : `Seleccione ${campo.toLowerCase()}`}</option>
-                        {opciones.map((unidad: Opcion) => (
+                        {opciones.map((unidad) => (
                             <option key={unidad.value} value={unidad.value}>
                                 {unidad.nombre}
                             </option>
@@ -242,7 +234,7 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                     }
 
                 </div>
-                {selectedUnidad && opciones.find((unidad: Opcion) => unidad.value === selectedUnidad)?.subdivisiones && (
+                {selectedUnidad && opciones.find((unidad) => unidad.value === selectedUnidad)?.subdivisiones && (
                     <div className='flex flex-col xl:h-full 2xl:h-full xl:w-full'>
                         <span className='ml-4 font-medium '> Municipio </span>
                         <select
@@ -294,7 +286,7 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                                     onChange={handleTipoDeLugar}>
 
                                     <option value="">Seleccione el tipo de lugar</option>
-                                    {opcionesTipoDeLugar.map((unidad: Opcion) => (
+                                    {opcionesTipoDeLugar.map((unidad) => (
                                         <option key={unidad.value} value={unidad.value}>
                                             {unidad.nombre}
                                         </option>
@@ -306,7 +298,7 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                     </>
                 }
                 {selectedSubunidad &&
-                    opciones.find((unidad: Opcion) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad: Opcion) =>
+                    opciones.find((unidad) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad) =>
                         subunidad.value === selectedSubunidad
                     )?.subdivisiones?.length > 0 && (
 
@@ -320,7 +312,7 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                                 onChange={handleSubsubunidadChange}>
 
                                 <option value="">Seleccione jurisdicción policial</option>
-                                {opciones.find((unidad) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad: Opcion) => subunidad.value === selectedSubunidad)?.subdivisiones?.map((subsubunidad) => (
+                                {opciones.find((unidad) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad) => subunidad.value === selectedSubunidad)?.subdivisiones?.map((subsubunidad) => (
                                     <option key={subsubunidad.value} value={subsubunidad.value}>
                                         {subsubunidad.nombre}
                                     </option>
@@ -328,7 +320,7 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                             </select>
                         </div>
                     )}
-                {selectedSubunidad && opciones.find((unidad: Opcion) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad: Opcion) =>
+                {selectedSubunidad && opciones.find((unidad) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad) =>
                     subunidad.value === selectedSubunidad)?.cuadriculas?.length > 0 && (
 
 
@@ -343,7 +335,7 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                                 required={true}
                                 onChange={handleSubsubunidadChange}>
                                 <option value="">Seleccione cuadrícula</option>
-                                {opciones.find((unidad) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad: Opcion) => subunidad.value === selectedSubunidad)?.cuadriculas?.map((cuadricula) => (
+                                {opciones.find((unidad) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad) => subunidad.value === selectedSubunidad)?.cuadriculas?.map((cuadricula) => (
                                     <option key={cuadricula.value} value={cuadricula.value}>
                                         {cuadricula.nombre}
                                     </option>
@@ -351,7 +343,7 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                             </select>
                         </div>
                     )}
-                {selectedSubsubunidad && opciones.find((unidad: Opcion) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad: Opcion) => subunidad.value === selectedSubunidad)?.subdivisiones?.find((subsubunidad: Opcion) => subsubunidad.value === selectedSubsubunidad)?.cuadriculas?.length > 0 && (
+                {selectedSubsubunidad && opciones.find((unidad) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad) => subunidad.value === selectedSubunidad)?.subdivisiones?.find((subsubunidad) => subsubunidad.value === selectedSubsubunidad)?.cuadriculas?.length > 0 && (
                     <div className='flex flex-col xl:h-full 2xl:h-full xl:w-full'>
                         <span className='ml-4 font-medium '> Cuadricula </span>
                         <select
@@ -362,7 +354,7 @@ function SelectCargaDenuncias({selectDivisiones, isRequired, valor, handleOpenMo
                             onChange={handleCuadriculaChange}
                         >
                             <option value="">Seleccione una cuadrícula</option>
-                            {opciones.find((unidad) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad: Opcion) => subunidad.value === selectedSubunidad)?.subdivisiones?.find((subsubunidad: Opcion) => subsubunidad.value === selectedSubsubunidad)?.cuadriculas?.map((cuadricula) => (
+                            {opciones.find((unidad) => unidad.value === selectedUnidad)?.subdivisiones?.find((subunidad) => subunidad.value === selectedSubunidad)?.subdivisiones?.find((subsubunidad) => subsubunidad.value === selectedSubsubunidad)?.cuadriculas?.map((cuadricula) => (
                                 <option key={cuadricula.value} value={cuadricula.value}>
                                     {cuadricula.nombre}
                                 </option>

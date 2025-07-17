@@ -9,26 +9,21 @@ import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 // APIs del BackEnd
-import { misDenuncias } from '../../api/CRUD/denuncias.crud';
+import { getDenunciasRecientes } from '../../api/CRUD/denuncias.crud';
 
-// Definición de tipos para las denuncias
-interface Denuncia {
-    id: string; // Un ID único es crucial para las keys en React
+type DenunciaExpediente = {
+    _id: string;
     numero_de_expediente: string;
-    fecha_creacion: string; // Para ordenar y asegurar que son las "más recientes"
 }
 
-type CardDenunciasRecientesProps = {
-    title: string;
-};
 
-export default function CardDenunciasRecientes({ title }: CardDenunciasRecientesProps): JSX.Element {
+export default function CardDenunciasRecientes(): JSX.Element {
 
     // Estados
-    const [lastFiveDenuncias, setLastFiveDenuncias] = useState<Denuncia[]>([]);
+    const [lastFiveDenuncias, setLastFiveDenuncias] = useState<DenunciaExpediente[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true); // Estado para la carga
     const [error, setError] = useState<string | null>(null); // Estado para manejar errores
-    const [hasAnimated, setHasAnimated] = useState(false); // Estado para controlar la animación
+    const [hasAnimated, setHasAnimated] = useState<boolean>(false); // Estado para controlar la animación
 
     // Carga las denuncias más recientes del usuario
     useEffect(() => {
@@ -37,16 +32,10 @@ export default function CardDenunciasRecientes({ title }: CardDenunciasRecientes
             setError(null);
             try {
                 // Obtiene todas las denuncias propias del usuario
-                const result: Denuncia[] = await misDenuncias([]);
-
-                // Ordena las denuncias por fecha de creación (más recientes primero)
-                const sortedDenuncias = result.sort((a, b) =>
-                    new Date(b.fecha_creacion).getTime() - new Date(a.fecha_creacion).getTime()
-                );
+                const result: DenunciaExpediente[] = await getDenunciasRecientes();
 
                 // Toma solo las 5 denuncias más recientes
-                const recentDenuncias = sortedDenuncias.slice(0, 5);
-                setLastFiveDenuncias(recentDenuncias);
+                setLastFiveDenuncias(result);
             } catch (err) {
                 console.error("Error al cargar denuncias:", err);
                 setError("No se pudieron cargar las denuncias.");
@@ -78,7 +67,7 @@ export default function CardDenunciasRecientes({ title }: CardDenunciasRecientes
 
                 {/* Encabezado de la tarjeta */}
                 <div className="border-b-2 px-6 py-4 border-neutral-600 text-neutral-50 text-lg font-semibold bg-neutral-600">
-                    {title}
+                    Denuncias recientes
                 </div>
 
                 {/* Contenido principal de la tarjeta */}

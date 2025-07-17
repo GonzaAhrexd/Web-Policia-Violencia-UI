@@ -17,9 +17,11 @@ import { useCampos } from '../../context/campos';
 // Librerías
 import Swal from 'sweetalert2'
 import InputRadio from '../InputComponents/InputRadio';
+// Tipos
+import User from '../../types/Usuarios'
 interface InputRegisterProps {
-    user: any
-    setIsEditing: any
+    user: User
+    setIsEditing: (isEditing: boolean) => void
 }
 
 function CardEditDataUser({ user, setIsEditing }: InputRegisterProps) {
@@ -57,7 +59,7 @@ function CardEditDataUser({ user, setIsEditing }: InputRegisterProps) {
                                 cancelButtonText: 'Cancelar'
                             }).then(async (result: any) => {
                                 if (result.isConfirmed) {
-                                    values.id = user.id
+                                    values.id = user._id
                                     // Edita el perfil
                                     const response = await editProfile(values);
                                     // Si esta da respuesta, recarga la página
@@ -83,7 +85,7 @@ function CardEditDataUser({ user, setIsEditing }: InputRegisterProps) {
                 </div>
                 <div className='flex flex-col md:flex-row'>
                     <InputNumber  require={false} campo="Teléfono" nombre="telefono" placeholder={user.telefono} register={register} setValue={setValue} error={errors.telefono} valor={user.telefono} maxLenght={14} />
-                    <InputRegister disabled campo="Nombre de usuario" nombre="nombre_de_usuario" register={register} setValue={setValue}  error={errors.nombre_de_usuario} valor={user.username} />
+                    <InputRegister disabled campo="Nombre de usuario" nombre="nombre_de_usuario" register={register} setValue={setValue}  error={errors.nombre_de_usuario} valor={user.nombre_de_usuario} />
                 </div>
                 <div className='flex flex-col md:flex-row'>
                     <SelectRegisterSingle mid isRequired={false} valor={user.jerarquia} campo="Jerarquía" nombre="jerarquia" opciones={jerarquiaCampos} setValue={setValue} error={errors.jerarquia} />

@@ -52,7 +52,6 @@ export const buscarDenunciasPlus = async (values: any ) => {
 }
 
 
-
 // GET: Buscar denuncias por id
 export const buscarDenunciasPorId = async (id: string) => {
     try {
@@ -63,6 +62,15 @@ export const buscarDenunciasPorId = async (id: string) => {
     }
 }
 
+// GET: Denuncias recientes del usuario
+export const getDenunciasRecientes = async () => {
+    try {
+        const response = await axios.get(`/denuncias/recientes`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 // GET: Cantidad de denuncias
 export const cantidadDenuncias = async (values: any) => {

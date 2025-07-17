@@ -23,6 +23,8 @@ import BuscarTerceros from '../../components/Busqueda/BuscarTerceros/BuscarTerce
 import BuscarExposiciones from '../../components/Busqueda/BuscarExposiciones/BuscarExposiciones';
 import BuscarDenunciasSinVerificar from '../../components/Busqueda/BuscarDenunciasSinVerificar/BuscarDenunciasSinVerificar';
 
+
+
 function Buscar() {
   const { user, isAuthenticated, isLoading } = useAuth();
   const { setOpenModal, openModal, title, text } = useStore();

@@ -32,9 +32,6 @@ function expandedComponentsUnidades({ data }: expandedComponentsUnidadesProps) {
 
     const [showAddMunicipio, setShowAddMunicipio] = useState(false)
 
-    useEffect(() => {
-        console.log(data)
-    }, [data])
 
     if (data.subdivisiones.length > 0) {
         return (
@@ -75,7 +72,7 @@ function expandedComponentsUnidades({ data }: expandedComponentsUnidadesProps) {
                             }
                             )}
                         >
-                            <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Nombre" nombre="nombre_unidad" register={register} error={errors.nombre} valor={data.nombre} setValue={setValue} />
+                            <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Nombre" nombre="nombre_unidad" register={register} error={errors.nombre} valor={data.nombre } setValue={setValue} />
                             <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Valor" nombre="valor_unidad" register={register} error={errors.valor} valor={data.value} setValue={setValue} />
                             <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full xl:w-3/10 mr-2'>
                                 Editar Unidad

@@ -75,7 +75,7 @@ function CargarDenuncia({ fecha, modoActuacion, setTitulo, handleOpenModal, regi
   const [isCeseDeHostigamiento, setIsCeseDeHostigamiento] = useState(false)
   const [isNinguna, setIsNinguna] = useState(false)
 
-  const { juzgadoIntervinente, vinculo, tiposDeArmas: opcionesTiposDeArma, unidades: unidadCampos } = useCampos()
+  const { juzgadoIntervinente, vinculo, tiposDeArmas: opcionesTiposDeArma } = useCampos()
 
   const {
     setSolicitudAprehension,
@@ -147,7 +147,7 @@ function CargarDenuncia({ fecha, modoActuacion, setTitulo, handleOpenModal, regi
         <SelectRegisterSingle isRequired={modoActuacion ? false : true} valor={modoActuacion} campo="Actuación" nombre="modo_actuacion" opciones={tipoDenunciaV2} setValue={setValue} error={errors.modo_actuacion} />
       </div>
       <div className='flex flex-col my-2'>
-        <SelectCargaDenuncias selectDivisiones consultarCoordenadas={consultarCoordenadas} direccion={direccion} barrio={barrio} setBarrio={setBarrio} setDireccion={setDireccion} coordenadas={coordenadas} setCoordenadas={setCoordenadas} errors={errors} setMunicipio={setMunicipio} campo="Unidad de carga" setComisariaPertenece={setComisariaPertenece} nombre="unidad_de_carga" opciones={unidadCampos} register={register} setValue={setValue} error={errors.unidad} state={isDivision} />
+        <SelectCargaDenuncias selectDivisiones consultarCoordenadas={consultarCoordenadas} direccion={direccion} barrio={barrio} setBarrio={setBarrio} setDireccion={setDireccion} coordenadas={coordenadas} setCoordenadas={setCoordenadas} errors={errors} setMunicipio={setMunicipio} campo="Unidad de carga" setComisariaPertenece={setComisariaPertenece} nombre="unidad_de_carga"  register={register} setValue={setValue} error={errors.unidad} state={isDivision} />
         <InputCheckbox campo="División Violencia Familiar y de Género" nombre="isDivision" register={register} setValue={setValue} setHook={setIsDivision} state={isDivision} id="division" />
         {!expediente ?
           <InputExpediente campo="Número de Expediente" comisariaPertenece={comisariaPertenece} nombre="numero_de_expediente" register={register} setValue={setValue} error={errors.expediente} />

@@ -17,6 +17,11 @@ import Footer from '../../components/Footer/Footer';
 // API
 import { reportarErrores } from '../../api/CRUD/errores.crud';
 
+type Apartados = {
+  nombre: string;
+  value: string;
+}
+
 function CargarDenuncias() {
   // Formulario 
   const { register, handleSubmit, setValue, formState: {
@@ -27,20 +32,21 @@ function CargarDenuncias() {
   const { user, isAuthenticated, isLoading } = useAuth();
 
   // Apartados de la página
-  const apartado = [
-    { nombre: "Register", valor: "Register" },
-    { nombre: "Login", valor: "Login" },
-    { nombre: "Home", valor: "Home" },
-    { nombre: "Estadísticas", valor: "Estadísticas" },
-    { nombre: "Administrar Usuarios", valor: "Administrar usuarios" },
-    { nombre: "Buscar", valor: "Buscar" },
-    { nombre: "Cargar Denuncias", valor: "Cargar Denuncias" },
-    { nombre: "Verificar Denuncias", valor: "Verificar Denuncias" },
-    { nombre: "Perfil", valor: "Perfil" },
-    { nombre: "Mis denuncias", valor: "Mis denuncias" },
-    { nombre: "Administrar usuarios", valor: "Administrar usuarios" },
-    { nombre: "Registro de actividad", valor: "Registro de actividad" },
-    { nombre: "Editar campos", valor: "Editar campos" },
+  const apartado: Apartados[] = [
+    { nombre: "Register", value: "Register" },
+    { nombre: "Login", value: "Login" },
+    { nombre: "Home", value: "Home" },
+    { nombre: "Estadísticas", value: "Estadísticas" },
+    { nombre: "Administrar Usuarios", value: "Administrar usuarios" },
+    { nombre: "Buscar", value: "Buscar" },
+    { nombre: "Cargar Denuncias", value: "Cargar Denuncias" },
+    { nombre: "Verificar Denuncias", value: "Verificar Denuncias" },
+    { nombre: "Perfil", value: "Perfil" },
+    { nombre: "Mis denuncias", value: "Mis denuncias" },
+    { nombre: "Administrar usuarios", value: "Administrar usuarios" },
+    { nombre: "Registro de actividad", value: "Registro de actividad" },
+    { nombre: "Editar campos", value: "Editar campos" },
+    { nombre: "Otro", value: "Otro" } // Opción para otros apartados no listados
   ]
  
   // Si está cargando, mostrar una pantalla de carga

@@ -24,13 +24,16 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useStore } from './store'
 import { useRef } from 'react';
 
-interface CargarDenunciasRolCargaProps {
-  user: any;
-  handleOpenModal: any;
-  setTitulo: any;
+// Tipos
+import User from '../../types/Usuarios'
+
+type CargarDenunciasRolCargaProps = {
+  user: User;
+  handleOpenModal: (text: string[]) => void;
+  setTitulo: (titulo: string) => void;
 }
 
-function CargarDenunciasRolCarga({ setTitulo, user, handleOpenModal }: CargarDenunciasRolCargaProps) {
+function CargarDenunciasRolCarga({ user, setTitulo, handleOpenModal }: CargarDenunciasRolCargaProps) {
   const { register, watch, handleSubmit, setValue, formState: { errors } } = useForm();
   const fileInputRef = useRef(null);
 
@@ -54,9 +57,9 @@ function CargarDenunciasRolCarga({ setTitulo, user, handleOpenModal }: CargarDen
     <div className='min-h-screen sm:h-full p-2 sm:p-10'>
       <h2 className='text-3xl my-5'>Cargar nueva denuncia</h2>
       <div>
-        {openModalVictima && <BuscarExistenteModal variante={"Víctima"} setOpenModal={setOpenModalVictima} setVictimaCargar={setVictimaCargar} />}
-        {openModalVictimario && <BuscarExistenteModal variante={"Victimario"} setOpenModal={setOpenModalVictimario} setVictimaCargar={setVictimarioCargar} />}
-        {openModalTercero && <BuscarExistenteModal variante={"Tercero"} setOpenModal={setOpenModalTercero} setVictimaCargar={setTerceroCargar} />}
+        {openModalVictima && <BuscarExistenteModal variante={"Víctima"} setOpenModal={setOpenModalVictima} setPersonaACargar={setVictimaCargar} />}
+        {openModalVictimario && <BuscarExistenteModal variante={"Victimario"} setOpenModal={setOpenModalVictimario} setPersonaACargar={setVictimarioCargar} />}
+        {openModalTercero && <BuscarExistenteModal variante={"Tercero"} setOpenModal={setOpenModalTercero} setPersonaACargar={setTerceroCargar} />}
         <form
           encType="multipart/form-data"
           method='post'
@@ -121,7 +124,7 @@ function CargarDenunciasRolCarga({ setTitulo, user, handleOpenModal }: CargarDen
                     values.aprehension = true;
                   }
                   // Asignar el id del usuario a la denuncia
-                  values.user_id = user.id;
+                  values.user_id = user._id;
                   // Crear el número de expediente en base a los datos ingresados
                   values.numero_de_expediente = values.PrefijoExpediente + values.numero_de_expediente + values.Expediente + values.SufijoExpediente;
 

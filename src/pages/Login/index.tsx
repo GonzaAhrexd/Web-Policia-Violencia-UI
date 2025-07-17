@@ -40,13 +40,6 @@ function Login() {
 
   return (
     <div className='gradient min-h-screen flex items-center justify-center md:p-4'>
-      {/*
-        Clases de animación:
-        - transition-all duration-500 ease-out: Define la duración y curva de la animación.
-        - transform translate-y-4: Estado inicial (desplazado hacia abajo).
-        - opacity-0: Estado inicial (invisible).
-        - ${showForm ? 'translate-y-0 opacity-100' : ''}: Clases condicionales para el estado final.
-      */}
       <div className={`flex flex-col items-center justify-center bg-white shadow-2xl p-8
                         h-screen w-screen rounded-none
                         md:h-full md:w-full md:rounded-lg md:max-w-xl
@@ -76,14 +69,14 @@ function Login() {
             <InputLogin
               campo={"nombre_de_usuario"}
               placeholder={"Nombre de usuario"}
-              register={register}
+              register={ register }
               type="text"
               error={errors.nombre_de_usuario}
             />
             <InputLogin
               campo={"pass"}
               placeholder={"Contraseña"}
-              register={register}
+              register={ register }
               type="password"
               error={errors.pass}
             />

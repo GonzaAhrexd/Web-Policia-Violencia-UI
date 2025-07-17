@@ -23,6 +23,13 @@ import CardDenunciasGrafico from '../../components/Cards/CardDenunciasGrafico';
 import WarningMessage from '../../components/Warnings/WarningMessage';
 // Iconos
 import { ExclamationTriangleIcon, UserIcon, MagnifyingGlassIcon, ListBulletIcon, PencilSquareIcon, ClipboardDocumentCheckIcon, ChartPieIcon, UserPlusIcon, PresentationChartBarIcon, ArrowUpTrayIcon } from '@heroicons/react/24/outline'
+// Tipos
+type seccionesType = {
+  mostrar: string;
+  url: string;
+  svg: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+}
+
 
 function Home() {
   // Obtiene los datos del usuario y verifica si está autenticado desde el contexto
@@ -49,19 +56,19 @@ function Home() {
   if (!isLoading && !isAuthenticated) return <Navigate to="/login" replace />
 
 
-  const seccionesAgente = [
+  const seccionesAgente: seccionesType[] = [
     { mostrar: "Búsqueda", url: "/búsqueda", svg: MagnifyingGlassIcon },
     { mostrar: "Mis denuncias", url: "/mis-denuncias", svg: ListBulletIcon },
     { mostrar: "Cargar denuncias", url: "/cargar-denuncias", svg: PencilSquareIcon },
   ]
 
-  const seccionesCarga = [
+  const seccionesCarga: seccionesType[] = [
     { mostrar: "Verificar denuncias", url: "/verificar-denuncias", svg: ClipboardDocumentCheckIcon },
     { mostrar: "Estadísticas", url: "/estadísticas", svg: ChartPieIcon },
   ]
 
 
-  const seccionesAdmin = [
+  const seccionesAdmin: seccionesType[] = [
     { mostrar: "Administrar usuarios", url: "/administrar-usuarios", svg: UserPlusIcon },
     { mostrar: "Registro de Actividad", url: "/registro-de-actividad", svg: PresentationChartBarIcon },
     { mostrar: "Editar campos", url: "/editar-campos", svg: ArrowUpTrayIcon },
@@ -133,7 +140,7 @@ function Home() {
               <CardProfile title="Mi cuenta" user={user} />
               {(user?.rol === 'admin' || user?.rol === 'carga') && (
                 <>
-                  <CardDenunciasRecientes title="Denuncias recientes" />
+                  <CardDenunciasRecientes/>
                   <CardDenunciasPendientesValidacion />
                   <CardDenunciasTotales />
                   <CardDenunciasGrafico />

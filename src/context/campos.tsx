@@ -4,15 +4,35 @@ import { createContext, ReactNode, useState, useContext, useEffect } from 'react
 import { obtenerCampo } from '../api/CRUD/campos.crud';
 import { obtenerUnidades } from '../api/CRUD/unidades.crud';
 
+type Campos = {
+    nombre: string;
+    value: string;
+    tipo: string
+}
+
 type CamposType = {
-    juzgadoIntervinente: any;
-    ocupaciones: any;
-    vinculo: any;
-    tiposDeArmas: any;
-    tiposDeLugar: any;
+    juzgadoIntervinente: Campos[];
+    ocupaciones: Campos[];
+    vinculo: Campos[];
+    tiposDeArmas: Campos[];
+    tiposDeLugar: Campos[];
     isLoading: boolean;
-    unidades: any;
+    unidades: Unidades[];
 };
+
+
+type Unidades = {
+    nombre: string;
+    value: string;
+    subdivisiones: Unidades[];
+    prefijo?: string;
+    cuadriculas?: Unidades[];
+    direccion?: string;
+    telefono?: string;
+    supervision?: string;
+}
+
+
 type CamposProviderProps = {
     children: ReactNode;
 };
@@ -34,12 +54,12 @@ export const useCampos = () => {
 // Se exporta CamposProvider para poder ser utilizado en el resto de la aplicación
 export const CamposProvider = ({ children }: CamposProviderProps) => {
     // Estados con lista de campos
-    const [juzgadoIntervinente, setJuzgadoIntervinente] = useState<any>([]); 
-    const [ocupaciones, setOcupaciones] = useState<any>([]);
-    const [vinculo, setVinculo] = useState<any>([]);
-    const [tiposDeArmas, setTiposDeArmas] = useState<any>([]);
-    const [tiposDeLugar, setTiposDeLugar] = useState<any>([]);
-    const [unidades, setUnidades] = useState<any>([]); 
+    const [juzgadoIntervinente, setJuzgadoIntervinente] = useState<Campos[]>([]); 
+    const [ocupaciones, setOcupaciones] = useState<Campos[]>([]);
+    const [vinculo, setVinculo] = useState<Campos[]>([]);
+    const [tiposDeArmas, setTiposDeArmas] = useState<Campos[]>([]);
+    const [tiposDeLugar, setTiposDeLugar] = useState<Campos[]>([]);
+    const [unidades, setUnidades] = useState<Unidades[]>([]); 
     const [isLoading, setIsLoading] = useState<boolean>(true);
    
     const obtenerDatos = async () => {

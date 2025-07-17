@@ -1,12 +1,14 @@
+import { FieldError, FieldErrorsImpl, FieldValues, Merge, UseFormRegister } from "react-hook-form";
+
 /*
   [ Input Login ]
     Se utiliza para crear un input de tipo texto para el login.
 */
 type InputLoginProps = {
     campo: string;
-    register: any;
+    register: UseFormRegister<FieldValues>;
     type: string;
-    error: any;
+    error: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
     placeholder?: string;
 };
 

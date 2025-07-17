@@ -1,7 +1,6 @@
 type ModalAddUserProps = {
   setOpenModal: any
 }
-
 // Hooks
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
@@ -21,6 +20,7 @@ import { jerarquiaCampos } from '../../GlobalConst/jerarquiaCampos'
 import { zonaCampos } from '../../GlobalConst/zonaCampos'
 import { useCampos } from '../../context/campos'
 import { XCircleIcon } from '@heroicons/react/24/outline'
+
 function ModalAddUser({ setOpenModal }: ModalAddUserProps) {
   const { watch, register, handleSubmit, setValue, formState: { errors } } = useForm();
   useEffect(() => {

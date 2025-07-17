@@ -1,18 +1,7 @@
 // Datos que se mostrarán en la tabla de denuncias
-type Row = {
-    numero_de_expediente: string;
-    _id: string;
-    fecha: string;
-    victima_nombre: string;
-    victimario_nombre: string;
-    municipio: string;
-    direccion: string;
-    jurisdiccion_policial: string;
-    violencia: string;
-    modalidades: string;
-    createdAt: string;
+import Denuncia from '../../../types/Denuncia';
 
-}
+type Row = Denuncia
 /* 
 --------------------------------------------------------------------------------------------------------
     CAMPOS
@@ -23,7 +12,7 @@ type Row = {
 ----------------------------------------------------------------------------------------------------------
 */
 
-export const columnsDenuncia = [
+export const columnsDenuncia:any = [
     {
         // Número de expediente de la denuncia
         name: 'ID',

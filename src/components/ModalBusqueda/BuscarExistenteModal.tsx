@@ -13,11 +13,11 @@ import InputNumber from '../InputComponents/InputNumber';
 
 interface BuscarExistenteModalProps {
     variante: string
-    setOpenModal: any
-    setVictimaCargar: any
+    setOpenModal: (data: boolean) => void,
+    setPersonaACargar: (data: any) => void
 
 }
-function BuscarExistenteModal({  variante, setOpenModal, setVictimaCargar }: BuscarExistenteModalProps) {
+function BuscarExistenteModal({  variante, setOpenModal, setPersonaACargar }: BuscarExistenteModalProps) {
     const [victimasMostrar, setVictimasMostrar] = useState([]);
     const [mostrarAlerta, setMostrarAlerta] = useState("");
     // useForm para el formulario
@@ -86,7 +86,7 @@ function BuscarExistenteModal({  variante, setOpenModal, setVictimaCargar }: Bus
     };
 
     const handleVictimaExistente = (victima: any) => {
-        setVictimaCargar(victima);
+        setPersonaACargar(victima);
         setOpenModal(false);
     }
 

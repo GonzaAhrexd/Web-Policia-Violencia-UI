@@ -93,9 +93,9 @@ function VerificarDenuncias() {
     <div className='h-full flex flex-grow flex-col'>
       <NavBar user={user} />
       {isModalOpen && <Modal titulo={titulo} texto={texto} onClose={handleCloseModal} />}
-      {openModalVictima && <BuscarExistenteModal variante={"Víctima"} setOpenModal={setOpenModalVictima} setVictimaCargar={setVictimaCargar} />}
-      {openModalVictimario && <BuscarExistenteModal variante={"Victimario"} setOpenModal={setOpenModalVictimario} setVictimaCargar={setVictimarioCargar} />}
-      {openModalTercero && <BuscarExistenteModal variante={"Tercero"} setOpenModal={setOpenModalTercero} setVictimaCargar={setTerceroCargar} />}
+      {openModalVictima && <BuscarExistenteModal variante={"Víctima"} setOpenModal={setOpenModalVictima} setPersonaACargar={setVictimaCargar} />}
+      {openModalVictimario && <BuscarExistenteModal variante={"Victimario"} setOpenModal={setOpenModalVictimario} setPersonaACargar={setVictimarioCargar} />}
+      {openModalTercero && <BuscarExistenteModal variante={"Tercero"} setOpenModal={setOpenModalTercero} setPersonaACargar={setTerceroCargar} />}
 
       <div className='min-h-screen sm:h-full p-2 sm:p-10'>
         <h1 className='text-3xl my-5'>Denuncias sin verificar</h1>

@@ -20,18 +20,19 @@ import { customStyles } from '../../GlobalConst/customStyles'
 import { columns } from './columnsDataTable'
 // Backend 
 import { obtenerMiActividad } from '../../api/CRUD/actividadReciente.crud';
-
+// Tipos
+import ActividadReciente from '../../types/ActividadReciente';
 const APIURL = import.meta.env.VITE_BASE_URL;
 
 function Index() {
   // Autenticación
   const { user, isAuthenticated, isLoading } = useAuth();
   // Carga de imagen
-  const fileInputRef: any  = useRef(null);
+  const fileInputRef: any = useRef(null);
   // Estados
-  const [isEditing, setIsEditing] = useState(false);
-  const [userImage, setUserImage] = useState('/user.png');
-  const [listaActividad, setListaActividad] = useState([]);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [userImage, setUserImage] = useState<string>('/user.png');
+  const [listaActividad, setListaActividad] = useState<ActividadReciente[]>([]);
 
   // Controla el cambio de imagen
   const handleImageClick = () => {
@@ -39,13 +40,13 @@ function Index() {
   };
 
   // Cambia la imagen del usuario
-  const handleImageChange = async (e: any)  => {
+  const handleImageChange = async (e: any) => {
     const file = e.target.files[0];
     // Si no hay archivo, no hace nada
     if (!file) return;
 
     // Edita la imagen del usuario
-    await editUserImg(user.id, file);
+    await editUserImg(user._id, file);
     // Recarga la página para mostrar la nueva imagen
     window.location.reload();
   };
@@ -54,11 +55,11 @@ function Index() {
     // Carga la imagen del usuario
     const fetchUserImage = async () => {
       // Si el usuario existe y tiene un id
-      if (user && user.id) {
+      if (user && user._id) {
         // Intenta cargar la imagen del usuario
         try {
           // Ruta de la imagen
-          const imagePath = `${APIURL}/usuario/${user.id}/image`
+          const imagePath = `${APIURL}/usuario/${user._id}/image`
           // Establece la imagen del usuario
           setUserImage(imagePath);
         } catch (error) {
@@ -68,7 +69,7 @@ function Index() {
     };
     // Carga la actividad del usuario
     const fetchActividad = async () => {
-      const actividades = await obtenerMiActividad(user?.id);
+      const actividades = await obtenerMiActividad(user?._id);
       setListaActividad(actividades);
     }
     // Llama a las funciones fetchUserImage y fetchActividad
@@ -77,7 +78,7 @@ function Index() {
   }, [user]);
 
   // Si está cargando, mostrar una pantalla de carga
-  if (isLoading) return <LoadingScreen/>
+  if (isLoading) return <LoadingScreen />
 
   // Si no está autenticado, redirigir a la página de login
   if (!isLoading && !isAuthenticated) return <Navigate to="/login" replace />;
@@ -94,16 +95,16 @@ function Index() {
             >
               <img
                 className="h-32 w-32 rounded-full object-cover"
-                src={user.imagen != "sin_definir" ? userImage : "/user.png"} 
-                alt="Imagen de perfil" 
+                src={user.imagen != "sin_definir" ? userImage : "/user.png"}
+                alt="Imagen de perfil"
               />
               <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <PencilIcon className="h-10 w-10 text-white" />
               </div>
               <input
-                type="file" 
+                type="file"
                 ref={fileInputRef}
-                onChange={handleImageChange} 
+                onChange={handleImageChange}
                 style={{ display: 'none' }}
                 accept="image/*"
               />
@@ -129,10 +130,10 @@ function Index() {
             <CardEditDataUser user={user} setIsEditing={setIsEditing} />
           }
         </div>
-        
-          <div className='h-full p-4 sm:p-10'>
-            <h2 className='text-2xl my-5'>Mi Actividad reciente</h2>
-            {listaActividad?.length > 0 &&
+
+        <div className='h-full p-4 sm:p-10'>
+          <h2 className='text-2xl my-5'>Mi Actividad reciente</h2>
+          {listaActividad?.length > 0 &&
             <div className='w-full break-words'>
               <DataTable
                 columns={columns} // Columnas de la tabla
@@ -145,14 +146,13 @@ function Index() {
                 noDataComponent="No se encontró actividad reciente" // Mensaje si no hay datos
                 defaultSortFieldId={"fecha"} // Campo por defecto para ordenar
                 defaultSortAsc={false} // Orden ascendente
-                />
-                </div>
-            }
-          </div>
-        
-      <Footer/>
+              />
+            </div>
+          }
+        </div>
+        <Footer />
       </div>
-      </div>
+    </div>
   );
 }
 
