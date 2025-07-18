@@ -18,7 +18,7 @@ import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outl
 // Componentes
 import NavBar from '../../components/NavBar';
 import InputCheckbox from '../../components/InputComponents/InputCheckbox';
-import InputRegister from '../../components/InputComponents/InputRegister';
+import InputText from '../../components/InputComponents/InputText';
 import InputDateRange from '../../components/InputComponents/InputDateRange';
 import LoadingScreen from '../../components/LoadingScreen';
 import Footer from '../../components/Footer/Footer';
@@ -97,7 +97,7 @@ function MisDenuncias() {
                                     handleBusqueda(values)
                                 })}>
                             <InputDateRange register={register} setValue={setValue} isRequired={false} />
-                            <InputRegister campo="Número de expediente" nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false} customSize='flex flex-col w-full xl:w-1/2'/>
+                            <InputText campo="Número de expediente" nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false} customSize='flex flex-col w-full xl:w-1/2'/>
                             <InputCheckbox campo="Falta rellenar el expediente" nombre="is_expediente_completo" register={register} error={errors.is_expediente_completo} id="is_expediente_completo"  setValue={setValue}/>
                             <button className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-3/10"> Buscar</button>
                         </form>

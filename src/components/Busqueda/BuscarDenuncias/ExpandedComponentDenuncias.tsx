@@ -52,6 +52,8 @@ import { useAuth } from '../../../context/auth';
 import Denuncia from '../../../types/Denuncia';
 import Victima from '../../../types/Victimas';
 import Victimario from '../../../types/Victimario';
+import Tercero from '../../../types/Tercero';
+
 type expandedComponentsProps = {
     data: Denuncia;
 }
@@ -73,7 +75,7 @@ function ExpandedComponentDenuncias({ data }: expandedComponentsProps) {
     // Estado de editar global
     const [editGlobal, setEditGlobal] = useState(false)
     // Guardar terceros
-    const [terceroDatosObtener, setTerceroDatosObtener]: any = useState([])
+    const [terceroDatosObtener, setTerceroDatosObtener] = useState<Tercero | null>(null)
     // Estado de carga
 
     // Función para obtener los datos de la víctima
@@ -103,7 +105,7 @@ function ExpandedComponentDenuncias({ data }: expandedComponentsProps) {
     const terceroObtener = async (id: string) => {
         try {
             // Llamada a la API
-            const response: Response = await getTercero(id)
+            const response: Tercero = await getTercero(id)
             // Establece en el hook los datos de la víctima
             setTerceroDatosObtener(response)
         } catch (error) {
@@ -511,7 +513,14 @@ function ExpandedComponentDenuncias({ data }: expandedComponentsProps) {
         }
         {editGlobal &&
             <>
-                <EditSection datosTerceros={terceroDatos} datosGeograficos={hechoDatosGeográficos} datosHecho={data} datosVictima={victimaDatos} datosVictimario={victimarioDatos} setEditSection={setEditGlobal} editSection={editGlobal} />
+                <EditSection
+                    datosHecho={data}
+                    datosVictima={victimaDatos}
+                    datosVictimario={victimarioDatos}
+                    datosTerceros={terceroDatosObtener}
+                    datosGeograficos={hechoDatosGeográficos}
+                    setEditSection={setEditGlobal}
+                    editSection={editGlobal} />
             </>
         }
     </div>

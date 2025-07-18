@@ -6,7 +6,7 @@ import {   buscarTercero } from '../../api/CRUD/terceros.crud';
 import { buscarVictima } from '../../api/CRUD/victimas.crud';
 import { buscarVictimario } from '../../api/CRUD/victimario.crud';
 // Componentes
-import InputRegister from '../InputComponents/InputRegister';
+import InputText from '../InputComponents/InputText';
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import InputNumber from '../InputComponents/InputNumber';
 
@@ -106,10 +106,10 @@ function BuscarExistenteModal({  variante, setOpenModal, setPersonaACargar }: Bu
                                 {mostrarAlerta}
                             </span>
                         )}
-                        <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Nombre" nombre="nombre" register={register} require={false} error={errors.nombre}/>
-                        <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Apellido" nombre="apellido" register={register} require={false} error={errors.apellido}/>
+                        <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Nombre" nombre="nombre" register={register} require={false} error={errors.nombre}/>
+                        <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Apellido" nombre="apellido" register={register} require={false} error={errors.apellido}/>
                         <InputNumber customSize='flex flex-col w-full xl:w-1/2'  campo="DNI" nombre="dni" register={register} require={false} error={errors.dni_victima} maxLenght={8}/>
-                        <InputRegister campo="Número de expediente" nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false}/>
+                        <InputText campo="Número de expediente" nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false}/>
                         <button className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-3/10">Buscar</button>
                     </form>
 

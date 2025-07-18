@@ -7,7 +7,7 @@ import { jerarquiaCampos } from '../../GlobalConst/jerarquiaCampos';
 import { zonaCampos } from '../../GlobalConst/zonaCampos';
 
 // Componentes
-import InputRegister from '../InputComponents/InputRegister'
+import InputText from '../InputComponents/InputText'
 import InputNumber from '../InputComponents/InputNumber'
 import SelectRegisterSingle from '../Select/SelectRegisterSingle'
 // Contexto
@@ -19,6 +19,13 @@ import Swal from 'sweetalert2'
 import InputRadio from '../InputComponents/InputRadio';
 // Tipos
 import User from '../../types/Usuarios'
+
+type Radio = {
+    value: string;
+    nombre: string;
+    id?: string;
+}
+
 interface InputRegisterProps {
     user: User
     setIsEditing: (isEditing: boolean) => void
@@ -34,7 +41,7 @@ function CardEditDataUser({ user, setIsEditing }: InputRegisterProps) {
     const { editProfile } = useAuth()
     const { unidades: unidadCampos } = useCampos();
 
-    const opcionesRadio = [
+    const opcionesRadio:Radio[] = [
         { value: "si", nombre: "Sí" },
         { value: "no", nombre: "No" },
     ]
@@ -42,7 +49,7 @@ function CardEditDataUser({ user, setIsEditing }: InputRegisterProps) {
     return (
         <div className="bg-white shadow-lg rounded-lg md:w-8/10 p-4 scale-up-center">
             <form className='flex flex-col w-95/100'
-                onSubmit={handleSubmit(async (values: any) => {
+                onSubmit={handleSubmit(async (values: User) => {
                     // Evalúa la longitud del teléfono
                     if (values.telefono.length && values.telefono.length != 10) {
                         setMensajeError("El teléfono debe tener 10 dígitos");
@@ -59,11 +66,11 @@ function CardEditDataUser({ user, setIsEditing }: InputRegisterProps) {
                                 cancelButtonText: 'Cancelar'
                             }).then(async (result: any) => {
                                 if (result.isConfirmed) {
-                                    values.id = user._id
+                                    values._id = user._id
                                     // Edita el perfil
                                     const response = await editProfile(values);
                                     // Si esta da respuesta, recarga la página
-                                    if (response) {
+                                    if (response) { 
                                         setMensajeError('')
                                         window.location.reload()
                                     } else { // Sino, el devuelve como mensaje de error que el usuario ya existe, si se intenta cambiar el nombre de usuario
@@ -80,12 +87,12 @@ function CardEditDataUser({ user, setIsEditing }: InputRegisterProps) {
                 })}>
                 {/* ID oculta para luego pasarlo al submit */}
                 <div className='flex flex-col md:flex-row'>
-                    <InputRegister disabled campo="Nombre" nombre="nombre" register={register} setValue={setValue}  error={errors.nombre} valor={user.nombre} />
-                    <InputRegister disabled campo="Apellido" nombre="apellido" register={register} setValue={setValue}  error={errors.apellido} valor={user.apellido} />
+                    <InputText disabled campo="Nombre" nombre="nombre" register={register} setValue={setValue}  error={errors.nombre} valor={user.nombre} />
+                    <InputText disabled campo="Apellido" nombre="apellido" register={register} setValue={setValue}  error={errors.apellido} valor={user.apellido} />
                 </div>
                 <div className='flex flex-col md:flex-row'>
                     <InputNumber  require={false} campo="Teléfono" nombre="telefono" placeholder={user.telefono} register={register} setValue={setValue} error={errors.telefono} valor={user.telefono} maxLenght={14} />
-                    <InputRegister disabled campo="Nombre de usuario" nombre="nombre_de_usuario" register={register} setValue={setValue}  error={errors.nombre_de_usuario} valor={user.nombre_de_usuario} />
+                    <InputText disabled campo="Nombre de usuario" nombre="nombre_de_usuario" register={register} setValue={setValue}  error={errors.nombre_de_usuario} valor={user.nombre_de_usuario} />
                 </div>
                 <div className='flex flex-col md:flex-row'>
                     <SelectRegisterSingle mid isRequired={false} valor={user.jerarquia} campo="Jerarquía" nombre="jerarquia" opciones={jerarquiaCampos} setValue={setValue} error={errors.jerarquia} />
@@ -96,7 +103,7 @@ function CardEditDataUser({ user, setIsEditing }: InputRegisterProps) {
                 { user.rol === 'admin' && 
                 <>
                 <span>¿División Violencia Familiar y de Género?</span>
-            <InputRadio watch={watch} defaultValue={isDivision ? 0 : 1} handleChange={setIsDivision} campo="violencia_familiar" nombre="violencia_familiar" register={register} type="radio" opciones={opcionesRadio} />
+            <InputRadio watch={watch} defaultValue={isDivision ? 0 : 1} handleChange={setIsDivision} campo="violencia_familiar" nombre="violencia_familiar" register={register}  opciones={opcionesRadio} />
            
             {isDivision ?
                 <SelectRegisterSingle notMunicipio notComisaria isRequired={false} valor={user.unidad} campo="Unidad" nombre="unidad" opciones={unidadCampos} setValue={setValue}  />

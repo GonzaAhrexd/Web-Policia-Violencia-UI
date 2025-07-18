@@ -6,18 +6,19 @@
 
 // Hooks
 import { useEffect } from 'react'
+import { FieldError, FieldErrorsImpl, FieldValues, Merge, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 // Props
 interface Props {
   campo: string;
   nombre: string;
-  setValue: any;
-  register: any;
-  error?: any;
-  setHook?: any;
-  state?: any;
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+  error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
+  setHook?: (boolean) => void;
+  state?: boolean;
   disabled?: boolean;
-  id: any;
+  id: string;
 }
 
 function InputCheckbox({disabled, campo, nombre, setValue, setHook, state, id }: Props) {

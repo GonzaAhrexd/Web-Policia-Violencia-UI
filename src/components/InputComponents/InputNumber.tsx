@@ -2,23 +2,23 @@
 import { useEffect, useState } from 'react';
 // Iconos
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
+import { FieldError, FieldErrorsImpl, FieldValues, Merge, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 // Props
 interface InputRegisterProps {
   campo: string;
   nombre: string;
-  register: any;
-  error: any;
+  register: UseFormRegister<FieldValues>;
+  setValue?: UseFormSetValue<FieldValues>;
+  error: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
   customSize?: string;
-  variante?: any;
   valor?: any;
   placeholder?: string;
-  setValue?: any;
   require?: boolean;
   maxLenght: number;
   disabled?: boolean;
 }
 
-function InputNumber({ disabled, maxLenght, customSize, campo, nombre, register, error, require, valor, placeholder, setValue }: InputRegisterProps) {
+function InputNumber({ campo, nombre, register, setValue, error, require, valor, placeholder, disabled, maxLenght, customSize  }: InputRegisterProps) {
   // Estados
   const [avisoRequerido, setAvisoRequerido] = useState(false)
   // Si el placeholder no tiene valor, se asigna un string vacío

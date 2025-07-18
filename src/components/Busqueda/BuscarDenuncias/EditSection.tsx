@@ -10,7 +10,7 @@ ________________________________________________________________________________
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 // APIs y BackEnd
-import {  editarTercero, crearTercero } from '../../../api/CRUD/terceros.crud'
+import { editarTercero, crearTercero } from '../../../api/CRUD/terceros.crud'
 import { editarVictimario } from '../../../api/CRUD/victimario.crud'
 import { editarVictima } from '../../../api/CRUD/victimas.crud'
 import { editarDenuncia } from '../../../api/CRUD/denuncias.crud'
@@ -24,19 +24,24 @@ import Swal from 'sweetalert2'
 import { XMarkIcon, CheckIcon } from '@heroicons/react/24/solid'
 import { useStore } from '../../../pages/MisDenuncias/store'
 
+// Tipos
+import Victima from '../../../types/Victimas';
+import Victimario from '../../../types/Victimario';
+import Denuncia from '../../../types/Denuncia';
+import Tercero from '../../../types/Tercero';
+
 // Props
-interface EditSectionProps {
-    datosVictima: any
-    datosVictimario: any
-    datosHecho: any
-    setEditSection: any
-    editSection: boolean
+type EditSectionProps = {
+    datosVictima: Victima
+    datosVictimario: Victimario
+    datosHecho: Denuncia
     datosGeograficos: any
-    datosTerceros: any
-    // handleOpenModal: any
+    datosTerceros: Tercero
+    editSection: boolean
+    setEditSection: (boolean) => void
 }
 
-function EditSection({  datosTerceros, datosGeograficos, datosVictima, datosVictimario, datosHecho, setEditSection, editSection }: EditSectionProps) {
+function EditSection({ datosHecho, datosVictima, datosVictimario, datosTerceros, datosGeograficos, editSection, setEditSection }: EditSectionProps) {
     // Utilizamos useForm para manejar los datos del formulario
     const { register, watch, handleSubmit, setValue, formState: {
         errors
@@ -79,7 +84,7 @@ function EditSection({  datosTerceros, datosGeograficos, datosVictima, datosVict
                                 await editarVictimario(values)
                                 // Editar tercero
                                 if (values.denunciado_por_tercero) {
-                                    if (datosTerceros.denunciado_por_tercero) {
+                                    if (datosHecho.denunciado_por_tercero) {
                                         await editarTercero(values)
                                     } else {
                                         const idTercero = await crearTercero(values)
@@ -113,14 +118,14 @@ function EditSection({  datosTerceros, datosGeograficos, datosVictima, datosVict
                         })
                     })}>
 
-                <EditVictima watch={watch} cantidad_hijos_con_agresor={datosHecho.hijos_victima_con_victimario} hijos_con_agresor={datosHecho.hijos_victima_con_victimario} convivencia={datosHecho.convivencia} dependencia_economica={datosHecho.dependencia_economica} vinculo_con_agresor={datosHecho.relacion_victima_victimario} datos={datosVictima} register={register} setValue={setValue} errors={errors} />
+                <EditVictima datos={datosVictima} register={register} setValue={setValue} errors={errors} watch={watch} cantidad_hijos_con_agresor={datosHecho.hijos_victima_con_victimario} hijos_con_agresor={datosHecho.hijos_victima_con_victimario} convivencia={datosHecho.convivencia} dependencia_economica={datosHecho.dependencia_economica} vinculo_con_agresor={datosHecho.relacion_victima_victimario} />
                 <EditVictimario datos={datosVictimario} register={register} setValue={setValue} errors={errors} />
                 <EditHecho setIsSolicitudAprehension={setIsSolicitudAprehension} datosTerceros={datosTerceros} datosGeograficos={datosGeograficos} datos={datosHecho} handleOpenModal={handleOpenModal} setTitulo={setTitle} register={register} setValue={setValue} errors={errors} />
-                
+
                 <>
                     <h1 className='text-2xl my-5'>Observaciones</h1>
-                    <InputCheckbox disabled={!isSolicitudAprehension} state={datosHecho.aprehension} campo="Aprehensión" nombre="aprehension" register={register} setValue={setValue}  id="aprehension" />
-                    <InputTextArea variante={"edit"} valor={datosHecho.observaciones} campo="" nombre="observaciones" setValue={setValue} register={register} />
+                    <InputCheckbox disabled={!isSolicitudAprehension} state={datosHecho.aprehension} campo="Aprehensión" nombre="aprehension" register={register} setValue={setValue} id="aprehension" />
+                    <InputTextArea edit valor={datosHecho.observaciones} campo="" nombre="observaciones" setValue={setValue} register={register} />
                 </>
                 <div className='my-5 flex flex-col md:flex-row sm:items-center md:justify-center w-full '>
                     <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-full sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0' onClick={() => setEditSection(!editSection)}>
@@ -132,7 +137,7 @@ function EditSection({  datosTerceros, datosGeograficos, datosVictima, datosVict
                 </div>
             </form>
         </div>
-    ) 
+    )
 }
 
 export default EditSection

@@ -14,7 +14,7 @@ import CargarVictimario from '../../components/Cargar/CargarVictimario';
 import CargarDenuncia from '../../components/Cargar/CargarDenuncia';
 import CargarObservaciones from '../../components/Cargar/CargarObservaciones';
 import BuscarExistenteModal from '../../components/ModalBusqueda/BuscarExistenteModal';
-import EditVictimaExistente from '../../components/EditMode/EditVictimaExistente';
+
 import EditVictimario from '../../components/EditMode/EditVictimario';
 
 // Iconos
@@ -26,6 +26,7 @@ import { useRef } from 'react';
 
 // Tipos
 import User from '../../types/Usuarios'
+import EditVictima from '../../components/EditMode/EditVictima';
 
 type CargarDenunciasRolCargaProps = {
   user: User;
@@ -170,7 +171,7 @@ function CargarDenunciasRolCarga({ user, setTitulo, handleOpenModal }: CargarDen
             {!victimaCargar ? // Si no hay datos de la víctima a cargar, mostrar el formulario de carga
               <CargarVictima watch={watch} register={register} setValue={setValue} errors={errors} />
               : // Si hay datos de la víctima a cargar, mostrar el formulario de edición
-              <EditVictimaExistente watch={watch} existente={true} md={true} datos={victimaCargar} register={register} setValue={setValue} errors={errors} />
+              <EditVictima existente md datos={victimaCargar} register={register} setValue={setValue} watch={watch} errors={errors} />
             }
           </div>
           {/* Haz una linea gris que divida, pero que solo salga a la mitad como los demás inputs */}
@@ -182,7 +183,7 @@ function CargarDenunciasRolCarga({ user, setTitulo, handleOpenModal }: CargarDen
             {!victimarioCargar ? // Si no hay datos del victimario a cargar, mostrar el formulario de carga
               <CargarVictimario watch={watch} register={register} setValue={setValue} errors={errors} />
               : // Si hay datos del victimario a cargar, mostrar el formulario de edición
-              <EditVictimario existente={true} md={true} datos={victimarioCargar} register={register} setValue={setValue} errors={errors} />
+              <EditVictimario existente md datos={victimarioCargar} register={register} setValue={setValue} errors={errors} />
             }
           </div>
           <h1 className='text-2xl my-5'>Hecho</h1>

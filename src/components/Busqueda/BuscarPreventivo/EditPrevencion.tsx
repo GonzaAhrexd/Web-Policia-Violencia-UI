@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 // Componentes
-import InputRegister from "../../InputComponents/InputRegister";
+import InputText from "../../InputComponents/InputText";
 import InputDate from "../../InputComponents/InputDate";
 import InputCheckboxAcumulador from "../../InputComponents/InputCheckboxAcumulador";
 import InputTextArea from "../../InputComponents/InputTextArea";
@@ -235,16 +235,16 @@ function EditPrevencion({ data, modoExpandir }: EditPrevencionProps) {
                     })
                 }>
                 <div className='flex flex-col items-center justify-center'>
-                    <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Supervisión" nombre="supervision" register={register} error={errors.supervision} require placeholder="Supervisión" setValue={setValue} valor={supervisionValor} />
+                    <InputText customSize="flex flex-col md:w-full xl:w-1/2" campo="Supervisión" nombre="supervision" register={register} error={errors.supervision} require placeholder="Supervisión" setValue={setValue} valor={supervisionValor} />
                     <InputDate campo="Fecha" nombre="fecha_preventivo" register={register} error={errors.fecha} valor={new Date(data.fecha).toISOString().slice(0, 10)} />
                     <div className='flex flex-row w-full  xl:w-5/10'>
-                        <InputRegister valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
-                        <InputRegister valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
+                        <InputText valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
+                        <InputText valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
                     </div>
 
-                    <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Número de nota" nombre="numero_nota" register={register} error={errors.numero_nota} require placeholder="Número de nota" valor={`N°-CSPJ/${new Date().getFullYear()}`} setValue={setValue} />
-                    <InputRegister valor={data.objeto} customSize="flex flex-col md:w-full xl:w-1/2" campo="Objeto" nombre="objeto" register={register} error={errors.objeto} require placeholder="Objeto" setValue={setValue} />
-                    <InputRegister valor={data.consultado} customSize="flex flex-col md:w-full xl:w-1/2" campo="Consultado a" nombre="consulta" register={register} error={errors.consulta} require placeholder="Consultado a" setValue={setValue} />
+                    <InputText customSize="flex flex-col md:w-full xl:w-1/2" campo="Número de nota" nombre="numero_nota" register={register} error={errors.numero_nota} require placeholder="Número de nota" valor={`N°-CSPJ/${new Date().getFullYear()}`} setValue={setValue} />
+                    <InputText valor={data.objeto} customSize="flex flex-col md:w-full xl:w-1/2" campo="Objeto" nombre="objeto" register={register} error={errors.objeto} require placeholder="Objeto" setValue={setValue} />
+                    <InputText valor={data.consultado} customSize="flex flex-col md:w-full xl:w-1/2" campo="Consultado a" nombre="consulta" register={register} error={errors.consulta} require placeholder="Consultado a" setValue={setValue} />
                     {modoExpandir && 
                     <InputTextArea valor={data.observaciones} campo="Observaciones" nombre="observaciones" register={register}  required placeholder="Observaciones" setValue={setValue} /> 
                     }

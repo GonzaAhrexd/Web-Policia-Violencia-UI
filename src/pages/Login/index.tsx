@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 // Contexto
 import { useAuth } from '../../context/auth';
 // Componentes
-import InputLogin from '../../components/InputComponents/InputLogin';
+import InputText from '../../components/InputComponents/InputText';
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -65,26 +65,10 @@ function Login() {
             onSubmit={handleSubmit(async (values) => {
               await signIn(values);
             })}
-          >
-            <InputLogin
-              campo={"nombre_de_usuario"}
-              placeholder={"Nombre de usuario"}
-              register={ register }
-              type="text"
-              error={errors.nombre_de_usuario}
-            />
-            <InputLogin
-              campo={"pass"}
-              placeholder={"Contraseña"}
-              register={ register }
-              type="password"
-              error={errors.pass}
-            />
-
-            <button
-              type="submit"
-              className='bg-sky-800 hover:bg-sky-700 text-white text-xl font-semibold w-full h-12 rounded-lg my-4 transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg'
-            >
+          >    
+            <InputText nombre="nombre_de_usuario" campo="" placeholder={"Nombre de usuario"} register={register} customSize='flex flex-col w-full' error={errors.nombre_de_usuario}/>
+            <InputText pass nombre="pass" campo="" placeholder={"Contraseña"} register={register} customSize='flex flex-col w-full' error={errors.pass}/>
+            <button type="submit" className='bg-sky-800 hover:bg-sky-700 text-white text-xl font-semibold w-full h-12 rounded-lg my-4 transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg'>
               Iniciar Sesión
             </button>
 

@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { pdf } from '@react-pdf/renderer';
 // Componentes
 import InputDate from '../../InputComponents/InputDate';
-import InputRegister from '../../InputComponents/InputRegister';
+import InputText from '../../InputComponents/InputText';
 import InputTextArea from '../../InputComponents/InputTextArea';
 import SelectRegisterSingle from '../../Select/SelectRegisterSingle';
 import PDFRadiograma from '../../ReactPDF/PDFRadiograma';
@@ -178,20 +178,20 @@ function CargarRadiograma({ data, setCrearRadiograma }: CargarRadiogramaProps) {
         })}
       >
         <div className='flex flex-col md:items-center justify-start md:justify-center'>
-          <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Supervisión" nombre="supervision" register={register} error={errors.supervision} require placeholder="Supervisión" setValue={setValue} valor={supervisionValor} />
+          <InputText customSize="flex flex-col md:w-full xl:w-1/2" campo="Supervisión" nombre="supervision" register={register} error={errors.supervision} require placeholder="Supervisión" setValue={setValue} valor={supervisionValor} />
           <InputDate campo="Fecha" nombre="fecha_preventivo" register={register} error={errors.fecha} />
-          <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
-          <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
+          <InputText customSize="flex flex-col md:w-full xl:w-1/2" valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
+          <InputText customSize="flex flex-col md:w-full xl:w-1/2" valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
           <InputTextArea campo="Solicita" nombre="solicita" register={register} required placeholder="Solicita" setValue={setValue} />
         </div>
         <h1 className='text-2xl'>Destinatario</h1>
         <div className='flex flex-col md:items-center justify-center'>
-          <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Destinatario" nombre="destinatario" register={register} error={errors.supervision} require placeholder="Supervisión" setValue={setValue} />
+          <InputText customSize="flex flex-col md:w-full xl:w-1/2" campo="Destinatario" nombre="destinatario" register={register} error={errors.supervision} require placeholder="Supervisión" setValue={setValue} />
         </div>
         <h1 className='text-2xl my-5'>Instructor</h1>
         <div className='flex flex-col justify-center items-center w-full '>
           <div className='flex flex-col lg:flex-row my-2 w-full lg:w-8/10 xl:w-6/10'>
-            <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Nombre y apellido" nombre="nombre_completo_instructor" register={register} setValue={setValue} error={errors.nombre_completo_instructor} />
+            <InputText customSize="flex flex-col md:w-full xl:w-1/2" campo="Nombre y apellido" nombre="nombre_completo_instructor" register={register} setValue={setValue} error={errors.nombre_completo_instructor} />
             <SelectRegisterSingle campo='Jerarquía' nombre="jerarquia_instructor" opciones={jerarquiaCampos} setValue={setValue} error={errors.jerarquia_instructor} />
           </div>
         </div>

@@ -1,6 +1,6 @@
 // Componentes
 import InputCheckbox from '../InputComponents/InputCheckbox'
-import InputRegister from '../InputComponents/InputRegister'
+import InputText from '../InputComponents/InputText'
 import SelectRegisterSingle from '../Select/SelectRegisterSingle'
 import InputNumber from '../InputComponents/InputNumber'
 
@@ -13,16 +13,21 @@ import { useCampos } from '../../context/campos'
 // Hooks
 import { useState } from 'react'
 
+// Tipos
+import Victimario from '../../types/Victimario';
+import { FieldErrors, FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+
+
 interface CargarVictimarioProps {
-  datos: any;
-  register: any;
-  setValue: any;
-  errors: any;
+  datos: Victimario;
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+  errors: FieldErrors<FieldValues>;
   md?: boolean;
-  existente?: any;
+  existente?: boolean;
 }
 
-function EditVictimario({ existente, md, datos, register, setValue, errors }: CargarVictimarioProps) {
+function EditVictimario({  datos, register, setValue, errors,existente, md }: CargarVictimarioProps) {
 
 
   const { ocupaciones } = useCampos();
@@ -34,15 +39,15 @@ function EditVictimario({ existente, md, datos, register, setValue, errors }: Ca
   return (
     <div className={`w-full ${md && "lg:w-6/10"}`}>
       {!existente && <h1 className='text-2xl my-5'>Victimario</h1>}
-      <InputRegister campo="" nombre="victimario_ID" register={register} setValue={setValue} hidden error={errors.nombre_victima} valor={datos._id} />
+      <InputText campo="" nombre="victimario_ID" register={register} setValue={setValue} hidden error={errors.nombre_victima} valor={datos._id} />
       <div className='flex flex-col md:flex-row my-2'>
-        <InputRegister campo="Nombre" nombre="nombre_victimario" register={register} setValue={setValue} error={errors.nombre_victimario} valor={datos.nombre} />
-        <InputRegister campo="Apellido" nombre="apellido_victimario" register={register} setValue={setValue} error={errors.apellido_victimario} valor={datos.apellido} />
+        <InputText campo="Nombre" nombre="nombre_victimario" register={register} setValue={setValue} error={errors.nombre_victimario} valor={datos.nombre} />
+        <InputText campo="Apellido" nombre="apellido_victimario" register={register} setValue={setValue} error={errors.apellido_victimario} valor={datos.apellido} />
       </div>
       <div className='flex flex-col md:flex-row my-2'>
         <InputNumber require={false} campo="Edad" nombre="edad_victimario" register={register} setValue={setValue} error={errors.edad_victimario} valor={datos.edad} maxLenght={2} />
         <InputNumber require={false} maxLenght={8} campo="DNI" nombre="dni_victimario" register={register} setValue={setValue} error={errors.dni_victimario} valor={datos.DNI != "S/N" ? datos.DNI : ""} />
-        <InputRegister campo="Domicilio" nombre="direccion_victimario" require={false} register={register} setValue={setValue}  error={errors.direccion_victimario} valor={datos.direccion} />
+        <InputText campo="Domicilio" nombre="direccion_victimario" require={false} register={register} setValue={setValue}  error={errors.direccion_victimario} valor={datos.direccion} />
       </div>
       <div className='flex flex-col xl:flex-row my-2'>
         <SelectRegisterSingle campo="Estado Civil" nombre="estado_civil_victimario" opciones={estadoCivil} setValue={setValue} error={errors.estado_civil_victimario} valor={datos.estado_civil} isRequired={false} />
@@ -63,8 +68,8 @@ function EditVictimario({ existente, md, datos, register, setValue, errors }: Ca
           className='ml-4 font-medium '>Detalles de aprehensión</span>
         {/* Haz que sean dos inputs de tipo radio que sean excluyentes, uno con aprehension y otro con en libertad */}
         <div>
-          <InputCheckbox setHook={setIsAprehendido} disabled={isLiberado} campo="Aprehensión" nombre="esta_aprehendido" register={register} setValue={setValue} id="aprehendido" state={datos.esta_aprehendido} />
-          <InputCheckbox setHook={setIsLiberado} disabled={isAprehendido} campo="En libertad" nombre="fue_liberado" register={register} setValue={setValue} id="liberado" state={datos.fue_liberado} />
+          <InputCheckbox  campo="Aprehensión" nombre="esta_aprehendido" register={register} setValue={setValue} id="aprehendido" state={datos.esta_aprehendido} setHook={setIsAprehendido} disabled={isLiberado}/>
+          <InputCheckbox campo="En libertad" nombre="fue_liberado" register={register} setValue={setValue} id="liberado" state={datos.fue_liberado}  setHook={setIsLiberado} disabled={isAprehendido} />
         </div>
       </>
 

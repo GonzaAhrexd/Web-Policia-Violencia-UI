@@ -1,21 +1,27 @@
 // Hooks
 import { useEffect } from 'react'
+import { FieldValues, UseFormRegister, UseFormWatch } from 'react-hook-form'
 
 // Props
-interface props {
-    register: any
-    type: string
+type props = {
     nombre: string
-    handleChange?: any
-    state?: any
     campo: any
-    id?: any
-    opciones?: any
-    defaultValue?: any
-    watch?: any
+    state?: boolean
+    id?: string
+    opciones?: Radio[]
+    defaultValue?: number
+    register: UseFormRegister<FieldValues>;
+    watch?: UseFormWatch<FieldValues>
+    handleChange?: (value: boolean) => void
 }
 
-function InputRadio({watch, register, nombre, type, defaultValue, handleChange, opciones }: props) {
+type Radio = {
+    value: string;
+    nombre: string;
+    id?: string;
+}
+
+function InputRadio({watch, register, nombre, defaultValue, handleChange, opciones }: props) {
     // watchRadio para ver si el radio button está seleccionado
     let watchRadio:any;
     // Si se recibe un watch, se asigna el valor a watchRadio
@@ -35,7 +41,7 @@ function InputRadio({watch, register, nombre, type, defaultValue, handleChange, 
                     <div>
                         <input
                             className="cursor-pointer border open-sans border-gray-300 rounded-md h-6 xl:h-6 xl:w-5 2xl:h-6 my-2 xl:my-1 xl:m-2 m-4 pl-2"
-                            type={type}
+                            type="radio"
                             id={opcion.id}
                             {...register(nombre)}
                              value={opcion.nombre}

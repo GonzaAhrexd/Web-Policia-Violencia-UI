@@ -13,7 +13,7 @@ import DataTable from 'react-data-table-component';
 import NavBar from '../../components/NavBar'
 import SelectRegisterSingle from '../../components/Select/SelectRegisterSingle';
 import InputDateRange from '../../components/InputComponents/InputDateRange';
-import InputRegister from '../../components/InputComponents/InputRegister';
+import InputText from '../../components/InputComponents/InputText';
 import LoadingScreen from '../../components/LoadingScreen';
 import Footer from '../../components/Footer/Footer';
 // Backend
@@ -66,7 +66,7 @@ function index() {
                         )}>
                     <InputDateRange register={register} setValue={setValue} isRequired={true} />
                     <SelectRegisterSingle isRequired={false} campo={"Sección"} nombre={"seccion"} opciones={listaDeSecciones} setValue={setValue} error={errors.seccion} />
-                    <InputRegister customSize="flex flex-col w-full xl:w-1/2" register={register} require={false} campo={"Usuario"} nombre={"usuario"} error={errors.usuario} />
+                    <InputText customSize="flex flex-col w-full xl:w-1/2" register={register} require={false} campo={"Usuario"} nombre={"usuario"} error={errors.usuario} />
                     <button className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10"> Buscar</button>
                 </form>
                 {listaDeActividad?.length > 0 &&

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import InputRegister from '../../InputComponents/InputRegister'
+import InputText from '../../InputComponents/InputText'
 import { PrinterIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import SelectRegisterSingle from '../../Select/SelectRegisterSingle'
 import InputCheckbox from '../../InputComponents/InputCheckbox'
@@ -92,7 +92,7 @@ function modoImprimir({ tipoPersona, modoImprimir, setModoImprimir, denunciasAMo
                 })}>
 
                 <div>
-                    <InputRegister customSize="flex flex-col w-full md:w-full" campo="Firma atentamente" nombre="atte" register={register} error={errors.atte} />
+                    <InputText customSize="flex flex-col w-full md:w-full" campo="Firma atentamente" nombre="atte" register={register} error={errors.atte} />
                     {!isListarTodo &&
                         <SelectRegisterSingle mid={true} campo="Listar denuncias de" nombre="denuncias_de" setValue={setValue} error={errors} opciones={opcionesPersonas} />
                     }

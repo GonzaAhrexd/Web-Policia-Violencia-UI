@@ -9,7 +9,7 @@ import { useAuth } from '../../../context/auth';
 import { useCampos } from '../../../context/campos';
 
 // Componentes
-import InputRegister from '../../InputComponents/InputRegister';
+import InputText from '../../InputComponents/InputText';
 import InputDateRange from '../../InputComponents/InputDateRange';
 import InputCheckbox from '../../InputComponents/InputCheckbox';
 
@@ -81,9 +81,9 @@ const BuscarDenunciasSinVerificar = () => {
                 />
 
                 {/* Input para buscar por ID de denuncia */}
-                <InputRegister campo="ID" nombre="id_denuncia" register={register} error={errors.id_denuncia} require={false} customSize="flex flex-col w-full xl:w-1/2"/>
+                <InputText campo="ID" nombre="id_denuncia" register={register} error={errors.id_denuncia} require={false} customSize="flex flex-col w-full xl:w-1/2"/>
                 {/* Input para buscar por número de expediente */}
-                <InputRegister campo="Número de expediente"nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false} customSize='flex flex-col w-full xl:w-1/2'/>
+                <InputText campo="Número de expediente"nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false} customSize='flex flex-col w-full xl:w-1/2'/>
 
                 {/* Selector de división, municipio y comisaría, solo visible para no agentes */}
                 {user.rol !== 'agente' && (

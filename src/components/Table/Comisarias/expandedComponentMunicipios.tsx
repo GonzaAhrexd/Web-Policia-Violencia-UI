@@ -8,7 +8,7 @@ import { customStyles } from '../../../GlobalConst/customStyles';
 import columnsUnidades from '../columnsTablaUnidades';
 import ExpandedComponentsComisarias from './expandedComponentComisarias';
 import ExpandedComponentsCuadriculas from './expandedComponentsCuadriculas';
-import InputRegister from '../../InputComponents/InputRegister';
+import InputText from '../../InputComponents/InputText';
 // Iconos
 import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outline'
 // Dependencias
@@ -117,12 +117,12 @@ function expandedComponentsUnidades({ data }: expandedComponentsUnidadesProps) {
                             )}
                         >
                             
-                            <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Nombre" nombre="nombre_municipio" register={register} error={errors.nombre_municipio} valor={data.nombre} setValue={setValue} />
-                            <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Valor" nombre="valor_municipio" register={register} error={errors.valor_municipio} valor={data.value} setValue={setValue} />
-                            <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Prefijo" nombre="prefijo_municipio" register={register} error={errors.prefijo_municipio} valor={data.prefijo} setValue={setValue} require={false} />
-                            <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Teléfono" nombre="telefono_municipio" register={register} error={errors.telefono_municipio} valor={data.telefono}  setValue={setValue} require={false} />
-                            <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Dirección" nombre="direccion_municipio" register={register} error={errors.direccion_municipio} valor={data.direccion}  setValue={setValue} require={false} />
-                            <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Supervisión" nombre="supervision_municipio" register={register} error={errors.supervision_municipio} valor={data.supervision}  setValue={setValue} require={false} />
+                            <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Nombre" nombre="nombre_municipio" register={register} error={errors.nombre_municipio} valor={data.nombre} setValue={setValue} />
+                            <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Valor" nombre="valor_municipio" register={register} error={errors.valor_municipio} valor={data.value} setValue={setValue} />
+                            <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Prefijo" nombre="prefijo_municipio" register={register} error={errors.prefijo_municipio} valor={data.prefijo} setValue={setValue} require={false} />
+                            <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Teléfono" nombre="telefono_municipio" register={register} error={errors.telefono_municipio} valor={data.telefono}  setValue={setValue} require={false} />
+                            <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Dirección" nombre="direccion_municipio" register={register} error={errors.direccion_municipio} valor={data.direccion}  setValue={setValue} require={false} />
+                            <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Supervisión" nombre="supervision_municipio" register={register} error={errors.supervision_municipio} valor={data.supervision}  setValue={setValue} require={false} />
 
                             <div className='flex items-center justify-center w-1/2'>
                                 <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-4/10 md:w-3/10 mr-2'>
@@ -183,12 +183,12 @@ function expandedComponentsUnidades({ data }: expandedComponentsUnidadesProps) {
                             }
                             )}
                         >
-                            <InputRegister campo="Nombre" nombre="nombre_comisaria" register={register}  error={errors.nombre_comisaria} />
-                            <InputRegister campo="Valor" nombre="valor_comisaria" register={register}  error={errors.valor_comisaria} />
-                            <InputRegister campo="Prefijo" nombre="prefijo_comisaria" register={register}  error={errors.prefijo_comisaria} />
-                            <InputRegister campo="Teléfono" nombre="telefono_comisaria" register={register}  error={errors.nombre_comisaria} />
-                            <InputRegister campo="Dirección" nombre="direccion_comisaria" register={register}  error={errors.nombre_comisaria} />
-                            <InputRegister campo="Supervisión" nombre="supervision_comisaria" register={register}  error={errors.supervision_comisaria} />
+                            <InputText campo="Nombre" nombre="nombre_comisaria" register={register}  error={errors.nombre_comisaria} />
+                            <InputText campo="Valor" nombre="valor_comisaria" register={register}  error={errors.valor_comisaria} />
+                            <InputText campo="Prefijo" nombre="prefijo_comisaria" register={register}  error={errors.prefijo_comisaria} />
+                            <InputText campo="Teléfono" nombre="telefono_comisaria" register={register}  error={errors.nombre_comisaria} />
+                            <InputText campo="Dirección" nombre="direccion_comisaria" register={register}  error={errors.nombre_comisaria} />
+                            <InputText campo="Supervisión" nombre="supervision_comisaria" register={register}  error={errors.supervision_comisaria} />
 
                             <div className='flex flex-row items-center w-full justify-center'>
                                 <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-4/10 xl:w-3/10 mr-2'>
@@ -237,8 +237,8 @@ function expandedComponentsUnidades({ data }: expandedComponentsUnidadesProps) {
 
                         })}
                         >
-                            <InputRegister campo="Nombre" nombre="nombre_cuadricula" register={register} error={errors.nombre_cuadricula} />
-                            <InputRegister campo="Valor" nombre="valor_cuadricula" register={register} error={errors.valor_cuadricula} />
+                            <InputText campo="Nombre" nombre="nombre_cuadricula" register={register} error={errors.nombre_cuadricula} />
+                            <InputText campo="Valor" nombre="valor_cuadricula" register={register} error={errors.valor_cuadricula} />
                             <div className='flex flex-row items-center w-full justify-center'>
                                 <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-4/10 xl:w-3/10 mr-2'>
                                     Agregar Cuadrícula

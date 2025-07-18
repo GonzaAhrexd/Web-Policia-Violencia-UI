@@ -1,5 +1,5 @@
 // Componentes
-import InputRegister from '../../InputComponents/InputRegister';
+import InputText from '../../InputComponents/InputText';
 // Backend APIs
 import { buscarTercero } from '../../../api/CRUD/terceros.crud';
 // Hooks
@@ -51,11 +51,11 @@ function BuscarTerceros() {
                     }
                     )}>
                 {mostrarAlerta && <span className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative my-5" role="alert"> {mostrarAlerta}</span>}
-                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="ID" nombre="id_tercero" register={register} require={false}  error={errors.id_tercero} />
-                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Nombre" nombre="nombre_tercero" register={register} require={false}  error={errors.nombre} />
-                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Apellido" nombre="apellido_tercero" register={register} require={false}  error={errors.apellido} />
-                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="DNI" nombre="dni_tercero" register={register} require={false}  error={errors.dni_victima} />
-                <InputRegister campo="Número de expediente" nombre="numero_de_expediente" register={register} require={false}  error={errors.numero_de_expediente} customSize='flex flex-col w-full xl:w-1/2' />
+                <InputText customSize="flex flex-col w-full xl:w-1/2" campo="ID" nombre="id_tercero" register={register} require={false}  error={errors.id_tercero} />
+                <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Nombre" nombre="nombre_tercero" register={register} require={false}  error={errors.nombre} />
+                <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Apellido" nombre="apellido_tercero" register={register} require={false}  error={errors.apellido} />
+                <InputText customSize="flex flex-col w-full xl:w-1/2" campo="DNI" nombre="dni_tercero" register={register} require={false}  error={errors.dni_victima} />
+                <InputText campo="Número de expediente" nombre="numero_de_expediente" register={register} require={false}  error={errors.numero_de_expediente} customSize='flex flex-col w-full xl:w-1/2' />
                 <button className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10"> Buscar</button>
             </form>
             <div className="flex flex-col w-full">

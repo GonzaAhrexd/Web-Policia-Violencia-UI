@@ -2,14 +2,13 @@
 import { useEffect, useState } from 'react'
 import { UseFormRegister, UseFormSetValue, FieldErrors } from 'react-hook-form';
 // Componentes
-import InputRegister from '../InputComponents/InputRegister'
+import InputText from '../InputComponents/InputText'
 import InputCheckbox from '../InputComponents/InputCheckbox'
 import InputNumber from '../InputComponents/InputNumber'
 import InputRadio from '../InputComponents/InputRadio'
 import SelectRegisterSingle from '../Select/SelectRegisterSingle'
 // Campos 
 import { estadoCivil } from '../../GlobalConst/estadoCivilCampos'
-// import { vinculo } from '../../GlobalConst/vinculoCampos'
 
 // Context
 import {useCampos } from '../../context/campos'
@@ -21,6 +20,13 @@ interface CargarVictimaProps {
   errors: FieldErrors;
   watch: any;
 }
+
+type Radio = {
+    value: string;
+    nombre: string;
+    id?: string;
+}
+
 
 function CargarVictima({watch, register, setValue, errors }: CargarVictimaProps) {
   // Estados
@@ -39,37 +45,38 @@ function CargarVictima({watch, register, setValue, errors }: CargarVictimaProps)
     }
   }, [isHijos])
 
-  const opcionesCondicionDeVulnerabilidad = [
+  const opcionesCondicionDeVulnerabilidad: Radio[] = [
     { nombre: 'Sí', value: 'si', id: "si_asistida" },
     { nombre: 'No', value: 'no', id: "no_asistida" },
   ]
 
-  const opcionesConvivencia = [
+  const opcionesConvivencia: Radio[] = [
     { nombre: 'Sí', value: 'si', id: "si_convivencia" },
     { nombre: 'No', value: 'no', id: "no_convivencia" },
   ]
 
-  const opcionesHijos = [
+  const opcionesHijos: Radio[] = [
     { nombre: 'Sí', value: 'si', id: "si_hijos" },
     { nombre: 'No', value: 'no', id: "no_hijos" },
   ]
 
-  const opcionesDependenciaEconomica = [
+  const opcionesDependenciaEconomica: Radio[] = [
     { nombre: 'Sí', value: 'si', id: "si_dependencia_economica" },
     { nombre: 'No', value: 'no', id: "no_dependencia_economica" },
   ]
+
   return (
     <div className='w-full lg:w-6/10'>
       <div className='flex flex-col md:flex-row my-2'>
-        <InputRegister campo="Nombre" nombre="nombre_victima" register={register} setValue={setValue}  error={errors.nombre_victima} />
-        <InputRegister campo="Apellido" nombre="apellido_victima" register={register} setValue={setValue}  error={errors.apellido_victima} />
+        <InputText campo="Nombre" nombre="nombre_victima" register={register} setValue={setValue}  error={errors.nombre_victima} />
+        <InputText campo="Apellido" nombre="apellido_victima" register={register} setValue={setValue}  error={errors.apellido_victima} />
         <SelectRegisterSingle campo="Género" nombre="genero_victima" opciones={generos} setValue={setValue} error={errors.genero_victima} />
       </div>
 
       <div className='flex flex-col md:flex-row my-2'>
         <InputNumber campo="Edad" nombre="edad_victima" require={false} register={register} setValue={setValue} error={errors.edad_victima} maxLenght={2} />
         <InputNumber campo="DNI" nombre="dni_victima" require={false} register={register} setValue={setValue} error={errors.dni_victima} maxLenght={8} />
-        <InputRegister campo="Domicilio" nombre="direccion_victima" require={false} register={register} setValue={setValue}  error={errors.direccion_victima} />
+        <InputText campo="Domicilio" nombre="direccion_victima" require={false} register={register} setValue={setValue}  error={errors.direccion_victima} />
       </div>
       <div className='flex flex-col xl:flex-row my-2'>
         <SelectRegisterSingle campo="Estado Civil" nombre="estado_civil_victima" opciones={estadoCivil} setValue={setValue} error={errors.estado_civil_victima} />
@@ -80,7 +87,7 @@ function CargarVictima({watch, register, setValue, errors }: CargarVictimaProps)
       </div>
       <div className='flex flex-col my-2'>
         <span className='ml-4 font-medium'>Condición de vulnerabilidad</span>
-        <InputRadio watch={watch} handleChange={setIsCondicionVulnerabilidad} campo="condicion_de_vulnerabilidad" nombre="condicion_de_vulnerabilidad" register={register} type="radio" opciones={opcionesCondicionDeVulnerabilidad} defaultValue={1} />
+        <InputRadio watch={watch} handleChange={setIsCondicionVulnerabilidad} campo="condicion_de_vulnerabilidad" nombre="condicion_de_vulnerabilidad" register={register} opciones={opcionesCondicionDeVulnerabilidad} defaultValue={1} />
         {isCondicionVulnerabilidad && 
         <div className={`grid grid-cols-1 md:grid-cols-3 my-2 bg-slate-100 border-2 md:border-0  border-slate-500 md:bg-white rounded-md`}>
         <InputCheckbox campo="Embarazo" nombre="embarazo" register={register} setValue={setValue}  error={errors.embarazo} id="dependencia_economica" />
@@ -96,15 +103,15 @@ function CargarVictima({watch, register, setValue, errors }: CargarVictimaProps)
       </div>
       <div className='flex flex-col my-2'>
         <span className='ml-4 font-medium'>¿Comparten vivienda?</span>      
-        <InputRadio campo="convivencia" nombre="convivencia" register={register} type="radio" opciones={opcionesConvivencia} defaultValue={1} />
+        <InputRadio campo="convivencia" nombre="convivencia" register={register} opciones={opcionesConvivencia} defaultValue={1} />
       </div>
       <div className='flex flex-col my-2'>
         <span className='ml-4 font-medium'>¿Hay Dependencia económica?</span>      
-        <InputRadio campo="dependencia_economica" nombre="dependencia_economica" register={register} type="radio" opciones={opcionesDependenciaEconomica} defaultValue={1} />
+        <InputRadio campo="dependencia_economica" nombre="dependencia_economica" register={register} opciones={opcionesDependenciaEconomica} defaultValue={1} />
       </div>
       <div className='flex flex-col my-2'>
         <span className='ml-4 font-medium'>Hijos</span>
-        <InputRadio watch={watch} handleChange={setIsHijos} campo="hijos" nombre="hijos" register={register} type="radio" opciones={opcionesHijos} defaultValue={1} />
+        <InputRadio watch={watch} handleChange={setIsHijos} campo="hijos" nombre="hijos" register={register} opciones={opcionesHijos} defaultValue={1} />
       </div>
       {isHijos &&
         <div className='bg-slate-100 border-2 md:border-0  border-slate-500 md:bg-white rounded-md'>

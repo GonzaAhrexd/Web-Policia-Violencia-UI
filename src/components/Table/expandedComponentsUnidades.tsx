@@ -5,13 +5,12 @@ import { customStyles } from '../../GlobalConst/customStyles';
 import Swal from 'sweetalert2';
 // Componentes
 import columnsUnidades from './columnsTablaUnidades';
-import InputRegister from '../InputComponents/InputRegister';
+import InputText from '../InputComponents/InputText';
 // Iconos
 import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outline'
 import expandedComponentsMunicipios from './Comisarias/expandedComponentMunicipios';
 // Hooks
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
 
 // Backend 
 import { editarUnidad, agregarMunicipio } from '../../api/CRUD/unidades.crud';
@@ -72,8 +71,8 @@ function expandedComponentsUnidades({ data }: expandedComponentsUnidadesProps) {
                             }
                             )}
                         >
-                            <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Nombre" nombre="nombre_unidad" register={register} error={errors.nombre} valor={data.nombre } setValue={setValue} />
-                            <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Valor" nombre="valor_unidad" register={register} error={errors.valor} valor={data.value} setValue={setValue} />
+                            <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Nombre" nombre="nombre_unidad" register={register} error={errors.nombre} valor={data.nombre } setValue={setValue} />
+                            <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Valor" nombre="valor_unidad" register={register} error={errors.valor} valor={data.value} setValue={setValue} />
                             <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full xl:w-3/10 mr-2'>
                                 Editar Unidad
                             </button>
@@ -119,12 +118,12 @@ function expandedComponentsUnidades({ data }: expandedComponentsUnidadesProps) {
                         }
                         )}
                     >
-                        <InputRegister campo="Nombre" nombre="nombre_municipio" register={register} error={errors.nombre_municipio} />
-                        <InputRegister campo="Valor" nombre="valor_municipio" register={register} error={errors.valor_municipio} />
-                        <InputRegister campo="Prefijo" nombre="prefijo_municipio" register={register} error={errors.prefijo_municipio} require={false} />
-                        <InputRegister campo="Teléfono" nombre="telefono_municipio" register={register} error={errors.telefono_municipio} require={false} />
-                        <InputRegister campo="Dirección" nombre="direccion_municipio" register={register} error={errors.direccion_municipio} require={false} />
-                        <InputRegister campo="Supervisión" nombre="supervision_municipio" register={register} error={errors.supervision_municipio} require={false} />
+                        <InputText campo="Nombre" nombre="nombre_municipio" register={register} error={errors.nombre_municipio} />
+                        <InputText campo="Valor" nombre="valor_municipio" register={register} error={errors.valor_municipio} />
+                        <InputText campo="Prefijo" nombre="prefijo_municipio" register={register} error={errors.prefijo_municipio} require={false} />
+                        <InputText campo="Teléfono" nombre="telefono_municipio" register={register} error={errors.telefono_municipio} require={false} />
+                        <InputText campo="Dirección" nombre="direccion_municipio" register={register} error={errors.direccion_municipio} require={false} />
+                        <InputText campo="Supervisión" nombre="supervision_municipio" register={register} error={errors.supervision_municipio} require={false} />
 
                         <div className='flex flex-row w-full items-center justify-center'>
                             <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-4/10 xl:w-3/10 mr-2'>

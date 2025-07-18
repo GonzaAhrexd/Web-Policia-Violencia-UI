@@ -14,7 +14,7 @@ import { tiposDeViolenciaText, tiposModalidades } from '../../GlobalConst/modalT
 // Backend
 import { getCoords } from '../../api/coordinates'
 // Componentes
-import InputRegister from '../InputComponents/InputRegister'
+import InputText from '../InputComponents/InputText'
 import SelectCargaDenuncias from '../Select/SelectCargaDenuncias'
 import SelectRegisterSingle from '../Select/SelectRegisterSingle'
 import InputCheckbox from '../InputComponents/InputCheckbox'
@@ -28,16 +28,21 @@ import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
 // Contexto
 import { useCampos } from '../../context/campos'
 
+// Tipos
+import Denuncia from '../../types/Denuncia';
+import Tercero from '../../types/Tercero';
+import { FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+
 // Props
 interface denunciaProps {
-  register: any
-  setValue: any
+    register: UseFormRegister<FieldValues>;
+    setValue?: UseFormSetValue<FieldValues>;
   errors: any
   handleOpenModal: any
   setTitulo: any
-  datos: any
+  datos: Denuncia
   datosGeograficos: any
-  datosTerceros: any
+  datosTerceros: Tercero
   setIsSolicitudAprehension: any
 }
 
@@ -150,8 +155,8 @@ useEffect(() => {
 
   return (
     <div className='w-full'>
-      <InputRegister campo="" nombre="denuncia_id" register={register} setValue={setValue}  error={errors._id} valor={datos._id} />
-      <InputRegister campo="" nombre="tercero_ID" register={register} setValue={setValue}  error={errors.tercero_ID} valor={datos.tercero_ID ? datos.tercero_ID : "No hay tercero"} />
+      <InputText campo="" nombre="denuncia_id" register={register} setValue={setValue}  error={errors._id} valor={datos._id} hidden/>
+      <InputText campo="" nombre="tercero_ID" register={register} setValue={setValue}  error={errors.tercero_ID} valor={datos.tercero_ID ? datos.tercero_ID : "No hay tercero"} hidden/>
       <h1 className='text-2xl my-5'>Hecho</h1>
       <div className='flex flex-col xl:flex-row'>
         <InputDate valor={new Date(datos.fecha).toISOString().slice(0, 10)} campo="Fecha" nombre="fecha" register={register}  error={errors.fecha} />
@@ -175,8 +180,8 @@ useEffect(() => {
 
       <div className='flex flex-col md:flex-row my-2'>
         <SelectRegisterSingle isRequired={false} valor={datos.juzgado_interviniente} campo="Organismo judicial interviniente" nombre="juzgado_interviniente" opciones={juzgadoIntervinente} setValue={setValue}  error={errors.juzgado_interviniente} />
-        <InputRegister require={false} valor={datos.juzgado_interviniente_numero} campo="Número del organismo judicial" nombre="juzgado_interviniente_numero" register={register} setValue={setValue} error={errors.juzgado_interviniente_numero} />
-        <InputRegister customSize='flex flex-col w-full md:w-full' campo="Dependencia Derivada" nombre="dependencia_derivada" register={register} setValue={setValue} error={errors.dependencia_derivada} valor={datos.dependencia_derivada} />
+        <InputText require={false} valor={datos.juzgado_interviniente_numero} campo="Número del organismo judicial" nombre="juzgado_interviniente_numero" register={register} setValue={setValue} error={errors.juzgado_interviniente_numero} />
+        <InputText customSize='flex flex-col w-full md:w-full' campo="Dependencia Derivada" nombre="dependencia_derivada" register={register} setValue={setValue} error={errors.dependencia_derivada} valor={datos.dependencia_derivada} />
       </div>
       <div className='flex flex-col md:flex-row my-2' >
         <SelectRegisterSingle isRequired={false} valor={datos.violencia} campo="Violencia" nombre="violencia" opciones={opcionesViolencia} setValue={setValue} error={errors.violencia} />
@@ -249,12 +254,12 @@ useEffect(() => {
         {isDenunciadoPorTercero &&
           <>
             <div className='flex flex-col md:flex-row'>
-              <InputRegister valor={datosTerceros[0].valor} campo="Nombre" nombre="nombre_tercero" register={register} setValue={setValue}  error={errors.nombre} />
-              <InputRegister valor={datosTerceros[1].valor} campo="Apellido" nombre="apellido_tercero" register={register} setValue={setValue}  error={errors.apellido} />
-              <InputRegister valor={datosTerceros[2].valor} campo="DNI" nombre="dni_tercero" register={register} setValue={setValue}  error={errors.DNI} />
+              <InputText valor={datosTerceros.nombre} campo="Nombre" nombre="nombre_tercero" register={register} setValue={setValue}  error={errors.nombre} />
+              <InputText valor={datosTerceros.apellido} campo="Apellido" nombre="apellido_tercero" register={register} setValue={setValue}  error={errors.apellido} />
+              <InputText valor={datosTerceros.DNI} campo="DNI" nombre="dni_tercero" register={register} setValue={setValue}  error={errors.DNI} />
             </div>
             <div className='flex flex-col'>
-              <SelectRegisterSingle isRequired={false} valor={datosTerceros[3].valor} campo="Vínculo con la víctima" nombre="vinculo_con_la_victima" opciones={vinculo} setValue={setValue} error={errors.vinculo_con_agresor} />
+              <SelectRegisterSingle isRequired={false} valor={datos.vinculo_con_la_victima_tercero} campo="Vínculo con la víctima" nombre="vinculo_con_la_victima" opciones={vinculo} setValue={setValue} error={errors.vinculo_con_agresor} />
             </div>
           </>
         }

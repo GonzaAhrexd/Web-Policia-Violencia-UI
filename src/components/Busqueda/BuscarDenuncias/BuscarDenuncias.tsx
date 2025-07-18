@@ -1,5 +1,5 @@
 // Componentes
-import InputRegister from '../../InputComponents/InputRegister';
+import InputText from '../../InputComponents/InputText';
 import InputCheckbox from '../../InputComponents/InputCheckbox';
 // import SelectDivisionMunicipios from '../../Select/SelectDivisionMunicipios';
 import InputDateRange from '../../InputComponents/InputDateRange';
@@ -92,8 +92,8 @@ function BuscarDenuncias() {
                     }
                     )}>
                 <InputDateRange register={register} setValue={setValue} isRequired={isDateRangeRequired} />
-                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="ID" nombre="id_denuncia" register={register} error={errors.id_denuncia} require={false} />
-                <InputRegister customSize='flex flex-col w-full xl:w-1/2' campo="Número de expediente" nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false} />
+                <InputText customSize="flex flex-col w-full xl:w-1/2" campo="ID" nombre="id_denuncia" register={register} error={errors.id_denuncia} require={false} />
+                <InputText customSize='flex flex-col w-full xl:w-1/2' campo="Número de expediente" nombre="numero_de_expediente" register={register} error={errors.numero_de_expediente} require={false} />
                 <div className='flex flex-col xl:flex-row w-full items-center justify-center'>
                     <SelectRegisterSingle isRequired={false} campo="Relación entre víctima y victimario" nombre="relacion_victima_victimario" opciones={vinculoCampos} setValue={setValue} error={errors.relacion_victima_victimario} />
                 </div>
@@ -103,8 +103,8 @@ function BuscarDenuncias() {
                     </div>
                 }
                 <div>
-                    <InputCheckbox campo="Aprehensión" nombre="aprehension" register={register} error={errors.aprehension} id="aprehension_busqueda" setValue={setValue}></InputCheckbox>
-                    <InputCheckbox campo="Falta rellenar el expediente" nombre="is_expediente_completo" register={register} error={errors.is_expediente_completo} id="is_expediente_completo" setValue={setValue}></InputCheckbox>
+                    <InputCheckbox campo="Aprehensión" nombre="aprehension" register={register} error={errors.aprehension} id="aprehension_busqueda" setValue={setValue} />
+                    <InputCheckbox campo="Falta rellenar el expediente" nombre="is_expediente_completo" register={register} error={errors.is_expediente_completo} id="is_expediente_completo" setValue={setValue} />
                 </div>
                 <button className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10"> Buscar</button>
             </form>

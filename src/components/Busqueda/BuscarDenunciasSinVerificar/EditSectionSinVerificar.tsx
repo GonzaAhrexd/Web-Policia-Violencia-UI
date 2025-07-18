@@ -206,7 +206,7 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
             <InputCheckbox disabled={!isSolicitudAprehension} campo="Aprehensión" nombre="aprehension" register={register} setValue={setValue}  id="aprehension" />
           </div>
           <div className='flex flex-col items-center w-6/10'>
-            <InputTextArea variante={"edit"} valor={datos.observaciones} campo="" nombre="observaciones" setValue={setValue} register={register}  />
+            <InputTextArea edit valor={datos.observaciones} campo="" nombre="observaciones" setValue={setValue} register={register}  />
           </div>
         </div>
         <div className='flex flex-col md:flex-row items-center justify-center w-full my-2'>

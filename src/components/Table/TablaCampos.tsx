@@ -6,7 +6,7 @@ import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline"
 // Bibliotecas
 import Swal from "sweetalert2"
 // Componentes
-import InputRegister from "../InputComponents/InputRegister"
+import InputText from "../InputComponents/InputText"
 // API
 import { agregarCampo, editarCampo, eliminarCampo } from "../../api/CRUD/campos.crud"
 
@@ -87,9 +87,9 @@ function TablaCampos({ campos, tipo }: TablaCamposProps) {
                 >
                     <div className="flex flex-col w-full md:w-3/4">
                         <h1 className="text-4xl">Edición</h1>
-                        <InputRegister customSize="flex flex-col w-full md:w-full" campo="Campo" nombre="campo" register={register} setValue={setValue} error={errors.campo} valor={toEdit?.nombre}
+                        <InputText customSize="flex flex-col w-full md:w-full" campo="Campo" nombre="campo" register={register} setValue={setValue} error={errors.campo} valor={toEdit?.nombre}
                         />
-                        <InputRegister customSize="flex flex-col w-full md:w-full" campo="Valor" nombre="value" register={register} setValue={setValue} error={errors.value} valor={toEdit?.value}
+                        <InputText customSize="flex flex-col w-full md:w-full" campo="Valor" nombre="value" register={register} setValue={setValue} error={errors.value} valor={toEdit?.value}
                         />
                     </div>
                     <button className="bg-sky-900 hover:bg-sky-700 text-white font-bold py-2 px-4 m-1 rounded w-full md:w-3/4">Guardar</button>
@@ -145,9 +145,9 @@ function TablaCampos({ campos, tipo }: TablaCamposProps) {
                                     )
                                 })}>
                                 <div className="flex flex-col w-full md:w-3/4">
-                                    <InputRegister customSize="flex flex-col w-full md:w-full" campo="Campo" nombre="campo" register={register} error={errors.campo}
+                                    <InputText customSize="flex flex-col w-full md:w-full" campo="Campo" nombre="campo" register={register} error={errors.campo}
                                     />
-                                    <InputRegister customSize="flex flex-col w-full md:w-full" campo="Valor" nombre="value" register={register} error={errors.value}
+                                    <InputText customSize="flex flex-col w-full md:w-full" campo="Valor" nombre="value" register={register} error={errors.value}
                                     />
                                 </div>
                                 <div className="w-7/10 flex flex-row">

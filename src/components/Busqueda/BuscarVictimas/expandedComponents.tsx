@@ -29,9 +29,11 @@ import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outl
 import { useAuth } from '../../../context/auth';
 import ModoImprimir from '../ModoImprimir/ModoImprimir';
 
+import Victima from '../../../types/Victimas';
+
 // Props
 interface expandedComponentsProps {
-    data: any
+    data: Victima
 }
 
 
@@ -74,7 +76,6 @@ function expandedComponents({ data }: expandedComponentsProps) {
     ]
     // Mostrar datos de los hijos
     const hijosVictima = [
-        { nombre: "Dependencia económica", valor: data?.hijos?.dependencia_economica },
         { nombre: "Mayores de edad", valor: data?.hijos?.mayores_de_edad },
         { nombre: "Menores de edad", valor: data?.hijos?.menores_de_edad },
         { nombre: "Menores discapacitados", valor: data?.hijos?.menores_discapacitados },
@@ -187,7 +188,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
                                 }
                             })
                         })}>
-                    <EditVictima onlyVictima watch={watch} datos={data} register={register} setValue={setValue} errors={errors} />
+                    <EditVictima onlyVictima datos={data} register={register} setValue={setValue} watch={watch} errors={errors} />
                     <div className='flex flex-col md:flex-row items-center justify-center w-full my-2'>
                         <div className='bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-6/10 md:w-2/10 flex items-center justify-center mt-2 md:mt-0 mx-2' onClick={() => setEditGlobal(!editGlobal)}>
                             <XMarkIcon className="w-7" />

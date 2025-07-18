@@ -7,7 +7,7 @@ import { jerarquiaCampos } from '../../GlobalConst/jerarquiaCampos';
 //import { unidadCampos } from '../../GlobalConst/unidadCampos';
 import { zonaCampos } from '../../GlobalConst/zonaCampos';
 // Componentes
-import InputRegister from '../InputComponents/InputRegister'
+import InputText from '../InputComponents/InputText'
 import InputNumber from '../InputComponents/InputNumber'
 import SelectRegisterSingle from '../Select/SelectRegisterSingle'
 // Backend
@@ -54,7 +54,7 @@ function CardEditDatadatos({ datos, setIsEditing }: InputRegisterProps) {
                             cancelButtonText: 'Cancelar'
                         }).then(async (result: any) => {
                             if (result.isConfirmed) {
-                                values.id = datos._id
+                                values._id = datos._id
                                 // Edita el perfil
                                 const response = await editUser(values);
                                 // Si esta da respuesta, recarga la página
@@ -71,16 +71,16 @@ function CardEditDatadatos({ datos, setIsEditing }: InputRegisterProps) {
                     }
                 })}>
                 <div className='flex flex-col md:flex-row'>
-                    <InputRegister disabled campo="Nombre" nombre="nombre" register={register} setValue={setValue} error={errors.nombre} valor={datos.nombre} />
-                    <InputRegister disabled campo="Apellido" nombre="apellido" register={register} setValue={setValue} error={errors.apellido} valor={datos.apellido} />
+                    <InputText disabled campo="Nombre" nombre="nombre" register={register} setValue={setValue} error={errors.nombre} valor={datos.nombre} />
+                    <InputText disabled campo="Apellido" nombre="apellido" register={register} setValue={setValue} error={errors.apellido} valor={datos.apellido} />
                 </div>
                 <div className='flex flex-col md:flex-row'>
                     <InputNumber require={false} campo="Teléfono" nombre="telefono" placeholder={datos.telefono} register={register} setValue={setValue} error={errors.telefono} valor={datos.telefono} maxLenght={14} />
                 </div>
 
                 <div className='flex flex-col md:flex-row'>
-                    <InputRegister require={false} campo="N° de Credencial" nombre="credencial" register={register} setValue={setValue} error={errors.credencial} valor={datos.credencial} />
-                    <InputRegister require={false} campo="N° de Plaza" nombre="plaza" register={register} setValue={setValue} error={errors.plaza} valor={datos.plaza} />
+                    <InputText require={false} campo="N° de Credencial" nombre="credencial" register={register} setValue={setValue} error={errors.credencial} valor={datos.credencial} />
+                    <InputText require={false} campo="N° de Plaza" nombre="plaza" register={register} setValue={setValue} error={errors.plaza} valor={datos.plaza} />
                 </div>
                 <div className='flex flex-col md:flex-row'>
                     <SelectRegisterSingle valor={datos.jerarquia} campo="Jerarquía" nombre="jerarquia" opciones={jerarquiaCampos} setValue={setValue} error={errors.jerarquia} isRequired={false} />
@@ -88,7 +88,7 @@ function CardEditDatadatos({ datos, setIsEditing }: InputRegisterProps) {
                 </div>
                 <div>
                     <span>¿División Violencia Familiar y de Género?</span>
-                    <InputRadio watch={watch} defaultValue={isDivision ? 0 : 1} handleChange={setDivision} campo="violencia_familiar" nombre="violencia_familiar" register={register} type="radio" opciones={opcionesRadio} />
+                    <InputRadio watch={watch} defaultValue={isDivision ? 0 : 1} handleChange={setDivision} campo="violencia_familiar" nombre="violencia_familiar" register={register} opciones={opcionesRadio} />
 
                 </div>
                 {isDivision ?

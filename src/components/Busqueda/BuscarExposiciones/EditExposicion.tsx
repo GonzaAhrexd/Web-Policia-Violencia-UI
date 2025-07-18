@@ -54,7 +54,7 @@ function EditExposicion({datos, setEditMode }: EditExposicionProps) {
               </div>
               <h1 className='text-2xl my-5'>Denuncia</h1>
               <div className='flex justify-center'>
-              <InputTextArea variante={"edit"} valor={datos.observaciones} campo="" nombre="observaciones" setValue={setValue} register={register}  />
+              <InputTextArea edit valor={datos.observaciones} campo="" nombre="observaciones" setValue={setValue} register={register}  />
               </div>
               <div className="flex justify-center my-3">
                 <div className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10 flex flex-col items-center justify-center cursor-pointer' onClick={() => setEditMode(false)}>Cancelar</div>

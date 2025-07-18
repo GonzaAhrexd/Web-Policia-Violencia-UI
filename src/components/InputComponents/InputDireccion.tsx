@@ -2,19 +2,19 @@
 import { useEffect, useState } from 'react'
 // Iconos
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
+import { FieldError, FieldErrorsImpl, FieldValues, Merge, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 interface InputRegisterProps {
     campo: string;
     nombre: string;
-    register: any;
-    error: any;
-    variante?: any;
+    setValue: UseFormSetValue<FieldValues>;
+    register: UseFormRegister<FieldValues>;
+    error: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
     valor?: any;
     placeholder?: string;
-    setValue?: any;
     require?: boolean;
     state: any;
-    setState: any;
+    setState: (value: string) => void;
 }
 
 function InputDireccion ({state, setState, campo, nombre, register, error, require, valor, placeholder, setValue }: InputRegisterProps) {

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { UseFormRegister, UseFormSetValue, FieldErrors } from 'react-hook-form';
 
 // Componentes
-import InputRegister from '../InputComponents/InputRegister'
+import InputText from '../InputComponents/InputText'
 import SelectCargaDenuncias from '../Select/SelectCargaDenuncias'
 import SelectRegisterSingle from '../Select/SelectRegisterSingle'
 import InputCheckbox from '../InputComponents/InputCheckbox'
@@ -158,7 +158,7 @@ function CargarDenuncia({ fecha, modoActuacion, setTitulo, handleOpenModal, regi
 
       <div className='flex flex-col md:flex-row my-2'>
         <SelectRegisterSingle isRequired={true} campo="Organismo judicial interviniente" nombre="juzgado_interviniente" opciones={juzgadoIntervinente} setValue={setValue} error={errors.juzgado_interviniente} />
-        <InputRegister require={false} campo="Número del organismo judicial" nombre="juzgado_interviniente_numero" register={register} setValue={setValue} error={errors.juzgado_interviniente_numero} />
+        <InputText require={false} campo="Número del organismo judicial" nombre="juzgado_interviniente_numero" register={register} setValue={setValue} error={errors.juzgado_interviniente_numero} />
       </div>
       <div className='flex flex-col md:flex-row my-2' >
         <SelectRegisterSingle campo="Violencia" nombre="violencia" opciones={opcionesViolencia} setValue={setValue} error={errors.violencia} />
@@ -217,7 +217,7 @@ function CargarDenuncia({ fecha, modoActuacion, setTitulo, handleOpenModal, regi
         <InputCheckbox setHook={setIsCeseDeHostigamiento} disabled={isNinguna} campo="Cese de hostigamiento" nombre="cese_de_hostigamiento" register={register} setValue={setValue} id="cese_de_hostigamiento" />
         <InputCheckbox setHook={setIsNinguna} disabled={(isProhibicion || isBoton || isExclusion || isSolicitud || isExpedientes || isLibertad || isCeseDeHostigamiento || isNotificacionExpediente)} campo="Ninguna" nombre="ninguna" register={register} setValue={setValue} id="ninguna" />
       </div>
-      <InputRegister customSize="flex flex-col w-full md:w-full" campo="Dependencia Derivada" nombre="dependencia_derivada" register={register} setValue={setValue}  error={errors.dependencia_derivada} />
+      <InputText customSize="flex flex-col w-full md:w-full" campo="Dependencia Derivada" nombre="dependencia_derivada" register={register} setValue={setValue}  error={errors.dependencia_derivada} />
       <div className='flex flex-col '>
         <span className='ml-4 font-medium'> Denunciado por tercero</span>
         <div className='flex flex-col md:flex-row'>
@@ -231,14 +231,14 @@ function CargarDenuncia({ fecha, modoActuacion, setTitulo, handleOpenModal, regi
             </div>
             {!setTercero ?
               <div className='flex flex-col md:flex-row'>
-                <InputRegister campo="Nombre" nombre="nombre_tercero" register={register} setValue={setValue}  error={errors.nombre_tercero} />
-                <InputRegister campo="Apellido" nombre="apellido_tercero" register={register} setValue={setValue}  error={errors.apellido_tercero} />
+                <InputText campo="Nombre" nombre="nombre_tercero" register={register} setValue={setValue}  error={errors.nombre_tercero} />
+                <InputText campo="Apellido" nombre="apellido_tercero" register={register} setValue={setValue}  error={errors.apellido_tercero} />
                 <InputNumber maxLenght={8} campo="DNI" nombre="dni_tercero" register={register} setValue={setValue} error={errors.dni_tercero} />
               </div>
               :
               <div className='flex flex-col md:flex-row'>
-                <InputRegister valor={setTercero.nombre} campo="Nombre" nombre="nombre_tercero" register={register} setValue={setValue} error={errors.nombre} />
-                <InputRegister valor={setTercero.apellido} campo="Apellido" nombre="apellido_tercero" register={register} setValue={setValue} error={errors.apellido} />
+                <InputText valor={setTercero.nombre} campo="Nombre" nombre="nombre_tercero" register={register} setValue={setValue} error={errors.nombre} />
+                <InputText valor={setTercero.apellido} campo="Apellido" nombre="apellido_tercero" register={register} setValue={setValue} error={errors.apellido} />
                 <InputNumber maxLenght={8} valor={setTercero.DNI} campo="DNI" nombre="dni_tercero" register={register} setValue={setValue} error={errors.DNI} />
               </div>
             }

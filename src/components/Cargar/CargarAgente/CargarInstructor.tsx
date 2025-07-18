@@ -1,7 +1,7 @@
 // Hooks
 import { UseFormRegister, UseFormSetValue, FieldErrors } from 'react-hook-form';
 // Componentes
-import InputRegister from '../../InputComponents/InputRegister'
+import InputText from '../../InputComponents/InputText'
 import SelectRegisterSingle from '../../Select/SelectRegisterSingle'
 // Campos 
 import { jerarquiaCampos } from '../../../GlobalConst/jerarquiaCampos';
@@ -25,7 +25,7 @@ function CargarInstructorYSecretario({ register, setValue, errors }: CargarVicti
       <div className='flex justify-center'>
         <div className='w-full lg:w-8/10 xl:w-6/10'>
           <div className='flex flex-col lg:flex-row my-2'>
-            <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Nombre y apellido" nombre="nombre_completo_instructor" register={register} setValue={setValue}error={errors.nombre_completo_instructor} />
+            <InputText customSize="flex flex-col md:w-full xl:w-1/2" campo="Nombre y apellido" nombre="nombre_completo_instructor" register={register} setValue={setValue}error={errors.nombre_completo_instructor} />
             <SelectRegisterSingle campo='Jerarquía' nombre="jerarquia_instructor" opciones={jerarquiaCampos} setValue={setValue}  error={errors.jerarquia_instructor} />
           </div>
         </div>
@@ -34,9 +34,9 @@ function CargarInstructorYSecretario({ register, setValue, errors }: CargarVicti
       <div className='flex justify-center'>
         <div className='w-full lg:w-8/10 xl:w-6/10'>
           <div className='flex flex-col lg:flex-row my-2'>
-            <InputRegister customSize="flex flex-col md:w-full xl:w-1/2" campo="Nombre y apellido" nombre="nombre_completo_secretario" register={register} setValue={setValue} error={errors.nombre_completo_instructor} />
+            <InputText customSize="flex flex-col md:w-full xl:w-1/2" campo="Nombre y apellido" nombre="nombre_completo_secretario" register={register} setValue={setValue} error={errors.nombre_completo_instructor} />
             <SelectRegisterSingle campo='Jerarquía' nombre="jerarquia_secretario" opciones={jerarquiaCamposSinCivil} setValue={setValue}  error={errors.jerarquia_instructor} />
-            <InputRegister require={false} customSize="flex flex-col md:w-full xl:w-1/2" campo="Plaza" nombre="plaza_secretario" register={register} setValue={setValue} error={errors.plaza} />
+            <InputText require={false} customSize="flex flex-col md:w-full xl:w-1/2" campo="Plaza" nombre="plaza_secretario" register={register} setValue={setValue} error={errors.plaza} />
           </div>
         </div>
       </div>

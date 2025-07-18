@@ -16,7 +16,7 @@ import CargarInstructorYSecretario from "../CargarAgente/CargarInstructor"
 import CargarPreguntas from "../CargarAgente/CargarPreguntas"
 import InputExpediente from "../../InputComponents/InputExpediente"
 import InputDate from "../../InputComponents/InputDate"
-import InputRegister from "../../InputComponents/InputRegister"
+import InputText from "../../InputComponents/InputText"
 import InputTextArea from "../../InputComponents/InputTextArea"
 import PDF from "../../ReactPDF/PDFAmpliacion"
 // API
@@ -179,8 +179,8 @@ function CargarAmpliacion({ data, setAmpliarDenuncia }: CargarAmpliacionProps) {
         <div className='flex flex-row w-full justify-center'>
           <div className='flex flex-row w-full lg:w-8/10 xl:w-6/10'>
             <InputDate campo="Fecha" nombre="fecha" register={register} error={errors.fecha} />
-            <InputRegister valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
-            <InputRegister valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
+            <InputText valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
+            <InputText valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
           </div>
         </div>
         <h2 className="text-2xl my-5 font-sans">Víctima</h2>
@@ -190,7 +190,7 @@ function CargarAmpliacion({ data, setAmpliarDenuncia }: CargarAmpliacionProps) {
         <h1 className='text-2xl my-5'>Denuncia</h1>
         <div className="flex flex-col w-full items-center justify-center">
           <div className='flex flex-col items-center w-2/3 justify-center '>
-            <InputTextArea variante={"edit"} valor={data.observaciones} campo="" nombre="observaciones" setValue={setValue} register={register}/>
+            <InputTextArea edit valor={data.observaciones} campo="" nombre="observaciones" setValue={setValue} register={register}/>
           </div>
         </div>
         <h1 className='text-2xl my-5'>Preguntas</h1>

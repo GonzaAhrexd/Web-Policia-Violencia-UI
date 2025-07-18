@@ -113,7 +113,7 @@ function CargarDenuncias() {
               })
             }>
               <SelectRegisterSingle campo="Apartado" nombre="apartado" opciones={apartado} setValue={setValue} error={errors.apartado} />
-              <InputTextArea variante="edit" register={register} campo="Descripción" nombre="descripcion" />
+              <InputTextArea edit register={register} campo="Descripción" nombre="descripcion" />
               <div className="flex justify-center my-3">
                 <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-6/10' type="submit">Enviar</button>
               </div>

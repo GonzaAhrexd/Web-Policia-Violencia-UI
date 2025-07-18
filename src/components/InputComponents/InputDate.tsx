@@ -6,12 +6,13 @@ import { useState } from 'react'
 
 // Iconos
 import ExclamationCircleIcon from '@heroicons/react/24/outline/ExclamationCircleIcon';
+import { FieldError, FieldErrorsImpl, FieldValues, Merge, UseFormRegister } from 'react-hook-form';
 interface InputDateProps {
     campo: string;
     nombre: string;
-    register: any;
+    register: UseFormRegister<FieldValues>;
     placeholder?: string;
-    error: any;
+    error: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
     require?: boolean;
     valor?: string;
 }

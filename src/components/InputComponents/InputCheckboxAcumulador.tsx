@@ -13,13 +13,9 @@ type OpcionesCheckboxAcumulador = {
   defaultSelected?: string[];
 };
 
-function InputCheckboxAcumulador({
-  opciones,
-  setStringAcumulador,
-  stringAcumulador,
-  defaultSelected,
-}: OpcionesCheckboxAcumulador) {
-  // Inicializa stringAcumulador con defaultSelected si está vacío
+function InputCheckboxAcumulador({ opciones, setStringAcumulador, stringAcumulador, defaultSelected }: OpcionesCheckboxAcumulador) {
+  
+  // Inicializa stringAcumulador con defaultSelected si está vacío 
   useEffect(() => {
     if (defaultSelected && defaultSelected.length > 0 && !stringAcumulador.trim()) {
       // Normaliza defaultSelected eliminando espacios

@@ -1,6 +1,3 @@
-type ModalAddUserProps = {
-  setOpenModal: any
-}
 // Hooks
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
@@ -20,6 +17,15 @@ import { jerarquiaCampos } from '../../GlobalConst/jerarquiaCampos'
 import { zonaCampos } from '../../GlobalConst/zonaCampos'
 import { useCampos } from '../../context/campos'
 import { XCircleIcon } from '@heroicons/react/24/outline'
+
+// Tipos
+
+import Opcion from '../../types/OpcionesSelect'
+
+type ModalAddUserProps = {
+  setOpenModal: (value: boolean) => void;
+};
+
 
 function ModalAddUser({ setOpenModal }: ModalAddUserProps) {
   const { watch, register, handleSubmit, setValue, formState: { errors } } = useForm();
@@ -41,12 +47,12 @@ function ModalAddUser({ setOpenModal }: ModalAddUserProps) {
 
   const [division, setDivision] = useState(false);
 
-  const opcionesRadio = [
+  const opcionesRadio: Opcion[] = [
     { value: "si", nombre: "Sí" },
     { value: "no", nombre: "No" },
   ]
 
-  const rolesCampos = [
+  const rolesCampos: Opcion[] = [
     { nombre: 'Admin', value: 'admin' },
     { nombre: "Agente", value: 'agente' },
     { nombre: "Carga", value: 'carga' },
@@ -122,7 +128,7 @@ function ModalAddUser({ setOpenModal }: ModalAddUserProps) {
             <SelectRegisterSingle campo="Jerarquía" nombre="jerarquia" opciones={jerarquiaCampos} setValue={setValue} error={errors.jerarquia} />
             <SelectRegisterSingle campo="Zona" nombre="zona" opciones={zonaCampos} setValue={setValue} error={errors.zona} />
             <span>¿División Violencia Familiar y de Género?</span>
-            <InputRadio watch={watch} defaultValue={1} handleChange={setDivision} campo="violencia_familiar" nombre="violencia_familiar" register={register} type="radio" opciones={opcionesRadio} />
+            <InputRadio watch={watch} defaultValue={1} handleChange={setDivision} campo="violencia_familiar" nombre="violencia_familiar" register={register} opciones={opcionesRadio} />
 
             {division ?
               <SelectRegisterSingle notMunicipio notComisaria campo="Unidad" nombre="unidad" opciones={unidadCampos} setValue={setValue} />

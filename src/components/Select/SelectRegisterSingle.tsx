@@ -1,20 +1,17 @@
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
+import { FieldError, FieldErrorsImpl, FieldValues, Merge, UseFormSetValue } from 'react-hook-form';
 
-type Opcion = {
-    value: string;
-    nombre: string;
-    subdivisiones?: Opcion[]; // Opcional, indica que puede tener subniveles
-}
+import Opcion from '../../types/OpcionesSelect'
 
 type SelectRegisterSingleProps = {
     campo: string; // Etiqueta principal (e.g., "Género", "Tipo de Denuncia", "Unidad")
     nombre: string; // Nombre del campo principal para react-hook-form
     opciones: Opcion[]; // Opciones para el primer nivel de select
-    setValue: any; // De react-hook-form
-    error?: any; // Para mostrar errores de validación de react-hook-form
+    setValue: UseFormSetValue<FieldValues>;
+    error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>; // Para mostrar errores de validación de react-hook-form
     isRequired?: boolean;
-    valor?: any; // Valor predeterminado para el select principal
+    valor?: string; // Valor predeterminado para el select principal
     mid?: boolean; // Prop para estilos condicionales (width)
     // Props específicas para el caso de SelectRegister (con cascada)
     notComisaria?: boolean;

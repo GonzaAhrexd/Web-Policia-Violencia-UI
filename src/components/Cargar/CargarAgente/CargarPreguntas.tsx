@@ -47,24 +47,24 @@ function CargarPreguntas({genero, watch, tipoDenuncia, register }: CargarVictima
               asistencia psicológica las 24 horas del día de manera GRATUITA, y la Línea 102 ubicado en Avenida Sarmiento
               N° 1675, Ciudad de Resistencia.</p>
             <span className='ml-4 font-medium  my-2'> ¿Desea ser asistid{genero == "Femenino" ? "a" : "o"} por dicho organismo? </span>
-            <InputRadio campo="AsistidaPorDichoOrganismo" nombre="AsistidaPorDichoOrganismo" register={register}  type="radio" opciones={opcionesAsistidaPorDichoOrganismo} defaultValue={3} />
+            <InputRadio campo="AsistidaPorDichoOrganismo" nombre="AsistidaPorDichoOrganismo" register={register}  opciones={opcionesAsistidaPorDichoOrganismo} defaultValue={3} />
           </div>
         }
         <div className='flex flex-col my-2'>
           <span className='ml-4 font-medium  my-2'> ¿Desea ser examinad{genero == "Femenino" ? "a" : "o"} por el medico policial en turno? </span>
-          <InputRadio campo="ExaminadaMedicoPolicial" nombre="ExaminadaMedicoPolicial" register={register}  type="radio" opciones={opcionesExaminadaMedicoPolicial} defaultValue={3} />
+          <InputRadio campo="ExaminadaMedicoPolicial" nombre="ExaminadaMedicoPolicial" register={register}  opciones={opcionesExaminadaMedicoPolicial} defaultValue={3} />
         </div>
         <div className='flex flex-col my-2'>
           <span className='ml-4 font-medium  my-2'> ¿Desea accionar penalmente por el delito que diera lugar? </span>
-          <InputRadio campo="AccionarPenalmente" nombre="AccionarPenalmente" register={register}  type="radio" opciones={opcionesAccionarPenalmente} defaultValue={3} />
+          <InputRadio campo="AccionarPenalmente" nombre="AccionarPenalmente" register={register}  opciones={opcionesAccionarPenalmente} defaultValue={3} />
         </div>
         <div className='flex flex-col my-2'>
         <span className='ml-4 font-medium  my-2'> ¿Desea agregar, quitar o enmendar algo a lo expuesto precedentemente? </span>
-        <InputRadio handleChange={setIsAgregado} state={isAgregado} watch={watch} campo="AgregarQuitarOEnmendarAlgo" nombre="AgregarQuitarOEnmendarAlgo" register={register} type="radio" opciones={opcionesAgregarQuitarOEnmendarAlgo} defaultValue={3} />
+        <InputRadio handleChange={setIsAgregado} state={isAgregado} watch={watch} campo="AgregarQuitarOEnmendarAlgo" nombre="AgregarQuitarOEnmendarAlgo" register={register} opciones={opcionesAgregarQuitarOEnmendarAlgo} defaultValue={3} />
        </div>
         {isAgregado &&
         <div className='flex flex-col my-2'>
-          <InputTextArea variante={"edit"} campo="Agrega" nombre="agrega" register={register}></InputTextArea>
+          <InputTextArea edit campo="Agrega" nombre="agrega" register={register}></InputTextArea>
           </div>
         }
       </div>
@@ -74,11 +74,11 @@ function CargarPreguntas({genero, watch, tipoDenuncia, register }: CargarVictima
       <div className='w-full lg:w-6/10'>
       <div className='flex flex-col my-2'>
         <span className='ml-4 font-medium my-2'> ¿Desea agregar, quitar o enmendar algo a lo expuesto precedentemente? </span>
-        <InputRadio handleChange={setIsAgregado} state={isAgregado} watch={watch} campo="AgregarQuitarOEnmendarAlgo" nombre="AgregarQuitarOEnmendarAlgo" register={register} type="radio" opciones={opcionesAgregarQuitarOEnmendarAlgo} defaultValue={3} />
+        <InputRadio handleChange={setIsAgregado} state={isAgregado} watch={watch} campo="AgregarQuitarOEnmendarAlgo" nombre="AgregarQuitarOEnmendarAlgo" register={register} opciones={opcionesAgregarQuitarOEnmendarAlgo} defaultValue={3} />
        </div>
         {isAgregado &&
         <div className='flex flex-col my-2'>
-          <InputTextArea variante={"edit"} campo="Agrega" nombre="agrega" register={register} ></InputTextArea>
+          <InputTextArea edit campo="Agrega" nombre="agrega" register={register} ></InputTextArea>
           </div>
         }
       </div>

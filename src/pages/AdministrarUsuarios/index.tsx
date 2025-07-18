@@ -11,7 +11,7 @@ import DataTable from 'react-data-table-component';
 import NavBar from '../../components/NavBar'
 import Footer from '../../components/Footer/Footer';
 import LoadingScreen from '../../components/LoadingScreen';
-import InputRegister from '../../components/InputComponents/InputRegister';
+import InputText from '../../components/InputComponents/InputText';
 import SelectRegisterSingle from '../../components/Select/SelectRegisterSingle';
 import ModalAddUser from '../../components/Modal/ModalAddUser';
 // Backend
@@ -84,9 +84,9 @@ function index() {
                                 setListaDeUsuarios(usuarios)
                             }
                             )}>
-                        <InputRegister customSize="flex flex-col w-full xl:w-1/2" require={false} nombre="nombre_de_usuario" campo="Nombre de usuario" error={errors.nombre_de_usuario} register={register} setValue={setValue} />
-                        <InputRegister customSize="flex flex-col w-full xl:w-1/2" require={false} nombre="nombre" campo="Nombre" error={errors.nombre} register={register} setValue={setValue} />
-                        <InputRegister customSize="flex flex-col w-full xl:w-1/2" require={false} nombre="apellido" campo="Apellido" error={errors.apellido} register={register} setValue={setValue} />
+                        <InputText customSize="flex flex-col w-full xl:w-1/2" require={false} nombre="nombre_de_usuario" campo="Nombre de usuario" error={errors.nombre_de_usuario} register={register} setValue={setValue} />
+                        <InputText customSize="flex flex-col w-full xl:w-1/2" require={false} nombre="nombre" campo="Nombre" error={errors.nombre} register={register} setValue={setValue} />
+                        <InputText customSize="flex flex-col w-full xl:w-1/2" require={false} nombre="apellido" campo="Apellido" error={errors.apellido} register={register} setValue={setValue} />
                         <SelectRegisterSingle isRequired={false} nombre="rol" campo="Rol" opciones={opcionesRoles} setValue={setValue} error={errors.rol} />
                         <button className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10"> Buscar</button>
                     </form>

@@ -1,4 +1,5 @@
 type Victimario = {
+    _id: string;
     nombre: string;
     apellido: string;
     direccion?: string;

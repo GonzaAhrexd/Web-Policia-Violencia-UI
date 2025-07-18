@@ -1,13 +1,7 @@
 // Datos que se mostrarán en la tabla de denuncias
-type Row = {
-    nombre: string,
-    apellido: string,
-    DNI: string,
-    ocupacion: string,
-    edad: string,
-    estado_civil: string
-}
+import Victima from '../../../types/Victimas';
 
+type Row = Victima;
 /* 
 --------------------------------------------------------------------------------------------------------
     CAMPOS

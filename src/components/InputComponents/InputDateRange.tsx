@@ -6,6 +6,7 @@ import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import { CalendarIcon } from '@heroicons/react/24/outline';
 // Importar CSS
 import '../../App.css';
+import { FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 // Tipos
 type ValuePiece = Date | null;
@@ -13,8 +14,8 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 // Props
 interface InputDateRangeProps {
-  register?: any;
-  setValue: any;
+  setValue: UseFormSetValue<FieldValues>;
+  register: UseFormRegister<FieldValues>;
   isRequired: boolean;
 }
 

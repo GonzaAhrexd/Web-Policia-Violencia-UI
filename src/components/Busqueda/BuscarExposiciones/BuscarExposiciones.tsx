@@ -1,5 +1,5 @@
 // Componentes
-import InputRegister from '../../InputComponents/InputRegister';
+import InputText from '../../InputComponents/InputText';
 import InputDateRange from '../../InputComponents/InputDateRange';
 // Backend APIs
 import { buscarExposicion } from '../../../api/CRUD/exposicion.crud';
@@ -57,10 +57,10 @@ function BuscarExposiciones() {
                     }
                     )}>
                 <InputDateRange register={register} setValue={setValue} isRequired={isDateRangeRequired} />
-                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="ID" nombre="id_exposicion" register={register} error={errors.id_denuncia} require={false} />
-                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Nombre víctima" nombre="nombre_victima" register={register} error={errors.numero_de_expediente} require={false}></InputRegister>
-                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="Apellido víctima" nombre="apellido_victima" register={register} error={errors.numero_de_expediente} require={false}></InputRegister>
-                <InputRegister customSize="flex flex-col w-full xl:w-1/2" campo="DNI víctima" nombre="dni_victima" register={register} error={errors.numero_de_expediente} require={false}></InputRegister>
+                <InputText customSize="flex flex-col w-full xl:w-1/2" campo="ID" nombre="id_exposicion" register={register} error={errors.id_denuncia} require={false} />
+                <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Nombre víctima" nombre="nombre_victima" register={register} error={errors.numero_de_expediente} require={false}></InputText>
+                <InputText customSize="flex flex-col w-full xl:w-1/2" campo="Apellido víctima" nombre="apellido_victima" register={register} error={errors.numero_de_expediente} require={false}></InputText>
+                <InputText customSize="flex flex-col w-full xl:w-1/2" campo="DNI víctima" nombre="dni_victima" register={register} error={errors.numero_de_expediente} require={false}></InputText>
                 <button className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10"> Buscar</button>
             </form>
             <div className="flex flex-col w-full">
