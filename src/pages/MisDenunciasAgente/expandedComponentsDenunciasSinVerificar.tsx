@@ -65,7 +65,7 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
     const { user } = useAuth(); // Obtiene el usuario autenticado desde el contexto
     const [tienePreventivoPrevio, setTienePreventivoPrevio] = useState(false); // Controla si hay un preventivo previo
     const [printMode, setPrintMode] = useState(false); // Controla el modo de impresión
-
+    const [editMode, setEditMode] = useState(false); // Controla el modo de edición
  // Formulario
   const {  watch, setValue, formState: {
     errors
@@ -169,6 +169,10 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
         setVerRadiograma(true);
     }
 
+    const handleEdit = () => {
+        setEditMode(true);
+    }
+
     // Renderizado condicional
 
     if (verAmpliaciones) {
@@ -253,6 +257,10 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
 
     // Vista principal
     // Muestra todos los detalles de la denuncia y opciones de acción
+     if (editMode) {
+        return <CargarAmpliacion data={data} setAmpliarDenuncia={setAmpliarDenuncia} />;
+    }
+
     return (
         <div className="flex flex-col p-1 sm:p-10 max-w-full scale-up-ver-top">
             {/* Estado de la denuncia con íconos visuales */}
@@ -360,9 +368,14 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
 
                 
 
-            {/* Botón para generar y abrir el PDF */}
                {!printMode && (
                 <div className="flex justify-center my-3">
+                       <div className='mb-1 flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => {
+                    handleEdit()
+                  }}>
+                    Editar
+                </div>
+          
                   <div className='flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(true)}>Imprimir</div>
                   <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' type="submit">Enviar</button>
                 </div>
@@ -388,7 +401,7 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
 
               )}
                
-          
+                  
         </div>
     );
 }

@@ -38,7 +38,23 @@ const autoridadesOpciones = [
         { id: 36, nombre: "Supervisión Zona V Metropolitana", valor: "Supervisión Zona V Metropolitana" },
         { id: 37, nombre: "Supervisión Zona VI Metropolitana", valor: "Supervisión Zona VI Metropolitana" },
         { id: 38, nombre: "Supervisión Zona XXII Metropolitana", valor: "Supervisión Zona XXII Metropolitana" },
-        { id: 39, nombre: "Expte. y Archivo Dependencia", valor: "Expte. y Archivo Dependencia" }
+        { id: 39, nombre: "Expte. y Archivo Dependencia", valor: "Expte. y Archivo Dependencia" },
+        { id: 40, nombre: "Supervisión Zona VII Interior", valor: "Supervisión Zona VII Interior" },
+        { id: 41, nombre: "Supervisión Zona VIII Interior", valor: "Supervisión Zona VIII Interior" },
+        { id: 42, nombre: "Supervisión Zona IX Interior", valor: "Supervisión Zona IX Interior" },
+        { id: 43, nombre: "Supervisión Zona X Interior", valor: "Supervisión Zona X Interior" },
+        { id: 44, nombre: "Supervisión Zona XI Interior", valor: "Supervisión Zona XI Interior" },
+        { id: 45, nombre: "Supervisión Zona XII Interior", valor: "Supervisión Zona XII Interior" },
+        { id: 46, nombre: "Supervisión Zona XIII Interior", valor: "Supervisión Zona XIII Interior" },
+        { id: 47, nombre: "Supervisión Zona XIV Interior", valor: "Supervisión Zona XIV Interior" },
+        { id: 48, nombre: "Supervisión Zona XV Interior", valor: "Supervisión Zona XV Interior" },
+        { id: 49, nombre: "Supervisión Zona XVI Interior", valor: "Supervisión Zona XVI Interior" },
+        { id: 50, nombre: "Supervisión Zona XVII Interior", valor: "Supervisión Zona XVII Interior" },
+        { id: 51, nombre: "Supervisión Zona XVIII Interior", valor: "Supervisión Zona XVIII Interior" },
+        { id: 52, nombre: "Supervisión Zona XIX Interior", valor: "Supervisión Zona XIX Interior" },
+        { id: 53, nombre: "Supervisión Zona XX Interior", valor: "Supervisión Zona XX Interior" },
+        { id: 54, nombre: "Supervisión Zona XXI Interior", valor: "Supervisión Zona XXI Interior" },
+
 
     ];
 
