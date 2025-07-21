@@ -32,9 +32,13 @@ import { useAuth } from '../../../context/auth';
 // Estilos
 import { customStyles } from '../../../GlobalConst/customStyles'
 
-interface expandedComponentsProps {
-    data: any
+import Tercero from '../../../types/Tercero';
+import Denuncias from '../../../types/Denuncia';
+
+type expandedComponentsProps = {
+    data: Tercero
 }
+
 function expandedComponents({ data }: expandedComponentsProps) {
     // State para guardar los datos de la víctima
     const [editGlobal, setEditGlobal] = useState(false)
@@ -59,14 +63,15 @@ function expandedComponents({ data }: expandedComponentsProps) {
     }
 
     useEffect(() => {
-        const fetchDenuncias = async (denunciaId: any) => {
+        const fetchDenuncias = async (denunciaId: string) => {
             const result = await buscarDenunciasPorId(denunciaId);
+            
             return result;
         }
 
         const fetchAllDenuncias = async () => {
-            const denuncias = await Promise.all(data?.denuncias_realizadas?.map(fetchDenuncias) || []);
-            // @ts-ignore
+            const denuncias: Denuncias[] = await Promise.all(data?.denuncias_realizadas?.map(fetchDenuncias) || []);
+
             setDenunciasAMostrar(denuncias);
         }
 

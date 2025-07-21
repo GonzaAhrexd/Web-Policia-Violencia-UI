@@ -8,7 +8,7 @@ interface InputRegisterProps {
     nombre: string;
     register: UseFormRegister<FieldValues>;
     setValue?: UseFormSetValue<FieldValues>;
-    edit: boolean
+    edit?: boolean
     valor?: string;
     placeholder?: string;
     required?: boolean;

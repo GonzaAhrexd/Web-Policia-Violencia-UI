@@ -26,11 +26,10 @@ type FormularioVictimaProps = {
   existente?: boolean; // Indica si la víctima ya existe
   editarConDenuncia?: boolean; // Indica si se edita con denuncia
   md?: boolean; // Controla el ancho del contenedor
-  vinculo_con_agresor?: any;
-  convivencia?: any;
-  dependencia_economica?: any;
-  hijos_con_agresor?: any;
-  cantidad_hijos_con_agresor?: number | string;
+  vinculo_con_agresor?: string;
+  convivencia?: boolean;
+  dependencia_economica?: boolean;
+  cantidad_hijos_con_agresor?: number
   onlyVictima?: boolean; // Mostrar solo datos de la víctima
 }
 
@@ -40,10 +39,10 @@ type OpcionesRadio = {
   id?: string;
 };
 
-function EditVictima({ datos, register, setValue, watch, errors, verificar = false, existente = false, editarConDenuncia = false, md = false, vinculo_con_agresor, convivencia, dependencia_economica, hijos_con_agresor, cantidad_hijos_con_agresor, onlyVictima = false }: FormularioVictimaProps) {
+function EditVictima({ datos, register, setValue, watch, errors, verificar = false, existente = false, editarConDenuncia = false, md = false, vinculo_con_agresor, convivencia, dependencia_economica, cantidad_hijos_con_agresor, onlyVictima = false }: FormularioVictimaProps) {
   // Estados
   const [isHijos, setIsHijos] = useState<boolean>(verificar ? false : datos?.hijos?.tiene_hijos || false);
-  const [isHijosConAgresor, setIsHijosConAgresor] = useState<boolean>(hijos_con_agresor ? hijos_con_agresor > 0 : false);
+  const [isHijosConAgresor, setIsHijosConAgresor] = useState<boolean>(cantidad_hijos_con_agresor ? cantidad_hijos_con_agresor > 0 : false);
   const [isCondicionVulnerabilidad, setIsCondicionVulnerabilidad] = useState<boolean>(verificar ? false : datos?.condicion_de_vulnerabilidad || false);
   const [isAdultoMayor, setIsAdultoMayor] = useState<boolean>(verificar ? false : datos?.condiciones_de_vulnerabilidad?.adulto_mayor || false);
   const [isMenorEdad, setIsMenorEdad] = useState<boolean>(verificar ? false : datos?.condiciones_de_vulnerabilidad?.menor_de_edad || false);
@@ -91,9 +90,9 @@ function EditVictima({ datos, register, setValue, watch, errors, verificar = fal
         setIsAdultoMayor(datos?.condiciones_de_vulnerabilidad?.adulto_mayor || false);
         setIsMenorEdad(datos?.condiciones_de_vulnerabilidad?.menor_de_edad || false);
       }
-      setIsHijosConAgresor(hijos_con_agresor ? hijos_con_agresor > 0 : false);
+      setIsHijosConAgresor(cantidad_hijos_con_agresor ? cantidad_hijos_con_agresor > 0 : false);
     }, 200);
-  }, [datos, victimaCargar, verificar, existente, editarConDenuncia, hijos_con_agresor]);
+  }, [datos, victimaCargar, verificar, existente, editarConDenuncia, cantidad_hijos_con_agresor]);
 
   return (
     <div key={datos._id} className={`w-full ${md ? 'lg:w-6/10' : ''}`}>

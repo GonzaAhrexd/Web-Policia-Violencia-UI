@@ -7,13 +7,20 @@ import InputCheckbox from '../../InputComponents/InputCheckbox'
 
 import { pdf } from '@react-pdf/renderer';
 import PDF from '../../ReactPDF/PDFRegistroPersonas';
-interface modoImprimirProps {
+
+// Tipos 
+import Denuncia from '../../../types/Denuncia';
+import Usuario from '../../../types/Usuarios';
+import Victima from '../../../types/Victimas';
+import Victimario from '../../../types/Victimario';
+import Tercero from '../../../types/Tercero';
+type modoImprimirProps = {
     tipoPersona: string
-    modoImprimir: any
-    setModoImprimir: any
-    denunciasAMostrar: any
-    user: any
-    data: any
+    modoImprimir: boolean
+    setModoImprimir: (modo: boolean) => void
+    denunciasAMostrar: Denuncia[]
+    user: Usuario
+    data: Victima | Victimario | Tercero
 }
 
 function modoImprimir({ tipoPersona, modoImprimir, setModoImprimir, denunciasAMostrar, user, data }: modoImprimirProps) {

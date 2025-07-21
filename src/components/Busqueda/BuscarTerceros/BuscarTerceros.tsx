@@ -13,9 +13,14 @@ import { customStyles } from '../../../GlobalConst/customStyles'
 // Iconos
 import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outline'
 // Campos
+
+import Tercero from '../../../types/Tercero';
+
+
+
 function BuscarTerceros() {
-    const [tercerosMostrar, setTercerosMostrar] = useState([]);
-    const [mostrarAlerta, setMostrarAlerta] = useState("");
+    const [tercerosMostrar, setTercerosMostrar] = useState<Tercero[]>([]);
+    const [mostrarAlerta, setMostrarAlerta] = useState<string>("");
     const { register, handleSubmit, formState: {
         errors
     } } = useForm()

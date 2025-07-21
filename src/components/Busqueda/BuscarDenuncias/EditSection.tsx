@@ -118,7 +118,7 @@ function EditSection({ datosHecho, datosVictima, datosVictimario, datosTerceros,
                         })
                     })}>
 
-                <EditVictima datos={datosVictima} register={register} setValue={setValue} errors={errors} watch={watch} cantidad_hijos_con_agresor={datosHecho.hijos_victima_con_victimario} hijos_con_agresor={datosHecho.hijos_victima_con_victimario} convivencia={datosHecho.convivencia} dependencia_economica={datosHecho.dependencia_economica} vinculo_con_agresor={datosHecho.relacion_victima_victimario} />
+                <EditVictima datos={datosVictima} register={register} setValue={setValue} errors={errors} watch={watch} cantidad_hijos_con_agresor={datosHecho.hijos_victima_con_victimario} convivencia={datosHecho.convivencia} dependencia_economica={datosHecho.dependencia_economica} vinculo_con_agresor={datosHecho.relacion_victima_victimario} />
                 <EditVictimario datos={datosVictimario} register={register} setValue={setValue} errors={errors} />
                 <EditHecho setIsSolicitudAprehension={setIsSolicitudAprehension} datosTerceros={datosTerceros} datosGeograficos={datosGeograficos} datos={datosHecho} handleOpenModal={handleOpenModal} setTitulo={setTitle} register={register} setValue={setValue} errors={errors} />
 

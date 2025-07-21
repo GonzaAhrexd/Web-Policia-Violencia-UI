@@ -31,14 +31,17 @@ import { ArrowDownCircleIcon, ArrowUpCircleIcon } from '@heroicons/react/24/outl
 import { useAuth } from '../../../context/auth';
 import ModoImprimir from '../ModoImprimir/ModoImprimir'
 
-interface expandedComponentsProps {
-    data: any
+// Tipos
+import Victimario from '../../../types/Victimario';
+import Denuncia from '../../../types/Denuncia';
+type expandedComponentsProps = {
+    data: Victimario    
 }
 function expandedComponents({ data }: expandedComponentsProps) {
     // State para guardar los datos de la víctima
-    const [editGlobal, setEditGlobal] = useState(false)
-    const [denunciasAMostrar, setDenunciasAMostrar] = useState([]);
-    const [modoImprimir, setModoImprimir] = useState(false);
+    const [editGlobal, setEditGlobal] = useState<boolean>(false)
+    const [denunciasAMostrar, setDenunciasAMostrar] = useState<Denuncia[]>([]);
+    const [modoImprimir, setModoImprimir] = useState<boolean>(false);
     const { register, handleSubmit, setValue, formState: {
         errors
     } } = useForm()
@@ -82,10 +85,10 @@ function expandedComponents({ data }: expandedComponentsProps) {
 
         // Función para buscar todas las denuncias
         const fetchAllDenuncias = async () => {
-            const denuncias = await Promise.all(data?.denuncias_en_contra?.map(fetchDenuncias) || []);
+            const denuncias: Denuncia[] = await Promise.all(data?.denuncias_en_contra?.map(fetchDenuncias) || []);
             // Filtrar resultados nulos o indefinidos
-            const denunciasFiltradas = denuncias.filter(denuncia => denuncia !== null && denuncia !== undefined);
-            // @ts-ignore
+            const denunciasFiltradas: Denuncia[] = denuncias.filter(denuncia => denuncia !== null && denuncia !== undefined);
+            // Setear las denuncias a mostrar
             setDenunciasAMostrar(denunciasFiltradas);
         }
 

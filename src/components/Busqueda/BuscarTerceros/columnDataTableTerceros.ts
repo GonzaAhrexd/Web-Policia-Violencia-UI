@@ -1,17 +1,12 @@
 // Datos que se mostrarán en la tabla de denuncias
-type Row = {
-    nombre: string,
-    apellido: string,
-    DNI: string,
-    vinculo_con_victima: string
-}
+import Tercero from '../../../types/Tercero';
 
 
 export const columnTercero = [
     {
         // Número de expediente de la denuncia
         name: 'Nombre',
-        selector: (row: Row) => row.nombre,
+        selector: (row: Tercero) => row.nombre,
         style: {
             fontSize: '14px',
             fontWeight: 500,
@@ -20,7 +15,7 @@ export const columnTercero = [
     },
     {
         name: 'Apellido',
-        selector: (row: Row) => row.apellido,
+        selector: (row: Tercero) => row.apellido,
         style: {
             fontSize: '14px',
             fontWeight: 500,
@@ -28,7 +23,7 @@ export const columnTercero = [
     },
     {
         name: 'DNI',
-        selector: (row: Row) => row.DNI,
+        selector: (row: Tercero) => row.DNI,
         style: {
             fontSize: '14px',
             fontWeight: 500,
