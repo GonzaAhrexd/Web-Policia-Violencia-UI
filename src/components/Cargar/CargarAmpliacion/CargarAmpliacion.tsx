@@ -24,7 +24,7 @@ import { crearDenunciaSinVerificar, agregarAmpliacionDenuncia } from "../../../a
 import SelectRegisterSingle from "../../Select/SelectRegisterSingle"
 type CargarAmpliacionProps = {
   data: any;
-  setAmpliarDenuncia: any;
+  setAmpliarDenuncia: (value: boolean) => void;
 }
 function CargarAmpliacion({ data, setAmpliarDenuncia }: CargarAmpliacionProps) {
   // Formulario
