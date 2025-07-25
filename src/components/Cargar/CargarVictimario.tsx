@@ -1,5 +1,5 @@
 // Hooks
-import { UseFormRegister, UseFormSetValue, FieldErrors } from 'react-hook-form';
+import { UseFormRegister, UseFormSetValue, FieldErrors, UseFormWatch, FieldValues } from 'react-hook-form';
 // Componentes
 import InputText from '../InputComponents/InputText'
 import SelectRegisterSingle from '../Select/SelectRegisterSingle'
@@ -20,7 +20,7 @@ interface CargarVictimarioProps {
   register: UseFormRegister<any>;
   setValue: UseFormSetValue<any>;
   errors: FieldErrors;
-  watch: any;
+  watch: UseFormWatch<FieldValues>;
 }
 
 function CargarVictimario({watch, register, setValue, errors }: CargarVictimarioProps) {

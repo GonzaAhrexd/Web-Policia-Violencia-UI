@@ -32,23 +32,15 @@ import { useCampos } from '../../../context/campos'; // Hook para obtener datos 
 // Componentes y contexto
 import autoridadesOpciones from '../../../GlobalConst/autoridadesCampos';
 import SelectRegisterSingle from '../../Select/SelectRegisterSingle';
+import direccionDivisiones from '../../../GlobalConst/direccionDivisiones';
 
 // Tipos
 // Define las propiedades del componente
+import DenunciaSinVerificar from '../../../types/DenunciaSinVerificar';
 type CargarPreventivoProps = {
-    setCrearPreventivo: any; // Función para cerrar el formulario
-    data: any; // Datos de la denuncia asociada
+    setCrearPreventivo: (value: boolean) => void; // Función para cerrar el formulario
+    data: DenunciaSinVerificar; // Datos de la denuncia asociada
 };
-const direccionDivisiones: any[] = [
-    { division: "Metropolitana", direccion: "Avenida Alvear Nº 126", telefono: "362461832" },
-    { division: "La Leonesa", direccion: "Santiago del Estero y Entre Ríos", telefono: "3624644562" },
-    { division: "Lapachito", direccion: "25 de Mayo S/N", telefono: "3624605783" },
-    { division: "Roque Saenz Peña", direccion: "Calle 7e/12 y 14", telefono: "3644431835" },
-    { division: "Villa Ángela", direccion: "Echeverría N° 35", telefono: "3735 431438" },
-    { division: "General San Martín", direccion: "Esq. Maipú y Urquiza", telefono: "3725422202" },
-    { division: "Charata", direccion: "9 de Julio N° 575", telefono: "3624222322" },
-    { division: "Juan José Castelli", direccion: "Av. Perón N° 470", telefono: "3624702665" }
-]
 
 function CargarPreventivo({ data, setCrearPreventivo }: CargarPreventivoProps) {
     const { register, handleSubmit, setValue, getValues, formState: { errors } } = useForm(); // Hook para manejar el formulario

@@ -1,8 +1,12 @@
-import { useAuth } from '../../context/auth';
+// Hooks
 import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-
+// Contexto
+import { useAuth } from '../../context/auth';
+// Iconos
+import { PlusCircleIcon } from '@heroicons/react/24/outline';
+// Componentes
 import NavBar from '../../components/NavBar';
 import InputDateRange from '../../components/InputComponents/InputDateRange';
 import EstadisticasMunicipiosSeccion from '../../components/EstadisticasSecciones/EstadisticasMunicipiosSeccion';
@@ -19,9 +23,8 @@ import Modal from '../../components/Modal';
 import Footer from '../../components/Footer/Footer';
 import LoadingScreen from '../../components/LoadingScreen';
 import EstadisticasAprehensiones from '../../components/EstadisticasSecciones/EstadisticasAprehensiones';
-
+// API
 import { buscarDenuncias } from '../../api/CRUD/denuncias.crud';
-import { PlusCircleIcon } from '@heroicons/react/24/outline';
 
 // Objeto para mapear IDs a componentes de estadísticas
 const sectionComponents = {

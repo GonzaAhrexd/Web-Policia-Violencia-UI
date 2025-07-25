@@ -1,6 +1,7 @@
 import  { useEffect, useState } from 'react';
 import { BarChart, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, LabelList } from 'recharts';
 
+
 type DenunciasMunicipiosProps = {
     data: any;
     total: number;

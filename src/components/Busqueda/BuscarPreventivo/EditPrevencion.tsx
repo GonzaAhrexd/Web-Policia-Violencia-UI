@@ -19,8 +19,11 @@ import { useCampos } from "../../../context/campos";
 import direccionDivisiones from "../../../GlobalConst/direccionDivisiones";
 import autoridadesOpciones from "../../../GlobalConst/autoridadesCampos";
 // Tipos de datos para el componente
+
+import Preventivo from "../../../types/Preventivo";
+
 type EditPrevencionProps = {
-    data: any
+    data: Preventivo
     modoExpandir: boolean
 }
 

@@ -14,7 +14,6 @@ import CargarVictimario from '../../components/Cargar/CargarVictimario';
 import CargarDenuncia from '../../components/Cargar/CargarDenuncia';
 import CargarObservaciones from '../../components/Cargar/CargarObservaciones';
 import BuscarExistenteModal from '../../components/ModalBusqueda/BuscarExistenteModal';
-
 import EditVictimario from '../../components/EditMode/EditVictimario';
 
 // Iconos

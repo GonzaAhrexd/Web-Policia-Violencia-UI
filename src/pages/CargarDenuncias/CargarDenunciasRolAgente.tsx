@@ -16,11 +16,11 @@ import CargarTipoDeDenuncia from '../../components/Cargar/CargarAgente/CargarTip
 import PDF from '../../components/ReactPDF/PDFDenuncias';
 import InputExpediente from '../../components/InputComponents/InputExpediente';
 import InputText from '../../components/InputComponents/InputText';
-import { useCampos } from '../../context/campos';
 import direccionDivisiones from '../../GlobalConst/direccionDivisiones';
-import { useStore } from './store';
 import SelectRegisterSingle from '../../components/Select/SelectRegisterSingle';
-
+// Contexto
+import { useStore } from './store';
+import { useCampos } from '../../context/campos';
 // Tipos
 import User from '../../types/Usuarios'
 

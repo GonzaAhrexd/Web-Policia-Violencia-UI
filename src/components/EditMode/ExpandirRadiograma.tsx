@@ -12,9 +12,11 @@ import { pdf } from '@react-pdf/renderer';
 import PDFRadiograma from '../ReactPDF/PDFRadiograma';
 import { useState } from 'react';
 
+import Radiograma from '../../types/Radiograma'; // Importa el tipo de dato Radiograma
+
 type CargarRadiogramaProps = {
   // Define the props for the CargarRadiograma component here
-  data: any;
+  data: Radiograma;
   preventivoAmpliado?: any
   modoExpandir?: boolean; // Indica si el modo es expandido
 }
@@ -29,7 +31,7 @@ function EditRadiograma({ preventivoAmpliado, data, modoExpandir }: CargarRadiog
     const nuevosValores = {
       ...data,
       ...values,
-      nro_nota_preventivo_anterior: data.numero_nota_anterior,
+      nro_nota_preventivo_anterior: preventivoAmpliado.numero_nota_anterior,
       nro_nota_preventivo: preventivoAmpliado.numero_nota,
       fecha_anterior: data.fecha,
     };

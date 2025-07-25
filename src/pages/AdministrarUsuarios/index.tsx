@@ -31,7 +31,7 @@ function index() {
     const { user, isAuthenticated, isLoading } = useAuth();
     // Formulario
 
-    const [modalShow, setModalShow] = useState(false)
+    const [modalShow, setModalShow] = useState<boolean>(false)
 
     const { isLoading: loadingCampos } = useCampos()
 

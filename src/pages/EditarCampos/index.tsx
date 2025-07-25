@@ -11,6 +11,7 @@ import LoadingScreen from '../../components/LoadingScreen';
 // Contexto
 import { useAuth } from '../../context/auth';
 import { CamposContext } from '../../context/campos';
+
 function EditarCampos() {
     // Autenticación 
     const { user, isAuthenticated, isLoading: isAuthLoading } = useAuth();

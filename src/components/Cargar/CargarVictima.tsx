@@ -1,6 +1,6 @@
 // Hooks
 import { useEffect, useState } from 'react'
-import { UseFormRegister, UseFormSetValue, FieldErrors } from 'react-hook-form';
+import { UseFormRegister, UseFormSetValue, FieldErrors, FieldValues, UseFormWatch } from 'react-hook-form';
 // Componentes
 import InputText from '../InputComponents/InputText'
 import InputCheckbox from '../InputComponents/InputCheckbox'
@@ -17,8 +17,8 @@ import { generos } from '../../GlobalConst/generosCampos'
 interface CargarVictimaProps {
   register: UseFormRegister<any>;
   setValue: UseFormSetValue<any>;
+  watch: UseFormWatch<FieldValues>;
   errors: FieldErrors;
-  watch: any;
 }
 
 type Radio = {
