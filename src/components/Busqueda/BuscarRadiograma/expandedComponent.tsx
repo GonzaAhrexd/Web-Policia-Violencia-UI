@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 // Iconos
 import { TrashIcon } from '@heroicons/react/24/solid'
 // import { PencilSquareIcon } from '@heroicons/react/24/outline'
-import { PrinterIcon } from "@heroicons/react/24/outline";
+import {  PrinterIcon } from "@heroicons/react/24/outline"
 // Componentes
 import SimpleTableCheckorX from '../../../components/ShowData/SimpleTableCheckorX';
 import EditRadiograma from "../../EditMode/ExpandirRadiograma";
@@ -20,8 +20,11 @@ import { getRadiogramaById, deleteRadiograma } from "../../../api/CRUD/radiogram
 import SelectRegisterSingle from "../../Select/SelectRegisterSingle";
 import { useForm } from "react-hook-form";
 
+// Tipos
+import Radiograma from '../../../types/Radiograma'
+
 type expandedComponentProps = {
-    data: any
+    data: Radiograma
 }
 
 
@@ -34,6 +37,7 @@ function expandedComponentRadiograma({ data }: expandedComponentProps) {
     const { user } = useAuth();
     const [printMode, setPrintMode] = useState(false);
     const [preventivoAmpliado, setPreventivoAmpliado] = useState(null);
+    // const [editMode, setEditMode] = useState(false);
     const [loading, setLoading] = useState(true);
 
       const { setValue, watch, formState: { errors } } = useForm({
@@ -140,6 +144,11 @@ function expandedComponentRadiograma({ data }: expandedComponentProps) {
             <EditRadiograma preventivoAmpliado={preventivoAmpliado} modoExpandir={true} data={dataRadiograma} />
         )
     }
+    // if(editMode) {
+    //     return (
+    //         <EditRadiograma modoExpandir={false} data={dataRadiograma} />
+    //     )
+    // }
 
  
     else {
@@ -200,6 +209,9 @@ function expandedComponentRadiograma({ data }: expandedComponentProps) {
 
                {!printMode && (
                     <div className="flex justify-center my-3">
+                         {/* <div className="bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0" onClick={() => setEditMode(true)}>
+                            <PencilIcon className="w-7" />
+                        </div> */}
                         <div className="bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0" onClick={() => setPrintMode(true)}>
                             <PrinterIcon className="w-7" />
                         </div>

@@ -18,11 +18,15 @@ import { columnsDataTableVerificar } from './columnsDataTableVerificar';
 import { customStyles } from '../../../GlobalConst/customStyles';
 import expandedComponentDenunciasSinVerificar from '../../../pages/MisDenunciasAgente/expandedComponentsDenunciasSinVerificar';
 import SelectRegisterSingle from '../../Select/SelectRegisterSingle';
+
 // Define los íconos para expandir/contraer filas en la DataTable
 const expandableIcon = {
     collapsed: <ArrowDownCircleIcon className='h-6 w-6' />,
     expanded: <ArrowUpCircleIcon className='h-6 w-6' />,
 };
+
+// Tipos
+import DenunciaSinVerificar from '../../../types/DenunciaSinVerificar';
 
 const BuscarDenunciasSinVerificar = () => {
     // Inicializa el formulario con react-hook-form para manejar los inputs
@@ -33,7 +37,7 @@ const BuscarDenunciasSinVerificar = () => {
     const { unidades: unidadCampos } = useCampos();
 
     // Estado para almacenar las denuncias obtenidas de la búsqueda
-    const [denunciasAMostrar, setDenunciasAMostrar] = useState([]);
+    const [denunciasAMostrar, setDenunciasAMostrar] = useState<DenunciaSinVerificar[]>([]);
 
     // Observa los valores de los campos numero_de_expediente e id_denuncia
     const expedienteValue = watch('numero_de_expediente');

@@ -18,8 +18,12 @@ import ShowTextArea from "../../ShowData/ShowTextArea";
 import { getPreventivo } from "../../../api/CRUD/preventivo.crud";
 import SelectRegisterSingle from "../../Select/SelectRegisterSingle";
 import { useForm } from "react-hook-form";
+
+
+import Preventivo from "../../../types/Preventivo";
+
 type expandedComponentProps = {
-    data: any
+    data: Preventivo
 }
 
 // Expanded component PREVENTIVO
@@ -28,6 +32,7 @@ function expandedComponent({ data }: expandedComponentProps) {
     const [ampliarPreventivo, setAmpliarPreventivo] = useState(false)
     const [dataPreventivo, setDataPreventivo] = useState(data);
     const [printMode, setPrintMode] = useState(false);
+    // const [editMode, setEditMode] = useState(false);
     const { user } = useAuth();
 
     const handleVerAmpliación = async () => {
@@ -105,6 +110,12 @@ function expandedComponent({ data }: expandedComponentProps) {
         )
     }
 
+    // if(editMode) {
+    //     return (
+    //         <EditPrevencion modoExpandir={false} data={dataPreventivo} />
+    //     )
+    // }
+
     else {
         return (
 
@@ -172,6 +183,9 @@ function expandedComponent({ data }: expandedComponentProps) {
 
                 {!printMode && (
                     <div className="flex justify-center my-3">
+                        {/* <div className="bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0" onClick={() => setEditMode(true)}>
+                            <PencilIcon className="w-7" />
+                        </div> */}
                         <div className="bg-sky-950 hover:bg-sky-700 text-white cursor-pointer font-bold py-2 px-4 rounded w-8/10 sm:w-6/10 md:w-2/10 flex items-center justify-center mx-2 mt-2 md:mt-0" onClick={() => setPrintMode(true)}>
                             <PrinterIcon className="w-7" />
                         </div>

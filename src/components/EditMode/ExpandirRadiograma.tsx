@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
-import { crearRadiograma, ampliarRadiograma } from '../../api/CRUD/radiograma.crud'
+import { crearRadiograma, ampliarRadiograma, editRadiograma } from '../../api/CRUD/radiograma.crud'
 import InputDate from '../InputComponents/InputDate'
 import InputText from '../InputComponents/InputText';
 
@@ -64,7 +64,22 @@ function EditRadiograma({ preventivoAmpliado, data, modoExpandir }: CargarRadiog
             confirmButtonText: 'Sí, crear radiograma'
           }).then(async (result) => {
             if (result.isConfirmed) {
+              
+              if(!modoExpandir) {
+                const valoresParaEnviar = {
+                  ...data,
+                  ...value,
 
+                }
+   
+                await editRadiograma(data._id, valoresParaEnviar);
+                Swal.fire(
+                  '¡Editado!',
+                  'El radiograma ha sido editado.',
+                  'success'
+                )
+                return
+              }
 
               const valoresParaEnviar = {
                 ...data,
@@ -75,6 +90,7 @@ function EditRadiograma({ preventivoAmpliado, data, modoExpandir }: CargarRadiog
                 fecha_anterior: data.fecha,
                 tipo_radiograma: "Ampliación de radiograma",
               }
+
 
               const radiogramaNuevo = await crearRadiograma(valoresParaEnviar);
               await ampliarRadiograma(data._id, radiogramaNuevo._id);
@@ -93,7 +109,7 @@ function EditRadiograma({ preventivoAmpliado, data, modoExpandir }: CargarRadiog
           <InputDate campo="Fecha" nombre="fecha" register={register} error={errors.fecha} valor={new Date(data.fecha).toISOString().slice(0, 10)} />
           <InputText customSize="flex flex-col md:w-full xl:w-1/2" valor={data.direccion} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
           <InputText customSize="flex flex-col md:w-full xl:w-1/2" valor={data.telefono} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
-          <InputTextArea valor={data.solicita} campo="Solicita" nombre="solicita" register={register}  required placeholder="Solicita" setValue={setValue} />
+          <InputTextArea valor={data.solicita} campo="Solicita" nombre="solicita" register={register} required placeholder="Solicita" setValue={setValue} />
         </div>
         <h1 className='text-2xl'>Destinatario</h1>
         <div className='flex flex-col md:items-center justify-center'>
@@ -108,8 +124,15 @@ function EditRadiograma({ preventivoAmpliado, data, modoExpandir }: CargarRadiog
         </div>
         <div className='flex flex-row items-center justify-center'>
 
+          {!modoExpandir && (
+            <div className="flex justify-center my-3 w-full">
+              <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10'>
+                Editar radiograma
+              </button>
+            </div>
+          )}
 
-          {!printMode && (
+          {(!printMode && modoExpandir) && (
             <div className="flex justify-center my-3">
               <div className='flex flex-row items-center justify-center cursor-pointer bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 mx-5 rounded w-3/10' onClick={() => setPrintMode(true)}>Imprimir</div>
               <button className='bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full md:w-3/10'>

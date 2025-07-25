@@ -22,8 +22,12 @@ import PDF from "../../ReactPDF/PDFAmpliacion"
 // API
 import { crearDenunciaSinVerificar, agregarAmpliacionDenuncia } from "../../../api/CRUD/denunciasSinVerificar.crud"
 import SelectRegisterSingle from "../../Select/SelectRegisterSingle"
+
+// Tipos
+import DenunciaSinVerificar from "../../../types/DenunciaSinVerificar"
+
 type CargarAmpliacionProps = {
-  data: any;
+  data: DenunciaSinVerificar;
   setAmpliarDenuncia: (value: boolean) => void;
 }
 function CargarAmpliacion({ data, setAmpliarDenuncia }: CargarAmpliacionProps) {
@@ -155,7 +159,7 @@ function CargarAmpliacion({ data, setAmpliarDenuncia }: CargarAmpliacionProps) {
             values.hora = horaActual
             values.ampliado_de = data._id
 
-            const denunciaAmpliada: any = await crearDenunciaSinVerificar(values)
+            const denunciaAmpliada: DenunciaSinVerificar = await crearDenunciaSinVerificar(values)
 
             await agregarAmpliacionDenuncia(data._id, denunciaAmpliada._id)
             Swal.fire({
@@ -190,7 +194,7 @@ function CargarAmpliacion({ data, setAmpliarDenuncia }: CargarAmpliacionProps) {
         <h1 className='text-2xl my-5'>Denuncia</h1>
         <div className="flex flex-col w-full items-center justify-center">
           <div className='flex flex-col items-center w-2/3 justify-center '>
-            <InputTextArea edit valor={data.observaciones} campo="" nombre="observaciones" setValue={setValue} register={register}/>
+            <InputTextArea edit valor={`${data.observaciones} ${data.agrega}` } campo="" nombre="observaciones" setValue={setValue} register={register}/>
           </div>
         </div>
         <h1 className='text-2xl my-5'>Preguntas</h1>

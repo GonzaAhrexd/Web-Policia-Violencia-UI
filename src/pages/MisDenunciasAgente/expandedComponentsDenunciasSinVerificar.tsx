@@ -36,9 +36,10 @@ import { getRadiogramaById } from '../../api/CRUD/radiograma.crud'; // Función 
 import SelectRegisterSingle from '../../components/Select/SelectRegisterSingle';
 import { useForm } from 'react-hook-form';
 // Tipos
+import DenunciaSinVerificar from '../../types/DenunciaSinVerificar';
 // Define el tipo de las propiedades del componente
 type ExpandedComponentsProps = {
-    data: any; // Objeto que contiene los datos de la denuncia
+    data: DenunciaSinVerificar; // Objeto que contiene los datos de la denuncia
 };
 
 // Datos estáticos
@@ -354,7 +355,7 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
             {/* Sección de exposición, si aplica */}
             {data.preguntas.desea_agregar_quitar_o_enmendar && (
                 <>
-                    <h2 className="text-3xl my-5 font-sans">Exposición</h2>
+                    <h2 className="text-3xl my-5 font-sans">Agrega</h2>
                     <ShowTextArea  dato={data.agrega} />
                 </>
             )}
