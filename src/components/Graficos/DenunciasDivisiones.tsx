@@ -2,8 +2,12 @@ import  { useEffect, useState } from 'react';
 import { BarChart, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, LabelList } from 'recharts';
 
 
+type EstadisticasDivisionState = {
+    [key: string]: { valor: number; isDivision: number; }
+}
+
 type DenunciasMunicipiosProps = {
-    data: any;
+    data: EstadisticasDivisionState;
     total: number;
 };
 

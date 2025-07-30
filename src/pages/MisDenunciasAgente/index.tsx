@@ -25,9 +25,11 @@ import { columns } from './columnsDataTable'
 import expandedComponents from './expandedComponentsDenunciasSinVerificar'
 import { customStyles } from '../../GlobalConst/customStyles'
 
+import DenunciaSinVerificar from '../../types/DenunciaSinVerificar';
+
 function MisDenunciasAgente() {
     // Estados
-    const [denunciasAMostrar, setDenunciasAMostrar] = useState([]);
+    const [denunciasAMostrar, setDenunciasAMostrar] = useState<DenunciaSinVerificar[]>([]);
 
     // Se realiza la búsqueda de las denuncias con los datos ingresados
     const handleBusqueda = async (values: any) => {

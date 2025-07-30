@@ -32,11 +32,12 @@ import Modal from '../../components/Modal';
 // ZUD
 import { useStore } from './store'
 // import expandedComponents from '../MisDenunciasAgente/expandedComponents';
+import Denuncia from '../../types/Denuncia';
 
 
 function MisDenuncias() {
     // Estados
-    const [denunciasAMostrar, setDenunciasAMostrar] = useState([]);
+    const [denunciasAMostrar, setDenunciasAMostrar] = useState<Denuncia[]>([]);
 
     // Se realiza la búsqueda de las denuncias con los datos ingresados
     const handleBusqueda = async (values: any) => {

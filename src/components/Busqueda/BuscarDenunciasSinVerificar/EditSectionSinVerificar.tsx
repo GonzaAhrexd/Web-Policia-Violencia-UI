@@ -8,7 +8,7 @@ ________________________________________________________________________________
 */
 // Hooks
 import { useForm } from 'react-hook-form'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 // APIs y BackEnd
 import { agregarVictimario } from '../../../api/CRUD/victimario.crud'
 import { agregarVictima } from '../../../api/CRUD/victimas.crud'
@@ -30,11 +30,13 @@ import { XMarkIcon, CheckIcon } from '@heroicons/react/24/solid'
 // Dependencias
 import { useStore } from '../../../pages/CargarDenuncias/store'
 // Props
-interface EditSectionProps {
-  datos: any
-  setEditSection?: any
+
+import DenunciaSinVerificar from '../../../types/DenunciaSinVerificar';
+
+type EditSectionProps = {
+  datos: DenunciaSinVerificar
   editSection?: boolean
-  datosGeograficos?: any
+  setEditSection?: (edit: boolean) => void
 }
 
 function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSectionProps) {
@@ -81,8 +83,7 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
   }
   const [expedienteDividido] = useState(dividirExpediente(datos.numero_de_expediente))
 
-  const {
- 
+  const { 
     isSolicitudAprehension,
 
     victimaCargar,
@@ -99,9 +100,6 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
     
   } = useStore();
 
-  useEffect(() => {
-    console.log(errors)
-  }, [])
 
   return (
     <div>

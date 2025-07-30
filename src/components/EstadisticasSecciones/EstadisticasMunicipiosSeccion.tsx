@@ -5,8 +5,11 @@ import EstadisticasMunicipios from "../TablasEstadisticas/EstadisticasMunicipios
 import DenunciasMunicipios from "../Graficos/DenunciasMunicipios"
 
 // Props
+
+import Denuncia from "../../types/Denuncia";
+
 type EstadisticasMunicipiosSeccionProps = {
-  denunciasAMostrar: any;
+  denunciasAMostrar: Denuncia[];
 }
 
 function EstadisticasMunicipiosSeccion({ denunciasAMostrar }: EstadisticasMunicipiosSeccionProps) {
@@ -32,7 +35,7 @@ function EstadisticasMunicipiosSeccion({ denunciasAMostrar }: EstadisticasMunici
   }, [denunciasAMostrar])
 
 
-  const calcularEstadisticasMunicipio = (denuncias: any[]) => {
+  const calcularEstadisticasMunicipio = (denuncias: Denuncia[]) => {
     // Calcula las estadisticas de los municipios con el formato {unidad_de_carga: {municipio: cantidad}}
     const estadisticas: { [unidad_de_carga: string]: { [municipio: string]: number } } = {};
     // Recorre las denuncias

@@ -9,25 +9,28 @@
 */
 
 // Datos que se mostrarán en la tabla de denuncias
-type Row = {
-    numero_de_expediente: string;
-    fecha: string;
-    victima_nombre: string;
-    victimario_nombre: string;
-    municipio: string;
-    direccion: string;
-    jurisdiccion_policial: string;
-    violencia: string;
-    modalidades: string;
-    createdAt: string;
-}
+
+import Denuncia from '../../types/Denuncia';
+
+// type Row = {
+//     numero_de_expediente: string;
+//     fecha: string;
+//     victima_nombre: string;
+//     victimario_nombre: string;
+//     municipio: string;
+//     direccion: string;
+//     jurisdiccion_policial: string;
+//     violencia: string;
+//     modalidades: string;
+//     createdAt: string;
+// }
 
 // Columnas de la tabla de denuncias
 export const columnsDenuncia = [
     {
         // Número de expediente de la denuncia
         name: 'Número de Expediente',
-        selector: (row:Row) => row.numero_de_expediente,
+        selector: (row: Denuncia) => row.numero_de_expediente,
         style: {
             fontSize: '14px',
             fontWeight: 500,
@@ -36,9 +39,9 @@ export const columnsDenuncia = [
     {
         // Fecha en la que se realizó la denuncia
         name: 'Fecha denuncia',
-        selector: (row:Row) => row.fecha,
+        selector: (row: Denuncia) => row.fecha,
         sortable: true,
-        format: (row:Row) => `${new Date(row.fecha).getUTCDate().toString().padStart(2, '0')}/${(new Date(row.fecha).getUTCMonth() + 1).toString().padStart(2, '0')}/${new Date(row.fecha).getUTCFullYear()}`,
+        format: (row: Denuncia) => `${new Date(row.fecha).getUTCDate().toString().padStart(2, '0')}/${(new Date(row.fecha).getUTCMonth() + 1).toString().padStart(2, '0')}/${new Date(row.fecha).getUTCFullYear()}`,
         style: {
             fontSize: '14px',
             fontWeight: 500,
@@ -47,7 +50,7 @@ export const columnsDenuncia = [
     {
         // Fecha en la que se cargó la denuncia, puede diferir de la fecha de la denuncia
         name: 'Fecha carga',
-        selector: (row:Row) => new Date(row.createdAt).toLocaleString('es-AR', {timeZone: 'America/Argentina/Buenos_Aires'}),
+        selector: (row: Denuncia) => new Date(row.createdAt).toLocaleString('es-AR', {timeZone: 'America/Argentina/Buenos_Aires'}),
         sortable: true,
         id: "Fecha",
         // format: (row:Row) => `${new Date(row.createdAt).getUTCDate().toString().padStart(2, '0')}/${(new Date(row.createdAt).getUTCMonth() + 1).toString().padStart(2, '0')}/${new Date(row.createdAt).getUTCFullYear()}`,
@@ -59,7 +62,7 @@ export const columnsDenuncia = [
     {
         // Nombre de la víctima
         name: 'Víctima',
-        selector: (row:Row) => row.victima_nombre,
+        selector: (row: Denuncia) => row.victima_nombre,
         style: {
             fontSize: '14px',
             fontWeight: 500,
@@ -69,7 +72,7 @@ export const columnsDenuncia = [
     {
         // Nombre del victimario
         name: 'Victimario',
-        selector: (row:Row) => row.victimario_nombre,
+        selector: (row: Denuncia) => row.victimario_nombre,
         style: {
             fontSize: '14px',
             fontWeight: 500,
@@ -79,7 +82,7 @@ export const columnsDenuncia = [
     {
         // Municipio dónde sucedió el hecho
         name: 'Municipio',
-        selector: (row:Row) => row.municipio,
+        selector: (row: Denuncia) => row.municipio,
         sortable: true,
         style: {
             fontSize: '14px',
@@ -90,7 +93,7 @@ export const columnsDenuncia = [
     {
         // Dirección dónde sucedió el hecho
         name: 'Dirección',
-        selector: (row:Row) => row.direccion,
+        selector: (row: Denuncia) => row.direccion,
         sortable: true,
         style: {
             fontSize: '14px',
@@ -101,7 +104,7 @@ export const columnsDenuncia = [
     {
         // Jurisdicción policial a la que pertenece la denuncia
         name: 'Jurisdicción policial',
-        selector: (row:Row) => row.jurisdiccion_policial,
+        selector: (row: Denuncia) => row.jurisdiccion_policial,
         sortable: true,
         style: {
             fontSize: '14px',
@@ -111,7 +114,7 @@ export const columnsDenuncia = [
     {
         // Tipo de violencia
         name: 'Violencia',
-        selector: (row:Row) => row.violencia,
+        selector: (row: Denuncia) => row.violencia,
         sortable: true,
         style: {
             fontSize: '14px',
@@ -121,7 +124,7 @@ export const columnsDenuncia = [
     {
         // Modalidad de la denuncia
         name: 'Modalidad',
-        selector: (row:Row) => row.modalidades,
+        selector: (row: Denuncia) => row.modalidades,
         sortable: true,
         style: {
             fontSize: '14px',

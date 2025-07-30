@@ -26,13 +26,14 @@ import { useStore } from '../CargarDenuncias/store' // Store de Zustand para man
 import Modal from '../../components/Modal';
 import BuscarExistenteModal from '../../components/ModalBusqueda/BuscarExistenteModal';
 
+import DenunciaSinVerificar from '../../types/DenunciaSinVerificar';
 
 function VerificarDenuncias() {
 
   // Autenticación
   const { user, isAuthenticated, isLoading } = useAuth();
   // Estados
-  const [denunciasAMostrar, setDenunciasAMostrar] = useState([]);
+  const [denunciasAMostrar, setDenunciasAMostrar] = useState<DenunciaSinVerificar[]>([]);
   // Cargar denuncias sin verificar
   useEffect(() => {
     const cargarDenuncias = async () => {

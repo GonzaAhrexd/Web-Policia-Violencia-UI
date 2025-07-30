@@ -25,8 +25,12 @@ const columns = [
         sortable: true,
         id: 'Fecha',
         width: '180px',
-        // Haz que muestre la fecha con la hora en formato dd/mm/yyyy hh:mm:ss con GMT-3
-        selector: (row:Row) => new Date(row.fecha).toLocaleString('es-AR', {timeZone: 'America/Argentina/Buenos_Aires'}),
+        // Haz que muestre la fecha con la hora en formato dd/mm/yyyy HH:mm:ss con GMT-3 (24h)
+        selector: (row: Row) =>
+            new Date(row.fecha).toLocaleString('es-AR', {
+                timeZone: 'America/Argentina/Buenos_Aires',
+                hour12: false, // Fuerza formato 24h
+            }),
         style: {
             fontSize: '14px',
             fontWeight: 500,
@@ -35,7 +39,7 @@ const columns = [
     {
         // Usuario
         name: 'Usuario',
-        selector: (row:Row) => row.usuario,
+        selector: (row: Row) => row.usuario,
         width: '150px',
         style: {
             fontSize: '14px',
@@ -45,7 +49,7 @@ const columns = [
     {
         // Descripción
         name: 'Descripción',
-        selector: (row:Row) => row.descripcion,
+        selector: (row: Row) => row.descripcion,
         sortable: true,
         minwidth: '300px',
         style: {
@@ -56,7 +60,7 @@ const columns = [
     {
         // Modelo modificado
         name: 'Sección',
-        selector: (row:Row) => row.modelo_modificado,
+        selector: (row: Row) => row.modelo_modificado,
         sortable: true,
         width: '200px',
         style: {
@@ -67,7 +71,7 @@ const columns = [
     {
         // ID del modelo
         name: 'ID de sección modificada',
-        selector: (row:Row) => row.id_del_modelo,
+        selector: (row: Row) => row.id_del_modelo,
         width: '300px',
         style: {
             fontSize: '14px',

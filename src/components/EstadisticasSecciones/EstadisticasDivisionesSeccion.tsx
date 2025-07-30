@@ -5,16 +5,23 @@ import EstadisticasDivision from "../TablasEstadisticas/EstadisticasDivision"
 import DenunciasDivisionesComisariasTorta from "../Graficos/DenunciasDivisionesComisariasTorta";
 import DenunciasDivisiones from "../Graficos/DenunciasDivisiones"
 
+// Tipos
+import Denuncia from "../../types/Denuncia"
+
 // Props
 type EstadisticasMunicipiosSeccionProps = {
-    denunciasAMostrar: any;
+    denunciasAMostrar: Denuncia[];
+}
+
+type EstadisticasDivisionState = {
+    [key: string]: { valor: number; isDivision: number; }
 }
 
 function EstadisticasMunicipiosSeccion({ denunciasAMostrar }: EstadisticasMunicipiosSeccionProps) {
 
     // Estados
-    const [estadisticasDivisiones, setEstadisticasDivisiones] = useState<any>({});
-    const [loading, setLoading] = useState(true);
+    const [estadisticasDivisiones, setEstadisticasDivisiones] = useState<EstadisticasDivisionState>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
     // USeEffect
     useEffect(() => {
@@ -35,9 +42,9 @@ function EstadisticasMunicipiosSeccion({ denunciasAMostrar }: EstadisticasMunici
     }, [denunciasAMostrar])
 
     // Funcion para calcular estadisticas de las divisiones
-    const calcularEstadisticasDivision = (denuncias: any[]) => {
+    const calcularEstadisticasDivision = (denuncias: Denuncia[]) => {
         // En estadisticas guardo la cantidad de denuncias por division y la cantidad de denuncias que fueron recepcionadas en las divisiones
-        const estadisticas: { [key: string]: { valor: number; isDivision: number } } = {};
+        const estadisticas: EstadisticasDivisionState  = {};
         // Recorro las denuncias
         denuncias.forEach((denuncia) => {
             // Guardo la division
@@ -70,16 +77,13 @@ function EstadisticasMunicipiosSeccion({ denunciasAMostrar }: EstadisticasMunici
                         <EstadisticasDivision estadisticasDivisiones={estadisticasDivisiones} />
                     </div>
                     <div className="text-2xl">
-                        {/* @ts-ignore */}
                         De un total de {denunciasAMostrar?.length} denuncias, {Object.values(estadisticasDivisiones).reduce((acc, curr) => acc + curr.isDivision, 0)} fueron recepcionadas en las distintas divisiones de la provincia.
                     </div>
                     <div className=" hidden md:block">
-                    {/* @ts-ignore */}
-                    <DenunciasDivisionesComisariasTorta aspect={2} comisarias={(denunciasAMostrar?.length) - Object.values(estadisticasDivisiones).reduce((acc, curr) => acc + curr.isDivision, 0)} division={Object.values(estadisticasDivisiones).reduce((acc, curr) => acc + curr.isDivision, 0)} />
+                        <DenunciasDivisionesComisariasTorta aspect={2} comisarias={(denunciasAMostrar?.length) - Object.values(estadisticasDivisiones).reduce((acc, curr) => acc + curr.isDivision, 0)} division={Object.values(estadisticasDivisiones).reduce((acc, curr) => acc + curr.isDivision, 0)} />
                     </div>
                     <div className=" block md:hidden ">
-                    {/* @ts-ignore */}
-                    <DenunciasDivisionesComisariasTorta aspect={1} comisarias={(denunciasAMostrar?.length) - Object.values(estadisticasDivisiones).reduce((acc, curr) => acc + curr.isDivision, 0)} division={Object.values(estadisticasDivisiones).reduce((acc, curr) => acc + curr.isDivision, 0)} />
+                        <DenunciasDivisionesComisariasTorta aspect={1} comisarias={(denunciasAMostrar?.length) - Object.values(estadisticasDivisiones).reduce((acc, curr) => acc + curr.isDivision, 0)} division={Object.values(estadisticasDivisiones).reduce((acc, curr) => acc + curr.isDivision, 0)} />
                     </div>
                 </div>
                 <div className='mt-10 w-full md:w-5/10'>

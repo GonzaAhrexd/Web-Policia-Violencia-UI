@@ -2,8 +2,12 @@ import { useEffect, useState } from 'react'
 
 import EstadisticasMedidasCautelaresTabla from './../TablasEstadisticas/EstadisticasTiposDeViolenciaTabla'
 import DenunciasMedidasCautelaresGrafico from '../Graficos/DenunciasMedidasCautelaresGrafico';
+
+
+import Denuncia from '../../types/Denuncia'
+
 type EstadisticasMedidasCautelaresProps = {
-  denunciasAMostrar: any
+  denunciasAMostrar: Denuncia[]
 }
 
 function EstadisticasMedidasCautelares({ denunciasAMostrar }: EstadisticasMedidasCautelaresProps) {
@@ -27,7 +31,7 @@ function EstadisticasMedidasCautelares({ denunciasAMostrar }: EstadisticasMedida
   };
   // UseEffect
   useEffect(() => {
-    const calcularTiposDeViolencia = (denuncias: any[]) => {
+    const calcularTiposDeViolencia = (denuncias: Denuncia[]) => {
         const estadisticas: { [tipo: string]: number } = { Total: 0 };
         const estadisticasMedidasDispuestas: { [tipo: string]: number } = { Total: 0 };
 

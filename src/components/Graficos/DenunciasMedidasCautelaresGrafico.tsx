@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList, ResponsiveContainer } from 'recharts';
 
 type DenunciasMedidasCautelaresGraficoProps = {
-    estadistica: any
+    estadistica: {[tipo: string]: number}
     aspect?: number
 }
 

@@ -8,14 +8,17 @@ import SeccionCondicion from './EstadisticasVictima/SeccionCondicion'
 import SeccionVinculoConAgresor from './EstadisticasVictima/SeccionVinculoConAgresor'
 import SeccionCompartenViviendaYDependenciaEconomica from './EstadisticasVictima/SeccionCompartenViviendaYDependenciaEconomica'
 
+import Denuncia from '../../types/Denuncia'
+import Victima from '../../types/Victimas'
+
 type EstadisticasVictimasSeccionProps = {
-    denunciasAMostrar: any
+    denunciasAMostrar: Denuncia[]
 }
 
 function EstadisticasVictimasSeccion({ denunciasAMostrar }: EstadisticasVictimasSeccionProps) {
 
     // Estado
-    const [victimas, setVictimas] = useState(new Set())
+    const [victimas, setVictimas] = useState<Set<Victima>>(new Set())
     const [loading, setLoading] = useState(true)
 
     // UseEffect
@@ -41,7 +44,7 @@ function EstadisticasVictimasSeccion({ denunciasAMostrar }: EstadisticasVictimas
             }
             
             // Convertimos el Set a un arreglo de objetos
-            const victimasArray: any = Array.from(victimasSet).map((victimaString: any) => JSON.parse(victimaString));
+            const victimasArray: Set<Victima> = new Set(Array.from(victimasSet).map((victimaString: any) => JSON.parse(victimaString)));
             setVictimas(victimasArray);
             setLoading(false);
         };

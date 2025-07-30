@@ -6,9 +6,11 @@ import EstadisticasAprehensionPorDivision from '../TablasEstadisticas/Estadistic
 import AprehensionesGraficoTorta from '../Graficos/AprehensionesGraficoTorta';
 import AprehensionesPorDivisionGrafico from '../Graficos/AprehensionesPorDivisionGrafico';
 
+import Denuncia from '../../types/Denuncia'
+
 // Props
 type EstadisticasDivisionProps = {
-    denunciasAMostrar: any;
+    denunciasAMostrar: Denuncia[];
 }
 
 function EstadisticasAprehensiones({ denunciasAMostrar }: EstadisticasDivisionProps) {

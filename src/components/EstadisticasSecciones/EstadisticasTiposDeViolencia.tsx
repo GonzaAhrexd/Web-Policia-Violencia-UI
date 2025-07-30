@@ -8,10 +8,12 @@ import { tiposDeViolenciaText } from '../../GlobalConst/modalTextos'
 // Iconos
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 
+import Denuncia from '../../types/Denuncia';
+
 type EstadisticasTiposDeViolenciaProps = {
-  denunciasAMostrar: any
-  setTitulo: any
-  handleOpenModal: any
+  denunciasAMostrar: Denuncia[]
+  setTitulo: (titulo: string) => void
+  handleOpenModal: (values: any) => void
 }
 
 const EstadisticasTiposDeViolencia = ({ denunciasAMostrar, setTitulo, handleOpenModal }: EstadisticasTiposDeViolenciaProps) => {

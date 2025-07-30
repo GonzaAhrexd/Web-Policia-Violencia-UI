@@ -9,11 +9,13 @@ import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 import EstadisticasTiposDeViolenciaTabla from '../TablasEstadisticas/EstadisticasTiposDeViolenciaTabla';
 import TiposDeViolenciaTorta from '../Graficos/TiposDeViolenciaTorta'; 
 
+
+import Denuncia from '../../types/Denuncia'
 // Props
 type EstadisticasModalidadesProps = {
-    handleOpenModal: any,
-    setTitulo: any,
-    denunciasAMostrar: any,
+    handleOpenModal: (values: any) => void,
+    setTitulo: (title: string) => void,
+    denunciasAMostrar: Denuncia[]
 }
 
 

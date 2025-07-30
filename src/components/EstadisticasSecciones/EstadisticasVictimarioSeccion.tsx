@@ -7,14 +7,18 @@ import { useState, useEffect } from 'react'
 // Backend
 import { getVictimariosArray } from '../../api/CRUD/victimario.crud'
 
+
+import Denuncia from '../../types/Denuncia';
+import Victimario from '../../types/Victimario';
+
 type EstadisticasVictimarioSeccionProps = {
-    denunciasAMostrar: any
+    denunciasAMostrar: Denuncia[]
 }
 
 
 function EstadisticasVictimarioSeccion({denunciasAMostrar}: EstadisticasVictimarioSeccionProps) {
     // Estado
-    const [victimarios, setVictimarios] = useState(new Set())
+    const [victimarios, setVictimarios] = useState<Set<Victimario>>(new Set())
     const [loading, setLoading] = useState(true)
     
     // UseEffect

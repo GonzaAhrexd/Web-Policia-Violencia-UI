@@ -59,7 +59,7 @@ function SeccionCondicion({ victimas }: SeccionOcupacionProps) {
 
   return (
     <>
-      <h1 className="text-2xl">Condición de víctimas registrados en la Provincia del Chaco en el periodo seleccionado {"(Total de " + victimas?.length + " víctimas)"}</h1>
+      <h1 className="text-2xl">Condición de víctimas registrados en la Provincia del Chaco en el periodo seleccionado {"(Total de " + victimas?.size + " víctimas)"}</h1>
       <div className='flex flex-col md:flex-row justify-between'>
         <div className='flex flex-col w-full md:w-4/10'>
           <EstadisticasTiposDeViolencia texto="Condición" tipos_de_violencia={estadisticasCondicion} format={format} />

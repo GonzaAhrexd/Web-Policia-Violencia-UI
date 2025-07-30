@@ -4,7 +4,7 @@ type DenunciaSinVerificar = {
     estado: string;
     cargado_por: string;
     numero_de_expediente: string;
-    fecha: Date;
+    fecha: any;
     hora: string;
     direccion: string;
     telefono: string;
@@ -42,6 +42,7 @@ type DenunciaSinVerificar = {
     ampliaciones_IDs?: string[];
     preventivo_ID?: string;
     radiograma_ID?: string;
+    createdAt: string;
 };
 
 export default DenunciaSinVerificar;

@@ -19,22 +19,30 @@ import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid'
 import SimpleTableCheckorX from '../../components/ShowData/SimpleTableCheckorX';
 import EditSectionSinVerificar from '../../components/Busqueda/BuscarDenunciasSinVerificar/EditSectionSinVerificar';
 import ShowTextArea from '../../components/ShowData/ShowTextArea';
+// Tipos
+import DenunciaSinVerificar from '../../types/DenunciaSinVerificar';
 
 // Props
 type expandedComponentsProps = {
-    data: any
+    data: DenunciaSinVerificar
+}
+
+type DatosCampos = {
+    nombre: string;
+    valor: string | boolean;
+
 }
 
 function expandedComponents({ data }: expandedComponentsProps) {
     // Estado para controlar si se está editando
     const [editGlobal, setEditGlobal] = useState(false)
     // Datos para mostrar en la tabla
-    const datosDenuncia = [
+    const datosDenuncia:DatosCampos[] = [
         {nombre: "Número de expediente", valor: data.numero_de_expediente},
         {nombre: "Fecha de denuncia", valor: data.fecha},
     ]
     // Datos del denunciante
-    const denuncianteDatos = [
+    const denuncianteDatos:DatosCampos[] = [
         { nombre: "Nombre", valor: data.nombre_victima },
         { nombre: "Apellido", valor: data.apellido_victima },
         { nombre: "DNI", valor: data.DNI_victima },
@@ -46,7 +54,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
         { nombre: "¿Sabe leer y Escribir?", valor: data.sabe_leer_y_escribir_victima },
     ]
     // Preguntas para mostrar en la tabla
-    const preguntas = [
+    const preguntas:DatosCampos[] = [
         { nombre: "¿Desea ser asistida?", valor: data.preguntas.desea_ser_asistida },
         { nombre: "¿Desea ser examinada por un médico?", valor: data.preguntas.desea_ser_examinada_por_medico },
         { nombre: "¿Desea accionar penalmente?", valor: data.preguntas.desea_accionar_penalmente },

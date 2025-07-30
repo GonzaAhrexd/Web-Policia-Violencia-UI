@@ -1,8 +1,14 @@
 import { CheckIcon, XMarkIcon } from '@heroicons/react/20/solid'
 
+type DatosCampos = {
+    nombre: string;
+    valor: string | boolean;
+
+}
+
 interface simpleTableCheckorXProps {
     campo?: string;
-    datos: any;
+    datos: DatosCampos[];
     icono?: any;
 }
 
@@ -21,7 +27,7 @@ function SimpleTableCheckorX({ campo, datos, icono }: simpleTableCheckorXProps) 
                 </div>
                 <div className="table-cell bg-sky-900 text-white font-medium h-10" > </div>
             </div>
-            {datos.map((data: any, index: number) => (
+            {datos.map((data: DatosCampos, index: number) => (
 
                 <div className="flex flex-row items-between justify-between" key={index}>
                     <div className="flex pl-4 text-base font-medium md:text-xl w-4/10 md:w-4/10">{data.nombre}</div>

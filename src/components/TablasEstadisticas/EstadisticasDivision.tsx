@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react'
 
+
+type EstadisticasDivision = {
+    [key: string]: { valor: number; isDivision: number; }
+}
+
 type EstadisticasDivisionProps = {
-    estadisticasDivisiones: any;
+    estadisticasDivisiones: EstadisticasDivision;
 }
 
 function EstadisticasDivision({ estadisticasDivisiones }: EstadisticasDivisionProps) {
@@ -11,13 +16,9 @@ function EstadisticasDivision({ estadisticasDivisiones }: EstadisticasDivisionPr
 
     useEffect(() => {
         // Obtener el total del total y de isDivision
-        // @ts-ignore
         const total = Object.values(estadisticasDivisiones).reduce((acc, curr) => acc + curr.valor, 0);
-        // @ts-ignore
         const isDivision = Object.values(estadisticasDivisiones).reduce((acc, curr) => acc + curr.isDivision, 0);
-        // @ts-ignore
         setTotal(total);
-        // @ts-ignore
         setIsDivision(isDivision);
     }, [])
     return (
@@ -34,7 +35,6 @@ function EstadisticasDivision({ estadisticasDivisiones }: EstadisticasDivisionPr
                         <div className="flex flex-row items-between justify-between" key={division}>
                             <div className="flex pl-4 text-base font-medium md:text-xl w-full  md:w-8/10">{division}</div>
                             <div className="flex w-4/10 md:w-2/10 break-words break-all	">
-                                { /* @ts-ignore */}
                                 {cantidad.valor}
                             </div>
                         </div>
@@ -54,7 +54,6 @@ function EstadisticasDivision({ estadisticasDivisiones }: EstadisticasDivisionPr
                             <div className="flex pl-4 text-base font-medium md:text-xl w-full  md:w-8/10">{division}
                             </div>
                             <div className="flex w-4/10 md:w-2/10 break-words break-all	">
-                                { /* @ts-ignore */}
                                 {cantidad.isDivision}
                             </div>
                         </div>

@@ -2,7 +2,15 @@ import { useEffect, useState } from 'react'
 import EstadisticasTiposDeViolencia from '../TablasEstadisticas/EstadisticasTiposDeViolenciaTabla'
 import TiposDeViolenciaTorta from '../Graficos/TiposDeViolenciaTorta';
 
-function EstadisticasModoActuacionSeccion({denunciasAMostrar}) {
+
+import Denuncia from '../../types/Denuncia'
+
+type EstadisticasModoActuacionSeccionProps = {
+    denunciasAMostrar: Denuncia[]
+}
+
+
+function EstadisticasModoActuacionSeccion({denunciasAMostrar}: EstadisticasModoActuacionSeccionProps) {
 
     const [estadisticaModoActuacion, setEstadisticaModoActuacion] = useState<any>([])
 
@@ -11,7 +19,7 @@ function EstadisticasModoActuacionSeccion({denunciasAMostrar}) {
       const estadistica: { [tipo: string]: number } = {};
   
       // Contar las denuncias por modo de actuación
-      denunciasAMostrar.forEach((denuncia: any) => {
+      denunciasAMostrar.forEach((denuncia: Denuncia) => {
           const modoActuacion = denuncia.modo_actuacion;
           if (estadistica[modoActuacion]) {
               estadistica[modoActuacion]++;
