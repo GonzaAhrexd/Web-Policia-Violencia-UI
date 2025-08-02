@@ -1,3 +1,11 @@
+/*
+  [ EditarCampos.tsx ]  
+    Descripción: Página para editar campos de la aplicación, como juzgados intervinientes, ocupaciones, vínculos, tipos de armas, tipos de lugar y unidades.
+    Dependiendo del rol del usuario, se mostrarán diferentes tablas para editar los campos.
+    Solo los usuarios con rol de admin pueden acceder a esta página.
+    Si el usuario no es admin, será redirigido a la página principal.
+*/
+
 // Hooks
 import { useState, useContext } from 'react';
 // Dependencias

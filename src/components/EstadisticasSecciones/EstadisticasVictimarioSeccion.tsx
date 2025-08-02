@@ -1,5 +1,5 @@
 // Componentes
-import SeccionOcupacion from './EstadisticasVictima/SeccionOcupacion' 
+import SeccionOcupacion from './EstadisticasVictima/SeccionOcupacion'
 import SeccionFuerzaDeSeguridad from './EstadisticasVictimario/SeccionFuerzasDeSeguridad'
 import SeccionCondicionesVictimario from './EstadisticasVictimario/SeccionCondicionesVictimario'
 // Hooks
@@ -16,44 +16,50 @@ type EstadisticasVictimarioSeccionProps = {
 }
 
 
-function EstadisticasVictimarioSeccion({denunciasAMostrar}: EstadisticasVictimarioSeccionProps) {
+function EstadisticasVictimarioSeccion({ denunciasAMostrar }: EstadisticasVictimarioSeccionProps) {
     // Estado
     const [victimarios, setVictimarios] = useState<Set<Victimario>>(new Set())
     const [loading, setLoading] = useState(true)
-    
+
     // UseEffect
-    useEffect(() => {
-        // Función para obtener los victimarios de las denuncias
-        const fetchVictimarios = async () => {
-            // Set para guardar los victimarios
-            const victimarioSet = new Set();
-            const arrayIds: string[] = [];
+   useEffect(() => {
+    // Función para obtener los victimarios de las denuncias
+    const fetchVictimarios = async () => {
+        // Set temporal para evitar duplicados por contenido
+        const victimarioSet = new Set<string>();
+        const arrayIds: string[] = [];
 
+        // Recolectamos los IDs de victimarios
+        for (const denuncia of denunciasAMostrar) {
+            arrayIds.push(denuncia.victimario_ID);
+        }
 
-            for (const denuncia of denunciasAMostrar) {
-                arrayIds.push(denuncia.victimario_ID);
-            }
+        try {
+            // Llamamos al backend
+            const victimariosArray = await getVictimariosArray(arrayIds);
 
-            try{
-                const victimariosArray = await getVictimariosArray(arrayIds);
-                victimariosArray.forEach((victimario: any) => {
-                    victimarioSet.add(JSON.stringify(victimario));
-                });
-            } catch (error) {
-                console.error("Error al obtener los victimarios:", error);
-            }
+            // Usamos stringify para evitar duplicados aunque sean referencias distintas
+            victimariosArray.forEach((victimario: any) => {
+                victimarioSet.add(JSON.stringify(victimario));
+            });
 
-            // Convertimos el Set a un arreglo de objetos
-            const victimarioArray: any = Array.from(victimarioSet).map((victimarioString: any) => JSON.parse(victimarioString));
-            setVictimarios(victimarioArray);
-            setLoading(false);
-        };
-        
-        // Llamamos a la función para obtener los victimarios
-        fetchVictimarios();
-        
-    }, [])
-    
+        } catch (error) {
+            console.error("Error al obtener los victimarios:", error);
+        }
+
+        // Convertimos el Set en un array de objetos
+        const victimarioArrayFinal: Set<Victimario> = new Set(
+            Array.from(victimarioSet).map((victimarioString: string) => JSON.parse(victimarioString))
+        );
+
+        // Ahora victimarios es un array
+        setVictimarios(victimarioArrayFinal);
+        setLoading(false);
+    };
+
+    fetchVictimarios();
+}, [denunciasAMostrar]);
+
     // Si está cargando, mostrar "Cargando..."
     if (loading) {
         return (
@@ -64,14 +70,14 @@ function EstadisticasVictimarioSeccion({denunciasAMostrar}: EstadisticasVictimar
 
     }
 
-  return (
-    <>
-        <SeccionOcupacion persona={victimarios} tipo={"Ocupación de victimarios"} />
-        <SeccionFuerzaDeSeguridad victimarios={victimarios} denuncias={denunciasAMostrar} />
-        <SeccionCondicionesVictimario victimarios={victimarios} denunciasAMostrar={denunciasAMostrar} />
-        
-    </>
-  )
+    return (
+        <>
+            <SeccionOcupacion persona={victimarios} tipo={"Ocupación de victimarios"} />
+            <SeccionFuerzaDeSeguridad victimarios={victimarios} denuncias={denunciasAMostrar} />
+            <SeccionCondicionesVictimario victimarios={victimarios} denunciasAMostrar={denunciasAMostrar} />
+
+        </>
+    )
 }
 
 export default EstadisticasVictimarioSeccion

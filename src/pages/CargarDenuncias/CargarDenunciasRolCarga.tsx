@@ -1,3 +1,10 @@
+/*
+  [ CargarDenunciasRolCarga.tsx ]
+  Descripción: Componente para cargar denuncias para el rol de carga.
+  Este modo incluye más opciones y campos que luego son utilizados para generar estadísticas.
+  
+*/
+
 // Hooks
 import { useForm } from 'react-hook-form';
 

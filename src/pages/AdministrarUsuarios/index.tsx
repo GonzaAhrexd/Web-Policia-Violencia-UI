@@ -1,3 +1,12 @@
+/*
+    [ AdministrarUsuarios ]
+    Página para administrar los usuarios del sistema. 
+    - Permite buscar usuarios por nombre de usuario, nombre, apellido y rol. 
+    - Muestra una tabla con los usuarios encontrados.
+    - Permite agregar nuevos usuarios mediante un modal.
+    - Requiere autenticación y rol de administrador.
+    */
+
 // Hooks
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';

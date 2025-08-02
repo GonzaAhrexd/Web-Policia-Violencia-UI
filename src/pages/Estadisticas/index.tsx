@@ -1,3 +1,12 @@
+/* 
+    [ Estadisticas.tsx ]
+    Descripción: Página principal para mostrar estadísticas de denuncias.
+    Permite al usuario buscar denuncias por fecha y muestra diferentes secciones de estadísticas.
+
+
+*/
+
+
 // Hooks
 import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -46,8 +55,8 @@ function Index() {
 
     const [fecha, setFecha] = useState({ desde: '', hasta: '' });
     const [denunciasAMostrar, setDenunciasAMostrar] = useState([]);
-    const [activeSection, setActiveSection] = useState(null); // Usamos un solo estado para la sección activa
-    const [showAllSections, setShowAllSections] = useState(false); // Renombrado de showAll a showAllSections para claridad
+    const [activeSection, setActiveSection] = useState(null); 
+    const [showAllSections, setShowAllSections] = useState(false); 
     const [sinResultados, setSinResultados] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
     const [searchError, setSearchError] = useState(null);

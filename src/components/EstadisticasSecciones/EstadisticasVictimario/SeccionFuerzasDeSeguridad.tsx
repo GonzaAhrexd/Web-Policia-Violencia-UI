@@ -3,8 +3,9 @@ import { useEffect, useState } from "react"
 // Componentes
 import SeccionOcupacionFuerzas from "../EstadisticasVictima/SeccionOcupacion"
 import EstadisticasTabla from '../../TablasEstadisticas/EstadisticasTiposDeViolenciaTabla'
+import Victimario from "../../../types/Victimario"
 type SeccionOcupacionProps = {
-  victimarios: any,
+  victimarios: Set<Victimario>,
   denuncias: any
 }
 
@@ -15,7 +16,7 @@ function SeccionOcupacion({ victimarios, denuncias }: SeccionOcupacionProps) {
   const [municipiosCount, setMunicipiosCount] = useState<any>([])
   useEffect(
     () => {
-      const victimariosFuerzasDeSeguridad = victimarios.filter((victimario: any) => {
+      const victimariosFuerzasDeSeguridad = Array.from(victimarios).filter((victimario: any) => {
         return (
           victimario.ocupacion === 'Policía Provincial' ||
           victimario.ocupacion === 'Policía Federal Argentina' ||

@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react'
 import EstadisticasTiposDeViolencia from '../../TablasEstadisticas/EstadisticasTiposDeViolenciaTabla'
 import OcupacionGrafico from '../../Graficos/OcupacionGrafico'
 
-import Victima from '../../../types/Victimas'
-import Victimario from '../../../types/Victimario'
+
 
 type SeccionOcupacionProps = {
-    persona: Set<Victima | Victimario>
+    persona: any,
     tipo: string
 }
 
@@ -41,13 +40,13 @@ function SeccionOcupacion({persona, tipo}: SeccionOcupacionProps) {
     return (
 
         <>
-        <h1 className="text-2xl">{tipo} registrados en la Provincia del Chaco en el periodo seleccionado {"(Total de " + persona?.size + " víctimas)"}</h1>
+        <h1 className="text-2xl">{tipo} registrados en la Provincia del Chaco en el periodo seleccionado {"(Total de " + (persona?.size | persona?.length ) + " víctimas)"}</h1>
         <div className='flex flex-col md:flex-row justify-between'>
             <div className='flex flex-col items-center justify-center w-full md:w-4/10'>
                 <EstadisticasTiposDeViolencia texto="Ocupación" tipos_de_violencia={estadisticaOcupacion} format={format} />      
             </div>
             <div className='w-full md:w-5/10'>
-              <OcupacionGrafico ocupaciones={estadisticaOcupacion} total={persona.size}/>
+              <OcupacionGrafico ocupaciones={estadisticaOcupacion} total={persona?.size | persona?.length }/>
             </div>
         </div>
     </>

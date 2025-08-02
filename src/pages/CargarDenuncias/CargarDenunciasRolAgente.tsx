@@ -1,3 +1,11 @@
+/*
+  [ CargarDenunciasRolAgente.tsx ]
+  Descripción: Este componente es para cargar denuncias para el rol de agente.
+  Este modo es más simple y está diseñado para ser utilizado por agentes que necesitan cargar denuncias sin opciones avanzadas.
+  Incluye campos básicos y preguntas específicas para el rol de agente.
+
+*/
+
 // Hooks
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';

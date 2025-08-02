@@ -1,9 +1,13 @@
 /*
 _____________________________________________________________________________________________ 
 Uso del componente:
-    expandedComponents es una dependencia de la tabla mostrada en /MisDenuncias 
-    Recibe los datos de la víctima, victimario y hecho para mostrarlos en una tabla
-    y en un mapa. Además, se puede editar la denuncia y eliminarla.
+    expandedComponents es una dependencia de la tabla mostrada en AdministrarUsuarios/index.tsx
+    Se encarga de mostrar los datos del usuario seleccionado en la tabla.
+    - Muestra los datos del usuario seleccionado.
+    - Permite cambiar el rol del usuario.
+    - Muestra la actividad reciente del usuario.
+    - Permite editar los datos del usuario.
+    - Requiere autenticación y rol de administrador.
 _____________________________________________________________________________________________
 */
 // Componentes

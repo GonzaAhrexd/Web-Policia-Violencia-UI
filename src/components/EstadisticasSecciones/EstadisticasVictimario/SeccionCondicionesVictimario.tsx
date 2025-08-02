@@ -110,7 +110,7 @@ function SeccionCondicionesVictimario({ victimarios, denunciasAMostrar }: Seccio
     }
     return (
         <>
-            <h1 className="text-2xl">Condiciones del victimario registrados en la Provincia del Chaco en el periodo seleccionado {"(Total de " + victimarios?.length + " víctimas)"}</h1>
+            <h1 className="text-2xl">Condiciones del victimario registrados en la Provincia del Chaco en el periodo seleccionado {"(Total de " + victimarios?.size + " víctimas)"}</h1>
             <div className='flex flex-col md:flex-row justify-between'>
                 <div className='flex flex-col w-9/10 md:w-4/10'>
                     <EstadisticasTiposDeViolenciaTabla texto="Condiciones de Riesgo" tipos_de_violencia={condicionesRiesgo} format={format} />      

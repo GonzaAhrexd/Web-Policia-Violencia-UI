@@ -1,10 +1,11 @@
 /*
   [/cargar-denuncias]
-  Descripción: Página para cargar denuncias, dependiendo del rol del usuario, se mostrará un formulario diferente,
-  si es carga o admin, se mostrará un formulario avanzado por defecto, si es agente, se mostrará un formulario simple.
-
+   Descripción: Componente para cargar denuncias según el rol de carga del usuario.
+  Dependiendo del rol del usuario, se mostrará un formulario diferente.
+  Si es carga o admin, se mostrará un formulario avanzado por defecto,
+  si es agente, se mostrará un formulario simple.
   El usuario carga, puede elegir entre ambos modos.
-
+  
 */
 // Hooks
 import { useAuth } from '../../context/auth';
