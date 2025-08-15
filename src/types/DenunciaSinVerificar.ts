@@ -29,7 +29,7 @@ type DenunciaSinVerificar = {
         desea_ser_examinada_por_medico: boolean;
         desea_accionar_penalmente: boolean;
         desea_agregar_quitar_o_enmendar: boolean;
-    }
+    },
     secretario: {
         nombre_completo_secretario: string;
         jerarquia_secretario: string;

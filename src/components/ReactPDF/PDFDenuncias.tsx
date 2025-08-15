@@ -8,8 +8,12 @@ import styles from '../../GlobalConst/PDFStyles';
 // Componentes
 import Footer from './Footer';
 import Header from './Header';
+
+
+import DenunciaSinVerificar from '../../types/DenunciaSinVerificar';
+
 type PDFProps = {
-    datos: any;
+    datos: DenunciaSinVerificar | any;
     user: any;
     tipoDenuncia: string;
     genero: string;
@@ -40,6 +44,39 @@ function PDFDenuncias({ genero, tipoDenuncia, datos, user, isBusqueda }: PDFProp
     // Según userDivisionZona[0], quiero obtener de direccionDivisiones
     const direccionDivision: division[] = direccionDivisiones.filter((division) => division.division === userDivisionZona[0])
     const isExposicion = tipoDenuncia === "Exposición";
+    const modoActuacion = datos.modo_actuacion_2 ? datos.modo_actuacion_2 : datos.modo_actuacion
+
+    const RenderArticulo = () => {
+
+
+        if (modoActuacion == "Denuncia Penal") {
+            return ( 
+            <Text style={styles.longText}>
+                Quien es notificado del contenido del  artículo  245° (falso denunciante) del
+                Código Penal de la Nación Argentina; el contenido del art. 84º del Código Procesal Penal de la provincia del Chaco, donde
+                en sus partes dice{' '}
+                <Text style={styles.boldText}>
+                    “…LA VICTIMA DEL DELITO TENDRA DERECHO A SER INFORMADA ACERCA DE LAS FACULTADES QUE PUEDA EJERCER EN EL PROCESO-ARTICULO 8 Y 25, DE LAS RESOLUCIONES QUE SE DICTEN SOBRE LA SITUACION DEL IMPUTADO Y CUANDO FUERE MENOR O INCAPAZ SE AUTORIZARA A QUE DURANTE LOS ACTOS PROCESALES SEA ACOMPAÑADA POR PERSONA DE SU CONFIANZA, SIEMPRE QUE ELLO NO PERJUDIQUEN LA DEFENSA DEL IMPUTADO O LOS RESULTADOS DE LA INVESTIGACIÓN...”
+                </Text>
+            </Text>
+)        } else {
+            return (
+                <Text style={styles.longText}>
+                    Quien es notificado del contenido del  artículo  245° (falso denunciante) del
+                    Código Penal de la Nación Argentina; el contenido del art. 84º del Código Procesal Penal de la provincia del Chaco, donde
+                    en sus partes dice{' '}
+                    <Text style={styles.boldText}>
+                    “…LA VICTIMA DEL DELITO TENDRA DERECHO A SER INFORMADA ACERCA DE LAS FACULTADES QUE PUEDA EJERCER EN EL PROCESO-ARTICULO 8 Y 25, DE LAS RESOLUCIONES QUE SE DICTEN SOBRE LA SITUACION DEL IMPUTADO Y CUANDO FUERE MENOR O INCAPAZ SE AUTORIZARA A QUE DURANTE LOS ACTOS PROCESALES SEA ACOMPAÑADA POR PERSONA DE SU CONFIANZA, SIEMPRE QUE ELLO NO PERJUDIQUEN LA DEFENSA DEL IMPUTADO O LOS RESULTADOS DE LA INVESTIGACIÓN...”
+                </Text>
+            </Text>
+    
+)}
+
+    }
+
+
+
+
     const RenderDenuncia = () => {
         return (
             <Text style={styles.longText}>
@@ -59,12 +96,7 @@ function PDFDenuncias({ genero, tipoDenuncia, datos, user, isBusqueda }: PDFProp
                 {datos.nacionalidad_victima}, de {datos.edad_victima} años de edad, estado civil {datos.estado_civil_victima},
                 ocupación: {datos.ocupacion_victima}, {datos.SabeLeerYEscribir === 'Sí' ? 'con ' : 'sin '} instrucción, domiciliada{' '}
                 {datos.direccion_victima} -, teléfono celular Nº {datos.telefono_victima}, identidad que acredita con juramento de ley,
-                aduciendo tener DNI Nº {datos.dni_victima}. Quien es notificado del contenido del artículo 245° (falso denunciante) del
-                Código Penal de la Nación Argentina; el contenido del art. 84º del Código Procesal Penal de la provincia del Chaco, donde
-                en sus partes dice{' '}
-                <Text style={styles.boldText}>
-                    “…LA VICTIMA DEL DELITO TENDRA DERECHO A SER INFORMADA ACERCA DE LAS FACULTADES QUE PUEDA EJERCER EN EL PROCESO-ARTICULO 8 Y 25, DE LAS RESOLUCIONES QUE SE DICTEN SOBRE LA SITUACION DEL IMPUTADO Y CUANDO FUERE MENOR O INCAPAZ SE AUTORIZARA A QUE DURANTE LOS ACTOS PROCESALES SEA ACOMPAÑADA POR PERSONA DE SU CONFIANZA, SIEMPRE QUE ELLO NO PERJUDIQUEN LA DEFENSA DEL IMPUTADO O LOS RESULTADOS DE LA INVESTIGACIÓN...”
-                </Text>
+                aduciendo tener DNI Nº {datos.dni_victima}. <RenderArticulo />
                 {genero === 'Femenino' && (
                     <>
                         y Ley Nacional Nº 26.485, (Ley de protección integral para prevenir, sancionar y erradicar la violencia contra las
