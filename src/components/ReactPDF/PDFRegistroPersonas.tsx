@@ -3,10 +3,18 @@ import direccionDivisiones from '../../GlobalConst/direccionDivisiones';
 
 import styles from '../../GlobalConst/PDFStyles';
 
+// Tipos
+
+import Victima from '../../types/Victimas';
+import Victimario from '../../types/Victimario';
+import Tercero from '../../types/Tercero';
+import Usuario from '../../types/Usuarios';
+ 
+
 interface PDFProps {
     tipoPersona: string
-    datos: any
-    user: any
+    datos: Victima | Victimario | Tercero
+    user: Usuario
     denunciasAMostrar: any
     valores: any
 }

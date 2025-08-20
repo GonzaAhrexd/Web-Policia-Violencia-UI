@@ -37,9 +37,18 @@ function expandedComponents({ data }: expandedComponentsProps) {
     // Estado para controlar si se está editando
     const [editGlobal, setEditGlobal] = useState(false)
     // Datos para mostrar en la tabla
-    const datosDenuncia:DatosCampos[] = [
-        {nombre: "Número de expediente", valor: data.numero_de_expediente},
-        {nombre: "Fecha de denuncia", valor: data.fecha},
+    const datosDenuncia: DatosCampos[] = [
+        { nombre: "Número de expediente", valor: data.numero_de_expediente },
+        {
+            nombre: "Fecha de denuncia",
+            valor: (() => {
+                const date = new Date(data.fecha);
+                const day = String(date.getUTCDate()).padStart(2, '0');
+                const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+                const year = date.getUTCFullYear();
+                return `${day}/${month}/${year}`;
+            })()
+        },
     ]
     // Datos del denunciante
     const denuncianteDatos:DatosCampos[] = [

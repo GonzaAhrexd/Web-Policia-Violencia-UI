@@ -23,6 +23,12 @@ import { useForm } from "react-hook-form";
 // Tipos
 import Radiograma from '../../../types/Radiograma'
 
+type DatosCampos = {
+    nombre: string;
+    valor: string | boolean  | number;
+
+}
+
 type expandedComponentProps = {
     data: Radiograma
 }
@@ -106,18 +112,20 @@ function expandedComponentRadiograma({ data }: expandedComponentProps) {
             await deleteRadiograma(dataRadiograma._id)
         }
     }
+
+
     // Datos del preventivo
-    const datosPreventivo = [
+    const datosPreventivo: DatosCampos[] = [
         { nombre: "Número de nota", valor: dataRadiograma.nro_nota_preventivo ? dataRadiograma.nro_nota_preventivo : "No ingresado" },
         { nombre: "Número de expediente", valor: dataRadiograma.nro_expediente ? dataRadiograma.nro_expediente : "No ingresado" },
         { nombre: "ID radiograma", valor: dataRadiograma._id ? dataRadiograma._id : "No ingresado" },
         { nombre: "Consultado", valor: dataRadiograma.consultado_preventivo ? dataRadiograma.consultado_preventivo : "No ingresado" },
-        { nombre: "Fecha", valor: dataRadiograma.fecha ? dataRadiograma.fecha : "No ingresado" },
+        { nombre: "Fecha", valor: dataRadiograma.fecha ? new Date(dataRadiograma.fecha).toLocaleDateString() : "No ingresado" },
         { nombre: "Objeto", valor: dataRadiograma.objeto ? dataRadiograma.objeto : "No ingresado" },
 
     ]
     // Datos de la víctima
-    const victimaDatosMostrar = [
+    const victimaDatosMostrar: DatosCampos[] = [
         { nombre: "Nombre de la víctima", valor: dataRadiograma.nombre_victima ? dataRadiograma.nombre_victima : "No ingresado" },
         { nombre: "Apellido de la víctima", valor: dataRadiograma.apellido_victima ? dataRadiograma.apellido_victima : "No ingresado" },
         { nombre: "Edad víctima", valor: dataRadiograma.edad_victima ? dataRadiograma.edad_victima : "No ingresado" },
@@ -131,7 +139,7 @@ function expandedComponentRadiograma({ data }: expandedComponentProps) {
     ]
 
     // Datos del instructor
-    const instructorDatosMostrar = [
+    const instructorDatosMostrar: DatosCampos[] = [
         { nombre: "Nombre del instructor", valor: dataRadiograma.instructor?.nombre_completo_instructor ? dataRadiograma.instructor.nombre_completo_instructor : "No ingresado" },
         { nombre: "Jerarquía instructor", valor: dataRadiograma.instructor?.jerarquia_instructor ? dataRadiograma.instructor.jerarquia_instructor : "No ingresado" },
     ]

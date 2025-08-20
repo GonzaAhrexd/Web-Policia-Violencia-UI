@@ -62,12 +62,7 @@ function PDFDenuncias({ genero, tipoDenuncia, datos, user, isBusqueda }: PDFProp
 )        } else {
             return (
                 <Text style={styles.longText}>
-                    Quien es notificado del contenido del  artículo  245° (falso denunciante) del
-                    Código Penal de la Nación Argentina; el contenido del art. 84º del Código Procesal Penal de la provincia del Chaco, donde
-                    en sus partes dice{' '}
-                    <Text style={styles.boldText}>
-                    “…LA VICTIMA DEL DELITO TENDRA DERECHO A SER INFORMADA ACERCA DE LAS FACULTADES QUE PUEDA EJERCER EN EL PROCESO-ARTICULO 8 Y 25, DE LAS RESOLUCIONES QUE SE DICTEN SOBRE LA SITUACION DEL IMPUTADO Y CUANDO FUERE MENOR O INCAPAZ SE AUTORIZARA A QUE DURANTE LOS ACTOS PROCESALES SEA ACOMPAÑADA POR PERSONA DE SU CONFIANZA, SIEMPRE QUE ELLO NO PERJUDIQUEN LA DEFENSA DEL IMPUTADO O LOS RESULTADOS DE LA INVESTIGACIÓN...”
-                </Text>
+                   Abierto el acto se le hace saber que se le recepcionará la presente de acuerdo a las previsiones del Art. 35° del Código Faltas de la Provincia Ley 850-J, 
             </Text>
     
 )}

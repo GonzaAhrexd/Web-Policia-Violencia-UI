@@ -2,7 +2,7 @@ import { CheckIcon, XMarkIcon } from '@heroicons/react/20/solid'
 
 type DatosCampos = {
     nombre: string;
-    valor: string | boolean;
+    valor: string | boolean | number;
 
 }
 
@@ -33,7 +33,9 @@ function SimpleTableCheckorX({ campo, datos, icono }: simpleTableCheckorXProps) 
                     <div className="flex pl-4 text-base font-medium md:text-xl w-4/10 md:w-4/10">{data.nombre}</div>
                     {typeof data.valor !== "boolean" ?
                         <div className="flex w-4/10 md:w-2/10 break-words break-all	">
+                            
                             {data.valor}
+                                
                         </div>
                         :
                         <div className="flex w-4/10 md:w-2/10">{

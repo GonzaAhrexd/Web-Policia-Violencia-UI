@@ -3,10 +3,11 @@ import { useState } from 'react';
 import direccionDivisiones from '../../GlobalConst/direccionDivisiones';
 import Footer from './Footer';
 import styles from '../../GlobalConst/PDFStyles';
+import DenunciaSinVerificar from '../../types/DenunciaSinVerificar';
 
 type PDFProps = {
     isBusqueda: boolean;
-    datos: any;
+    datos: DenunciaSinVerificar | any;
     user: any;
     genero: string;
 }
@@ -24,6 +25,8 @@ function PDFAmpliacion({ isBusqueda, genero, datos, user }: PDFProps) {
     const mes = meses[fecha.getMonth()]
     const año = fecha.getFullYear()
     const horaActual = fecha.getHours().toString().padStart(2, '0') + ":" + fecha.getMinutes().toString().padStart(2, '0')
+    const {  modoActuacion } = datos 
+
 
     type division = {
         division: string,
@@ -34,6 +37,28 @@ function PDFAmpliacion({ isBusqueda, genero, datos, user }: PDFProps) {
     // Según userDivisionZona[0], quiero obtener de direccionDivisiones
     const direccionDivision: division[] = direccionDivisiones.filter((division) => division.division === userDivisionZona[0])
 
+     const RenderArticulo = () => {
+
+
+        if (modoActuacion == "Denuncia Penal") {
+            return ( 
+            <Text style={styles.longText}>
+                Quien es notificado del contenido del  artículo  245° (falso denunciante) del
+                Código Penal de la Nación Argentina; el contenido del art. 84º del Código Procesal Penal de la provincia del Chaco, donde
+                en sus partes dice{' '}
+                <Text style={styles.boldText}>
+                    “…LA VICTIMA DEL DELITO TENDRA DERECHO A SER INFORMADA ACERCA DE LAS FACULTADES QUE PUEDA EJERCER EN EL PROCESO-ARTICULO 8 Y 25, DE LAS RESOLUCIONES QUE SE DICTEN SOBRE LA SITUACION DEL IMPUTADO Y CUANDO FUERE MENOR O INCAPAZ SE AUTORIZARA A QUE DURANTE LOS ACTOS PROCESALES SEA ACOMPAÑADA POR PERSONA DE SU CONFIANZA, SIEMPRE QUE ELLO NO PERJUDIQUEN LA DEFENSA DEL IMPUTADO O LOS RESULTADOS DE LA INVESTIGACIÓN...”
+                </Text>
+            </Text>
+)        } else {
+            return (
+                <Text style={styles.longText}>
+                   Abierto el acto se le hace saber que se le recepcionará la presente de acuerdo a las previsiones del Art. 35° del Código Faltas de la Provincia Ley 850-J, 
+            </Text>
+    
+)}
+
+    }
 
     const Header = () => {
 
@@ -83,14 +108,9 @@ function PDFAmpliacion({ isBusqueda, genero, datos, user }: PDFProps) {
                         }   Provincia del Chaco, a los {dia} del mes de {mes} del año {año}, siendo la hora {horaActual} comparece a despacho la persona de mención en el título,
                         quien interrogado por sus datos personales de identidad DIJO: Llamarse como consta en el titulo, Ser de nacionalidad: {datos.nacionalidad_victima},
                         de {datos.edad_victima} años de edad, Estado civil {datos.estado_civil_victima}, ocupación: {datos.ocupacion_victima}, {datos.SabeLeerYEscribir == "Sí" ? "con " : "sin "} instrucción, domiciliada {datos.direccion_victima} -, Teléfono Celular Nº {datos.telefono_victima},
-                        Identidad que acredita con Juramento de Ley, aduciendo tener DNI Nº {datos.dni_victima} Quien es notificado del contenido del Artículo 245°
-                        (FALSO DENUNCIANTE) del Código Penal de la Nación Argentina; el contenido del Art. 84º del Código Procesal Penal de la
-                        Provincia del Chaco, donde en sus partes dice<Text style={styles.boldText}>  “...LA VICTIMA DEL DELITO TENDRA DERECHO A SER INFORMADA
-                            ACERCA DE LAS FACULTADES QUE PUEDA EJERCER EN EL PROCESO-ARTICULO 8 Y 25, DE LAS
-                            RESOLUCIONES QUE SE DICTEN SOBRE LA SITUACION DEL IMPUTADO Y CUANDO FUERE MENOR O
-                            INCAPAZ SE AUTORIZARA A QUE DURANTE LOS ACTOS PROCESALES SEA ACOMPAÑADA POR PERSONA DE
-                            SU CONFIANZA, SIEMPRE QUE ELLO NO PERJUDIQUEN LA DEFENSA DEL IMPUTADO O LOS RESULTADOS
-                            DE LA INVESTIGACIÓN..."</Text>{genero == "Femenino" && "y Ley Nacional Nº 26.485, (Ley de Protección Integral para prevenir sancionar y erradicar la violencia contra las mujeres en los ámbitos en que desarrolla sus relaciones interpersonales)"} y los términos de la Ley Provincial Nº
+                        Identidad que acredita con Juramento de Ley, aduciendo tener DNI Nº {datos.dni_victima}. 
+                        <RenderArticulo />
+                        {genero == "Femenino" && "y Ley Nacional Nº 26.485, (Ley de Protección Integral para prevenir sancionar y erradicar la violencia contra las mujeres en los ámbitos en que desarrolla sus relaciones interpersonales)"} y los términos de la Ley Provincial Nº
                         836-N (Ley de Violencia Familiar). Abierto el acto y cedida que le fuere la palabra y en uso de la misma <Text style={styles.boldText}>AMPLIO:</Text> {datos.observaciones} {genero == "Femenino" && "Seguidamente se le hace saber que existe la Línea 137, ubicado en Calle Mitre N° 171 -Resistencia-, donde se brinda asesoramiento legal y asistencia psicológica las 24 horas del dia de manera GRATUITA, y la Línea 102 ubicado en Avenida Sarmiento N° 1675-Resistencia-. "} {genero == "Femenino" && (
                             <Text style={styles.boldText}>PREGUNTANDO:</Text>)} {genero == "Femenino" && "“…Si desea ser asistida por dicho organismo."} {genero == "Femenino" && <Text style={styles.boldText}>RESPONDE:</Text>} {genero == "Femenino" && `“${datos.AsistidaPorDichoOrganismo == "Sí" ? "SÍ" : "NO"} `}
                         <Text style={styles.boldText}>PREGUNTANDO:</Text> Si desea ser examinad{genero == "Femenino" ? "a" : "o"} por el medico policial en turno…”. <Text style={styles.boldText}>RESPONDE:</Text>{datos.ExaminadaMedicoPolicial == "Sí" ? "SÍ" : "NO"}. <Text style={styles.boldText}>PREGUNTANDO:</Text> “…Si desea

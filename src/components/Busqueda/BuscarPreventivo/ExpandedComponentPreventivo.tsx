@@ -59,7 +59,7 @@ function expandedComponent({ data }: expandedComponentProps) {
     const datosPreventivo = [
         { nombre: "Número de nota", valor: dataPreventivo.numero_nota ? dataPreventivo.numero_nota : "No ingresado" },
         { nombre: "ID preventivo", valor: dataPreventivo._id ? dataPreventivo._id : "No ingresado" },
-        { nombre: "Fecha", valor: dataPreventivo.fecha ? dataPreventivo.fecha : "No ingresado" },
+        { nombre: "Fecha", valor: dataPreventivo.fecha ? new Date(dataPreventivo.fecha).toLocaleDateString() : "No ingresado" },
         { nombre: "Objeto", valor: dataPreventivo.objeto ? dataPreventivo.objeto : "No ingresado" },
 
     ]

@@ -77,7 +77,16 @@ function ExpandedComponentDenunciasSinVerificar({ data }: ExpandedComponentsProp
     // Información general de la denuncia
     const datosDenuncia = [
         { nombre: 'Número de expediente', valor: data.numero_de_expediente },
-        { nombre: 'Fecha de denuncia', valor: data.fecha },
+        { 
+            nombre: 'Fecha de denuncia', 
+            valor: (() => {
+                const date = new Date(data.fecha);
+                const day = String(date.getUTCDate()).padStart(2, '0');
+                const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+                const year = date.getUTCFullYear();
+                return `${day}/${month}/${year}`;
+            })()
+        },
         { nombre: 'División', valor: data.division },
         { nombre: 'Tipo de denuncia', valor: data.modo_actuacion },
     ];
