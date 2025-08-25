@@ -34,10 +34,10 @@ function modoImprimir({ tipoPersona, modoImprimir, setModoImprimir, denunciasAMo
     const [opcionesPersonas, setOpcionesPersonas] = useState<any>([])
 
     useEffect(() => {
-        denunciasAMostrar.forEach((denuncia: any) => {
+        denunciasAMostrar.forEach((denuncia: Denuncia) => {
             {
                 if (tipoPersona == "víctima") {
-                    setOpcionesPersonas((opcionesVictimarios: any) => {
+                    setOpcionesPersonas((opcionesVictimarios: Victimario[]) => {
                         if (!opcionesVictimarios.some(opcion => opcion.nombre === denuncia.victimario_nombre)) {
                             return [...opcionesVictimarios, { nombre: denuncia.victimario_nombre, value: denuncia.victimario_nombre }];
                         } else {
@@ -49,7 +49,7 @@ function modoImprimir({ tipoPersona, modoImprimir, setModoImprimir, denunciasAMo
             {
                 if (tipoPersona == "victimario") {
 
-                    setOpcionesPersonas((opcionesVictimarios: any) => {
+                    setOpcionesPersonas((opcionesVictimarios: Victima[]) => {
                         if (!opcionesVictimarios.some(opcion => opcion.nombre === denuncia.victima_nombre)) {
                             return [...opcionesVictimarios, { nombre: denuncia.victima_nombre, value: denuncia.victima_nombre }];
                         } else {
@@ -60,7 +60,7 @@ function modoImprimir({ tipoPersona, modoImprimir, setModoImprimir, denunciasAMo
             }
             {
                 if (tipoPersona == "tercero") {
-                    setOpcionesPersonas((opcionesTerceros) => {
+                    setOpcionesPersonas((opcionesTerceros: Tercero[]) => {
                         if (!opcionesTerceros.some(opcion => opcion.nombre === denuncia.victima_nombre)) {
                             return [...opcionesTerceros, { nombre: denuncia.victima_nombre, value: denuncia.victima_nombre }];
                         } else {

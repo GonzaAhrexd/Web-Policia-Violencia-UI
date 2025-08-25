@@ -12,7 +12,8 @@ export const buscarUsuario = async (values: any) => {
 // PUT: Modificar datos usuario
 export const editUser = async (values: any) => {
     try {
-        const response = await axios.put(`/usuarios/${values.id}`, values)
+        console.log(values)
+        const response = await axios.put(`/usuarios/editar-usuario/${values._id}`, values)
         return response.data
     } catch (error) {
         console.log(error)
