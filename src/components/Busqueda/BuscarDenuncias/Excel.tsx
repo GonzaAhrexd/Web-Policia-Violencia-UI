@@ -116,6 +116,7 @@ function Excel({ filtros }: ExcelProps) {
       { key: 'domicilio_victima', header: 'Domicilio de la víctima', width: 24, getValue: (d) => d.Victima?.direccion },
       { key: 'estado_civil_victima', header: 'Estado civil de la víctima', width: 24, getValue: (d) => d.Victima?.estado_civil },
       { key: 'ocupacion_victima', header: 'Ocupación de la víctima', width: 22, getValue: (d) => d.Victima?.ocupacion },
+      { key: 'etnia_victima', header: 'Etnia de la víctima', width: 16, getValue: (d) => d.Victima?.etnia },
       { key: 'vinculo_con_agresor_victima', header: 'Vínculo con el agresor de la víctima', width: 32, getValue: (d) => d?.relacion_victima_victimario, },
       // Condición de vulnerabilidad
       { key: 'condicion_de_vulnerabilidad_victima', header: 'Condición de vulnerabilidad de la víctima', width: 24, getValue: (d) => (d.Victima?.condicion_de_vulnerabilidad ? 'Sí' : 'No'), },
