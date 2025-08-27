@@ -29,9 +29,10 @@ function EditarCampos() {
     const [showVinculos, setShowVinculos] = useState<boolean>(false);
     const [showTiposDeArmas, setShowTiposDeArmas] = useState<boolean>(false);
     const [showTiposDeLugar, setShowTiposDeLugar] = useState<boolean>(false);
+    const [showEtnias, setShowEtnias] = useState<boolean>(false);
     const [showUnidades, setShowUnidades] = useState<boolean>(false);
 
-    const { juzgadoIntervinente, ocupaciones, vinculo, tiposDeArmas, tiposDeLugar, isLoading: isCamposLoading } = useContext(CamposContext) ;
+    const { juzgadoIntervinente, ocupaciones, vinculo, tiposDeArmas, tiposDeLugar, etnias, isLoading: isCamposLoading } = useContext(CamposContext) ;
 
 
     // Reinicia los estados de los campos
@@ -41,6 +42,7 @@ function EditarCampos() {
         setShowVinculos(false);
         setShowTiposDeArmas(false);
         setShowTiposDeLugar(false);
+        setShowEtnias(false);
         setShowUnidades(false);
     }
 
@@ -80,6 +82,10 @@ function EditarCampos() {
         setShowUnidades(true);
     }
 
+    const handleShowEtnias = () => {
+        handleReset();
+        setShowEtnias(true);
+    }
 
     // Si está cargando la autenticación o los campos, muestra "Cargando..."
     if (isAuthLoading || isCamposLoading) return <LoadingScreen/>
@@ -98,20 +104,23 @@ function EditarCampos() {
                 <div className='mt-5 flex flex-col items-center justify-center '>
                     <div className={`flex flex-col p-5 w-full items-center justify-center xl:w-3/10 `}>
                         {/* <div className={`w-full flex flex-col justify-center items-center  `}> */}
-                        <div className='w-full grid grid-cols-1 md:grid-cols-3 md:gap-2 '>
+                        <div className='w-full grid grid-cols-1 md:grid-cols-4 md:gap-2 '>
                             <button className={`my-2 md:my-0 ${showJuzgadoIntervinente ? "bg-sky-700" : "bg-sky-950"} hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full mr-2 transform transition-transform duration-300 ease-in-out hover:scale-105`} onClick={handleShowJuzgadoIntervinentes}>Juzgado Intervinentes</button>
                             <button className={`my-2 md:my-0 ${showOcupaciones ? "bg-sky-700" : "bg-sky-950"} hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full mr-2 transform transition-transform duration-300 ease-in-out hover:scale-105`} onClick={handleShowOcupaciones}>Ocupaciones</button>
                             <button className={`my-2 md:my-0 ${showVinculos ? "bg-sky-700" : "bg-sky-950"} hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full transform transition-transform duration-300 ease-in-out hover:scale-105`} onClick={handleShowVinculos}>Vínculos</button>
                             <button className={`my-2 md:my-0 ${showTiposDeArmas ? "bg-sky-700" : "bg-sky-950"} hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full transform transition-transform duration-300 ease-in-out hover:scale-105`} onClick={handleShowTiposDeArmas}>Tipos de Armas</button>
                             <button className={`my-2 md:my-0 ${showTiposDeLugar ? "bg-sky-700" : "bg-sky-950"} hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full transform transition-transform duration-300 ease-in-out hover:scale-105`} onClick={handleShowTiposDeLugar}>Tipos de Lugar</button>
+                            <button className={`my-2 md:my-0 ${showEtnias ? "bg-sky-700" : "bg-sky-950"} hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full transform transition-transform duration-300 ease-in-out hover:scale-105`} onClick={handleShowEtnias}>Etnias</button>
                             <button className={`my-2 md:my-0 ${showUnidades ? "bg-sky-700" : "bg-sky-950"} hover:bg-sky-700 text-white font-bold py-2 px-4 rounded w-full transform transition-transform duration-300 ease-in-out hover:scale-105`} onClick={handleShowUnidades}>Unidades</button>
                         </div>
+
                     </div>
                     {showJuzgadoIntervinente && <TablaCampos campos={juzgadoIntervinente} tipo="juzgadosIntervinientes" />}
                     {showOcupaciones && <TablaCampos campos={ocupaciones} tipo="ocupaciones" />}
                     {showVinculos && <TablaCampos campos={vinculo} tipo="vinculos" />}
                     {showTiposDeArmas && <TablaCampos campos={tiposDeArmas} tipo="tiposDeArmas" />}
                     {showTiposDeLugar && <TablaCampos campos={tiposDeLugar} tipo="tipoDeLugar" />}
+                    {showEtnias && <TablaCampos campos={etnias} tipo="etniasVictimas" />}
                     {showUnidades && <TablaUnidades />}
                 </div>
             </div>
