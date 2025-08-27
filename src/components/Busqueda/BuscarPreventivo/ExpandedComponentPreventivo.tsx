@@ -75,6 +75,7 @@ function expandedComponent({ data }: expandedComponentProps) {
         { nombre: "Género de la víctima", valor: dataPreventivo.genero_victima ? dataPreventivo.genero_victima : "No ingresado" },
         { nombre: "Domicilio de la víctima", valor: dataPreventivo.direccion_victima ? dataPreventivo.direccion_victima : "No ingresado" },
         { nombre: "Teléfono víctima", valor: dataPreventivo.telefono_victima ? dataPreventivo.telefono_victima : "No ingresado" },
+        { nombre: "Etnia de la víctima", valor: dataPreventivo.etnia_victima ? dataPreventivo.etnia_victima : "No ingresado" }
     ]
     // Datos del secretario
     const secretarioDatosMostrar = [

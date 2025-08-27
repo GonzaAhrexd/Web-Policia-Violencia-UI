@@ -47,7 +47,7 @@ function EditVictima({ datos, register, setValue, watch, errors, verificar = fal
   const [isAdultoMayor, setIsAdultoMayor] = useState<boolean>(verificar ? false : datos?.condiciones_de_vulnerabilidad?.adulto_mayor || false);
   const [isMenorEdad, setIsMenorEdad] = useState<boolean>(verificar ? false : datos?.condiciones_de_vulnerabilidad?.menor_de_edad || false);
 
-  const { ocupaciones, vinculo } = useCampos();
+  const { ocupaciones, vinculo, etnias } = useCampos();
   const { victimaCargar } = useStore();
 
   // Opciones para InputRadio
@@ -92,13 +92,14 @@ function EditVictima({ datos, register, setValue, watch, errors, verificar = fal
       }
       setIsHijosConAgresor(cantidad_hijos_con_agresor ? cantidad_hijos_con_agresor > 0 : false);
     }, 200);
-  }, [datos, victimaCargar, verificar, existente, editarConDenuncia, cantidad_hijos_con_agresor]);
+  }, []);
+  // datos, victimaCargar, verificar, existente, editarConDenuncia, cantidad_hijos_con_agresor <- Si no funciona
 
   return (
     <div key={datos._id} className={`w-full ${md ? 'lg:w-6/10' : ''}`}>
       {!(verificar || existente) && <h1 className="text-2xl my-5">Víctima</h1>}
-      <InputText campo="" nombre="victima_id" register={register} setValue={setValue} hidden error={errors.nombre_victima} valor={datos._id}
-      />
+      {!(verificar) &&  
+      <InputText campo="" nombre="victima_id" register={register} setValue={setValue} hidden error={errors.nombre_victima} valor={datos._id}/>}
 
       <div className="flex flex-col md:flex-row my-2">
         <InputText campo="Nombre" nombre="nombre_victima" register={register} setValue={setValue} error={errors.nombre_victima} valor={datos.nombre} require={verificar}
@@ -127,6 +128,9 @@ function EditVictima({ datos, register, setValue, watch, errors, verificar = fal
           <SelectRegisterSingle valor={existente ? undefined : vinculo_con_agresor} campo="Vínculo con el Agresor" nombre="vinculo_con_agresor_victima" opciones={vinculo} setValue={setValue} error={errors.vinculo_con_agresor_victima} isRequired={false}
           />
         )}
+      </div>
+      <div className="flex flex-col w-full my-2"> 
+          <SelectRegisterSingle valor={existente ? undefined : datos.etnia} campo="Etnia" nombre="etnia_victima" opciones={etnias} setValue={setValue} error={errors.etnia_victima} isRequired={false}    />
       </div>
 
       <div className="flex flex-col my-2">

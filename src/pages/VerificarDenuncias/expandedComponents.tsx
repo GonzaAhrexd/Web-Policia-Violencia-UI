@@ -59,6 +59,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
         { nombre: "Género", valor: data.genero_victima },
         { nombre: "Domicilio", valor: data.direccion_victima },
         { nombre: "Teléfono", valor: data.telefono_victima },
+        { nombre: "Étnia", valor: data.etnia_victima },
         { nombre: "Tipo de actuación", valor: data.modo_actuacion },
         { nombre: "¿Sabe leer y Escribir?", valor: data.sabe_leer_y_escribir_victima },
     ]

@@ -30,6 +30,7 @@ type Radiograma = {
     genero_victima: string;
     direccion_victima?: string | null;
     telefono_victima?: string | null;
+    etnia_victima?: string | null;
     instructor: {
         nombre_completo_instructor: string;
         jerarquia_instructor: string;

@@ -58,6 +58,7 @@ function expandedComponents({ data }: expandedComponentsProps) {
         { nombre: "DNI", valor: (data.DNI && data.DNI != "S/N") ? data.DNI : "No especificado" },
         { nombre: "Estado Civil", valor: data.estado_civil ? data.estado_civil : "No especificado" },
         { nombre: "Ocupación", valor: data.ocupacion ? data.ocupacion : "No especificado" },
+        { nombre: "Etnia", valor: data.etnia ? data.etnia : "No especificado" },
         // { nombre: "Vínculo con agresor", valor: data.vinculo_con_agresor ? data.vinculo_con_agresor : "No especificado"  },
         { nombre: "Condición de vulnerabilidad", valor: data.condicion_de_vulnerabilidad ? data.condicion_de_vulnerabilidad : "No especificado" },
         { nombre: "Denuncias previas", valor: data.denuncias_realizadas.length },

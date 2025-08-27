@@ -6,6 +6,7 @@ type Victima = {
     edad: number;
     genero: string;
     DNI: string;
+    etnia: string;
     estado_civil: string;
     ocupacion: string;
     condicion_de_vulnerabilidad: boolean;

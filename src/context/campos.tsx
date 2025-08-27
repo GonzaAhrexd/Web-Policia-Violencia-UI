@@ -16,6 +16,7 @@ type CamposType = {
     vinculo: Campos[];
     tiposDeArmas: Campos[];
     tiposDeLugar: Campos[];
+    etnias: Campos[];
     isLoading: boolean;
     unidades: Unidades[];
 };
@@ -59,6 +60,7 @@ export const CamposProvider = ({ children }: CamposProviderProps) => {
     const [vinculo, setVinculo] = useState<Campos[]>([]);
     const [tiposDeArmas, setTiposDeArmas] = useState<Campos[]>([]);
     const [tiposDeLugar, setTiposDeLugar] = useState<Campos[]>([]);
+    const [etnias, setEtnias] = useState<Campos[]>([]);
     const [unidades, setUnidades] = useState<Unidades[]>([]); 
     const [isLoading, setIsLoading] = useState<boolean>(true);
    
@@ -72,6 +74,7 @@ export const CamposProvider = ({ children }: CamposProviderProps) => {
                 vinculosRes,
                 tiposDeArmasRes,
                 tiposDeLugarRes,
+                etniasRes,
                 unidadesRes
             ] = await Promise.all([
                 obtenerCampo("juzgadosIntervinientes"),
@@ -79,6 +82,7 @@ export const CamposProvider = ({ children }: CamposProviderProps) => {
                 obtenerCampo("vinculos"),
                 obtenerCampo("tiposDeArmas"),
                 obtenerCampo("tipoDeLugar"),
+                obtenerCampo("etniasVictimas"),
                 obtenerUnidades()
             ]);
     
@@ -88,6 +92,7 @@ export const CamposProvider = ({ children }: CamposProviderProps) => {
             setVinculo(vinculosRes);
             setTiposDeArmas(tiposDeArmasRes);
             setTiposDeLugar(tiposDeLugarRes);
+            setEtnias(etniasRes);
             setUnidades(unidadesRes);
         } catch (error: any) {
             console.log(error);
@@ -109,6 +114,7 @@ export const CamposProvider = ({ children }: CamposProviderProps) => {
             tiposDeArmas,
             tiposDeLugar,
             unidades,
+            etnias,
             isLoading 
         }}>
             {children}

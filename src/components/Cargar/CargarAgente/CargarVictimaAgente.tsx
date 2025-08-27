@@ -25,7 +25,7 @@ interface CargarVictimaProps {
 function CargarVictimaAgente({valores, register, setValue, errors }: CargarVictimaProps) {
 
 
-  const { ocupaciones } = useCampos();
+  const { ocupaciones, etnias } = useCampos();
   
   const { setGenero } = useStore((state) => ({
     setGenero: state.setGenero,
@@ -56,6 +56,7 @@ function CargarVictimaAgente({valores, register, setValue, errors }: CargarVicti
       <div className='flex flex-col xl:flex-row my-2'>
         <SelectRegisterSingle isRequired={valores != '' ? false : true} valor={valores?.estado_civil_victima && valores.estado_civil_victima} campo="Estado Civil" nombre="estado_civil_victima" opciones={estadoCivil}  setValue={setValue} error={errors.estado_civil_victima} />
         <SelectRegisterSingle isRequired={valores != '' ? false : true} valor={valores?.ocupacion_victima && valores.ocupacion_victima} campo="Ocupación" nombre="ocupacion_victima" opciones={ocupaciones} setValue={setValue} error={errors.ocupacion_victima} />
+        <SelectRegisterSingle isRequired={valores != '' ? false : true} valor={valores?.etnia_victima && valores.etnia_victima} campo="Etnia" nombre="etnia_victima" opciones={etnias} setValue={setValue} error={errors.etnia_victima} />
       </div>
 
       <div className='flex flex-col md:flex-row my-2'>

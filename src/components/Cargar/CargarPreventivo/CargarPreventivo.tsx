@@ -196,7 +196,6 @@ function CargarPreventivo({ data, setCrearPreventivo }: CargarPreventivoProps) {
                         <InputText valor={direccionValor} campo="Dirección" nombre="direccion" register={register} setValue={setValue} error={errors.direccion} />
                         <InputText valor={telefonoValor} campo="Teléfono" nombre="telefono" register={register} setValue={setValue} error={errors.telefono} />
                     </div>
-
                     <InputText customSize="flex flex-col md:w-full xl:w-1/2" campo="Número de nota" nombre="numero_nota" register={register} error={errors.numero_nota} require placeholder="Número de nota" valor={`N°-CSPJ/${new Date().getFullYear()}`} setValue={setValue} />
                     <InputText customSize="flex flex-col md:w-full xl:w-1/2" campo="Objeto" nombre="objeto" register={register} error={errors.objeto} require placeholder="Objeto" setValue={setValue} />
                     <InputText customSize="flex flex-col md:w-full xl:w-1/2" campo="Consultado a" nombre="consultado" register={register} error={errors.consultado} require placeholder="Consultado a" setValue={setValue} />

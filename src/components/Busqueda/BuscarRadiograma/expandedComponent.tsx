@@ -136,6 +136,7 @@ function expandedComponentRadiograma({ data }: expandedComponentProps) {
         { nombre: "Género de la víctima", valor: dataRadiograma.genero_victima ? dataRadiograma.genero_victima : "No ingresado" },
         { nombre: "Domicilio de la víctima", valor: dataRadiograma.direccion_victima ? dataRadiograma.direccion_victima : "No ingresado" },
         { nombre: "Teléfono víctima", valor: dataRadiograma.telefono_victima ? dataRadiograma.telefono_victima : "No ingresado" },
+        { nombre: "Etnia de la víctima", valor: dataRadiograma.etnia_victima ? dataRadiograma.etnia_victima : "No ingresado" }
     ]
 
     // Datos del instructor

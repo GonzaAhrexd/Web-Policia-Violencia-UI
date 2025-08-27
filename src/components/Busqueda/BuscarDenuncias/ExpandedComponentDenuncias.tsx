@@ -195,6 +195,7 @@ function ExpandedComponentDenuncias({ data }: expandedComponentsProps) {
         { nombre: "Edad", valor: safeValue(victimaDatos?.edad) },
         { nombre: "DNI", valor: safeValue(victimaDatos?.DNI) },
         { nombre: "Estado Civil", valor: safeValue(victimaDatos?.estado_civil) },
+        { nombre: "Etnia", valor: safeValue(victimaDatos?.etnia) },
         { nombre: "Ocupación", valor: safeValue(victimaDatos?.ocupacion) },
         { nombre: "Convivencia", valor: safeValue(data?.convivencia) },
         { nombre: "Dependencia económica", valor: safeValue(data?.dependencia_economica) },

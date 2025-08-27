@@ -27,6 +27,7 @@ type Preventivo = {
     genero_victima: string;
     direccion_victima: string;
     telefono_victima: string;
+    etnia_victima: string;
     agrega: string;
     secretario: {
         nombre_completo_secretario: string;

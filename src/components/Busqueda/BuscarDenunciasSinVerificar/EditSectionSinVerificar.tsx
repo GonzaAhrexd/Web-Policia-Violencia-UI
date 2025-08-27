@@ -66,6 +66,7 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
     direccion: datos.direccion_victima,
     estado_civil: datos.estado_civil_victima,
     ocupacion: datos.ocupacion_victima,
+    etnia: datos.etnia_victima,
     telefono: datos.telefono_victima,
   }
   // Función para dividir el expediente
@@ -107,8 +108,10 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
       <form
         encType="multipart/form-data"
         method='post'
+   
         onSubmit={
           handleSubmit(async (values) => {
+            console.log(values)
             Swal.fire({
               title: '¿Estás seguro?',
               text: "Podrás editarlo más adelante.",
@@ -172,7 +175,8 @@ function EditSectionSinVerificar({ datos, setEditSection, editSection }: EditSec
                 }
               }
             })
-          })}>
+          })}
+          >
         <div className='flex items-center'>
 
           <h1 className='text-2xl my-5'>Víctima</h1>

@@ -21,6 +21,7 @@ type DenunciaSinVerificar = {
     genero_victima: string;
     direccion_victima?: string;
     telefono_victima?: string;
+    etnia_victima?: string;
     sabe_leer_y_escribir_victima?: boolean;
     observaciones?: string;
     agrega?: string;
