@@ -9,13 +9,13 @@ export const crearDenuncia = (denuncia: any) => {
     Object.keys(denuncia).forEach((key) => {
         formData.append(key, denuncia[key]);
     });
-    
+
     try {
         axios.post(`/denuncias/`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-    })
+        })
     } catch (error) {
         console.log(error)
     }
@@ -34,7 +34,25 @@ export const misDenuncias = async (values: any) => {
 // GET: Listar denuncias del usuario actual
 export const buscarDenuncias = async (values: any, manual: boolean) => {
     try {
-        const response = await axios.get(`/denuncias/buscar/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}/${values.id_denuncia ? values.id_denuncia : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}/${values.is_expediente_completo ? values.is_expediente_completo : "no_ingresado"}/${values.division ? values.division : "no_ingresado"}/${values.municipio ? values.municipio : "no_ingresado"}/${values.comisaria ? values.comisaria : "no_ingresado"}/${values.relacion_victima_victimario ? encodeURIComponent(values.relacion_victima_victimario) : "no_ingresado" }/${values.aprehension ? values.aprehension : "no_ingresado" }/${manual}`)
+        const response = await axios.get(`/denuncias/filtros`, {
+
+            //  division, municipio, comisaria, desde, hasta, id, expediente, mostrar_ampliaciones 
+
+            params: {
+                desde: values.desde ? values.desde : "no_ingresado",
+                hasta: values.hasta ? values.hasta : "no_ingresado",
+                id_denuncia: values.id_denuncia ? values.id_denuncia : "no_ingresado",
+                numero_de_expediente: values.numero_de_expediente ? values.numero_de_expediente : "no_ingresado",
+                is_expediente_completo: values.is_expediente_completo ? values.is_expediente_completo : "no_ingresado",
+                division: values.division ? values.division : "no_ingresado",
+                municipio: values.municipio ? values.municipio : "no_ingresado",
+                comisaria: values.comisaria ? values.comisaria : "no_ingresado",
+                relacion_victima_victimario: values.relacion_victima_victimario ? values.relacion_victima_victimario : "no_ingresado",
+                aprehension: values.aprehension ? values.aprehension : "no_ingresado",
+                manual: manual
+            }
+        })
+        // const response = await axios.get(`/denuncias/buscar/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}/${values.id_denuncia ? values.id_denuncia : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}/${values.is_expediente_completo ? values.is_expediente_completo : "no_ingresado"}/${values.division ? values.division : "no_ingresado"}/${values.municipio ? values.municipio : "no_ingresado"}/${values.comisaria ? values.comisaria : "no_ingresado"}/${values.relacion_victima_victimario ? encodeURIComponent(values.relacion_victima_victimario) : "no_ingresado" }/${values.aprehension ? values.aprehension : "no_ingresado" }/${manual}`)
         return response.data
     } catch (error) {
         console.log(error)
@@ -42,9 +60,9 @@ export const buscarDenuncias = async (values: any, manual: boolean) => {
 }
 
 // GET: Listar las denuncias para generar un excel
-export const buscarDenunciasPlus = async (values: any ) => {
+export const buscarDenunciasPlus = async (values: any) => {
     try {
-        const response = await axios.get(`/denuncias/excel/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}/${values.id_denuncia ? values.id_denuncia : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}/${values.is_expediente_completo ? values.is_expediente_completo : "no_ingresado"}/${values.division ? values.division : "no_ingresado"}/${values.municipio ? values.municipio : "no_ingresado"}/${values.comisaria ? values.comisaria : "no_ingresado"}/${values.relacion_victima_victimario ? encodeURIComponent(values.relacion_victima_victimario) : "no_ingresado" }/${values.aprehension ? values.aprehension : "no_ingresado" }`)
+        const response = await axios.get(`/denuncias/excel/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}/${values.id_denuncia ? values.id_denuncia : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}/${values.is_expediente_completo ? values.is_expediente_completo : "no_ingresado"}/${values.division ? values.division : "no_ingresado"}/${values.municipio ? values.municipio : "no_ingresado"}/${values.comisaria ? values.comisaria : "no_ingresado"}/${values.relacion_victima_victimario ? encodeURIComponent(values.relacion_victima_victimario) : "no_ingresado"}/${values.aprehension ? values.aprehension : "no_ingresado"}`)
         return response.data
     } catch (error) {
         console.log(error)
@@ -114,7 +132,7 @@ export const editarDenuncia = async (denuncia: any) => {
 }
 
 // PUT: Editar imagen de denuncia
-export const editarImagenDenuncia = async (imagenDenuncia : any) => {
+export const editarImagenDenuncia = async (imagenDenuncia: any) => {
     const formData = new FormData();
     // Pasa todos los datos de la denuncia a un FormData
     Object.keys(imagenDenuncia).forEach((key) => {

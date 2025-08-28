@@ -23,7 +23,7 @@ export const mostrarDenunciasSinVerificar = async () => {
 // GET: Mostrar denuncia sin verificar por ID
 export const mostrarDenunciasSinVerificarID = async (id: string) => {
     try {
-        const response = await axios.get(`/denuncias-sin-verificar/${id}`)
+        const response = await axios.get(`/denuncias-sin-verificar/getId/${id}`)
         return response.data
     } catch (error) {
         console.log(error)
@@ -64,15 +64,40 @@ export const misDenunciasSinVerificar = async (values: any) => {
 }
 
 // GET: Buscar denuncias sin verificar con filtros avanzados
+
 export const buscarDenunciasSinVerificar = async (values: any) => {
-    try {
-        console.log(values)
-        const response = await axios.get(`/denuncias-sin-verificar/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}/${values.id_denuncia ? encodeURIComponent(values.id_denuncia) : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}/${values.division ? values.division : "no_ingresado"}/${values.municipio ? values.municipio : "no_ingresado"}/${values.comisaria ? values.comisaria : "no_ingresado"}/${values.mostrar_ampliaciones ? values.mostrar_ampliaciones : "no_ingresado"}`)
-        return response.data
-    } catch (error) {
-        console.log(error)
-    }
-}
+  try {
+    console.log(values);
+
+    const response = await axios.get(`/denuncias-sin-verificar/filtros`, {
+      params: {
+        desde: values.desde || "no_ingresado",
+        hasta: values.hasta || "no_ingresado",
+        id: values.id_denuncia || "no_ingresado",
+        expediente: values.numero_de_expediente || "no_ingresado",
+        division: values.division || "no_ingresado",
+        municipio: values.municipio || "no_ingresado",
+        comisaria: values.comisaria || "no_ingresado",
+        mostrar_ampliaciones: values.mostrar_ampliaciones || "no_ingresado",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+// export const buscarDenunciasSinVerificar = async (values: any) => {
+//     try {
+//         console.log(values)
+//         const response = await axios.get(`/denuncias-sin-verificar/${values.desde ? values.desde : "no_ingresado"}/${values.hasta ? values.hasta : "no_ingresado"}/${values.id_denuncia ? encodeURIComponent(values.id_denuncia) : "no_ingresado"}/${values.numero_de_expediente ? encodeURIComponent(values.numero_de_expediente) : "no_ingresado"}/${values.division ? values.division : "no_ingresado"}/${values.municipio ? values.municipio : "no_ingresado"}/${values.comisaria ? values.comisaria : "no_ingresado"}/${values.mostrar_ampliaciones ? values.mostrar_ampliaciones : "no_ingresado"}`)
+//         return response.data
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
 
 // GET: Buscar las ampliaciones 
 export const buscarAmpliaciones = async (id: any) => {
